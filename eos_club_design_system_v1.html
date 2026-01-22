@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOS CLUB - Design System</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dawn': {
+                            'mineral': '#F9F9F7',
+                            'concrete': '#E6E5E0',
+                            'slate': '#2F3A40',
+                            'clay': '#C57B57',
+                            'gold': '#D6C6A6',
+                            'night': '#1F2933',
+                            'light': '#F0EAD6',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F9F9F7;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Grain texture overlay */
+        .grain-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .grain-texture > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #E6E5E0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #C57B57;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2F3A40;
+        }
+
+        /* Smooth transitions - "Stable Dynamics" */
+        * {
+            scroll-behavior: smooth;
+        }
+
+        /* Dawn gradient */
+        .dawn-gradient {
+            background: linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%);
+        }
+
+        /* Spotlight effect for cards */
+        .spotlight-card {
+            position: relative;
+            background: white;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: radial-gradient(circle at center, rgba(214, 198, 166, 0.2) 0%, transparent 70%);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* Subtle logo watermark for photography examples */
+        .photo-with-logo {
+            position: relative;
+        }
+
+        .photo-with-logo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            pointer-events: none;
+            /* gentle vignette to seat the logo without a sticker feel */
+            background: radial-gradient(120% 90% at 90% 85%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.00) 55%);
+            opacity: 0.55;
+        }
+
+        .photo-with-logo > img {
+            display: block;
+        }
+
+        .photo-logo {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            z-index: 2;
+            width: 84px;
+            height: auto;
+            opacity: 0.78;
+            mix-blend-mode: multiply;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.18));
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body class="bg-dawn-mineral text-dawn-night antialiased">
+
+    <!-- Split Screen Layout -->
+    <div class="flex min-h-screen">
+
+        <!-- Sidebar (Fixed Left) -->
+        <aside class="fixed left-0 top-0 h-screen w-80 bg-white border-r border-dawn-concrete overflow-y-auto grain-texture">
+            <div class="p-8">
+                <!-- Brand Logo & Name -->
+                <div class="mb-12">
+                    <!-- EOS Logo (actual asset) -->
+                    <div class="mb-6">
+                        <img
+                            src="assets/eos-logo-export_bm-black.png"
+                            alt="EOS CLUB logo"
+                            class="mx-auto h-16 w-auto"
+                            loading="eager"
+                            decoding="async"
+                        />
+                    </div>
+                    <h1 class="text-3xl font-bold text-dawn-night mb-2 text-center tracking-wider">EOS CLUB</h1>
+                    <p class="text-dawn-slate text-sm text-center">Design System</p>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="space-y-1">
+                    <a href="#typography" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="type" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Typography</span>
+                    </a>
+                    <a href="#colors" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="droplet" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Color Palette</span>
+                    </a>
+                    <a href="#assets" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="image" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Visual Assets</span>
+                    </a>
+                    <a href="#buttons" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="square" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Buttons & CTAs</span>
+                    </a>
+                    <a href="#forms" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="edit-3" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Form Elements</span>
+                    </a>
+                    <a href="#components" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="grid" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Components</span>
+                    </a>
+                    <a href="#navigation" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="menu" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Navigation</span>
+                    </a>
+                    <a href="#footer-styles" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="layout" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Footer Styles</span>
+                    </a>
+                </nav>
+
+                <!-- Footer Info -->
+                <div class="mt-12 pt-8 border-t border-dawn-concrete">
+                    <p class="text-xs text-dawn-slate">Version 1.0.0</p>
+                    <p class="text-xs text-dawn-clay mt-1">Last updated: Jan 2026</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content (Scrollable Right) -->
+        <main class="ml-80 flex-1 p-12 overflow-y-auto">
+
+            <!-- Hero Section -->
+            <div class="mb-16">
+                <h1 class="text-6xl font-bold text-dawn-night mb-4">EOS CLUB</h1>
+                <p class="text-xl text-dawn-slate max-w-3xl leading-relaxed" style="line-height: 1.75;">
+                    A place for conscious movement and genuine encounters. A space where you can strengthen your body, sort out your mind, and meet people who think similarly. Without pressure to perform. Without esotericism. With clarity and respect.
+                </p>
+            </div>
+
+            <!-- Section 1: Typography & Formatting -->
+            <section id="typography" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Typography & Formatting</h2>
+                    <p class="text-dawn-slate">Clear stance, no shouting. Text that breathes.</p>
+                </div>
+
+                <!-- Headings -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Headings</h3>
+
+                    <div class="space-y-6">
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h1 class="text-5xl font-bold text-dawn-night mb-2">Display heading</h1>
+                            <p class="text-sm text-dawn-clay font-mono">text-5xl font-bold • Merriweather</p>
+                        </div>
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h1 class="text-4xl font-bold text-dawn-night mb-2">Heading 1</h1>
+                            <p class="text-sm text-dawn-clay font-mono">text-4xl font-bold</p>
+                        </div>
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h2 class="text-3xl font-semibold text-dawn-night mb-2">Heading 2</h2>
+                            <p class="text-sm text-dawn-clay font-mono">text-3xl font-semibold</p>
+                        </div>
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h3 class="text-2xl font-semibold text-dawn-night mb-2">Heading 3</h3>
+                            <p class="text-sm text-dawn-clay font-mono">text-2xl font-semibold</p>
+                        </div>
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h4 class="text-xl font-semibold text-dawn-night mb-2">Heading 4</h4>
+                            <p class="text-sm text-dawn-clay font-mono">text-xl font-semibold</p>
+                        </div>
+                        <div class="border-b border-dawn-concrete pb-6">
+                            <h5 class="text-lg font-semibold text-dawn-night mb-2">Heading 5</h5>
+                            <p class="text-sm text-dawn-clay font-mono">text-lg font-semibold</p>
+                        </div>
+                        <div>
+                            <h6 class="text-base font-semibold text-dawn-night mb-2">Heading 6</h6>
+                            <p class="text-sm text-dawn-clay font-mono">text-base font-semibold</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Text -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Body text</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg text-dawn-night mb-2" style="line-height: 1.75;">Large body text for emphasis and readability. Movement that feels good. Spaces that breathe.</p>
+                            <p class="text-sm text-dawn-clay font-mono">text-lg • Inter • line-height: 1.75</p>
+                        </div>
+                        <div>
+                            <p class="text-base text-dawn-night mb-2" style="line-height: 1.75;">Regular body text is optimized for comfortable reading. This is about healthy living, not self-optimization. You don't have to prove anything. You're allowed to arrive.</p>
+                            <p class="text-sm text-dawn-clay font-mono">text-base • line-height: 1.75</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-dawn-slate mb-2" style="line-height: 1.6;">Small text for captions and supporting information. Clear, direct, no adjective storm.</p>
+                            <p class="text-sm text-dawn-clay font-mono">text-sm</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text Formatting -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Text formatting</h3>
+
+                    <div class="space-y-8">
+                        <div>
+                            <p class="text-base text-dawn-night mb-3" style="line-height: 1.75;">
+                                Use <strong class="font-semibold text-dawn-night">bold text</strong> to emphasize important information,
+                                <em class="italic text-dawn-slate">italics</em> for subtle emphasis, and
+                                <mark class="bg-dawn-light text-dawn-night px-1 rounded">highlighted text</mark> for key moments.
+                            </p>
+                        </div>
+
+                        <div>
+                            <blockquote class="border-l-4 border-dawn-clay pl-6 py-2 my-6 italic text-dawn-slate" style="line-height: 1.75;">
+                                "You come in, your nervous system calms down. You don't have to prove anything to anyone. You can be strong, vulnerable, tired, and motivated all at the same time. Everything has its place."
+                            </blockquote>
+                            <p class="text-sm text-dawn-clay font-mono">Blockquote • border-l-4 border-dawn-clay</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Color Palette -->
+            <section id="colors" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Color palette</h2>
+                    <p class="text-dawn-slate">Atmospheric sunrise. Nordic dawn, not tropical.</p>
+                </div>
+
+                <!-- Dawn Colors -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Dawn palette — Foundation</h3>
+                    <div class="grid grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-mineral border border-dawn-concrete flex items-center justify-center">
+                                <span class="text-xs font-mono text-dawn-slate">#F9F9F7</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Mineral white</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-mineral</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-concrete flex items-center justify-center">
+                                <span class="text-xs font-mono text-dawn-slate">#E6E5E0</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Warm concrete</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-concrete</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-light flex items-center justify-center border border-dawn-concrete">
+                                <span class="text-xs font-mono text-dawn-night">#F0EAD6</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Morning light</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-light</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-gold flex items-center justify-center">
+                                <span class="text-xs font-mono text-dawn-night">#D6C6A6</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Muted gold</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-gold</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Colors -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Action & brand colors</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-clay flex items-center justify-center shadow-lg">
+                                <span class="text-xs font-mono text-white">#C57B57</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Burnt clay</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-clay • Primary action</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-slate flex items-center justify-center shadow-lg">
+                                <span class="text-xs font-mono text-white">#2F3A40</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Deep slate</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-slate • Strong contrast</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-dawn-night flex items-center justify-center shadow-lg">
+                                <span class="text-xs font-mono text-white">#1F2933</span>
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Night slate</p>
+                            <p class="text-xs font-mono text-dawn-clay">dawn-night • Primary text</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dawn Gradient -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Dawn gradient</h3>
+                    <div class="space-y-4">
+                        <div class="h-32 rounded-xl dawn-gradient flex items-center justify-center shadow-lg">
+                            <span class="text-sm font-mono text-white">The transition from darkness to clarity</span>
+                        </div>
+                        <p class="text-sm text-dawn-slate">Use for primary buttons, hero backgrounds, and moments of transformation</p>
+                        <p class="text-xs font-mono text-dawn-clay">linear-gradient(135deg, #2F3A40 → #C57B57 → #D6C6A6)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Assets & Imagery -->
+            <section id="assets" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Visual Assets & Imagery</h2>
+                    <p class="text-dawn-slate">Documentary. Silhouettes & light edges. Real exertion.</p>
+                </div>
+
+                <!-- Logo -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Logo variations</h3>
+                    <div class="grid grid-cols-2 gap-8">
+                        <div class="border-2 border-dashed border-dawn-concrete rounded-xl p-8 flex flex-col items-center justify-center bg-dawn-mineral h-48">
+                            <img
+                                src="assets/eos-logo-export_bm-black.png"
+                                alt="EOS CLUB logo (black)"
+                                class="h-16 w-auto"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <p class="text-sm text-dawn-slate mt-4 font-semibold">Primary logo</p>
+                            <p class="text-xs text-dawn-clay font-mono mt-1">Light backgrounds</p>
+                        </div>
+                        <div class="border-2 border-dashed border-dawn-slate rounded-xl p-8 flex flex-col items-center justify-center bg-dawn-night h-48">
+                            <img
+                                src="assets/eos-logo-export_bm-black.png"
+                                alt="EOS CLUB logo (light version)"
+                                class="h-16 w-auto"
+                                style="filter: invert(1) brightness(1.12) contrast(1.05);"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <p class="text-sm text-dawn-light mt-4 font-semibold">Dark version</p>
+                            <p class="text-xs text-dawn-gold font-mono mt-1">Dark backgrounds</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 p-6 bg-dawn-light rounded-xl">
+                        <p class="text-sm text-dawn-night"><strong>Symbol meaning:</strong> Dawn. Platform. Movement. Flow. Calm. The logo <em>is</em> a movement—not an illustration, but the expression of it.</p>
+                    </div>
+                </div>
+
+                <!-- Imagery Style -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Space & atmosphere</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <div class="photo-with-logo rounded-xl shadow-sm mb-3 overflow-hidden">
+                                <img src="assets/yoga_studio.jpg" alt="EOS studio space" class="w-full" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" decoding="async">
+                                <img src="assets/eos-logo-export_bm-black.png" alt="" class="photo-logo" loading="lazy" decoding="async" aria-hidden="true">
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Breathing space</p>
+                            <p class="text-xs text-dawn-slate">Clean, minimal, organic. Natural light.</p>
+                        </div>
+                        <div>
+                            <div class="photo-with-logo rounded-xl shadow-sm mb-3 overflow-hidden">
+                                <img src="assets/yoga_studio_plan.jpg" alt="EOS studio plan" class="w-full" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" decoding="async">
+                                <img src="assets/eos-logo-export_bm-black.png" alt="" class="photo-logo" loading="lazy" decoding="async" aria-hidden="true">
+                            </div>
+                            <p class="text-sm font-semibold text-dawn-night">Documentary moments</p>
+                            <p class="text-xs text-dawn-slate">Real people, real practice, no perfection.</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-6 mt-6">
+                        <div>
+                            <div class="photo-with-logo rounded-xl shadow-sm mb-3 overflow-hidden">
+                                <img src="assets/yoga_closeup_1.png" alt="Studio detail — textiles" class="w-full" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" decoding="async">
+                                <img src="assets/eos-logo-export_bm-black.png" alt="" class="photo-logo" loading="lazy" decoding="async" aria-hidden="true">
+                            </div>
+                            <p class="text-xs text-dawn-slate">Soft fabrics, warm textures</p>
+                        </div>
+                        <div>
+                            <div class="photo-with-logo rounded-xl shadow-sm mb-3 overflow-hidden">
+                                <img src="assets/yoga_closeup_2.png" alt="Studio detail — light" class="w-full" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" decoding="async">
+                                <img src="assets/eos-logo-export_bm-black.png" alt="" class="photo-logo" loading="lazy" decoding="async" aria-hidden="true">
+                            </div>
+                            <p class="text-xs text-dawn-slate">Light & shadow play</p>
+                        </div>
+                        <div>
+                            <div class="photo-with-logo rounded-xl shadow-sm mb-3 overflow-hidden">
+                                <img src="assets/yoga_closeup_3.png" alt="Studio detail — material" class="w-full" style="aspect-ratio: 4/3; object-fit: cover;" loading="lazy" decoding="async">
+                                <img src="assets/eos-logo-export_bm-black.png" alt="" class="photo-logo" loading="lazy" decoding="async" aria-hidden="true">
+                            </div>
+                            <p class="text-xs text-dawn-slate">Thoughtful spatial design</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-dawn-light rounded-xl">
+                        <p class="text-sm text-dawn-night"><strong>Photography principles:</strong> Backlighting creates rim light (dawn effect). High whitespace. Documentary over staged. Silhouettes against bright backgrounds. Sweaty, messy hair, real exertion.</p>
+                    </div>
+                </div>
+
+                <!-- Avatars & Testimonials -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Avatars & testimonials</h3>
+
+                    <div class="flex items-end gap-8 mb-8">
+                        <div class="text-center">
+                            <img src="assets/testimonial.jpeg" alt="Community member portrait" class="w-20 h-20 rounded-full object-cover shadow-md mb-3 mx-auto border-4 border-white" loading="lazy" decoding="async">
+                            <p class="text-sm font-semibold text-dawn-night">Medium avatar</p>
+                            <p class="text-xs text-dawn-slate font-mono">w-20 h-20</p>
+                        </div>
+                        <div class="text-center">
+                            <img src="assets/testimonial2.jpeg" alt="Community member portrait" class="w-12 h-12 rounded-full object-cover shadow-md mb-3 mx-auto border-2 border-white" loading="lazy" decoding="async">
+                            <p class="text-sm font-semibold text-dawn-night">Small avatar</p>
+                            <p class="text-xs text-dawn-slate font-mono">w-12 h-12</p>
+                        </div>
+
+                        <!-- Testimonial Card -->
+                        <div class="flex-1 bg-dawn-mineral rounded-xl p-6 border border-dawn-concrete">
+                            <div class="flex items-start gap-4">
+                                <img src="assets/testimonial3.jpeg" alt="Testimonial profile" class="w-12 h-12 rounded-full object-cover shadow-sm border-2 border-white flex-shrink-0" loading="lazy" decoding="async">
+                                <div>
+                                    <p class="text-sm text-dawn-night italic mb-3" style="line-height: 1.6;">"A community where nobody has to be perfect. Spaces that breathe. Movement that feels good."</p>
+                                    <p class="text-sm font-semibold text-dawn-night">Sarah M.</p>
+                                    <p class="text-xs text-dawn-slate">Member since 2024</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-dawn-light rounded-xl">
+                        <p class="text-sm text-dawn-night"><strong>Usage:</strong> Testimonials should feel genuine and documentary. No posed perfection. Real people, real experiences.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Buttons & CTAs -->
+            <section id="buttons" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Buttons & CTAs</h2>
+                    <p class="text-dawn-slate">Direct and factual. "Book class" not "Start your journey".</p>
+                </div>
+
+                <!-- Button Variants -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Button variants</h3>
+
+                    <div class="space-y-8">
+                        <!-- Primary Buttons -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Primary (Dawn gradient)</h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-6 py-3 dawn-gradient text-white rounded-xl font-medium hover:opacity-90 transition-opacity duration-300 shadow-sm">
+                                    Book class
+                                </button>
+                                <button class="px-6 py-3 bg-dawn-clay text-white rounded-xl font-medium hover:bg-opacity-90 transition-all duration-300 shadow-sm">
+                                    Join community
+                                </button>
+                                <button class="px-6 py-3 bg-dawn-clay text-white rounded-xl font-medium opacity-50 shadow-sm" disabled>
+                                    Not available
+                                </button>
+                            </div>
+                            <p class="text-sm text-dawn-clay font-mono mt-3">dawn-gradient or bg-dawn-clay • Stable dynamics</p>
+                        </div>
+
+                        <!-- Secondary Buttons -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Secondary (Outline)</h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-6 py-3 border-2 border-dawn-clay text-dawn-clay rounded-xl font-medium hover:bg-dawn-clay hover:text-white transition-colors duration-300">
+                                    Learn more
+                                </button>
+                                <button class="px-6 py-3 border-2 border-dawn-slate text-dawn-slate rounded-xl font-medium hover:bg-dawn-slate hover:text-white transition-colors duration-300">
+                                    View schedule
+                                </button>
+                                <button class="px-6 py-3 border-2 border-dawn-concrete text-dawn-concrete rounded-xl font-medium" disabled>
+                                    Disabled
+                                </button>
+                            </div>
+                            <p class="text-sm text-dawn-clay font-mono mt-3">border-2 border-dawn-clay • Moderate transitions (300ms)</p>
+                        </div>
+
+                        <!-- Ghost Buttons -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Ghost (Minimal)</h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-6 py-3 text-dawn-night rounded-xl font-medium hover:bg-dawn-light transition-colors duration-300">
+                                    Browse classes
+                                </button>
+                                <button class="px-6 py-3 text-dawn-clay rounded-xl font-medium hover:bg-dawn-light transition-colors duration-300">
+                                    Contact us
+                                </button>
+                            </div>
+                            <p class="text-sm text-dawn-clay font-mono mt-3">text-dawn-night hover:bg-dawn-light</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Form Elements -->
+            <section id="forms" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Form elements</h2>
+                    <p class="text-dawn-slate">Clarity and respect. No pressure to perform.</p>
+                </div>
+
+                <!-- Text Inputs -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Text inputs</h3>
+
+                    <div class="space-y-6 max-w-2xl">
+                        <!-- Normal Input -->
+                        <div>
+                            <label class="block text-sm font-semibold text-dawn-night mb-2">
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                placeholder="you@example.com"
+                                class="w-full px-4 py-3 border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all duration-300 bg-dawn-mineral"
+                            >
+                            <p class="text-sm text-dawn-slate mt-1">Normal state</p>
+                        </div>
+
+                        <!-- Success Input -->
+                        <div>
+                            <label class="block text-sm font-semibold text-dawn-night mb-2">
+                                Name
+                            </label>
+                            <input
+                                type="text"
+                                value="Sarah Miller"
+                                class="w-full px-4 py-3 border-2 border-green-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-green-50"
+                            >
+                            <p class="text-sm text-green-600 mt-1 flex items-center gap-1">
+                                <i data-feather="check-circle" class="w-4 h-4"></i>
+                                Available
+                            </p>
+                        </div>
+
+                        <!-- Error Input -->
+                        <div>
+                            <label class="block text-sm font-semibold text-dawn-night mb-2">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                value="123"
+                                class="w-full px-4 py-3 border-2 border-red-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-50"
+                            >
+                            <p class="text-sm text-red-600 mt-1 flex items-center gap-1">
+                                <i data-feather="alert-circle" class="w-4 h-4"></i>
+                                Must be at least 8 characters
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Textarea -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Textarea</h3>
+                    <div class="max-w-2xl">
+                        <label class="block text-sm font-semibold text-dawn-night mb-2">
+                            Message
+                        </label>
+                        <textarea
+                            rows="4"
+                            placeholder="Share your thoughts..."
+                            class="w-full px-4 py-3 border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all duration-300 resize-none bg-dawn-mineral"
+                        ></textarea>
+                    </div>
+                </div>
+
+                <!-- Checkboxes & Toggles -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Checkboxes & toggles</h3>
+
+                    <div class="grid grid-cols-2 gap-8 max-w-4xl">
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Checkboxes</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="checkbox" checked class="w-5 h-5 rounded border-dawn-concrete text-dawn-clay focus:ring-dawn-clay">
+                                    <span class="text-dawn-night">Weekly newsletter</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <input type="checkbox" class="w-5 h-5 rounded border-dawn-concrete text-dawn-clay focus:ring-dawn-clay">
+                                    <span class="text-dawn-night">Class reminders</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Toggle switches</h4>
+                            <div class="space-y-4">
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <div class="relative">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-dawn-clay rounded-full peer peer-focus:ring-2 peer-focus:ring-dawn-clay after:content-[''] after:absolute after:top-0.5 after:left-[22px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </div>
+                                    <span class="text-dawn-night">Notifications</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer">
+                                    <div class="relative">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-dawn-concrete rounded-full peer peer-focus:ring-2 peer-focus:ring-dawn-clay after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </div>
+                                    <span class="text-dawn-night">Auto-renewal</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Interactive Components -->
+            <section id="components" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Interactive components</h2>
+                    <p class="text-dawn-slate">Clean, spacious, human.</p>
+                </div>
+
+                <!-- Cards -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Cards</h3>
+
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="border border-dawn-concrete rounded-xl p-6 hover:shadow-md transition-shadow duration-300">
+                            <div class="w-12 h-12 bg-dawn-light rounded-lg flex items-center justify-center mb-4">
+                                <i data-feather="activity" class="w-6 h-6 text-dawn-clay"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-2">Dynamic flow</h4>
+                            <p class="text-dawn-slate text-sm">Physical, clearly guided flow. Build strength and flexibility.</p>
+                        </div>
+
+                        <div class="border border-dawn-concrete rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-300">
+                            <div class="h-32 bg-dawn-gold"></div>
+                            <div class="p-6">
+                                <h4 class="text-lg font-semibold text-dawn-night mb-2">Calm & restore</h4>
+                                <p class="text-dawn-slate text-sm">Evening programming. Space to breathe.</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-dawn-slate text-white rounded-xl p-6 hover:bg-opacity-90 transition-all duration-300 cursor-pointer">
+                            <div class="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center mb-4">
+                                <i data-feather="arrow-right" class="w-6 h-6 text-white"></i>
+                            </div>
+                            <h4 class="text-lg font-semibold mb-2">View schedule</h4>
+                            <p class="text-dawn-gold text-sm">Find your next class</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Alerts & Banners -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Alerts & banners</h3>
+
+                    <div class="space-y-4 max-w-3xl">
+                        <div class="flex items-start gap-3 p-4 bg-dawn-light border border-dawn-gold rounded-xl">
+                            <i data-feather="info" class="w-5 h-5 text-dawn-clay flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <h5 class="font-semibold text-dawn-night mb-1">Class update</h5>
+                                <p class="text-sm text-dawn-slate">New Calm & Restore course every Wednesday at 8:00 PM.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3 p-4 bg-green-50 border border-green-200 rounded-xl">
+                            <i data-feather="check-circle" class="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"></i>
+                            <div>
+                                <h5 class="font-semibold text-green-900 mb-1">Booking confirmed</h5>
+                                <p class="text-sm text-green-700">Your spot is reserved. See you soon.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badges -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Badges & pills</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Status badges</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-3 py-1 bg-dawn-light text-dawn-night text-sm font-medium rounded-full">Open</span>
+                                <span class="px-3 py-1 bg-dawn-gold text-dawn-night text-sm font-medium rounded-full">Few spots left</span>
+                                <span class="px-3 py-1 bg-dawn-clay text-white text-sm font-medium rounded-full">Full</span>
+                                <span class="px-3 py-1 bg-dawn-concrete text-dawn-slate text-sm font-medium rounded-full">Waitlist</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4">Outline badges</h4>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-3 py-1 border-2 border-dawn-clay text-dawn-clay text-sm font-medium rounded-full">Beginner friendly</span>
+                                <span class="px-3 py-1 border-2 border-dawn-slate text-dawn-slate text-sm font-medium rounded-full">Intermediate</span>
+                                <span class="px-3 py-1 border-2 border-dawn-night text-dawn-night text-sm font-medium rounded-full">Advanced</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Navigation Examples -->
+            <section id="navigation" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Navigation examples</h2>
+                    <p class="text-dawn-slate">Clear structure, no noise.</p>
+                </div>
+
+                <!-- Desktop Navbar -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Desktop navigation</h3>
+
+                    <div class="border-2 border-dawn-concrete rounded-xl overflow-hidden">
+                        <nav class="flex items-center justify-between px-8 py-4 bg-white border-b border-dawn-concrete">
+                            <div class="flex items-center gap-8">
+                                <div class="font-bold text-xl text-dawn-night tracking-wider">EOS CLUB</div>
+                                <div class="hidden md:flex items-center gap-6">
+                                    <a href="#" class="text-dawn-night font-medium hover:text-dawn-clay transition-colors duration-300">Classes</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">About</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Community</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Contact</a>
+                                </div>
+                            </div>
+                            <button class="px-6 py-2 bg-dawn-clay text-white rounded-lg font-medium hover:bg-opacity-90 transition-all duration-300">
+                                Book class
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Mobile navigation</h3>
+
+                    <div class="max-w-sm border-2 border-dawn-concrete rounded-xl overflow-hidden">
+                        <div class="flex items-center justify-between px-6 py-4 bg-white border-b border-dawn-concrete">
+                            <div class="font-bold text-xl text-dawn-night tracking-wider">EOS CLUB</div>
+                            <button class="text-dawn-slate">
+                                <i data-feather="x" class="w-6 h-6"></i>
+                            </button>
+                        </div>
+
+                        <div class="bg-white">
+                            <nav class="p-4 space-y-2">
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-night font-medium bg-dawn-light rounded-lg">
+                                    <i data-feather="calendar" class="w-5 h-5"></i>
+                                    <span>Classes</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
+                                    <i data-feather="users" class="w-5 h-5"></i>
+                                    <span>Community</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
+                                    <i data-feather="info" class="w-5 h-5"></i>
+                                    <span>About</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
+                                    <i data-feather="mail" class="w-5 h-5"></i>
+                                    <span>Contact</span>
+                                </a>
+                            </nav>
+
+                            <div class="p-4 border-t border-dawn-concrete">
+                                <button class="w-full px-6 py-3 bg-dawn-clay text-white rounded-xl font-medium hover:bg-opacity-90 transition-all duration-300">
+                                    Book class
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 8: Footer Styles -->
+            <section id="footer-styles" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Footer styles</h2>
+                    <p class="text-dawn-slate">Grounded. Clear. Calm.</p>
+                </div>
+
+                <!-- Minimal Footer -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Minimal footer</h3>
+
+                    <div class="border-2 border-dawn-concrete rounded-xl overflow-hidden">
+                        <footer class="bg-white border-t border-dawn-concrete px-8 py-8">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-6">
+                                    <p class="text-sm text-dawn-slate">© 2026 EOS CLUB</p>
+                                    <div class="flex items-center gap-4">
+                                        <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Privacy</a>
+                                        <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Terms</a>
+                                        <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Contact</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300">
+                                        <i data-feather="instagram" class="w-5 h-5"></i>
+                                    </a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300">
+                                        <i data-feather="mail" class="w-5 h-5"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- Newsletter Footer -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Newsletter footer</h3>
+
+                    <div class="border-2 border-dawn-concrete rounded-xl overflow-hidden">
+                        <footer class="bg-gradient-to-br from-dawn-mineral to-dawn-light px-8 py-12">
+                            <div class="max-w-3xl mx-auto text-center mb-8">
+                                <h3 class="text-2xl font-bold text-dawn-night mb-3">Stay connected</h3>
+                                <p class="text-dawn-slate mb-6" style="line-height: 1.75;">Weekly insights on conscious movement, community events, and class updates.</p>
+                                <div class="flex gap-3 max-w-md mx-auto">
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        class="flex-1 px-4 py-3 border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent bg-white"
+                                    >
+                                    <button class="px-6 py-3 bg-dawn-clay text-white rounded-xl font-medium hover:bg-opacity-90 transition-all duration-300 whitespace-nowrap">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="border-t border-dawn-concrete pt-8">
+                                <div class="flex items-center justify-between">
+                                    <p class="text-sm text-dawn-slate">© 2026 EOS CLUB · Cologne</p>
+                                    <div class="flex items-center gap-4">
+                                        <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300">
+                                            <i data-feather="instagram" class="w-5 h-5"></i>
+                                        </a>
+                                        <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300">
+                                            <i data-feather="mail" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-dawn-concrete pt-12 pb-8">
+                <div class="text-center">
+                    <p class="text-dawn-slate mb-2">EOS CLUB Design System — Living document</p>
+                    <p class="text-sm text-dawn-clay">Merriweather · Inter · Feather Icons</p>
+                    <p class="text-xs text-dawn-slate mt-4">Version 1.0.0 · January 2026</p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Initialize Feather Icons -->
+    <script>
+        feather.replace();
+    </script>
+
+</body>
+</html>
