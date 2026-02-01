@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EOS Club Cologne: A new space for yoga, conscious movement, and genuine community. Join the waitlist and get 10% off your founding membership. Opening 2026.">
+    <title>EOS Club Cologne — Something New is Dawning</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dawn-mineral': '#F9F9F7',
+                        'dawn-concrete': '#E6E5E0',
+                        'dawn-slate': '#2F3A40',
+                        'dawn-clay': '#C57B57',
+                        'dawn-gold': '#D6C6A6',
+                        'dawn-night': '#1F2933',
+                        'dawn-light': '#F0EAD6',
+                    },
+                    backgroundImage: {
+                        'dawn-gradient': 'linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%)',
+                        'heat-gradient': 'linear-gradient(135deg, #E9B24A 0%, #E8742C 35%, #E6534A 60%, #E24676 78%, #C74A8E 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Global Styles & Reset */
+        body {
+            background-color: #F9F9F7;
+            color: #1F2933;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Grain Texture Overlay */
+        .grain-texture::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        /* Utility: Hide scrollbar for cleaner modal look if needed */
+        .no-scroll { overflow: hidden; }
+
+        /* Custom Selection Color */
+        ::selection {
+            background: #C57B57;
+            color: #F9F9F7;
+        }
+
+        /* Image Masking for Soft Edges */
+        .soft-edge-img {
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+    </style>
+</head>
+<body class="font-sans grain-texture relative">
+
+    <!-- Header / Nav -->
+    <header class="fixed top-0 w-full z-40 transition-all duration-300 bg-dawn-mineral/90 backdrop-blur-sm border-b border-transparent" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="block w-24 md:w-28 relative z-50 group" aria-label="EOS Club Home">
+                <img src="assets/eos-logo-export_bm-black.png" alt="EOS Logo" class="w-full h-auto opacity-90 group-hover:opacity-100 transition-opacity">
+            </a>
+            
+            <!-- Skip Link -->
+            <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-dawn-clay text-white px-4 py-2 rounded-md">Skip to content</a>
+
+            <!-- Nav CTA -->
+            <a href="#join" class="hidden md:inline-block text-sm font-medium text-dawn-slate hover:text-dawn-clay transition-colors tracking-wide">
+                Coming 2026
+            </a>
+        </div>
+    </header>
+
+    <main id="main-content">
+
+        <!-- HERO SECTION -->
+        <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden" id="hero">
+            <!-- Background Gradient Bloom (Radial Heat) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] opacity-20 pointer-events-none" 
+                 style="background: radial-gradient(circle at center, #E9B24A 0%, #E6534A 30%, transparent 70%); filter: blur(80px);">
+            </div>
+
+            <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+                <div class="hero-anim opacity-0 translate-y-8">
+                    <span class="inline-block py-1 px-3 rounded-full border border-dawn-slate/20 text-xs font-medium text-dawn-slate mb-6 tracking-wide uppercase">
+                        Cologne, 2026
+                    </span>
+                    <h1 class="font-serif text-5xl md:text-7xl font-bold text-dawn-night mb-6 leading-[1.1]" title="Something new is dawning in Cologne">
+                        Something new is <br class="hidden md:block" /> <span class="italic font-light text-dawn-clay">dawning</span> in Cologne.
+                    </h1>
+                    <p class="text-lg md:text-xl text-dawn-slate max-w-2xl mx-auto mb-10 leading-relaxed">
+                        A place for conscious movement, genuine encounters, and the kind of calm your nervous system has been asking for.
+                    </p>
+                    
+                    <!-- Hero Form -->
+                    <form class="max-w-md mx-auto flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault(); window.location.href='#join';">
+                        <label for="hero-email" class="sr-only">Email Address</label>
+                        <input type="email" id="hero-email" placeholder="Your email address" 
+                               class="w-full px-5 py-4 bg-white border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all placeholder:text-dawn-concrete text-dawn-night" required>
+                        <button type="submit" class="w-full sm:w-auto px-8 py-4 bg-dawn-night text-white font-medium rounded-xl hover:bg-dawn-slate transition-colors shadow-lg shadow-dawn-slate/10 whitespace-nowrap">
+                            Count me in
+                        </button>
+                    </form>
+                    <p class="mt-4 text-xs text-dawn-slate opacity-70">Be the first to know when we open — and get 10% off.</p>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50">
+                <i data-feather="arrow-down" class="text-dawn-slate w-6 h-6"></i>
+            </div>
+        </section>
+
+        <!-- TENSION SECTION (The Problem) -->
+        <section class="py-24 md:py-32 bg-white border-y border-dawn-concrete" id="tension">
+            <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                
+                <!-- Text -->
+                <div class="order-2 md:order-1 scroll-trigger">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dawn-night mb-6">
+                        You don't need another thing to optimize.
+                    </h2>
+                    <div class="space-y-6 text-dawn-slate leading-relaxed">
+                        <p>
+                            Your calendar is full. Your head is fuller. And somewhere between the morning news and the late-night scroll, your body quietly wonders when it gets a say.
+                        </p>
+                        <p>
+                            Most spaces promise transformation. We're not here to transform you. You're already whole.
+                        </p>
+                        <p class="font-medium text-dawn-night border-l-4 border-dawn-clay pl-4">
+                            We're here to give you room to breathe.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Image -->
+                <div class="order-1 md:order-2 relative scroll-trigger">
+                    <div class="aspect-[4/5] md:aspect-square overflow-hidden rounded-2xl bg-dawn-concrete relative">
+                        <!-- Placeholder for "Sweaty, real exertion" image -->
+                        <img src="assets/yoga_studio.jpg" alt="A calm, breathing space with natural light" class="w-full h-full object-cover grayscale-[20%] contrast-[1.05] soft-edge-img hover:scale-105 transition-transform duration-700 ease-out">
+                        
+                        <!-- Subtle Watermark -->
+                        <img src="assets/eos-logo-export_bm-black.png" class="absolute bottom-4 right-4 w-16 opacity-50 mix-blend-multiply" alt="" aria-hidden="true">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOLUTION SECTION (What EOS Is) -->
+        <section class="py-24 bg-dawn-mineral">
+            <div class="max-w-3xl mx-auto px-6 text-center mb-16 scroll-trigger">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-dawn-night mb-6">
+                    Movement that stays with you.
+                </h2>
+                <p class="text-dawn-slate text-lg leading-relaxed">
+                    EOS Club is a space where you can strengthen your body, settle your mind, and meet people who get it—without having to explain yourself.
+                </p>
+            </div>
+
+            <!-- 3 Column Features -->
+            <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl border border-dawn-concrete shadow-sm hover:shadow-md transition-shadow duration-300 scroll-trigger">
+                    <div class="w-12 h-12 bg-dawn-light rounded-lg flex items-center justify-center mb-6 text-dawn-clay">
+                        <i data-feather="message-square" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-dawn-night mb-3">Clear, not cryptic</h3>
+                    <p class="text-sm text-dawn-slate leading-relaxed">
+                        We speak like humans. No "unlocking frequencies" here—just honest guidance and straightforward information.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl border border-dawn-concrete shadow-sm hover:shadow-md transition-shadow duration-300 scroll-trigger">
+                    <div class="w-12 h-12 bg-dawn-light rounded-lg flex items-center justify-center mb-6 text-dawn-clay">
+                        <i data-feather="activity" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-dawn-night mb-3">Physical, not pushy</h3>
+                    <p class="text-sm text-dawn-slate leading-relaxed">
+                        Build strength and flexibility at your own pace. Challenge is optional. Showing up is enough.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl border border-dawn-concrete shadow-sm hover:shadow-md transition-shadow duration-300 scroll-trigger">
+                    <div class="w-12 h-12 bg-dawn-light rounded-lg flex items-center justify-center mb-6 text-dawn-clay">
+                        <i data-feather="users" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-dawn-night mb-3">Community, not cult</h3>
+                    <p class="text-sm text-dawn-slate leading-relaxed">
+                        Real connections with people who think similarly. No small talk required, but always welcome.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISUAL BREAK / ATMOSPHERE -->
+        <section class="py-24 overflow-hidden bg-dawn-night text-dawn-mineral relative">
+            <div class="absolute inset-0 opacity-20 bg-[url('assets/14_bg_gradient.jpg')] bg-cover bg-center"></div>
+            
+            <div class="max-w-6xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div class="scroll-trigger">
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6 text-dawn-light">Coming soon to Cologne.</h2>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="text-dawn-clay mt-1 w-5 h-5"></i>
+                            <span class="text-dawn-concrete">Yoga and functional flows for all levels</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="text-dawn-clay mt-1 w-5 h-5"></i>
+                            <span class="text-dawn-concrete">Calm and restorative sessions for overstimulated minds</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="text-dawn-clay mt-1 w-5 h-5"></i>
+                            <span class="text-dawn-concrete">Workshops on breathing, sleep, and stress</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="text-dawn-clay mt-1 w-5 h-5"></i>
+                            <span class="text-dawn-concrete">Wood, natural light, and zero wall-sized "Namaste" signs.</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="scroll-trigger">
+                    <div class="grid grid-cols-2 gap-4">
+                        <img src="assets/yoga_closeup_1.png" alt="Detail of studio texture" class="rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-500">
+                        <img src="assets/yoga_closeup_2.png" alt="Light and shadow play" class="rounded-xl opacity-80 hover:opacity-100 transition-opacity duration-500 translate-y-8">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FINAL CTA (Incentive) -->
+        <section id="join" class="py-24 md:py-32 bg-dawn-mineral relative overflow-hidden">
+            <!-- Decorative circle -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-dawn-gold/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+
+            <div class="max-w-2xl mx-auto px-6 text-center relative z-10 scroll-trigger">
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-dawn-night mb-6">
+                    Get in early. Get 10% off.
+                </h2>
+                <p class="text-dawn-slate text-lg mb-10">
+                    We're opening soon, and we'd love you to be there from the start. Sign up now to lock in your founding member discount and get honest updates.
+                </p>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-dawn-concrete">
+                    <form class="flex flex-col gap-4">
+                        <div class="text-left">
+                            <label for="footer-email" class="block text-sm font-semibold text-dawn-night mb-2">Email address</label>
+                            <input type="email" id="footer-email" placeholder="you@example.com" 
+                                   class="w-full px-4 py-3 bg-dawn-mineral border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all">
+                        </div>
+                        <button type="submit" class="w-full px-6 py-4 bg-dawn-clay text-white font-bold rounded-xl hover:bg-opacity-90 transition-all shadow-md mt-2">
+                            Save my spot
+                        </button>
+                        <p class="text-xs text-dawn-slate mt-2">One email to confirm. No life philosophy attached.</p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-dawn-concrete py-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="font-serif font-bold text-dawn-night text-lg">EOS CLUB</p>
+                <p class="text-sm text-dawn-slate">Spaces that breathe. Movement that lasts.</p>
+                <p class="text-xs text-dawn-concrete mt-1">Cologne, 2026</p>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors" aria-label="Instagram">
+                    <i data-feather="instagram" class="w-5 h-5"></i>
+                </a>
+                <a href="mailto:hello@eos-club.de" class="text-dawn-slate hover:text-dawn-clay transition-colors" aria-label="Email">
+                    <i data-feather="mail" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+
+        // GSAP Animations
+        document.addEventListener("DOMContentLoaded", (event) => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // 1. Hero Entrance (The "Dawn")
+            const tl = gsap.timeline();
+            tl.to(".hero-anim", {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                ease: "power3.out",
+                stagger: 0.2
+            });
+
+            // 2. Scroll Triggers for Sections
+            // Select all elements with class 'scroll-trigger'
+            const sections = document.querySelectorAll(".scroll-trigger");
+            
+            sections.forEach(section => {
+                gsap.fromTo(section, 
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: section,
+                            start: "top 85%", // Animation starts when top of element hits 85% of viewport
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // 3. Navbar background on scroll
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-sm', 'border-dawn-concrete');
+                    navbar.classList.remove('border-transparent');
+                } else {
+                    navbar.classList.remove('shadow-sm', 'border-dawn-concrete');
+                    navbar.classList.add('border-transparent');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

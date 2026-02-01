@@ -1,0 +1,97 @@
+{
+  "sourceImage": "assets/14_bg_gradient_large.jpg",
+  "palette": {
+    "core": [
+      {
+        "name": "Solar Nectar",
+        "hex": "#E9B24A",
+        "rgb": { "r": 233, "g": 178, "b": 74 },
+        "note": "Primary brand warmth; strong CTA fills, key highlights, active states."
+      },
+      {
+        "name": "Sunburst Orange",
+        "hex": "#E8742C",
+        "rgb": { "r": 232, "g": 116, "b": 44 },
+        "note": "Secondary warm tone; secondary buttons, badges, emphasis chips."
+      },
+      {
+        "name": "Ember Coral",
+        "hex": "#E6534A",
+        "rgb": { "r": 230, "g": 83, "b": 74 },
+        "note": "Attention hue; error-adjacent accents, critical highlights, illustrations."
+      },
+      {
+        "name": "Hot Rose",
+        "hex": "#E24676",
+        "rgb": { "r": 226, "g": 70, "b": 118 },
+        "note": "Energetic core pink; primary gradient stops, links on light backgrounds, selected states."
+      },
+      {
+        "name": "Magenta Glow",
+        "hex": "#C74A8E",
+        "rgb": { "r": 199, "g": 74, "b": 142 },
+        "note": "Depth tone; headers, hero gradients, focus rings (pair with softer outer glows)."
+      }
+    ],
+    "accents": [
+      {
+        "name": "Tangerine Highlight",
+        "hex": "#F18A4A",
+        "rgb": { "r": 241, "g": 138, "b": 74 },
+        "note": "Accent pop; hover states, small UI highlights, subtle icon fills."
+      },
+      {
+        "name": "Apricot Haze",
+        "hex": "#F2B07C",
+        "rgb": { "r": 242, "g": 176, "b": 124 },
+        "note": "Soft supporting warmth; card accents, secondary surfaces, gentle dividers."
+      },
+      {
+        "name": "Melon Pink",
+        "hex": "#F06A8C",
+        "rgb": { "r": 240, "g": 106, "b": 140 },
+        "note": "Accent pink; tags, progress/health indicators, playful micro-interactions."
+      },
+      {
+        "name": "Orchid Transition",
+        "hex": "#D76AA3",
+        "rgb": { "r": 215, "g": 106, "b": 163 },
+        "note": "Bridge tone between pink/magenta; gradients, shadows/glows, subtle emphasis backgrounds."
+      }
+    ],
+    "backgroundWash": [
+      {
+        "name": "Pistachio Mist",
+        "hex": "#F2F4C9",
+        "rgb": { "r": 242, "g": 244, "b": 201 },
+        "note": "Background wash; large app/page backgrounds preserving the pale green-yellow mood."
+      },
+      {
+        "name": "Warm Cream",
+        "hex": "#FBF3D6",
+        "rgb": { "r": 251, "g": 243, "b": 214 },
+        "note": "Background wash; panels and content areas where you want maximum readability."
+      },
+      {
+        "name": "Peach Fog",
+        "hex": "#F8E1D5",
+        "rgb": { "r": 248, "g": 225, "b": 213 },
+        "note": "Background wash; warm-tinted sections, empty states, subtle hero backdrops."
+      }
+    ],
+    "recommendedTextColors": [
+      {
+        "name": "Deep Olive Charcoal",
+        "hex": "#2A2B1E",
+        "rgb": { "r": 42, "g": 43, "b": 30 },
+        "note": "Dark text on background washes; body copy, headings, UI labels."
+      },
+      {
+        "name": "Soft Warm White",
+        "hex": "#FFF7EE",
+        "rgb": { "r": 255, "g": 247, "b": 238 },
+        "note": "Light text on Hot Rose/Magenta Glow; button text, inverse headers, overlays."
+      }
+    ]
+  }
+}

@@ -96,6 +96,34 @@
             background: linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%);
         }
 
+        /* EOS warm gradients (from gradient_palette.json + 14_bg_gradient.jpg) */
+        .eos-gradient-heat-linear {
+            background: linear-gradient(135deg, #E9B24A 0%, #E8742C 35%, #E6534A 60%, #E24676 78%, #C74A8E 100%);
+        }
+
+        .eos-gradient-heat-radial {
+            /* Radial “sun” bloom with a gentle pistachio wash at the edges */
+            background: radial-gradient(120% 120% at 50% 48%, #E9B24A 0%, #E8742C 26%, #E6534A 46%, #E24676 62%, #C74A8E 76%, #F2F4C9 100%);
+        }
+
+        .eos-gradient-wash {
+            background: linear-gradient(135deg, #F2F4C9 0%, #FBF3D6 45%, #F8E1D5 100%);
+        }
+
+        .eos-gradient-swatch {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .eos-gradient-swatch::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            /* subtle top-to-bottom scrim for more reliable text legibility */
+            background: linear-gradient(180deg, rgba(42,43,30,0.10) 0%, rgba(42,43,30,0.00) 55%);
+            pointer-events: none;
+        }
+
         /* Spotlight effect for cards */
         .spotlight-card {
             position: relative;
@@ -184,6 +212,10 @@
                     <a href="#colors" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
                         <i data-feather="droplet" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
                         <span class="font-medium">Color Palette</span>
+                    </a>
+                    <a href="#gradients" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
+                        <i data-feather="sun" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
+                        <span class="font-medium">Gradients</span>
                     </a>
                     <a href="#assets" class="flex items-center px-4 py-3 text-dawn-night hover:bg-dawn-light rounded-lg transition-colors duration-300 group">
                         <i data-feather="image" class="w-5 h-5 mr-3 text-dawn-clay group-hover:text-dawn-slate"></i>
@@ -395,6 +427,116 @@
                         </div>
                         <p class="text-sm text-dawn-slate">Use for primary buttons, hero backgrounds, and moments of transformation</p>
                         <p class="text-xs font-mono text-dawn-clay">linear-gradient(135deg, #2F3A40 → #C57B57 → #D6C6A6)</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2.5: Gradients -->
+            <section id="gradients" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-dawn-night mb-3">Gradients</h2>
+                    <p class="text-dawn-slate">Warmth with depth. Use sparingly, with strong typography and breathing room.</p>
+                </div>
+
+                <!-- Source reference -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <div class="flex items-start justify-between gap-8 flex-col lg:flex-row">
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold text-dawn-night mb-3">Source image</h3>
+                            <p class="text-dawn-slate" style="line-height: 1.75;">
+                                These gradient tokens are derived from <span class="font-mono text-xs text-dawn-clay">assets/14_bg_gradient.jpg</span>
+                                and the palette notes in <span class="font-mono text-xs text-dawn-clay">gradient_palette.json</span>.
+                            </p>
+
+                            <div class="mt-6 grid grid-cols-2 gap-4">
+                                <div class="p-4 bg-dawn-mineral border border-dawn-concrete rounded-xl">
+                                    <p class="text-sm font-semibold text-dawn-night mb-1">Recommended dark text</p>
+                                    <p class="text-xs text-dawn-slate">Deep Olive Charcoal</p>
+                                    <p class="text-xs font-mono text-dawn-clay">#2A2B1E</p>
+                                </div>
+                                <div class="p-4 bg-dawn-night border border-dawn-concrete rounded-xl">
+                                    <p class="text-sm font-semibold text-dawn-light mb-1">Recommended light text</p>
+                                    <p class="text-xs text-dawn-gold">Soft Warm White</p>
+                                    <p class="text-xs font-mono text-dawn-gold">#FFF7EE</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <figure class="w-full lg:w-[380px]">
+                            <img
+                                src="assets/14_bg_gradient.jpg"
+                                alt="EOS warm gradient reference image"
+                                class="w-full rounded-xl border border-dawn-concrete shadow-sm"
+                                loading="lazy"
+                                decoding="async"
+                            />
+                            <figcaption class="text-xs text-dawn-slate mt-2">Reference: warm bloom + soft wash edges</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <!-- Gradient tokens -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Gradient tokens</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="space-y-3">
+                            <div class="h-40 rounded-xl eos-gradient-heat-radial eos-gradient-swatch border border-dawn-concrete shadow-sm flex items-end">
+                                <div class="p-4">
+                                    <p class="text-sm font-semibold" style="color: #2A2B1E;">Heat Bloom (Radial)</p>
+                                    <p class="text-xs font-mono" style="color: #2A2B1E; opacity: 0.8;">eos-gradient-heat-radial</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-dawn-slate">Hero backgrounds, section headers, ambient overlays.</p>
+                            <p class="text-xs font-mono text-dawn-clay">radial-gradient(… #E9B24A → #E8742C → #E6534A → #E24676 → #C74A8E → #F2F4C9)</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="h-40 rounded-xl eos-gradient-heat-linear eos-gradient-swatch border border-dawn-concrete shadow-sm flex items-end">
+                                <div class="p-4">
+                                    <p class="text-sm font-semibold" style="color: #FFF7EE;">Heat Line (Linear)</p>
+                                    <p class="text-xs font-mono" style="color: #FFF7EE; opacity: 0.85;">eos-gradient-heat-linear</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-dawn-slate">Primary accents: CTA fills, emphasis chips, active states.</p>
+                            <p class="text-xs font-mono text-dawn-clay">linear-gradient(135deg, #E9B24A → #E8742C → #E6534A → #E24676 → #C74A8E)</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="h-40 rounded-xl eos-gradient-wash eos-gradient-swatch border border-dawn-concrete shadow-sm flex items-end">
+                                <div class="p-4">
+                                    <p class="text-sm font-semibold" style="color: #2A2B1E;">Warm Wash (Surface)</p>
+                                    <p class="text-xs font-mono" style="color: #2A2B1E; opacity: 0.8;">eos-gradient-wash</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-dawn-slate">Large surfaces where you want warmth but maximum readability.</p>
+                            <p class="text-xs font-mono text-dawn-clay">linear-gradient(135deg, #F2F4C9 → #FBF3D6 → #F8E1D5)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usage guidance -->
+                <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-6">Usage guidance</h3>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="p-6 bg-dawn-light rounded-xl border border-dawn-concrete">
+                            <h4 class="text-lg font-semibold text-dawn-night mb-3">Readability & contrast</h4>
+                            <ul class="list-disc pl-5 text-sm text-dawn-slate space-y-2" style="line-height: 1.75;">
+                                <li>Prefer <span class="font-mono text-xs text-dawn-clay">#2A2B1E</span> on lighter regions and <span class="font-mono text-xs text-dawn-clay">#FFF7EE</span> on magenta-heavy regions.</li>
+                                <li>For body text on complex gradients, add a subtle scrim/overlay (see the built-in swatch overlay).</li>
+                                <li>Keep gradients behind large type or sparse UI. Avoid long paragraphs on multi-stop gradients.</li>
+                            </ul>
+                        </div>
+
+                        <div class="p-6 bg-dawn-mineral rounded-xl border border-dawn-concrete">
+                            <h4 class="text-lg font-semibold text-dawn-night mb-3">Pairing with the palette</h4>
+                            <p class="text-sm text-dawn-slate" style="line-height: 1.75;">
+                                The warm core stops map to <strong>Solar Nectar</strong> → <strong>Sunburst Orange</strong> → <strong>Ember Coral</strong>
+                                → <strong>Hot Rose</strong> → <strong>Magenta Glow</strong>, with <strong>Pistachio Mist</strong> as the background wash.
+                                Use <strong>Tangerine Highlight</strong> and <strong>Orchid Transition</strong> for hover glows and subtle depth.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </section>

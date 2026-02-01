@@ -41,3 +41,21 @@ We believe in transparency and agility.
 
 ---
 *Built with ❤️ by Khanyi Media*
+
+---
+
+## EOS Club — pre-launch landing page
+
+Open [`eos_prelaunch_landing.html`](eos_prelaunch_landing.html) in your browser.
+
+If you prefer serving it locally:
+
+```bash
+python3 -m http.server 5173
+```
+
+Then visit:
+
+```text
+http://localhost:5173/eos_prelaunch_landing.html
+```

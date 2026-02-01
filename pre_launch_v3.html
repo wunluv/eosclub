@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOS Club Cologne – Coming 2026</title>
+    <meta name="description" content="EOS Club Cologne: A new space for yoga, conscious movement, and genuine community. Join the waitlist and get 10% off your founding membership. Opening 2026.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'dawn': {
+                            'mineral': '#F9F9F7',
+                            'concrete': '#E6E5E0',
+                            'slate': '#2F3A40',
+                            'clay': '#C57B57',
+                            'gold': '#D6C6A6',
+                            'night': '#1F2933',
+                            'light': '#F0EAD6',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F9F9F7;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Grain texture overlay */
+        .grain-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .grain-texture > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* EOS warm gradients */
+        .eos-gradient-heat-linear {
+            background: linear-gradient(135deg, #E9B24A 0%, #E8742C 35%, #E6534A 60%, #E24676 78%, #C74A8E 100%);
+        }
+
+        .eos-gradient-heat-radial {
+            background: radial-gradient(120% 120% at 50% 48%, #E9B24A 0%, #E8742C 26%, #E6534A 46%, #E24676 62%, #C74A8E 76%, #F2F4C9 100%);
+        }
+
+        .eos-gradient-wash {
+            background: linear-gradient(135deg, #F2F4C9 0%, #FBF3D6 45%, #F8E1D5 100%);
+        }
+
+        .dawn-gradient {
+            background: linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%);
+        }
+
+        /* Subtle fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+        }
+
+        .fade-in-delay {
+            opacity: 0;
+            animation: fadeIn 1.2s ease-out 0.3s forwards;
+        }
+
+        /* Smooth transitions */
+        * {
+            scroll-behavior: smooth;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { scroll-behavior: auto; }
+            .fade-in, .fade-in-delay { animation: none; opacity: 1; transform: none; }
+        }
+
+        /* Custom text colors for gradients */
+        .text-warm-dark {
+            color: #2A2B1E;
+        }
+
+        .text-warm-light {
+            color: #FFF7EE;
+        }
+    </style>
+</head>
+<body class="bg-dawn-mineral text-dawn-night antialiased">
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center eos-gradient-heat-radial grain-texture overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/10"></div>
+
+        <div class="container mx-auto px-6 py-20 text-center relative z-10">
+            <!-- Logo -->
+            <div class="mb-8 fade-in">
+                <img
+                    src="assets/eos-logo-export_bm-black.png"
+                    alt="EOS CLUB logo"
+                    class="mx-auto h-24 md:h-32 w-auto mb-4"
+                    loading="eager"
+                />
+                <h2 class="text-2xl md:text-3xl font-bold tracking-widest text-warm-dark">EOS CLUB</h2>
+            </div>
+
+            <!-- Hero Headline -->
+            <div class="max-w-4xl mx-auto mb-12 fade-in-delay">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-warm-dark mb-6 leading-tight">
+                    Something new is dawning in Cologne.
+                </h1>
+                <p class="text-xl md:text-2xl text-warm-dark/80 leading-relaxed max-w-3xl mx-auto" style="line-height: 1.75;">
+                    A place for conscious movement, genuine encounters, and the kind of calm your nervous system has been asking for.
+                </p>
+            </div>
+
+            <!-- Hero CTA -->
+            <div class="max-w-2xl mx-auto fade-in-delay">
+                <p class="text-lg md:text-xl text-warm-dark/90 mb-6 font-medium">
+                    Be the first to know when we open our doors. Get 10% off your membership.
+                </p>
+
+                <form class="flex flex-col sm:flex-row gap-4 justify-center items-center" onsubmit="handleFormSubmit(event)">
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="your@email.com"
+                        required
+                        class="w-full sm:flex-1 max-w-md px-6 py-4 border-2 border-warm-dark/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-warm-dark focus:border-transparent transition-all duration-300 bg-white/90 backdrop-blur-sm text-lg"
+                    >
+                    <button
+                        type="submit"
+                        class="w-full sm:w-auto px-8 py-4 bg-dawn-night text-white rounded-xl font-semibold hover:bg-dawn-slate transition-all duration-300 shadow-lg hover:shadow-xl text-lg whitespace-nowrap"
+                    >
+                        Count me in
+                    </button>
+                </form>
+                <p class="text-sm text-warm-dark/60 mt-3 italic">One email to confirm. No life philosophy attached.</p>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-feather="chevron-down" class="w-8 h-8 text-warm-dark/40"></i>
+        </div>
+    </section>
+
+    <!-- Problem/Tension Section -->
+    <section class="py-24 md:py-32 bg-dawn-mineral relative grain-texture">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-dawn-night mb-8">
+                    You don't need another thing to optimize.
+                </h2>
+                <div class="text-lg md:text-xl text-dawn-slate space-y-6" style="line-height: 1.75;">
+                    <p>
+                        Your calendar is full. Your head is fuller. And somewhere between the morning news and the late-night scroll, your body quietly wonders when it gets a say.
+                    </p>
+                    <p>
+                        Most spaces promise transformation. We're not here to transform you. You're already whole.
+                    </p>
+                    <p class="text-xl md:text-2xl font-semibold text-dawn-night">
+                        We're here to give you room to breathe.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Break with Image -->
+    <section class="relative h-96 md:h-[600px] overflow-hidden">
+        <img
+            src="assets/yoga_closeup_1.png"
+            alt="Conscious movement at EOS Club"
+            class="w-full h-full object-cover"
+            loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-dawn-night/60 to-transparent"></div>
+    </section>
+
+    <!-- What EOS Is Section -->
+    <section class="py-24 md:py-32 eos-gradient-wash relative grain-texture">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-dawn-night mb-8">
+                    Movement that stays with you.
+                </h2>
+                <div class="text-lg md:text-xl text-dawn-slate space-y-6" style="line-height: 1.75;">
+                    <p>
+                        EOS Club is a space where you can strengthen your body, settle your mind, and meet people who get it, without having to explain yourself.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6 my-12 text-left">
+                        <div class="bg-white/60 backdrop-blur-sm p-6 rounded-xl border border-dawn-concrete">
+                            <p class="text-dawn-night font-medium">No pressure to perform.</p>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm p-6 rounded-xl border border-dawn-concrete">
+                            <p class="text-dawn-night font-medium">No cosmic promises.</p>
+                        </div>
+                        <div class="bg-white/60 backdrop-blur-sm p-6 rounded-xl border border-dawn-concrete">
+                            <p class="text-dawn-night font-medium">Just quality teaching, thoughtful spaces, and a community that doesn't require perfection.</p>
+                        </div>
+                    </div>
+                    <p class="text-xl md:text-2xl font-serif italic text-dawn-night">
+                        Think of it as your nervous system's favourite appointment.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The EOS Difference Section -->
+    <section class="py-24 md:py-32 bg-white relative grain-texture">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-dawn-night mb-16 text-center">
+                    What makes EOS feel different.
+                </h2>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="text-center p-8 border border-dawn-concrete rounded-2xl hover:shadow-lg transition-shadow duration-300 bg-dawn-mineral">
+                        <div class="w-16 h-16 bg-dawn-light rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="message-circle" class="w-8 h-8 text-dawn-clay"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-dawn-night mb-4">
+                            Exceptional Facilitation
+                        </h3>
+                        <p class="text-dawn-slate leading-relaxed">
+                            We speak like humans. No "unlocking frequencies" here, just honest guidance and exquisite facilitation.
+                        </p>
+                    </div>
+
+                    <!-- Feature 2 -->
+                    <div class="text-center p-8 border border-dawn-concrete rounded-2xl hover:shadow-lg transition-shadow duration-300 bg-dawn-mineral">
+                        <div class="w-16 h-16 bg-dawn-light rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="check-circle" class="w-8 h-8 text-dawn-clay"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-dawn-night mb-4">
+                            Showing up is enough
+                        </h3>
+                        <p class="text-dawn-slate leading-relaxed">
+                            Build strength and flexibility at your own pace. Challenge is optional. Showing up is enough.
+                        </p>
+                    </div>
+
+                    <!-- Feature 3 -->
+                    <div class="text-center p-8 border border-dawn-concrete rounded-2xl hover:shadow-lg transition-shadow duration-300 bg-dawn-mineral">
+                        <div class="w-16 h-16 bg-dawn-light rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="users" class="w-8 h-8 text-dawn-clay"></i>
+                        </div>
+                        <h3 class="text-xl md:text-2xl font-bold text-dawn-night mb-4">
+                            Community, not cult
+                        </h3>
+                        <p class="text-dawn-slate leading-relaxed">
+                            Real connections with people who think similarly. No small talk required, but always welcome.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Break with Image -->
+    <section class="relative h-96 md:h-[600px] overflow-hidden">
+        <img
+            src="assets/yoga_closeup_2.png"
+            alt="Community at EOS Club"
+            class="w-full h-full object-cover"
+            loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-dawn-night/60 to-transparent"></div>
+    </section>
+
+    <!-- What to Expect Section -->
+    <section class="py-24 md:py-32 bg-dawn-mineral relative grain-texture">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-5xl font-bold text-dawn-night mb-12 text-center">
+                    Coming soon to Cologne.
+                </h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="flex items-start gap-4 p-6 bg-white rounded-xl border border-dawn-concrete">
+                        <div class="flex-shrink-0 w-12 h-12 bg-dawn-light rounded-full flex items-center justify-center">
+                            <i data-feather="activity" class="w-6 h-6 text-dawn-clay"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-dawn-night mb-2">Yoga and functional flows</h3>
+                            <p class="text-dawn-slate text-sm">For all levels</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-6 bg-white rounded-xl border border-dawn-concrete">
+                        <div class="flex-shrink-0 w-12 h-12 bg-dawn-light rounded-full flex items-center justify-center">
+                            <i data-feather="heart" class="w-6 h-6 text-dawn-clay"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-dawn-night mb-2">Calm and restorative sessions</h3>
+                            <p class="text-dawn-slate text-sm">For overstimulated minds</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-6 bg-white rounded-xl border border-dawn-concrete">
+                        <div class="flex-shrink-0 w-12 h-12 bg-dawn-light rounded-full flex items-center justify-center">
+                            <i data-feather="book-open" class="w-6 h-6 text-dawn-clay"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-dawn-night mb-2">Workshops on the useful stuff</h3>
+                            <p class="text-dawn-slate text-sm">Breathing, sleep, and stress</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-6 bg-white rounded-xl border border-dawn-concrete">
+                        <div class="flex-shrink-0 w-12 h-12 bg-dawn-light rounded-full flex items-center justify-center">
+                            <i data-feather="home" class="w-6 h-6 text-dawn-clay"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-dawn-night mb-2">A space designed to help you exhale</h3>
+                            <p class="text-dawn-slate text-sm">The moment you walk in</p>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center text-lg text-dawn-slate italic">
+                    Wood, natural light, and zero wall-sized "Namaste" signs. We promise.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Studio Space Image -->
+    <section class="relative h-96 md:h-[600px] overflow-hidden">
+        <img
+            src="visual_references/yoga_studio3.jpg"
+            alt="EOS Club studio space"
+            class="w-full h-full object-cover"
+            loading="lazy"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-dawn-night/70 to-transparent flex items-end justify-center pb-12">
+            <p class="text-white text-xl md:text-2xl font-serif italic">Spaces that breathe.</p>
+        </div>
+    </section>
+
+    <!-- Pre-Launch Incentive Section (Main CTA) -->
+    <section class="py-24 md:py-32 eos-gradient-heat-linear relative grain-texture">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/5 to-transparent"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold text-warm-light mb-8">
+                    Get in early. Get 10% off.
+                </h2>
+
+                <p class="text-lg md:text-xl text-warm-light/90 mb-12 leading-relaxed">
+                    We're opening soon, and we'd love you to be there from the start.
+                </p>
+
+                <div class="bg-white/95 backdrop-blur-sm rounded-2xl p-8 md:p-12 shadow-2xl">
+                    <h3 class="text-xl md:text-2xl font-bold text-dawn-night mb-6">Sign up now to:</h3>
+
+                    <ul class="text-left space-y-4 mb-10 max-w-lg mx-auto">
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="w-6 h-6 text-dawn-clay flex-shrink-0 mt-1"></i>
+                            <span class="text-dawn-night">Be first to book when classes go live</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="w-6 h-6 text-dawn-clay flex-shrink-0 mt-1"></i>
+                            <span class="text-dawn-night">Lock in <strong>10% off</strong> your founding membership</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i data-feather="check" class="w-6 h-6 text-dawn-clay flex-shrink-0 mt-1"></i>
+                            <span class="text-dawn-night">Get honest updates (no spam, no guru energy)</span>
+                        </li>
+                    </ul>
+
+                    <form class="flex flex-col sm:flex-row gap-4 justify-center items-center" onsubmit="handleFormSubmit(event)">
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="your@email.com"
+                            required
+                            class="w-full sm:flex-1 max-w-md px-6 py-4 border-2 border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all duration-300 bg-white text-lg"
+                        >
+                        <button
+                            type="submit"
+                            class="w-full sm:w-auto px-8 py-4 dawn-gradient text-white rounded-xl font-semibold hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl text-lg whitespace-nowrap"
+                        >
+                            Save my spot
+                        </button>
+                    </form>
+
+                    <p class="text-sm text-dawn-slate mt-4 italic">Your inbox will thank you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Section / Footer -->
+    <footer class="py-20 bg-dawn-night text-dawn-light relative grain-texture">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Logo -->
+                <div class="mb-8">
+                    <img
+                        src="assets/eos-logo-export_bm-black.png"
+                        alt="EOS CLUB logo"
+                        class="mx-auto h-20 w-auto mb-4 opacity-90"
+                        style="filter: invert(1) brightness(1.12) contrast(1.05);"
+                        loading="lazy"
+                    />
+                    <h2 class="text-2xl md:text-3xl font-bold tracking-widest text-dawn-light mb-6">EOS CLUB</h2>
+                </div>
+
+                <div class="mb-8">
+                    <p class="text-xl md:text-2xl font-serif mb-2">Spaces that breathe. Movement that lasts.</p>
+                    <p class="text-dawn-gold text-lg">Cologne, 2026.</p>
+                </div>
+
+                <div class="border-t border-dawn-slate/30 pt-8 mt-12">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <p class="text-sm text-dawn-slate">© 2026 EOS CLUB · Cologne</p>
+
+                        <div class="flex items-center gap-6">
+                            <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Privacy</a>
+                            <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Terms</a>
+                            <a href="#" class="text-sm text-dawn-slate hover:text-dawn-clay transition-colors duration-300">Contact</a>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300" aria-label="Instagram">
+                                <i data-feather="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-dawn-slate hover:text-dawn-clay transition-colors duration-300" aria-label="Email">
+                                <i data-feather="mail" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal (Hidden by default) -->
+    <div id="successModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-2xl p-8 md:p-12 max-w-md mx-4 text-center shadow-2xl">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-feather="check-circle" class="w-10 h-10 text-green-600"></i>
+            </div>
+            <h3 class="text-2xl md:text-3xl font-bold text-dawn-night mb-4">You're on the list.</h3>
+            <p class="text-dawn-slate mb-6 leading-relaxed">
+                Thanks for being early. We'll be in touch soon with opening dates, founding member details, and your 10% discount.
+            </p>
+            <p class="text-dawn-slate italic mb-8">
+                Until then, take a breath. You've earned it.
+            </p>
+            <button
+                onclick="closeModal()"
+                class="px-8 py-3 bg-dawn-clay text-white rounded-xl font-semibold hover:bg-opacity-90 transition-all duration-300"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+
+    <!-- Initialize Feather Icons -->
+    <script>
+        feather.replace();
+    </script>
+
+    <!-- Form Handling Script -->
+    <script>
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            // Get the email value
+            const email = event.target.email.value;
+
+            // Here you would typically send the email to your backend
+            // For now, we'll just show the success modal
+            console.log('Email submitted:', email);
+
+            // Show success modal
+            document.getElementById('successModal').classList.remove('hidden');
+
+            // Reset the form
+            event.target.reset();
+        }
+
+        function closeModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal on background click
+        document.getElementById('successModal').addEventListener('click', function(event) {
+            if (event.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>

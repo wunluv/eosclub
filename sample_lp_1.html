@@ -1,0 +1,453 @@
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOMA | Spiritual Practice &amp; Yoga</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Inter:wght@200;300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+/* Custom Font Assignments */
+.font-serif { font-family: 'Cormorant Garamond', serif; }
+.font-sans { font-family: 'Inter', sans-serif; }
+/* Subtle texture overlay */
+.grain {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 50;
+opacity: 0.03;
+background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+/* Smooth reveal animation */
+.reveal {
+animation: fadeIn 1.2s ease-out forwards;
+opacity: 0;
+transform: translateY(10px);
+}
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+@keyframes fadeIn {
+to { opacity: 1; transform: translateY(0); }
+}
+/* Custom scrollbar hide */
+.no-scrollbar::-webkit-scrollbar {
+display: none;
+}
+.no-scrollbar {
+-ms-overflow-style: none;
+scrollbar-width: none;
+}
+</style><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.bottom-10{bottom:2.5rem}.left-1\/2{left:50%}.right-0{right:0px}.right-8{right:2rem}.top-0{top:0px}.top-8{top:2rem}.z-0{z-index:0}.z-10{z-index:10}.z-40{z-index:40}.order-1{order:1}.order-2{order:2}.col-span-1{grid-column:span 1 / span 1}.col-span-2{grid-column:span 2 / span 2}.col-span-3{grid-column:span 3 / span 3}.col-span-5{grid-column:span 5 / span 5}.mx-auto{margin-left:auto;margin-right:auto}.mb-10{margin-bottom:2.5rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.mt-auto{margin-top:auto}.inline-block{display:inline-block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.aspect-\[3\/4\]{aspect-ratio:3/4}.h-10{height:2.5rem}.h-20{height:5rem}.h-32{height:8rem}.h-\[40rem\]{height:40rem}.h-full{height:100%}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-32{width:8rem}.w-\[40rem\]{width:40rem}.w-full{width:100%}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-7xl{max-width:80rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-xl{max-width:36rem}.-translate-x-1\/2{--tw-translate-x:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes bounce{0%, 100%{transform:translateY(-25%);animation-timing-function:cubic-bezier(0.8,0,1,1)}50%{transform:none;animation-timing-function:cubic-bezier(0,0,0.2,1)}}.animate-bounce{animation:bounce 1s infinite}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-12{gap:3rem}.gap-16{gap:4rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-x-2 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.5rem * var(--tw-space-x-reverse));margin-left:calc(0.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-3 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0.75rem * var(--tw-space-x-reverse));margin-left:calc(0.75rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-x-8 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(2rem * var(--tw-space-x-reverse));margin-left:calc(2rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.scroll-smooth{scroll-behavior:smooth}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-none{border-style:none}.border-stone-100{--tw-border-opacity:1;border-color:rgb(245 245 244 / var(--tw-border-opacity, 1))}.border-stone-200{--tw-border-opacity:1;border-color:rgb(231 229 228 / var(--tw-border-opacity, 1))}.border-stone-200\/50{border-color:rgb(231 229 228 / 0.5)}.border-stone-300{--tw-border-opacity:1;border-color:rgb(214 211 209 / var(--tw-border-opacity, 1))}.border-stone-900{--tw-border-opacity:1;border-color:rgb(28 25 23 / var(--tw-border-opacity, 1))}.border-transparent{border-color:transparent}.bg-stone-100{--tw-bg-opacity:1;background-color:rgb(245 245 244 / var(--tw-bg-opacity, 1))}.bg-stone-100\/50{background-color:rgb(245 245 244 / 0.5)}.bg-stone-200{--tw-bg-opacity:1;background-color:rgb(231 229 228 / var(--tw-bg-opacity, 1))}.bg-stone-50{--tw-bg-opacity:1;background-color:rgb(250 250 249 / var(--tw-bg-opacity, 1))}.bg-stone-50\/80{background-color:rgb(250 250 249 / 0.8)}.bg-stone-900{--tw-bg-opacity:1;background-color:rgb(28 25 23 / var(--tw-bg-opacity, 1))}.bg-stone-900\/10{background-color:rgb(28 25 23 / 0.1)}.bg-transparent{background-color:transparent}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-white\/50{background-color:rgb(255 255 255 / 0.5)}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-stone-200{--tw-gradient-from:#e7e5e4 var(--tw-gradient-from-position);--tw-gradient-to:rgb(231 229 228 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-stone-100{--tw-gradient-to:rgb(245 245 244 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #f5f5f4 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-transparent{--tw-gradient-to:transparent var(--tw-gradient-to-position)}.object-cover{object-fit:cover}.p-3{padding:0.75rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-24{padding-top:6rem;padding-bottom:6rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-0\.5{padding-bottom:0.125rem}.pb-10{padding-bottom:2.5rem}.pb-2{padding-bottom:0.5rem}.pt-20{padding-top:5rem}.pt-4{padding-top:1rem}.pt-8{padding-top:2rem}.text-center{text-align:center}.text-right{text-align:right}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.font-serif{font-family:ui-serif, Georgia, Cambria, "Times New Roman", Times, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-6xl{font-size:3.75rem;line-height:1}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-light{font-weight:300}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-\[0\.9\]{line-height:0.9}.leading-relaxed{line-height:1.625}.tracking-\[0\.2em\]{letter-spacing:0.2em}.tracking-tight{letter-spacing:-0.025em}.tracking-tighter{letter-spacing:-0.05em}.tracking-wide{letter-spacing:0.025em}.tracking-wider{letter-spacing:0.05em}.tracking-widest{letter-spacing:0.1em}.text-stone-300{--tw-text-opacity:1;color:rgb(214 211 209 / var(--tw-text-opacity, 1))}.text-stone-400{--tw-text-opacity:1;color:rgb(168 162 158 / var(--tw-text-opacity, 1))}.text-stone-50{--tw-text-opacity:1;color:rgb(250 250 249 / var(--tw-text-opacity, 1))}.text-stone-500{--tw-text-opacity:1;color:rgb(120 113 108 / var(--tw-text-opacity, 1))}.text-stone-600{--tw-text-opacity:1;color:rgb(87 83 78 / var(--tw-text-opacity, 1))}.text-stone-700{--tw-text-opacity:1;color:rgb(68 64 60 / var(--tw-text-opacity, 1))}.text-stone-800{--tw-text-opacity:1;color:rgb(41 37 36 / var(--tw-text-opacity, 1))}.text-stone-900{--tw-text-opacity:1;color:rgb(28 25 23 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.decoration-stone-300{-webkit-text-decoration-color:#d6d3d1;text-decoration-color:#d6d3d1}.underline-offset-4{text-underline-offset:4px}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-stone-400::placeholder{--tw-placeholder-opacity:1;color:rgb(168 162 158 / var(--tw-placeholder-opacity, 1))}.opacity-40{opacity:0.4}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.grayscale{--tw-grayscale:grayscale(100%);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.delay-100{transition-delay:100ms}.delay-200{transition-delay:200ms}.duration-1000{transition-duration:1000ms}.duration-300{transition-duration:300ms}.duration-500{transition-duration:500ms}.duration-\[3000ms\]{transition-duration:3000ms}.selection\:bg-stone-200 *::selection{--tw-bg-opacity:1;background-color:rgb(231 229 228 / var(--tw-bg-opacity, 1))}.selection\:text-stone-900 *::selection{--tw-text-opacity:1;color:rgb(28 25 23 / var(--tw-text-opacity, 1))}.selection\:bg-stone-200::selection{--tw-bg-opacity:1;background-color:rgb(231 229 228 / var(--tw-bg-opacity, 1))}.selection\:text-stone-900::selection{--tw-text-opacity:1;color:rgb(28 25 23 / var(--tw-text-opacity, 1))}.hover\:scale-105:hover{--tw-scale-x:1.05;--tw-scale-y:1.05;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:border-stone-300:hover{--tw-border-opacity:1;border-color:rgb(214 211 209 / var(--tw-border-opacity, 1))}.hover\:border-stone-400:hover{--tw-border-opacity:1;border-color:rgb(168 162 158 / var(--tw-border-opacity, 1))}.hover\:border-stone-800:hover{--tw-border-opacity:1;border-color:rgb(41 37 36 / var(--tw-border-opacity, 1))}.hover\:border-stone-900:hover{--tw-border-opacity:1;border-color:rgb(28 25 23 / var(--tw-border-opacity, 1))}.hover\:bg-stone-200:hover{--tw-bg-opacity:1;background-color:rgb(231 229 228 / var(--tw-bg-opacity, 1))}.hover\:bg-stone-50\/50:hover{background-color:rgb(250 250 249 / 0.5)}.hover\:bg-stone-700:hover{--tw-bg-opacity:1;background-color:rgb(68 64 60 / var(--tw-bg-opacity, 1))}.hover\:bg-stone-800:hover{--tw-bg-opacity:1;background-color:rgb(41 37 36 / var(--tw-bg-opacity, 1))}.hover\:bg-stone-900:hover{--tw-bg-opacity:1;background-color:rgb(28 25 23 / var(--tw-bg-opacity, 1))}.hover\:text-stone-50:hover{--tw-text-opacity:1;color:rgb(250 250 249 / var(--tw-text-opacity, 1))}.hover\:text-stone-600:hover{--tw-text-opacity:1;color:rgb(87 83 78 / var(--tw-text-opacity, 1))}.hover\:text-stone-800:hover{--tw-text-opacity:1;color:rgb(41 37 36 / var(--tw-text-opacity, 1))}.hover\:text-stone-900:hover{--tw-text-opacity:1;color:rgb(28 25 23 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:opacity-70:hover{opacity:0.7}.hover\:shadow-sm:hover{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.group:hover .group-hover\:translate-x-1{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-stone-500{--tw-text-opacity:1;color:rgb(120 113 108 / var(--tw-text-opacity, 1))}.group:hover .group-hover\:grayscale-0{--tw-grayscale:grayscale(0);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}@media (min-width: 768px){.md\:order-1{order:1}.md\:order-2{order:2}.md\:col-span-1{grid-column:span 1 / span 1}.md\:mb-0{margin-bottom:0px}.md\:block{display:block}.md\:flex{display:flex}.md\:hidden{display:none}.md\:aspect-square{aspect-ratio:1 / 1}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:py-32{padding-top:8rem;padding-bottom:8rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-5xl{font-size:3rem;line-height:1}.md\:text-8xl{font-size:6rem;line-height:1}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 1024px){.lg\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.lg\:text-9xl{font-size:8rem;line-height:1}}</style></head>
+<body class="bg-stone-50 text-stone-800 font-sans antialiased selection:bg-stone-200 selection:text-stone-900">
+    
+    <!-- Noise Overlay -->
+    <div class="grain"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200/50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Mobile Menu Icon -->
+            <div class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:menu" data-width="24" style="stroke-width: 1.5;" class="iconify text-stone-600 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5h16M4 12h16M4 19h16"></path></svg>
+            </div>
+
+            <!-- Logo -->
+            <a href="#" class="font-serif text-2xl tracking-widest text-stone-900 hover:opacity-70 transition-opacity uppercase">
+                S<span class="tracking-tighter">O</span>MA
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-8 text-sm tracking-wide text-stone-600 font-medium">
+                <a href="#philosophy" class="hover:text-stone-900 transition-colors">Lineage</a>
+                <a href="#classes" class="hover:text-stone-900 transition-colors">Practice</a>
+                <a href="#retreats" class="hover:text-stone-900 transition-colors">Retreats</a>
+                <a href="#schedule" class="hover:text-stone-900 transition-colors">Schedule</a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden md:block">
+                <button class="border border-stone-300 rounded-full px-5 py-2 text-xs uppercase tracking-widest hover:bg-stone-800 hover:text-stone-50 hover:border-stone-800 transition-all duration-500">
+                    Book Session
+                </button>
+            </div>
+            
+            <!-- Mobile Bag/User -->
+            <div class="md:hidden">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:user" data-width="20" style="stroke-width: 1.5;" class="iconify text-stone-600 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></g></svg>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <!-- Abstract Background Element -->
+        <div class="absolute inset-0 z-0 flex items-center justify-center opacity-40 pointer-events-none">
+            <div class="w-[40rem] h-[40rem] rounded-full bg-gradient-to-tr from-stone-200 via-stone-100 to-transparent blur-3xl animate-pulse" style="animation-duration: 8s;"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-8 reveal">
+            <p class="text-stone-500 text-xs uppercase tracking-[0.2em] font-medium mb-4">Established in Silence</p>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl text-stone-900 tracking-tight leading-[0.9]">
+                Return to <br> <span class="italic font-light text-stone-600">the Self</span>
+            </h1>
+            <p class="text-stone-600 max-w-lg mx-auto text-lg md:text-xl font-light leading-relaxed pt-4 delay-100 reveal">
+                Beyond the physical postures lies the vast ocean of consciousness. We guide you through breath, stillness, and movement towards inner dissolution.
+            </p>
+            
+            <div class="pt-8 flex items-center justify-center space-x-6 delay-200 reveal">
+                <button class="bg-stone-900 text-stone-50 px-8 py-3 rounded-full text-sm font-medium tracking-wide hover:bg-stone-700 transition-colors">
+                    View Schedule
+                </button>
+                <button class="flex items-center space-x-2 text-stone-600 hover:text-stone-900 transition-colors text-sm font-medium tracking-wide group">
+                    <span>Our Philosophy</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:arrow-right" data-width="16" style="stroke-width: 1.5;" class="iconify group-hover:translate-x-1 transition-transform iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path></svg>
+                </button>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce duration-[3000ms]">
+            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:arrow-down" data-width="20" style="stroke-width: 1.5;" class="iconify text-stone-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v14m7-7l-7 7l-7-7"></path></svg>
+        </div>
+    </header>
+
+    <!-- Philosophy / Image Grid -->
+    <section id="philosophy" class="py-24 md:py-32 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8 order-2 md:order-1">
+                    <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-stone-100 mb-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="20" height="20" viewBox="0 0 24 24" data-icon="lucide:flower-2" data-width="20" style="stroke-width: 1.5;" class="iconify text-stone-600 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path><circle cx="12" cy="8" r="2"></circle><path d="M12 10v12m0 0c4.2 0 7-1.667 7-5c-4.2 0-7 1.667-7 5m0 0c-4.2 0-7-1.667-7-5c4.2 0 7 1.667 7 5"></path></g></svg>
+                    </div>
+                    <h2 class="font-serif text-4xl md:text-5xl text-stone-900 tracking-tight">The Architecture of Peace</h2>
+                    <p class="text-stone-600 leading-relaxed font-light text-lg">
+                        Modern yoga often stops at the body. At Soma, we view asana as merely the first step. Our lineage-based approach integrates Pranayama (breath control), Dhyana (meditation), and Svadyaya (self-inquiry).
+                    </p>
+                    <p class="text-stone-600 leading-relaxed font-light text-lg">
+                        We are not a gym. We are a sanctuary for the spirit, offering a path to deconstruct the ego and reconnect with the universal source.
+                    </p>
+                    <ul class="space-y-4 pt-4">
+                        <li class="flex items-start space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="10" height="10" viewBox="0 0 24 24" data-icon="lucide:circle" data-width="10" style="stroke-width: 1.5;" class="iconify mt-1 text-stone-400 iconify--lucide"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>
+                            <span class="text-sm font-medium">Traditional Vinyasa Krama</span>
+                        </li>
+                        <li class="flex items-start space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="10" height="10" viewBox="0 0 24 24" data-icon="lucide:circle" data-width="10" style="stroke-width: 1.5;" class="iconify mt-1 text-stone-400 iconify--lucide"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>
+                            <span class="text-sm font-medium">Vedic Chanting &amp; Sound Baths</span>
+                        </li>
+                        <li class="flex items-start space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="10" height="10" viewBox="0 0 24 24" data-icon="lucide:circle" data-width="10" style="stroke-width: 1.5;" class="iconify mt-1 text-stone-400 iconify--lucide"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></circle></svg>
+                            <span class="text-sm font-medium">Non-dualistic Teachings</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order-1 md:order-2 relative aspect-[3/4] md:aspect-square overflow-hidden rounded-2xl bg-stone-200">
+                    <img src="https://images.unsplash.com/photo-1603988363607-e1e4a66962c6?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" alt="Meditative state" class="object-cover w-full h-full hover:scale-105 transition-transform duration-1000">
+                    <div class="absolute inset-0 bg-stone-900/10"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Offerings (Classes) -->
+    <section id="classes" class="py-24 bg-white/50 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="max-w-xl">
+                    <h2 class="font-serif text-4xl text-stone-900 tracking-tight mb-4">Our Offerings</h2>
+                    <p class="text-stone-500 font-light">Practices designed to align the subtle body and quiet the mind.</p>
+                </div>
+                <a href="#" class="hidden md:flex items-center space-x-2 text-stone-500 hover:text-stone-900 transition-colors text-sm border-b border-transparent hover:border-stone-900 pb-0.5">
+                    <span>View full curriculum</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="group relative p-8 rounded-xl bg-stone-50 border border-stone-200 hover:border-stone-300 transition-all duration-300 hover:shadow-sm">
+                    <div class="absolute top-8 right-8 text-stone-300 group-hover:text-stone-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:wind" data-width="24" style="stroke-width: 1.5;" class="iconify iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.8 19.6A2 2 0 1 0 14 16H2m15.5-8a2.5 2.5 0 1 1 2 4H2m7.8-7.6A2 2 0 1 1 11 8H2"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-stone-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">Prana Vinyasa</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed mb-6 font-light">
+                        Breath-initiated movement. A slow, rhythmic flow focusing on the energetic alignment rather than just physical shape.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-stone-200/50">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">75 Mins</span>
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Moderate</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group relative p-8 rounded-xl bg-stone-50 border border-stone-200 hover:border-stone-300 transition-all duration-300 hover:shadow-sm">
+                    <div class="absolute top-8 right-8 text-stone-300 group-hover:text-stone-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:moon" data-width="24" style="stroke-width: 1.5;" class="iconify iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-stone-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">Yin &amp; Nidra</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed mb-6 font-light">
+                        Deep fascial release followed by psychic sleep. A practice of complete surrender to restore the nervous system.
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-stone-200/50">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">90 Mins</span>
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Gentle</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group relative p-8 rounded-xl bg-stone-50 border border-stone-200 hover:border-stone-300 transition-all duration-300 hover:shadow-sm">
+                    <div class="absolute top-8 right-8 text-stone-300 group-hover:text-stone-500 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:sparkles" data-width="24" style="stroke-width: 1.5;" class="iconify iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594zM20 2v4m2-2h-4"></path><circle cx="4" cy="20" r="2"></circle></g></svg>
+                    </div>
+                    <h3 class="font-serif text-2xl text-stone-900 mb-3 group-hover:translate-x-1 transition-transform duration-300">Kriya &amp; Meditation</h3>
+                    <p class="text-sm text-stone-500 leading-relaxed mb-6 font-light">
+                        Purification techniques involving repetitive action, mantra, and breathwork to awaken the dormant energy (Kundalini).
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-stone-200/50">
+                        <span class="text-xs uppercase tracking-wider text-stone-400">60 Mins</span>
+                        <span class="text-xs uppercase tracking-wider text-stone-400">Advanced</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teacher/Lineage Minimal Section -->
+    <section class="py-24 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="24" height="24" viewBox="0 0 24 24" data-icon="lucide:users" data-width="24" style="stroke-width: 1.5;" class="iconify inline-block text-stone-400 mb-4 iconify--lucide"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M16 3.128a4 4 0 0 1 0 7.744M22 21v-2a4 4 0 0 0-3-3.87"></path><circle cx="9" cy="7" r="4"></circle></g></svg>
+                <h2 class="font-serif text-3xl md:text-4xl text-stone-900 tracking-tight mb-4">Guides, Not Gurus</h2>
+                <p class="text-stone-500 font-light">Our teachers are devoted students first, sharing wisdom from established lineages with humility and grace.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Teacher 1 -->
+                <div class="text-center group cursor-pointer">
+                    <div class="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" class="object-cover w-full h-full">
+                    </div>
+                    <h4 class="font-serif text-xl text-stone-900">Elara Vance</h4>
+                    <p class="text-xs text-stone-500 uppercase tracking-widest mt-1">Vedic Chant</p>
+                </div>
+                <!-- Teacher 2 -->
+                <div class="text-center group cursor-pointer">
+                    <div class="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" class="object-cover w-full h-full">
+                    </div>
+                    <h4 class="font-serif text-xl text-stone-900">Julian Ko</h4>
+                    <p class="text-xs text-stone-500 uppercase tracking-widest mt-1">Pranayama</p>
+                </div>
+                <!-- Teacher 3 -->
+                <div class="text-center group cursor-pointer">
+                    <div class="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" class="object-cover w-full h-full">
+                    </div>
+                    <h4 class="font-serif text-xl text-stone-900">Sarah M.</h4>
+                    <p class="text-xs text-stone-500 uppercase tracking-widest mt-1">Asana</p>
+                </div>
+                <!-- Teacher 4 -->
+                <div class="text-center group cursor-pointer">
+                    <div class="relative w-32 h-32 mx-auto rounded-full overflow-hidden mb-4 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&amp;w=1000&amp;auto=format&amp;fit=crop" class="object-cover w-full h-full">
+                    </div>
+                    <h4 class="font-serif text-xl text-stone-900">Davide R.</h4>
+                    <p class="text-xs text-stone-500 uppercase tracking-widest mt-1">Meditation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Section (List View) -->
+    <section id="schedule" class="py-24 bg-stone-100/50 border-t border-stone-200">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="font-serif text-3xl md:text-4xl text-stone-900 tracking-tight mb-10 text-center">Daily Rhythm</h2>
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <!-- Header -->
+                <div class="grid grid-cols-12 gap-4 p-5 bg-stone-50 border-b border-stone-200 text-xs font-medium text-stone-500 uppercase tracking-wider">
+                    <div class="col-span-2">Time</div>
+                    <div class="col-span-5">Practice</div>
+                    <div class="col-span-3">Guide</div>
+                    <div class="col-span-2 text-right"></div>
+                </div>
+
+                <!-- Row 1 -->
+                <div class="grid grid-cols-12 gap-4 p-6 items-center border-b border-stone-100 hover:bg-stone-50/50 transition-colors group">
+                    <div class="col-span-2 text-stone-900 font-medium font-serif text-lg">06:30</div>
+                    <div class="col-span-5">
+                        <div class="text-stone-900 font-medium">Morning Sadhana</div>
+                        <div class="text-xs text-stone-500 mt-1">Meditation &amp; Kriya</div>
+                    </div>
+                    <div class="col-span-3 text-sm text-stone-600">Davide R.</div>
+                    <div class="col-span-2 text-right">
+                        <button class="text-xs border border-stone-300 rounded-full px-3 py-1.5 hover:bg-stone-900 hover:text-stone-50 hover:border-stone-900 transition-all">Book</button>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="grid grid-cols-12 gap-4 p-6 items-center border-b border-stone-100 hover:bg-stone-50/50 transition-colors group">
+                    <div class="col-span-2 text-stone-900 font-medium font-serif text-lg">08:00</div>
+                    <div class="col-span-5">
+                        <div class="text-stone-900 font-medium">Hatha Sun</div>
+                        <div class="text-xs text-stone-500 mt-1">Solar alignment</div>
+                    </div>
+                    <div class="col-span-3 text-sm text-stone-600">Sarah M.</div>
+                    <div class="col-span-2 text-right">
+                        <button class="text-xs border border-stone-300 rounded-full px-3 py-1.5 hover:bg-stone-900 hover:text-stone-50 hover:border-stone-900 transition-all">Book</button>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="grid grid-cols-12 gap-4 p-6 items-center border-b border-stone-100 hover:bg-stone-50/50 transition-colors group">
+                    <div class="col-span-2 text-stone-900 font-medium font-serif text-lg">17:30</div>
+                    <div class="col-span-5">
+                        <div class="text-stone-900 font-medium">Restorative Sound</div>
+                        <div class="text-xs text-stone-500 mt-1">Crystal bowls &amp; Nidra</div>
+                    </div>
+                    <div class="col-span-3 text-sm text-stone-600">Elara Vance</div>
+                    <div class="col-span-2 text-right">
+                        <button class="text-xs border border-stone-300 rounded-full px-3 py-1.5 hover:bg-stone-900 hover:text-stone-50 hover:border-stone-900 transition-all">Book</button>
+                    </div>
+                </div>
+
+                 <!-- Row 4 -->
+                 <div class="grid grid-cols-12 gap-4 p-6 items-center hover:bg-stone-50/50 transition-colors group">
+                    <div class="col-span-2 text-stone-900 font-medium font-serif text-lg">19:00</div>
+                    <div class="col-span-5">
+                        <div class="text-stone-900 font-medium">Candlelit Yin</div>
+                        <div class="text-xs text-stone-500 mt-1">Deep stretch</div>
+                    </div>
+                    <div class="col-span-3 text-sm text-stone-600">Julian Ko</div>
+                    <div class="col-span-2 text-right">
+                        <button class="text-xs border border-stone-300 rounded-full px-3 py-1.5 hover:bg-stone-900 hover:text-stone-50 hover:border-stone-900 transition-all">Book</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="#" class="text-sm text-stone-500 hover:text-stone-900 underline underline-offset-4 decoration-stone-300">View Full Week Schedule</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership / Energy Exchange -->
+    <section class="py-24 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <h2 class="font-serif text-4xl text-stone-900 tracking-tight">Energy Exchange</h2>
+                    <p class="text-stone-600 font-light text-lg max-w-md">
+                        We offer tiered memberships to support your commitment to the practice. Drop-ins are always welcome for the traveler.
+                    </p>
+                    <div class="flex flex-col space-y-4 pt-4">
+                        <div class="flex items-center space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:check" data-width="16" style="stroke-width: 1.5;" class="iconify text-stone-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+                            <span class="text-sm">Mat and prop storage included</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:check" data-width="16" style="stroke-width: 1.5;" class="iconify text-stone-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+                            <span class="text-sm">Access to tea lounge and library</span>
+                        </div>
+                        <div class="flex items-center space-x-3 text-stone-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:check" data-width="16" style="stroke-width: 1.5;" class="iconify text-stone-400 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 6L9 17l-5-5"></path></svg>
+                            <span class="text-sm">Quarterly private consultation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Pricing Card 1 -->
+                    <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200 flex flex-col hover:border-stone-400 transition-colors">
+                        <div class="mb-4">
+                            <h3 class="font-serif text-xl text-stone-900">Seeker</h3>
+                            <p class="text-xs text-stone-500 mt-1 uppercase tracking-wide">5 Class Pass</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-serif text-stone-900">$110</span>
+                            <span class="text-stone-500 text-sm">/ bundle</span>
+                        </div>
+                        <button class="mt-auto w-full py-3 rounded-lg border border-stone-300 text-sm font-medium hover:bg-stone-900 hover:text-white hover:border-stone-900 transition-all">Select</button>
+                    </div>
+
+                    <!-- Pricing Card 2 -->
+                    <div class="p-6 rounded-2xl bg-stone-900 border border-stone-900 flex flex-col text-stone-50 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 p-3">
+                             <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="32" height="32" viewBox="0 0 24 24" data-icon="lucide:infinity" data-width="32" style="stroke-width: 1.5;" class="iconify text-stone-700 iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"></path></svg>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="font-serif text-xl text-stone-50">Sadhaka</h3>
+                            <p class="text-xs text-stone-400 mt-1 uppercase tracking-wide">Unlimited Monthly</p>
+                        </div>
+                        <div class="mb-6">
+                            <span class="text-3xl font-serif text-stone-50">$180</span>
+                            <span class="text-stone-400 text-sm">/ month</span>
+                        </div>
+                        <button class="mt-auto w-full py-3 rounded-lg bg-stone-50 text-stone-900 text-sm font-medium hover:bg-stone-200 transition-all">Join</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-100 pt-20 pb-10 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                     <a href="#" class="font-serif text-2xl tracking-widest text-stone-900 uppercase">
+                        S<span class="tracking-tighter">O</span>MA
+                    </a>
+                    <p class="mt-4 text-sm text-stone-500 font-light leading-relaxed">
+                        A sacred space for the study of self through the lens of ancient yogic technology.
+                    </p>
+                </div>
+                
+                <div>
+                    <h5 class="font-medium text-stone-900 mb-4 text-sm">Studio</h5>
+                    <ul class="space-y-2 text-sm text-stone-500 font-light">
+                        <li><a href="#" class="hover:text-stone-800">The Space</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Rentals</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Karma Yoga</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-medium text-stone-900 mb-4 text-sm">Practice</h5>
+                    <ul class="space-y-2 text-sm text-stone-500 font-light">
+                        <li><a href="#" class="hover:text-stone-800">Class Types</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Private Instruction</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Workshops</a></li>
+                        <li><a href="#" class="hover:text-stone-800">Online Library</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h5 class="font-medium text-stone-900 mb-4 text-sm">Reflections</h5>
+                    <p class="text-sm text-stone-500 font-light mb-4">Join our newsletter for moon cycles and studio updates.</p>
+                    <div class="flex border-b border-stone-300 pb-2">
+                        <input type="email" placeholder="Email address" class="bg-transparent border-none outline-none text-sm w-full placeholder-stone-400 text-stone-800">
+                        <button class="text-stone-400 hover:text-stone-900 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="16" height="16" viewBox="0 0 24 24" data-icon="lucide:arrow-right" data-width="16" style="stroke-width: 1.5;" class="iconify iconify--lucide"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-stone-200 text-xs text-stone-400 font-light">
+                <div class="mb-4 md:mb-0">
+                    © 2024 SOMA Yoga Studio. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-stone-600">Privacy</a>
+                    <a href="#" class="hover:text-stone-600">Terms</a>
+                    <a href="#" class="hover:text-stone-600">Instagram</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body></html>

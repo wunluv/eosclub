@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EOS CLUB — Opening in April</title>
+    <meta
+      name="description"
+      content="EOS CLUB is a place for conscious movement and genuine encounters. Opening in April. Subscribe to the newsletter and get 10% off memberships when the club opens."
+    />
+
+    <!-- Social preview (safe defaults) -->
+    <meta property="og:title" content="EOS CLUB — Opening in April" />
+    <meta
+      property="og:description"
+      content="A place for conscious movement and genuine encounters. Subscribe to get 10% off memberships when EOS CLUB opens."
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts (from design system) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP (gentle motion) -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              serif: ["Merriweather", "serif"],
+              sans: ["Inter", "sans-serif"],
+            },
+            colors: {
+              dawn: {
+                mineral: "#F9F9F7",
+                concrete: "#E6E5E0",
+                slate: "#2F3A40",
+                clay: "#C57B57",
+                gold: "#D6C6A6",
+                night: "#1F2933",
+                light: "#F0EAD6",
+              },
+            },
+            boxShadow: {
+              "soft-ring": "0 0 0 6px rgba(197, 123, 87, 0.16)",
+            },
+          },
+        },
+      };
+    </script>
+
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #f9f9f7;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      .font-display {
+        font-family: "Merriweather", serif;
+      }
+
+      /* Grain texture overlay (from design system) */
+      .grain-texture::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1;
+      }
+      .grain-texture > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* Gradients (from design system) */
+      .eos-gradient-heat-radial {
+        background: radial-gradient(
+          120% 120% at 50% 48%,
+          #e9b24a 0%,
+          #e8742c 26%,
+          #e6534a 46%,
+          #e24676 62%,
+          #c74a8e 76%,
+          #f2f4c9 100%
+        );
+      }
+      .eos-gradient-wash {
+        background: linear-gradient(135deg, #f2f4c9 0%, #fbf3d6 45%, #f8e1d5 100%);
+      }
+      .dawn-gradient {
+        background: linear-gradient(135deg, #2f3a40 0%, #c57b57 50%, #d6c6a6 100%);
+      }
+
+      /* Text legibility scrim for the hero gradient */
+      .hero-scrim {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(42, 43, 30, 0.55) 0%,
+          rgba(42, 43, 30, 0.18) 30%,
+          rgba(249, 249, 247, 0.0) 70%
+        );
+        pointer-events: none;
+      }
+
+      /* Spotlight card (from design system) */
+      .spotlight-card {
+        position: relative;
+        background: white;
+      }
+      .spotlight-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(circle at center, rgba(214, 198, 166, 0.18) 0%, transparent 70%);
+        border-radius: inherit;
+        z-index: -1;
+      }
+
+      /* Accessible focus */
+      :focus-visible {
+        outline: 3px solid rgba(197, 123, 87, 0.55);
+        outline-offset: 3px;
+      }
+
+      /* Reduce motion */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-dawn-mineral text-dawn-night antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow"
+    >
+      Skip to content
+    </a>
+
+    <!-- Top nav (subtle, calm) -->
+    <header class="fixed inset-x-0 top-0 z-40">
+      <div class="bg-dawn-mineral/75 backdrop-blur-md border-b border-dawn-concrete">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+          <div class="flex h-16 items-center justify-between">
+            <a href="#top" class="flex items-center gap-3">
+              <img
+                src="assets/eos-logo-export_bm-black.png"
+                alt="EOS CLUB"
+                class="h-7 w-auto"
+                loading="eager"
+                decoding="async"
+              />
+              <span class="hidden sm:block text-sm font-semibold tracking-[0.18em]">EOS CLUB</span>
+            </a>
+
+            <nav class="flex items-center gap-2 sm:gap-3" aria-label="Primary">
+              <a
+                href="#about"
+                class="rounded-lg px-3 py-2 text-sm text-dawn-slate hover:text-dawn-night hover:bg-dawn-light transition-colors"
+              >
+                About
+              </a>
+              <a
+                href="#partners"
+                class="rounded-lg px-3 py-2 text-sm text-dawn-slate hover:text-dawn-night hover:bg-dawn-light transition-colors"
+              >
+                Partners
+              </a>
+              <a
+                href="#newsletter"
+                class="rounded-xl px-4 py-2 text-sm font-medium text-white dawn-gradient shadow-sm hover:opacity-95 transition-opacity"
+              >
+                Get 10% off
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="top" class="pt-16"></div>
+
+    <!-- Hero (enlivening gradient) -->
+    <section class="relative overflow-hidden eos-gradient-heat-radial grain-texture">
+      <div class="hero-scrim" aria-hidden="true"></div>
+
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="py-16 sm:py-20 lg:py-24">
+          <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-7">
+              <p
+                class="js-hero-item inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-xs font-medium tracking-[0.2em] text-[#FFF7EE] backdrop-blur"
+              >
+                Opening in April
+                <span class="h-1 w-1 rounded-full bg-[#FFF7EE]/80" aria-hidden="true"></span>
+                Newsletter offer
+              </p>
+
+              <h1 class="js-hero-item mt-6 text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#FFF7EE]">
+                EOS CLUB
+              </h1>
+
+              <p
+                class="js-hero-item mt-5 max-w-2xl text-lg sm:text-xl leading-relaxed text-[#FFF7EE]/90"
+              >
+                A place for conscious movement and genuine encounters. A space to strengthen your body,
+                sort out your mind, and meet people who think similarly.
+                <span class="block mt-2">Without pressure to perform. Without esotericism. With clarity and respect.</span>
+              </p>
+
+              <div class="js-hero-item mt-8 flex flex-col sm:flex-row gap-3 sm:items-center">
+                <a
+                  href="#newsletter"
+                  class="inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium bg-[#FFF7EE] text-[#2A2B1E] hover:bg-white transition-colors shadow-sm"
+                >
+                  Subscribe for 10% off
+                </a>
+                <a
+                  href="#partners"
+                  class="inline-flex items-center justify-center rounded-xl px-6 py-3 text-sm font-medium border border-white/35 text-[#FFF7EE] hover:bg-white/10 transition-colors"
+                >
+                  Partner / investor info
+                </a>
+              </div>
+
+              <p class="js-hero-item mt-6 text-xs leading-relaxed text-[#FFF7EE]/80 max-w-2xl">
+                The 10% offer is reserved for newsletter subscribers and applies to memberships at launch.
+                Details will be shared before opening.
+              </p>
+            </div>
+
+            <div class="lg:col-span-5">
+              <div class="spotlight-card rounded-2xl border border-white/25 bg-white/85 backdrop-blur-md p-6 sm:p-8">
+                <div class="flex items-start gap-4">
+                  <div class="shrink-0 rounded-xl bg-dawn-light p-3">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path
+                        d="M12 2a7 7 0 0 0-4 12.7V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.3A7 7 0 0 0 12 2Z"
+                        stroke="#2F3A40"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                      <path
+                        d="M9.5 21h5"
+                        stroke="#2F3A40"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </div>
+
+                  <div>
+                    <h2 class="font-semibold text-dawn-night">A stable counterpoint.</h2>
+                    <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                      We’re building a studio that values devotion, freedom, and respect.
+                      Clear spaces. Clear language. A community where nobody has to be perfect.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div class="rounded-xl bg-dawn-mineral border border-dawn-concrete p-4">
+                    <p class="text-xs font-semibold text-dawn-night">Body</p>
+                    <p class="mt-1 text-xs text-dawn-slate">Movement that feels good.</p>
+                  </div>
+                  <div class="rounded-xl bg-dawn-mineral border border-dawn-concrete p-4">
+                    <p class="text-xs font-semibold text-dawn-night">Mind</p>
+                    <p class="mt-1 text-xs text-dawn-slate">Clarity without dogma.</p>
+                  </div>
+                  <div class="rounded-xl bg-dawn-mineral border border-dawn-concrete p-4">
+                    <p class="text-xs font-semibold text-dawn-night">People</p>
+                    <p class="mt-1 text-xs text-dawn-slate">Belonging, without pressure.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main id="main">
+      <!-- Subtle section divider -->
+      <section id="about" class="relative bg-dawn-mineral">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
+          <div class="max-w-3xl">
+            <p class="js-reveal text-xs font-medium tracking-[0.2em] text-dawn-clay">EOS in one minute</p>
+            <h2 class="js-reveal mt-4 text-3xl sm:text-4xl font-bold tracking-tight">Clear stance, with warmth.</h2>
+            <p class="js-reveal mt-5 text-base sm:text-lg text-dawn-slate leading-relaxed">
+              EOS isn’t a trend space. It’s a club for conscious, modern people who want a healthy life without it
+              dominating their whole life.
+            </p>
+          </div>
+
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <article class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+              <h3 class="text-lg font-semibold">Physical, not performance.</h3>
+              <p class="mt-3 text-sm text-dawn-slate leading-relaxed">
+                Clearly guided sessions that build strength and mobility.
+                No “higher, faster, further”.
+              </p>
+            </article>
+
+            <article class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+              <h3 class="text-lg font-semibold">Conscious, not esoteric.</h3>
+              <p class="mt-3 text-sm text-dawn-slate leading-relaxed">
+                A calm approach to breath, focus, and recovery.
+                No cosmic language.
+              </p>
+            </article>
+
+            <article class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+              <h3 class="text-lg font-semibold">Community, not a buzzword.</h3>
+              <p class="mt-3 text-sm text-dawn-slate leading-relaxed">
+                A lived system: respectful, present, and honest.
+                People are seen, not harassed.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-white border-y border-dawn-concrete">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
+          <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
+            <div class="lg:col-span-6">
+              <p class="js-reveal text-xs font-medium tracking-[0.2em] text-dawn-clay">Timeline</p>
+              <h2 class="js-reveal mt-4 text-3xl sm:text-4xl font-bold tracking-tight">Opening in April.</h2>
+              <p class="js-reveal mt-5 text-base sm:text-lg text-dawn-slate leading-relaxed">
+                We’ll share the opening date, membership structure, and early access details via the newsletter.
+                Short, clear updates. No noise.
+              </p>
+            </div>
+
+            <div class="lg:col-span-6">
+              <ol class="grid gap-4">
+                <li class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+                  <div class="flex items-start justify-between gap-6">
+                    <div>
+                      <p class="text-sm font-semibold text-dawn-night">Now</p>
+                      <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                        Build the community list. Share early details with people who want clarity.
+                      </p>
+                    </div>
+                    <span class="shrink-0 rounded-full bg-dawn-light px-3 py-1 text-xs font-medium text-dawn-night">Step 1</span>
+                  </div>
+                </li>
+                <li class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+                  <div class="flex items-start justify-between gap-6">
+                    <div>
+                      <p class="text-sm font-semibold text-dawn-night">Pre-opening</p>
+                      <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                        Announce memberships, schedules, and partner collaborations.
+                      </p>
+                    </div>
+                    <span class="shrink-0 rounded-full bg-dawn-light px-3 py-1 text-xs font-medium text-dawn-night">Step 2</span>
+                  </div>
+                </li>
+                <li class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6">
+                  <div class="flex items-start justify-between gap-6">
+                    <div>
+                      <p class="text-sm font-semibold text-dawn-night">April</p>
+                      <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                        Doors open. Subscribers receive their 10% membership offer details.
+                      </p>
+                    </div>
+                    <span class="shrink-0 rounded-full bg-dawn-light px-3 py-1 text-xs font-medium text-dawn-night">Step 3</span>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="partners" class="relative eos-gradient-wash grain-texture">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
+          <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-7">
+              <p class="js-reveal text-xs font-medium tracking-[0.2em] text-dawn-clay">For partners & investors</p>
+              <h2 class="js-reveal mt-4 text-3xl sm:text-4xl font-bold tracking-tight">Built for longevity.</h2>
+              <p class="js-reveal mt-5 text-base sm:text-lg text-dawn-slate leading-relaxed">
+                EOS is designed to be a stable local anchor with digital expandability over time.
+                Physical locations remain the core—online is a complement.
+              </p>
+
+              <ul class="js-reveal mt-8 grid gap-3 sm:grid-cols-2">
+                <li class="rounded-2xl bg-white/80 border border-dawn-concrete p-5">
+                  <p class="text-sm font-semibold">Clear positioning</p>
+                  <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                    Between performance gyms and esoteric spaces—without compromise.
+                  </p>
+                </li>
+                <li class="rounded-2xl bg-white/80 border border-dawn-concrete p-5">
+                  <p class="text-sm font-semibold">Quality-led programming</p>
+                  <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                    Teaching, space, and structure built with devotion.
+                  </p>
+                </li>
+                <li class="rounded-2xl bg-white/80 border border-dawn-concrete p-5">
+                  <p class="text-sm font-semibold">Community as a system</p>
+                  <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                    Belonging that is nurtured daily, not marketed.
+                  </p>
+                </li>
+                <li class="rounded-2xl bg-white/80 border border-dawn-concrete p-5">
+                  <p class="text-sm font-semibold">Measured growth</p>
+                  <p class="mt-2 text-sm text-dawn-slate leading-relaxed">
+                    Calm, consistent communication. No overpromising.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <div class="lg:col-span-5">
+              <div class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6 sm:p-8 bg-white/90 backdrop-blur">
+                <div class="flex items-center gap-3">
+                  <img
+                    src="assets/eos-logo-export_bm-black.png"
+                    alt=""
+                    class="h-8 w-auto opacity-80"
+                    loading="lazy"
+                    decoding="async"
+                    aria-hidden="true"
+                  />
+                  <p class="text-sm font-semibold">Partner contact</p>
+                </div>
+                <p class="mt-3 text-sm text-dawn-slate leading-relaxed">
+                  Add a dedicated email and short deck link here when ready.
+                  This section is intentionally concise.
+                </p>
+                <div class="mt-6 rounded-xl bg-dawn-mineral border border-dawn-concrete p-4">
+                  <p class="text-xs font-medium text-dawn-night">Placeholder</p>
+                  <p class="mt-1 text-xs text-dawn-slate">
+                    Email: <span class="font-mono">partners@eosclub.example</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="newsletter" class="bg-dawn-mineral">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-16 sm:py-20">
+          <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+            <div class="lg:col-span-6">
+              <p class="js-reveal text-xs font-medium tracking-[0.2em] text-dawn-clay">Newsletter</p>
+              <h2 class="js-reveal mt-4 text-3xl sm:text-4xl font-bold tracking-tight">Subscribe and get 10% off.</h2>
+              <p class="js-reveal mt-5 text-base sm:text-lg text-dawn-slate leading-relaxed">
+                Early access details. Opening updates. No spam.
+                When we launch the Google Form, this form will submit directly to it.
+              </p>
+            </div>
+
+            <div class="lg:col-span-6">
+              <div class="js-reveal spotlight-card rounded-2xl border border-dawn-concrete p-6 sm:p-8">
+                <!--
+                  Google Form integration notes:
+                  - Replace GOOGLE_FORM_ACTION_URL with your Google Form "formResponse" endpoint.
+                  - Update the input "name" to the correct Google Form entry key (e.g., entry.123456789).
+                  - Optionally add a hidden field for a source tag.
+                -->
+                <form id="newsletterForm" class="space-y-4" novalidate>
+                  <div>
+                    <label for="email" class="block text-sm font-semibold text-dawn-night">Email address</label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      inputmode="email"
+                      autocomplete="email"
+                      required
+                      placeholder="you@example.com"
+                      class="mt-2 w-full rounded-xl border border-dawn-concrete bg-dawn-mineral px-4 py-3 text-base focus:border-transparent focus:shadow-soft-ring focus:outline-none"
+                    />
+                    <p id="emailHelp" class="mt-2 text-xs text-dawn-slate">
+                      We’ll use this only for EOS updates.
+                    </p>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="w-full rounded-xl px-6 py-3 text-sm font-medium text-white bg-dawn-clay hover:bg-opacity-90 transition-colors"
+                  >
+                    Subscribe
+                  </button>
+
+                  <p id="formStatus" class="text-sm text-dawn-slate" role="status" aria-live="polite"></p>
+
+                  <p class="text-xs text-dawn-slate leading-relaxed">
+                    By subscribing you agree to receive the EOS CLUB newsletter. You can unsubscribe any time.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="border-t border-dawn-concrete bg-white">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 py-10">
+          <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-center gap-3">
+              <img
+                src="assets/eos-logo-export_bm-black.png"
+                alt=""
+                class="h-7 w-auto opacity-80"
+                loading="lazy"
+                decoding="async"
+                aria-hidden="true"
+              />
+              <p class="text-xs text-dawn-slate">© <span id="year"></span> EOS CLUB</p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 text-xs text-dawn-slate">
+              <a class="rounded-lg px-3 py-2 hover:bg-dawn-light transition-colors" href="#about">About</a>
+              <a class="rounded-lg px-3 py-2 hover:bg-dawn-light transition-colors" href="#partners">Partners</a>
+              <a class="rounded-lg px-3 py-2 hover:bg-dawn-light transition-colors" href="#newsletter">Newsletter</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      // Keep this empty until the client provides the Google Form action URL.
+      // Example format: https://docs.google.com/forms/d/e/<FORM_ID>/formResponse
+      const GOOGLE_FORM_ACTION_URL = "";
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Footer year
+      document.getElementById("year").textContent = String(new Date().getFullYear());
+
+      // Newsletter form handling (placeholder)
+      const form = document.getElementById("newsletterForm");
+      const statusEl = document.getElementById("formStatus");
+      const emailEl = document.getElementById("email");
+
+      function setStatus(message, tone = "neutral") {
+        statusEl.textContent = message;
+        statusEl.className = "text-sm";
+        if (tone === "success") statusEl.classList.add("text-green-700");
+        if (tone === "error") statusEl.classList.add("text-red-700");
+        if (tone === "neutral") statusEl.classList.add("text-dawn-slate");
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const email = (emailEl.value || "").trim();
+        if (!email) {
+          setStatus("Please enter an email address.", "error");
+          emailEl.focus();
+          return;
+        }
+        const valid = emailEl.checkValidity();
+        if (!valid) {
+          setStatus("Please enter a valid email address.", "error");
+          emailEl.focus();
+          return;
+        }
+
+        if (!GOOGLE_FORM_ACTION_URL) {
+          setStatus(
+            "Thanks — the signup form is being configured. Keep this tab bookmarked; once the Google Form is connected, submissions will go through.",
+            "success"
+          );
+          form.reset();
+          return;
+        }
+
+        // If a Google Form action URL is provided, submit using a hidden form POST.
+        // Note: Google Forms require specific field names (entry.<id>). Update input 'name' accordingly.
+        const postForm = document.createElement("form");
+        postForm.method = "POST";
+        postForm.action = GOOGLE_FORM_ACTION_URL;
+        postForm.target = "_blank";
+
+        const emailInput = document.createElement("input");
+        emailInput.type = "hidden";
+        emailInput.name = emailEl.name;
+        emailInput.value = email;
+        postForm.appendChild(emailInput);
+
+        document.body.appendChild(postForm);
+        postForm.submit();
+        postForm.remove();
+
+        setStatus("Thanks — check the new tab to confirm submission.", "success");
+        form.reset();
+      });
+
+      // Gentle GSAP animations
+      if (!prefersReducedMotion && window.gsap) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero entrance
+        gsap.fromTo(
+          ".js-hero-item",
+          { y: 10, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power2.out",
+            stagger: 0.08,
+            delay: 0.15,
+          }
+        );
+
+        // Section reveal
+        gsap.utils.toArray(".js-reveal").forEach((el) => {
+          gsap.fromTo(
+            el,
+            { y: 14, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.85,
+              ease: "power2.out",
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+              },
+            }
+          );
+        });
+      }
+    </script>
+  </body>
+</html>
+
