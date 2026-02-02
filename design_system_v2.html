@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOS CLUB - Design System V2 (Infrared & Oishi)</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Outfit (Friendly/Modern) & Plus Jakarta Sans (Geomtric/Clean) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class', // Manual dark mode
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Outfit', 'sans-serif'],
+                        'body': ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        'oishi': {
+                            'void': '#050505',    // The deepest black
+                            'charcoal': '#141414', // Card background
+                            'stone': '#262626',   // Borders
+                            'ash': '#888888',     // Muted text
+                            'mist': '#E5E5E5',    // High contrast text
+                        },
+                        'infrared': {
+                            'core': '#FF2E00',    // The source of the heat
+                            'glow': '#FF5C00',    // The spread
+                            'warmth': '#FF8A00',  // The edge
+                            'peach': '#FFD4B8',   // Skin tone / Soft highlight
+                        }
+                    },
+                    backgroundImage: {
+                        'infrared-gradient': 'linear-gradient(135deg, #FF2E00 0%, #FF8A00 100%)',
+                        'infrared-radial': 'radial-gradient(circle at center, #FF2E00 0%, transparent 70%)',
+                        'heatmap': 'linear-gradient(90deg, #050505 0%, #261008 50%, #521400 100%)',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(255, 46, 0, 0.3)',
+                        'glow-hover': '0 0 40px rgba(255, 46, 0, 0.5)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: #050505; /* Oishi Void */
+            color: #E5E5E5;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Ambient Heat Effects (Replaces Grain) */
+        .heat-leak {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #141414;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #FF2E00, #FF8A00);
+            border-radius: 5px;
+        }
+
+        /* Utilities */
+        .text-gradient {
+            background: linear-gradient(135deg, #FF2E00 0%, #FF8A00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-panel {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Smooth Transitions */
+        * { scroll-behavior: smooth; }
+
+        /* Animation for "Exciting/Fun" */
+        @keyframes pulse-heat {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+        .animate-heat {
+            animation: pulse-heat 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-infrared-core selection:text-white">
+
+    <!-- Ambient Background Heat -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div class="heat-leak bg-infrared-core w-96 h-96 -top-20 -left-20 animate-heat"></div>
+        <div class="heat-leak bg-infrared-warmth w-[500px] h-[500px] bottom-0 right-0 opacity-20"></div>
+    </div>
+
+    <!-- Layout -->
+    <div class="flex min-h-screen relative z-10">
+
+        <!-- Sidebar Navigation -->
+        <aside class="fixed left-0 top-0 h-screen w-72 bg-oishi-charcoal/90 backdrop-blur border-r border-oishi-stone overflow-y-auto">
+            <div class="p-8">
+                <!-- Brand -->
+                <div class="mb-12">
+                    <div class="flex items-center gap-3 mb-2">
+                        <!-- Simple Geometric Logo Placeholder -->
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-infrared-core to-infrared-warmth"></div>
+                        <h1 class="text-3xl font-display font-bold text-white tracking-tight">EOS</h1>
+                    </div>
+                    <p class="text-oishi-ash text-xs font-medium uppercase tracking-widest">Design System v2</p>
+                </div>
+
+                <!-- Nav -->
+                <nav class="space-y-2">
+                    <a href="#philosophy" class="flex items-center px-4 py-3 text-white hover:bg-oishi-stone rounded-xl transition-all group">
+                        <i data-feather="heart" class="w-5 h-5 mr-3 text-infrared-glow"></i>
+                        <span class="font-medium">Philosophy</span>
+                    </a>
+                    <a href="#typography" class="flex items-center px-4 py-3 text-oishi-ash hover:text-white hover:bg-oishi-stone rounded-xl transition-all group">
+                        <i data-feather="type" class="w-5 h-5 mr-3 group-hover:text-infrared-warmth transition-colors"></i>
+                        <span>Typography</span>
+                    </a>
+                    <a href="#colors" class="flex items-center px-4 py-3 text-oishi-ash hover:text-white hover:bg-oishi-stone rounded-xl transition-all group">
+                        <i data-feather="sun" class="w-5 h-5 mr-3 group-hover:text-infrared-warmth transition-colors"></i>
+                        <span>Infrared Palette</span>
+                    </a>
+                    <a href="#components" class="flex items-center px-4 py-3 text-oishi-ash hover:text-white hover:bg-oishi-stone rounded-xl transition-all group">
+                        <i data-feather="grid" class="w-5 h-5 mr-3 group-hover:text-infrared-warmth transition-colors"></i>
+                        <span>Components</span>
+                    </a>
+                    <a href="#imagery" class="flex items-center px-4 py-3 text-oishi-ash hover:text-white hover:bg-oishi-stone rounded-xl transition-all group">
+                        <i data-feather="image" class="w-5 h-5 mr-3 group-hover:text-infrared-warmth transition-colors"></i>
+                        <span>Imagery</span>
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ml-72 flex-1 p-12 overflow-y-auto">
+
+            <!-- Header / Introduction -->
+            <div class="mb-20" id="philosophy">
+                <span class="inline-block py-1 px-3 rounded-full border border-infrared-core/30 bg-infrared-core/10 text-infrared-warmth text-xs font-bold uppercase tracking-wider mb-6">
+                    Version 2.0: Heat & Zen
+                </span>
+                <h1 class="text-6xl md:text-7xl font-display font-extrabold text-white mb-6 leading-tight">
+                    Sweat. Light. <br>
+                    <span class="text-gradient">Community.</span>
+                </h1>
+                <p class="text-xl text-oishi-ash max-w-2xl leading-relaxed font-light">
+                    A shift from the quiet mineral dawn to the vibrant, beating heart of the studio.
+                    Dark "Oishi" backgrounds create a Zen-like void, allowing the infrared light and human energy to take center stage.
+                    It's friendly, it's hot, and it's for everyone.
+                </p>
+            </div>
+
+            <!-- Typography -->
+            <section id="typography" class="mb-24">
+                <h2 class="text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-infrared-core rounded-full"></span>
+                    Typography
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- Headings -->
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <div class="border-b border-oishi-stone pb-4 mb-4">
+                            <h3 class="text-oishi-ash text-sm uppercase tracking-widest mb-2">Primary Font (Headings)</h3>
+                            <p class="text-2xl font-display font-bold text-white">Outfit</p>
+                        </div>
+                        <div class="space-y-6">
+                            <div>
+                                <h1 class="text-5xl font-display font-extrabold text-white">Display Headline</h1>
+                                <p class="text-xs text-oishi-ash mt-1">Outfit ExtraBold (800)</p>
+                            </div>
+                            <div>
+                                <h2 class="text-4xl font-display font-bold text-white">Section Title</h2>
+                                <p class="text-xs text-oishi-ash mt-1">Outfit Bold (700)</p>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-display font-medium text-white">Card Headline</h3>
+                                <p class="text-xs text-oishi-ash mt-1">Outfit Medium (500)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Body -->
+                    <div class="glass-panel p-8 rounded-3xl">
+                        <div class="border-b border-oishi-stone pb-4 mb-4">
+                            <h3 class="text-oishi-ash text-sm uppercase tracking-widest mb-2">Secondary Font (Body)</h3>
+                            <p class="text-2xl font-body font-bold text-white">Plus Jakarta Sans</p>
+                        </div>
+                        <div class="space-y-6">
+                            <p class="text-lg text-oishi-mist leading-relaxed">
+                                We don't care if you do Pilates, lift weights, or just want to stretch.
+                                <strong class="text-white">The infrared heat is the constant.</strong>
+                                Come for the sweat, stay for the feeling.
+                            </p>
+                            <p class="text-base text-oishi-ash leading-relaxed">
+                                This is the standard body copy. It's geometric, highly legible, and modern.
+                                It complements the friendly curves of Outfit without competing for attention.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Color Palette -->
+            <section id="colors" class="mb-24">
+                <h2 class="text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-infrared-core rounded-full"></span>
+                    The Infrared Spectrum
+                </h2>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
+                    <!-- Infrared Core -->
+                    <div class="space-y-3">
+                        <div class="h-32 rounded-2xl bg-infrared-core shadow-glow flex items-end p-4">
+                            <span class="text-white font-bold">Core Red</span>
+                        </div>
+                        <p class="text-xs font-mono text-oishi-ash">#FF2E00</p>
+                    </div>
+                    <!-- Infrared Glow -->
+                    <div class="space-y-3">
+                        <div class="h-32 rounded-2xl bg-infrared-glow flex items-end p-4">
+                            <span class="text-black font-bold">Heat Orange</span>
+                        </div>
+                        <p class="text-xs font-mono text-oishi-ash">#FF5C00</p>
+                    </div>
+                    <!-- Oishi Void -->
+                    <div class="space-y-3">
+                        <div class="h-32 rounded-2xl bg-oishi-void border border-oishi-stone flex items-end p-4">
+                            <span class="text-white font-bold">Oishi Void</span>
+                        </div>
+                        <p class="text-xs font-mono text-oishi-ash">#050505</p>
+                    </div>
+                    <!-- Oishi Charcoal -->
+                    <div class="space-y-3">
+                        <div class="h-32 rounded-2xl bg-oishi-charcoal border border-oishi-stone flex items-end p-4">
+                            <span class="text-oishi-mist font-bold">Charcoal</span>
+                        </div>
+                        <p class="text-xs font-mono text-oishi-ash">#141414</p>
+                    </div>
+                </div>
+
+                <!-- Gradients -->
+                <div class="glass-panel p-8 rounded-3xl">
+                    <h3 class="text-xl font-display font-bold text-white mb-6">Heat Maps & Gradients</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <div class="h-40 rounded-2xl bg-infrared-gradient mb-4 relative overflow-hidden group">
+                                <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            </div>
+                            <p class="text-white font-medium">Infrared Linear</p>
+                            <p class="text-sm text-oishi-ash">Primary interaction gradient (Buttons, active states).</p>
+                        </div>
+                        <div>
+                            <div class="h-40 rounded-2xl bg-oishi-void border border-oishi-stone mb-4 relative flex items-center justify-center overflow-hidden">
+                                <div class="w-40 h-40 bg-infrared-core rounded-full blur-[60px] opacity-60"></div>
+                            </div>
+                            <p class="text-white font-medium">Ambient Heat</p>
+                            <p class="text-sm text-oishi-ash">Backgrounds for cards or sections to create depth.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Components -->
+            <section id="components" class="mb-24">
+                <h2 class="text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-infrared-core rounded-full"></span>
+                    Components
+                </h2>
+
+                <!-- Buttons -->
+                <div class="glass-panel p-10 rounded-3xl mb-10">
+                    <h3 class="text-xl font-display font-bold text-white mb-8">Interactive Elements</h3>
+
+                    <div class="flex flex-wrap gap-6 items-center">
+                        <!-- Primary Glow Button -->
+                        <button class="relative px-8 py-4 bg-infrared-gradient rounded-full text-white font-bold text-lg shadow-glow hover:shadow-glow-hover hover:scale-105 transition-all duration-300">
+                            Book a Sweat
+                        </button>
+
+                        <!-- Secondary Outline -->
+                        <button class="px-8 py-4 border border-oishi-stone bg-oishi-charcoal rounded-full text-white font-medium hover:border-infrared-core hover:text-infrared-warmth transition-colors duration-300">
+                            View Schedule
+                        </button>
+
+                        <!-- Text Link -->
+                        <button class="flex items-center text-oishi-ash hover:text-white transition-colors group">
+                            <span class="border-b border-transparent group-hover:border-infrared-core pb-0.5">Learn about Infrared</span>
+                            <i data-feather="arrow-right" class="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Class Card -->
+                    <div class="group bg-oishi-charcoal border border-oishi-stone rounded-3xl p-6 hover:border-infrared-core/50 transition-all duration-300 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-infrared-core rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-opacity duration-500"></div>
+
+                        <div class="flex justify-between items-start mb-6">
+                            <span class="bg-oishi-stone text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">High Heat</span>
+                            <i data-feather="activity" class="text-infrared-warmth"></i>
+                        </div>
+                        <h4 class="text-2xl font-display font-bold text-white mb-2">Infrared Pilates</h4>
+                        <p class="text-oishi-ash text-sm mb-6">Deep core work amplified by 40°C heat. Low impact, high sweat.</p>
+                        <div class="flex items-center justify-between border-t border-oishi-stone pt-4">
+                            <span class="text-white font-mono text-sm">45 Min</span>
+                            <span class="text-white font-mono text-sm">All Levels</span>
+                        </div>
+                    </div>
+
+                    <!-- Modality Card (Fun/Exciting) -->
+                    <div class="group bg-infrared-gradient rounded-3xl p-6 shadow-glow transform hover:-translate-y-2 transition-all duration-300 text-white">
+                        <div class="mb-6 bg-white/20 w-12 h-12 rounded-full flex items-center justify-center backdrop-blur">
+                            <i data-feather="zap" class="text-white"></i>
+                        </div>
+                        <h4 class="text-2xl font-display font-bold mb-2">New here?</h4>
+                        <p class="opacity-90 text-sm mb-6">Get your first 3 sessions for the price of 1. Experience the heat.</p>
+                        <button class="w-full py-3 bg-white text-infrared-core font-bold rounded-full hover:bg-oishi-void hover:text-white transition-colors">
+                            Claim Offer
+                        </button>
+                    </div>
+
+                     <!-- Feature Card -->
+                     <div class="bg-oishi-charcoal border border-oishi-stone rounded-3xl p-6 relative">
+                        <h4 class="text-xl font-display font-bold text-white mb-4">Not just Yoga.</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-oishi-ash">
+                                <i data-feather="check-circle" class="w-4 h-4 text-infrared-glow mr-3"></i>
+                                Calisthenics
+                            </li>
+                            <li class="flex items-center text-oishi-ash">
+                                <i data-feather="check-circle" class="w-4 h-4 text-infrared-glow mr-3"></i>
+                                Barre Sculpt
+                            </li>
+                            <li class="flex items-center text-oishi-ash">
+                                <i data-feather="check-circle" class="w-4 h-4 text-infrared-glow mr-3"></i>
+                                Functional Flow
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+             <!-- Imagery Style -->
+             <section id="imagery" class="mb-24">
+                <h2 class="text-3xl font-display font-bold text-white mb-8 flex items-center gap-3">
+                    <span class="w-2 h-8 bg-infrared-core rounded-full"></span>
+                    Imagery Direction
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative rounded-3xl overflow-hidden aspect-video group">
+                        <!-- Placeholder Image -->
+                        <img src="assets/yoga_studio.jpg" class="w-full h-full object-cover opacity-60 grayscale group-hover:grayscale-0 transition-all duration-700 mix-blend-luminosity">
+                        <!-- Overlay Effect -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-infrared-core/80 to-transparent mix-blend-overlay"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <span class="bg-white text-black text-xs font-bold px-2 py-1 rounded mb-2 inline-block">Style Guide</span>
+                            <p class="text-white font-bold text-xl">High Contrast & Red Light</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-center space-y-6">
+                        <div class="bg-oishi-charcoal p-6 rounded-3xl border border-oishi-stone">
+                            <h4 class="text-white font-bold mb-2">Key Visual Principles</h4>
+                            <ul class="list-disc list-inside text-oishi-ash space-y-2">
+                                <li><strong>Red Wash:</strong> Photos should feel like they are taken inside the infrared studio. Warm, glowing skin tones.</li>
+                                <li><strong>Community Focus:</strong> Show interaction. High fives, laughter, shared exhaustion.</li>
+                                <li><strong>Dark Backgrounds:</strong> Subjects should pop against dark/black environments to match the "Oishi" aesthetic.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-oishi-stone pt-12 pb-8">
+                <div class="flex justify-between items-end">
+                    <div>
+                        <p class="text-white font-display font-bold text-2xl mb-2">EOS</p>
+                        <p class="text-oishi-ash text-sm">Design System V2.0</p>
+                    </div>
+                    <p class="text-infrared-glow text-sm font-mono">#InfraredCommunity</p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        feather.replace();
+    </script>
+</body>
+</html>

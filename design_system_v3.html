@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOS CLUB - Design System V2 (Infrared)</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Merriweather', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'zen': {
+                            'black': '#09090B',    /* Oishi Black - Deepest */
+                            'surface': '#18181B',  /* Card Background */
+                            'charcoal': '#27272A', /* Borders/Separators */
+                            'stone': '#52525B',    /* Muted Text */
+                            'mist': '#A1A1AA',     /* Secondary Text */
+                            'white': '#FAFAFA',    /* Primary Text */
+                        },
+                        'infra': {
+                            'core': '#FF2E00',     /* The Light Source Red */
+                            'glow': '#FF5C35',     /* Lighter Orange-Red */
+                            'dim': '#7F1700',      /* Dark Red */
+                            'heat': '#FF8C00',     /* Warmth Accent */
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px -5px rgba(255, 46, 0, 0.5)',
+                        'glow-hover': '0 0 30px -5px rgba(255, 46, 0, 0.7)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #09090B; /* Zen Black */
+            color: #FAFAFA;
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Grain texture overlay - Adjusted for Dark Mode */
+        .grain-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: overlay;
+        }
+
+        .grain-texture > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom scrollbar - Dark Mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #18181B;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #27272A;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF2E00;
+        }
+
+        /* Infrared Gradient */
+        .infra-gradient {
+            background: linear-gradient(135deg, #FF2E00 0%, #FF8C00 100%);
+        }
+
+        .infra-gradient-text {
+            background: linear-gradient(135deg, #FF2E00 0%, #FF8C00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Heat Map Gradient */
+        .heat-gradient {
+            background: radial-gradient(circle at center, #FF5C35 0%, #FF2E00 40%, #7F1700 80%, #09090B 100%);
+        }
+
+        /* Oishi Black Gradient */
+        .zen-gradient {
+            background: linear-gradient(180deg, #18181B 0%, #09090B 100%);
+        }
+
+        /* Infrared Filter for Images
+           This simulates the red light therapy look on any photo
+        */
+        .infrared-filter {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .infrared-filter::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(255, 46, 0, 0.3), rgba(255, 46, 0, 0.6));
+            mix-blend-mode: multiply;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .infrared-filter img {
+            filter: grayscale(100%) contrast(1.2) brightness(0.9);
+            transition: filter 0.5s ease;
+        }
+
+        .infrared-filter:hover img {
+            filter: grayscale(0%) contrast(1.1);
+        }
+
+        .infrared-filter:hover::after {
+            background: linear-gradient(to bottom, rgba(255, 46, 0, 0.1), rgba(255, 46, 0, 0.3));
+        }
+
+        /* Glassmorphism for Dark Mode */
+        .glass-panel {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Neon Glow Text */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 46, 0, 0.4);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body class="bg-zen-black text-zen-white antialiased">
+
+    <!-- Split Screen Layout -->
+    <div class="flex min-h-screen">
+
+        <!-- Sidebar (Fixed Left) -->
+        <aside class="fixed left-0 top-0 h-screen w-80 bg-zen-black border-r border-zen-charcoal overflow-y-auto grain-texture">
+            <div class="p-8">
+                <!-- Brand Logo & Name -->
+                <div class="mb-12">
+                    <!-- EOS Logo (Inverted for Dark Mode) -->
+                    <div class="mb-6 relative">
+                        <!-- Simulated Logo with Glow -->
+                        <div class="w-16 h-16 mx-auto bg-white rounded-full flex items-center justify-center shadow-glow">
+                             <img
+                                src="assets/eos-logo-export_bm-red.svg"
+                                alt="EOS CLUB logo"
+                                class="h-10 w-auto"
+                            />
+                        </div>
+                    </div>
+                    <h1 class="text-3xl font-bold text-white mb-2 text-center tracking-wider text-glow">EOS CLUB</h1>
+                    <p class="text-infra-glow text-sm text-center font-medium tracking-widest uppercase">Infrared Studio</p>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="space-y-1">
+                    <a href="#typography" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="type" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Typography</span>
+                    </a>
+                    <a href="#colors" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="droplet" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Infrared Palette</span>
+                    </a>
+                    <a href="#gradients" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="sun" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Heat Maps</span>
+                    </a>
+                    <a href="#assets" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="image" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Visual Assets</span>
+                    </a>
+                    <a href="#buttons" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="zap" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Energy Actions</span>
+                    </a>
+                    <a href="#forms" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="edit-3" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Form Elements</span>
+                    </a>
+                    <a href="#components" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="grid" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Components</span>
+                    </a>
+                    <a href="#navigation" class="flex items-center px-4 py-3 text-zen-mist hover:text-white hover:bg-zen-surface rounded-lg transition-all duration-300 group">
+                        <i data-feather="menu" class="w-5 h-5 mr-3 text-zen-stone group-hover:text-infra-core transition-colors"></i>
+                        <span class="font-medium">Navigation</span>
+                    </a>
+                </nav>
+
+                <!-- Footer Info -->
+                <div class="mt-12 pt-8 border-t border-zen-charcoal">
+                    <p class="text-xs text-zen-stone">System V2.0 (Infrared)</p>
+                    <p class="text-xs text-infra-dim mt-1">Updated: Feb 2026</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content (Scrollable Right) -->
+        <main class="ml-80 flex-1 p-12 overflow-y-auto bg-zen-black">
+
+            <!-- Hero Section -->
+            <div class="mb-16 relative">
+                <!-- Background ambient glow -->
+                <div class="absolute -top-20 -left-20 w-96 h-96 bg-infra-core opacity-10 blur-[100px] rounded-full pointer-events-none"></div>
+
+                <h1 class="text-6xl font-bold text-white mb-4 relative z-10">EOS CLUB <span class="text-infra-core">V2</span></h1>
+                <p class="text-xl text-zen-mist max-w-3xl leading-relaxed relative z-10" style="line-height: 1.75;">
+                    Friendly, warm, and exciting. A fusion of <span class="text-white font-semibold">Japanese Zen aesthetics</span> and the energizing power of <span class="text-infra-glow font-semibold">Infrared Light Therapy</span>. We are not just yoga—we are movement, heat, and community.
+                </p>
+            </div>
+
+            <!-- Section 1: Typography & Formatting -->
+            <section id="typography" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Typography</h2>
+                    <p class="text-zen-mist">High contrast. Modern. Fun. White text on Oishi Black.</p>
+                </div>
+
+                <!-- Headings -->
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-infra-core opacity-5 blur-[80px] rounded-full"></div>
+
+                    <h3 class="text-2xl font-semibold text-zen-mist mb-8">Headings</h3>
+
+                    <div class="space-y-6 relative z-10">
+                        <div class="border-b border-zen-charcoal pb-6">
+                            <h1 class="text-6xl font-bold text-white mb-2 tracking-tight">Turn on the light.</h1>
+                            <p class="text-sm text-infra-glow font-mono">Display • Merriweather Bold</p>
+                        </div>
+                        <div class="border-b border-zen-charcoal pb-6">
+                            <h2 class="text-4xl font-bold text-white mb-2">Heat. Movement. Zen.</h2>
+                            <p class="text-sm text-infra-glow font-mono">H1 • Inter Bold</p>
+                        </div>
+                        <div class="border-b border-zen-charcoal pb-6">
+                            <h3 class="text-3xl font-semibold text-white mb-2">Infrared Therapy</h3>
+                            <p class="text-sm text-infra-glow font-mono">H2 • Merriweather Semibold</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-medium text-infra-glow mb-2 uppercase tracking-widest">Community First</h4>
+                            <p class="text-sm text-zen-stone font-mono">H4 • Inter Medium • Uppercase</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Text -->
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <h3 class="text-2xl font-semibold text-zen-mist mb-8">Body text</h3>
+
+                    <div class="space-y-6">
+                        <div>
+                            <p class="text-lg text-zen-mist mb-2" style="line-height: 1.75;">
+                                <span class="text-white font-medium">The EOS studio is not attached to any one modality.</span> We respond to the demand of the market. Whether it's Pilates, Barre, or Calisthenics, we bring the heat.
+                            </p>
+                            <p class="text-sm text-zen-stone font-mono">Lead • Inter Regular</p>
+                        </div>
+                        <div>
+                            <p class="text-base text-zen-stone mb-2" style="line-height: 1.75;">
+                                Infrared light penetrates deep into the tissue, promoting recovery and relaxation. Combined with our "Oishi Black" aesthetic, it creates a sanctuary that feels both exciting and deeply grounding.
+                            </p>
+                            <p class="text-sm text-zen-stone font-mono">Body • Inter Regular</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Color Palette -->
+            <section id="colors" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Infrared Palette</h2>
+                    <p class="text-zen-mist">Deep shadows met with intense, biological light.</p>
+                </div>
+
+                <!-- Zen Base -->
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Zen Base (The Dark Mode)</h3>
+                    <div class="grid grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-zen-black border border-zen-charcoal flex items-center justify-center">
+                                <span class="text-xs font-mono text-zen-stone">#09090B</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Zen Black</p>
+                            <p class="text-xs font-mono text-zen-mist">Background</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-zen-surface border border-zen-charcoal flex items-center justify-center">
+                                <span class="text-xs font-mono text-zen-stone">#18181B</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Zen Surface</p>
+                            <p class="text-xs font-mono text-zen-mist">Cards / Panels</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-zen-charcoal flex items-center justify-center">
+                                <span class="text-xs font-mono text-zen-mist">#27272A</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Charcoal</p>
+                            <p class="text-xs font-mono text-zen-mist">Borders / Dividers</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-zen-white flex items-center justify-center">
+                                <span class="text-xs font-mono text-zen-black">#FAFAFA</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Zen White</p>
+                            <p class="text-xs font-mono text-zen-mist">Primary Text</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infrared Accents -->
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Infrared Accents</h3>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-infra-core flex items-center justify-center shadow-glow">
+                                <span class="text-xs font-mono text-white">#FF2E00</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Infrared Core</p>
+                            <p class="text-xs font-mono text-zen-mist">Primary Brand Color</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-infra-glow flex items-center justify-center">
+                                <span class="text-xs font-mono text-black">#FF5C35</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Heat Glow</p>
+                            <p class="text-xs font-mono text-zen-mist">Secondary / Hover</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-infra-heat flex items-center justify-center">
+                                <span class="text-xs font-mono text-black">#FF8C00</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Warmth</p>
+                            <p class="text-xs font-mono text-zen-mist">Gradients / Warmth</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Gradients -->
+            <section id="gradients" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Heat Maps & Gradients</h2>
+                    <p class="text-zen-mist">Visualizing energy flow and temperature.</p>
+                </div>
+
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Linear Heat -->
+                        <div>
+                            <div class="h-40 rounded-xl infra-gradient mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-xl">Energy Flow</span>
+                            </div>
+                            <h4 class="text-white font-semibold">Linear Heat</h4>
+                            <p class="text-sm text-zen-stone">Used for buttons, progress bars, and active states.</p>
+                        </div>
+
+                        <!-- Radial Heat -->
+                        <div>
+                            <div class="h-40 rounded-xl heat-gradient mb-4 flex items-center justify-center border border-zen-charcoal">
+                                <span class="text-white font-bold text-xl">Core Warmth</span>
+                            </div>
+                            <h4 class="text-white font-semibold">Radial Core</h4>
+                            <p class="text-sm text-zen-stone">Used for backgrounds and ambient lighting effects.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Visual Assets -->
+            <section id="assets" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Visual Assets</h2>
+                    <p class="text-zen-mist">The "Infrared Filter" creates a cohesive, moody, red-light aesthetic from standard photography.</p>
+                </div>
+
+                <!-- Imagery Style -->
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <h3 class="text-2xl font-semibold text-white mb-8">Atmosphere & Filter</h3>
+
+                    <div class="grid grid-cols-2 gap-8">
+                        <!-- Standard Photo with Filter -->
+                        <div>
+                            <div class="infrared-filter rounded-xl mb-4 h-64 w-full">
+                                <img src="assets/yoga_studio.jpg" alt="Studio space" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-sm font-semibold text-white">Infrared Filter Applied</p>
+                            <p class="text-xs text-zen-stone">Standard photos are treated with a heavy red multiply blend mode and contrast boost.</p>
+                        </div>
+
+                        <!-- Action Shot -->
+                        <div>
+                            <div class="infrared-filter rounded-xl mb-4 h-64 w-full">
+                                <img src="assets/yoga_closeup_1.png" alt="Movement detail" class="w-full h-full object-cover">
+                            </div>
+                            <p class="text-sm font-semibold text-white">Focus on Form</p>
+                            <p class="text-xs text-zen-stone">Silhouettes and highlights pop against the red/black treatment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Buttons & Actions -->
+            <section id="buttons" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Energy Actions</h2>
+                    <p class="text-zen-mist">Interactive elements that glow and pulse.</p>
+                </div>
+
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <div class="space-y-8">
+                        <!-- Primary Actions -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-4">Primary (High Voltage)</h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-8 py-3 bg-infra-core text-white rounded-full font-bold shadow-glow hover:shadow-glow-hover hover:scale-105 transition-all duration-300">
+                                    Book Session
+                                </button>
+                                <button class="px-8 py-3 infra-gradient text-white rounded-full font-bold hover:opacity-90 transition-all duration-300">
+                                    Join The Club
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Actions -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-white mb-4">Secondary (Ghost)</h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-8 py-3 border border-infra-core text-infra-core rounded-full font-medium hover:bg-infra-core hover:text-white transition-all duration-300">
+                                    View Schedule
+                                </button>
+                                <button class="px-8 py-3 border border-zen-charcoal text-white rounded-full font-medium hover:border-white transition-all duration-300">
+                                    Learn More
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 6: Forms -->
+            <section id="forms" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Forms</h2>
+                    <p class="text-zen-mist">Dark inputs with glowing focus states.</p>
+                </div>
+
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <div class="max-w-xl space-y-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-zen-mist mb-2">Email Address</label>
+                            <input type="email" placeholder="you@example.com" class="w-full px-5 py-4 bg-zen-black border border-zen-charcoal rounded-xl text-white placeholder-zen-stone focus:outline-none focus:border-infra-core focus:shadow-glow transition-all duration-300">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-zen-mist mb-2">Select Interest</label>
+                            <div class="flex gap-4">
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="interest" class="peer sr-only">
+                                    <div class="px-4 py-2 rounded-lg border border-zen-charcoal text-zen-mist peer-checked:border-infra-core peer-checked:text-infra-core peer-checked:bg-zen-black transition-all">
+                                        Red Light
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="interest" class="peer sr-only">
+                                    <div class="px-4 py-2 rounded-lg border border-zen-charcoal text-zen-mist peer-checked:border-infra-core peer-checked:text-infra-core peer-checked:bg-zen-black transition-all">
+                                        Pilates
+                                    </div>
+                                </label>
+                                <label class="cursor-pointer">
+                                    <input type="radio" name="interest" class="peer sr-only">
+                                    <div class="px-4 py-2 rounded-lg border border-zen-charcoal text-zen-mist peer-checked:border-infra-core peer-checked:text-infra-core peer-checked:bg-zen-black transition-all">
+                                        Barre
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 7: Components -->
+            <section id="components" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-4xl font-bold text-white mb-3">Components</h2>
+                    <p class="text-zen-mist">Cards and modules that sit in the dark.</p>
+                </div>
+
+                <div class="bg-zen-surface rounded-2xl border border-zen-charcoal p-10 mb-6 grain-texture">
+                    <div class="grid grid-cols-3 gap-6">
+                        <!-- Class Card -->
+                        <div class="bg-zen-black border border-zen-charcoal rounded-2xl p-6 hover:border-infra-core transition-colors duration-300 group cursor-pointer">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="w-10 h-10 rounded-full bg-zen-surface flex items-center justify-center text-infra-core group-hover:bg-infra-core group-hover:text-white transition-colors">
+                                    <i data-feather="activity" class="w-5 h-5"></i>
+                                </div>
+                                <span class="text-xs font-mono text-infra-glow border border-infra-dim bg-infra-dim/20 px-2 py-1 rounded">HOT</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-1">Infra-Pilates</h4>
+                            <p class="text-sm text-zen-stone">High heat, low impact. Sculpt your core under red light.</p>
+                        </div>
+
+                        <!-- Membership Card -->
+                        <div class="relative overflow-hidden rounded-2xl p-6 border border-zen-charcoal group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-zen-black to-zen-surface z-0"></div>
+                            <div class="absolute inset-0 bg-infra-core opacity-0 group-hover:opacity-10 transition-opacity duration-500 z-0"></div>
+
+                            <div class="relative z-10 text-center">
+                                <h4 class="text-lg font-bold text-white mb-2">Founding Member</h4>
+                                <p class="text-3xl font-bold text-infra-glow mb-4">10% OFF</p>
+                                <button class="w-full py-2 rounded-lg border border-zen-charcoal text-sm text-white hover:bg-white hover:text-black transition-colors">
+                                    Claim Spot
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer Style -->
+            <footer class="border-t border-zen-charcoal pt-12 pb-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+                    <div>
+                        <h5 class="text-white font-bold mb-4">Studio</h5>
+                        <ul class="space-y-2 text-sm text-zen-stone">
+                            <li><a href="#" class="hover:text-infra-core transition-colors">The Space</a></li>
+                            <li><a href="#" class="hover:text-infra-core transition-colors">Infrared Tech</a></li>
+                            <li><a href="#" class="hover:text-infra-core transition-colors">Amenities</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 class="text-white font-bold mb-4">Classes</h5>
+                        <ul class="space-y-2 text-sm text-zen-stone">
+                            <li><a href="#" class="hover:text-infra-core transition-colors">Schedule</a></li>
+                            <li><a href="#" class="hover:text-infra-core transition-colors">Workshops</a></li>
+                            <li><a href="#" class="hover:text-infra-core transition-colors">Private Sessions</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="text-center pt-8 border-t border-zen-charcoal">
+                    <p class="text-zen-stone mb-2">EOS CLUB Design System V2 — Infrared Edition</p>
+                    <p class="text-xs text-zen-charcoal mt-4">Oishi Black Aesthetic</p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Initialize Feather Icons -->
+    <script>
+        feather.replace();
+    </script>
+
+</body>
+</html>
