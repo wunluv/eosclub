@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="EOS CLUB - A wellness community launching in April. Pilates, Barre, Calisthenics, Yoga, and more in infrared heat. Join our waiting list for 10% opening discount." />
+    <title>EOS CLUB - A Wellness Community</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="EOS CLUB - A Wellness Community" />
+    <meta property="og:description" content="Sweat in a new light. Join our wellness community launching in April." />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Fonts from Design System v2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        /* Design System v2 palette */
+        --oishi-void: #050505;
+        --oishi-charcoal: #141414;
+        --oishi-stone: #262626;
+        --oishi-ash: #888888;
+        --oishi-mist: #e5e5e5;
+
+        --infrared-core: #ff2e00;
+        --infrared-glow: #ff5c00;
+        --infrared-warmth: #ff8a00;
+        --infrared-peach: #ffd4b8;
+
+        --shadow-glow: 0 0 20px rgba(255, 46, 0, 0.3);
+        --shadow-glow-hover: 0 0 40px rgba(255, 46, 0, 0.5);
+      }
+
+      /* Base */
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        background: var(--oishi-void);
+        color: var(--oishi-mist);
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      h1,
+      .font-display {
+        font-family: "Outfit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      }
+
+      ::selection {
+        background: var(--infrared-core);
+        color: #fff;
+      }
+
+      /* Background canvas (neural shader) */
+      canvas#neuro {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.95;
+        z-index: 0;
+      }
+
+      /* Ambient heat haze layer */
+      .heat {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .heat::before,
+      .heat::after {
+        content: "";
+        position: absolute;
+        width: 520px;
+        height: 520px;
+        border-radius: 999px;
+        filter: blur(90px);
+        opacity: 0.35;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .heat::before {
+        top: -180px;
+        left: -180px;
+        background: radial-gradient(circle at 30% 30%, var(--infrared-core), transparent 65%);
+        animation: heatPulse 6s ease-in-out infinite;
+      }
+
+      .heat::after {
+        right: -220px;
+        bottom: -220px;
+        background: radial-gradient(circle at 40% 40%, var(--infrared-warmth), transparent 65%);
+        opacity: 0.22;
+      }
+
+      @keyframes heatPulse {
+        0%,
+        100% {
+          opacity: 0.32;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(1.08);
+        }
+      }
+
+      /* Foreground layout */
+      .app {
+        position: relative;
+        z-index: 2;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: clamp(20px, 5vw, 40px);
+      }
+
+      .hero {
+        width: min(640px, 100%);
+        text-align: center;
+      }
+
+      .logoWrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: clamp(20px, 4vw, 32px);
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .logo {
+        width: clamp(56px, 12vw, 80px);
+        height: clamp(56px, 12vw, 80px);
+        filter: drop-shadow(0 0 24px rgba(255, 46, 0, 0.4));
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 32px rgba(255, 46, 0, 0.6));
+      }
+
+      .brandName {
+        font-size: clamp(48px, 10vw, 88px);
+        line-height: 1;
+        letter-spacing: -0.02em;
+        margin: 0 0 clamp(12px, 2vw, 20px) 0;
+        font-weight: 800;
+        animation: fadeInUp 0.8s ease-out 0.1s both;
+      }
+
+      /* Red gradient for "EOS" only */
+      .brandName .eos {
+        background: linear-gradient(135deg, var(--infrared-core) 0%, var(--infrared-warmth) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 20px rgba(255, 46, 0, 0.2));
+      }
+
+      /* White for "CLUB" */
+      .brandName .club {
+        color: #ffffff;
+      }
+
+      .tagline {
+        font-size: clamp(20px, 4vw, 28px);
+        line-height: 1.3;
+        margin: 0 0 clamp(16px, 3vw, 24px) 0;
+        font-weight: 600;
+        color: var(--oishi-mist);
+        animation: fadeInUp 0.8s ease-out 0.2s both;
+      }
+
+      .description {
+        max-width: 54ch;
+        margin: 0 auto clamp(24px, 4vw, 36px);
+        font-size: clamp(15px, 2.5vw, 18px);
+        line-height: 1.65;
+        color: color-mix(in srgb, var(--oishi-mist) 85%, var(--oishi-ash));
+        animation: fadeInUp 0.8s ease-out 0.3s both;
+      }
+
+      .description strong {
+        color: var(--oishi-mist);
+        font-weight: 600;
+      }
+
+      .launchInfo {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: clamp(28px, 5vw, 40px);
+        padding: 12px 20px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 46, 0, 0.3);
+        background: linear-gradient(135deg, rgba(255, 46, 0, 0.15), rgba(255, 138, 0, 0.08));
+        backdrop-filter: blur(8px);
+        box-shadow: var(--shadow-glow);
+        animation: fadeInUp 0.8s ease-out 0.4s both, pulse 3s ease-in-out 2s infinite;
+      }
+
+      .launchIcon {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--infrared-core), var(--infrared-warmth));
+        box-shadow: 0 0 16px rgba(255, 92, 0, 0.7);
+        animation: glow 2s ease-in-out infinite;
+      }
+
+      .launchText {
+        font-size: clamp(13px, 2.2vw, 15px);
+        font-weight: 600;
+        color: var(--infrared-peach);
+        letter-spacing: 0.02em;
+      }
+
+      /* Email form */
+      .emailForm {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        max-width: 480px;
+        margin: 0 auto;
+        animation: fadeInUp 0.8s ease-out 0.5s both;
+      }
+
+      .formGroup {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .emailInput {
+        flex: 1 1 240px;
+        min-width: 0;
+        padding: 16px 24px;
+        font-size: 16px;
+        font-family: inherit;
+        color: var(--oishi-mist);
+        background: rgba(20, 20, 20, 0.8);
+        border: 1px solid var(--oishi-stone);
+        border-radius: 100px;
+        outline: none;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(8px);
+      }
+
+      .emailInput::placeholder {
+        color: var(--oishi-ash);
+      }
+
+      .emailInput:focus {
+        border-color: var(--infrared-core);
+        background: rgba(20, 20, 20, 0.95);
+        box-shadow: 0 0 0 3px rgba(255, 46, 0, 0.1), var(--shadow-glow);
+      }
+
+      .submitBtn {
+        flex: 0 0 auto;
+        padding: 16px 40px;
+        font-size: 16px;
+        font-weight: 700;
+        font-family: 'Outfit', sans-serif;
+        color: white;
+        background: linear-gradient(135deg, var(--infrared-core) 0%, var(--infrared-warmth) 100%);
+        border: none;
+        border-radius: 100px;
+        cursor: pointer;
+        box-shadow: var(--shadow-glow);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+
+      .submitBtn:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-glow-hover);
+      }
+
+      .submitBtn:active {
+        transform: translateY(0);
+      }
+
+      .submitBtn:focus-visible {
+        outline: 3px solid rgba(255, 46, 0, 0.5);
+        outline-offset: 2px;
+      }
+
+      /* Success message */
+      .successMessage {
+        display: none;
+        padding: 16px 24px;
+        background: rgba(255, 138, 0, 0.1);
+        border: 1px solid rgba(255, 138, 0, 0.3);
+        border-radius: 16px;
+        color: var(--infrared-peach);
+        font-size: 15px;
+        text-align: center;
+        animation: fadeInUp 0.5s ease-out;
+      }
+
+      .successMessage.show {
+        display: block;
+      }
+
+      /* Screen reader only class */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scale(1.02);
+          opacity: 0.95;
+        }
+      }
+
+      @keyframes glow {
+        0%, 100% {
+          opacity: 1;
+          box-shadow: 0 0 16px rgba(255, 92, 0, 0.7);
+        }
+        50% {
+          opacity: 0.7;
+          box-shadow: 0 0 24px rgba(255, 92, 0, 1);
+        }
+      }
+
+      /* Accessibility: reduce motion */
+      @media (prefers-reduced-motion: reduce) {
+        .heat::before,
+        .launchInfo,
+        .launchIcon {
+          animation: none;
+        }
+        canvas#neuro {
+          opacity: 0.6;
+        }
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* Mobile responsive */
+      @media (max-width: 640px) {
+        .formGroup {
+          flex-direction: column;
+        }
+
+        .emailInput {
+          flex: 1 1 auto;
+        }
+
+        .submitBtn {
+          width: 100%;
+          padding: 18px 40px;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .app {
+          padding: 20px 16px;
+        }
+
+        .description {
+          font-size: 15px;
+        }
+      }
+
+      /* High contrast mode */
+      @media (prefers-contrast: high) {
+        .emailInput,
+        .submitBtn {
+          border-width: 2px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="neuro" aria-hidden="true"></canvas>
+    <div class="heat" aria-hidden="true"></div>
+
+    <main class="app" role="main">
+      <article class="hero">
+        <!-- Logo -->
+        <div class="logoWrapper">
+          <img
+            class="logo"
+            src="assets/eos-logo-export_bm-red.svg"
+            alt="EOS Club Logo - Red circular emblem"
+            width="80"
+            height="80"
+          />
+        </div>
+
+        <!-- Brand Name with Red "EOS" -->
+        <h1 class="brandName font-display">
+          <span class="eos">EOS</span> <span class="club">CLUB</span>
+        </h1>
+
+        <!-- Main Tagline -->
+        <p class="tagline">
+          A Wellness Community. Sweat in a new light.
+        </p>
+
+        <!-- Description -->
+        <p class="description">
+          Pilates, Barre, Calisthenics, Yoga? Or just hang out with a barista brewed coffee.
+          <strong>Doesn't matter.</strong> Come for the wellness. Stay for the community.
+        </p>
+
+        <!-- Launch Info Badge -->
+        <div class="launchInfo" role="status" aria-live="polite">
+          <span class="launchIcon" aria-hidden="true"></span>
+          <span class="launchText">Launching April • 10% opening discount for list members</span>
+        </div>
+
+        <!-- Email Signup Form -->
+        <form
+          class="emailForm"
+          id="signupForm"
+          aria-label="Email signup form"
+          novalidate
+        >
+          <div class="formGroup">
+            <label for="email" class="sr-only">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="emailInput"
+              placeholder="Enter your email"
+              required
+              aria-required="true"
+              aria-describedby="emailHelp"
+              autocomplete="email"
+            />
+            <button
+              type="submit"
+              class="submitBtn"
+              aria-label="Join the waiting list"
+            >
+              I'm in!
+            </button>
+          </div>
+          <span id="emailHelp" class="sr-only">
+            Enter your email to join our wellness community and receive updates
+          </span>
+          <div
+            class="successMessage"
+            id="successMessage"
+            role="alert"
+            aria-live="polite"
+          >
+            ✨ Welcome to the community! We'll keep you updated on launch details.
+          </div>
+        </form>
+      </article>
+    </main>
+
+    <!-- Vertex shader -->
+    <script type="x-shader/x-fragment" id="vertShader">
+      precision mediump float;
+
+      varying vec2 vUv;
+      attribute vec2 a_position;
+
+      void main() {
+        vUv = .5 * (a_position + 1.);
+        gl_Position = vec4(a_position, 0.0, 1.0);
+      }
+    </script>
+
+    <!-- Fragment shader (updated to warm infrared palette) -->
+    <script type="x-shader/x-fragment" id="fragShader">
+      precision mediump float;
+
+      varying vec2 vUv;
+      uniform float u_time;
+      uniform float u_ratio;
+      uniform vec2 u_pointer_position;
+      uniform float u_scroll_progress;
+
+      vec2 rotate(vec2 uv, float th) {
+        return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+      }
+
+      float neuro_shape(vec2 uv, float t, float p) {
+        vec2 sine_acc = vec2(0.);
+        vec2 res = vec2(0.);
+        float scale = 8.;
+
+        for (int j = 0; j < 15; j++) {
+          uv = rotate(uv, 1.);
+          sine_acc = rotate(sine_acc, 1.);
+          vec2 layer = uv * scale + float(j) + sine_acc - t;
+          sine_acc += sin(layer) + 2.4 * p;
+          res += (.5 + .5 * cos(layer)) / scale;
+          scale *= (1.2);
+        }
+        return res.x + res.y;
+      }
+
+      vec3 heat_palette(float x) {
+        /* Palette anchors from Design System v2:
+           core  #FF2E00
+           glow  #FF5C00
+           warmth#FF8A00
+           peach #FFD4B8
+        */
+        vec3 core = vec3(1.00, 0.18, 0.00);
+        vec3 glow = vec3(1.00, 0.36, 0.00);
+        vec3 warmth = vec3(1.00, 0.54, 0.00);
+        vec3 peach = vec3(1.00, 0.83, 0.72);
+
+        x = clamp(x, 0.0, 1.0);
+        vec3 a = mix(core, glow, smoothstep(0.0, 0.45, x));
+        vec3 b = mix(warmth, peach, smoothstep(0.55, 1.0, x));
+        return mix(a, b, smoothstep(0.35, 0.95, x));
+      }
+
+      void main() {
+        vec2 uv = .5 * vUv;
+        uv.x *= u_ratio;
+
+        vec2 pointer = vUv - u_pointer_position;
+        pointer.x *= u_ratio;
+        float p = clamp(length(pointer), 0., 1.);
+        p = .5 * pow(1. - p, 2.);
+
+        float t = .001 * u_time;
+        float noise = neuro_shape(uv, t, p);
+
+        noise = 1.2 * pow(noise, 3.);
+        noise += pow(noise, 10.);
+        noise = max(.0, noise - .5);
+        noise *= (1. - length(vUv - .5));
+
+        /* Use scroll_progress as a slow hue/temperature drift (no scroll needed; defaults to 0) */
+        float drift = 0.5 + 0.5 * sin(3.0 * u_scroll_progress + 0.25);
+        vec3 color = heat_palette(drift);
+
+        /* Slight vignette + intensity */
+        float vignette = smoothstep(0.95, 0.35, length(vUv - 0.5));
+        float intensity = noise * (0.75 + 0.25 * vignette);
+        gl_FragColor = vec4(color * intensity, intensity);
+      }
+    </script>
+
+    <!-- Collated JS (from neural_glow.ts, adapted to vanilla JS) -->
+    <script>
+      (function () {
+        const canvasEl = document.querySelector("canvas#neuro");
+        if (!canvasEl) return;
+
+        const devicePixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const pointer = { x: 0, y: 0, tX: 0, tY: 0 };
+        let uniforms;
+
+        const gl = initShader();
+        if (!gl) return;
+
+        setupEvents();
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+        render();
+
+        function initShader() {
+          const vsSource = document.getElementById("vertShader")?.textContent;
+          const fsSource = document.getElementById("fragShader")?.textContent;
+          if (!vsSource || !fsSource) return null;
+
+          const gl = canvasEl.getContext("webgl") || canvasEl.getContext("experimental-webgl");
+          if (!gl) {
+            // Keep page usable if WebGL isn't supported.
+            canvasEl.style.display = "none";
+            return null;
+          }
+
+          function createShader(sourceCode, type) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, sourceCode);
+            gl.compileShader(shader);
+
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+              console.error("Shader compile error:", gl.getShaderInfoLog(shader));
+              gl.deleteShader(shader);
+              return null;
+            }
+            return shader;
+          }
+
+          const vertexShader = createShader(vsSource, gl.VERTEX_SHADER);
+          const fragmentShader = createShader(fsSource, gl.FRAGMENT_SHADER);
+          if (!vertexShader || !fragmentShader) return null;
+
+          function createShaderProgram(vs, fs) {
+            const program = gl.createProgram();
+            gl.attachShader(program, vs);
+            gl.attachShader(program, fs);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+              console.error("Program link error:", gl.getProgramInfoLog(program));
+              return null;
+            }
+            return program;
+          }
+
+          const shaderProgram = createShaderProgram(vertexShader, fragmentShader);
+          if (!shaderProgram) return null;
+
+          uniforms = getUniforms(shaderProgram);
+          function getUniforms(program) {
+            const u = {};
+            const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+            for (let i = 0; i < uniformCount; i++) {
+              const name = gl.getActiveUniform(program, i).name;
+              u[name] = gl.getUniformLocation(program, name);
+            }
+            return u;
+          }
+
+          const vertices = new Float32Array([-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, 1.0, 1.0]);
+          const vertexBuffer = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+          gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+          gl.useProgram(shaderProgram);
+          const positionLocation = gl.getAttribLocation(shaderProgram, "a_position");
+          gl.enableVertexAttribArray(positionLocation);
+          gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+          gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+          return gl;
+        }
+
+        function render() {
+          const currentTime = performance.now();
+          pointer.x += (pointer.tX - pointer.x) * 0.2;
+          pointer.y += (pointer.tY - pointer.y) * 0.2;
+
+          gl.uniform1f(uniforms.u_time, currentTime);
+          gl.uniform2f(
+            uniforms.u_pointer_position,
+            pointer.x / window.innerWidth,
+            1 - pointer.y / window.innerHeight
+          );
+          gl.uniform1f(uniforms.u_scroll_progress, (window.pageYOffset || 0) / (2 * window.innerHeight));
+
+          gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+          requestAnimationFrame(render);
+        }
+
+        function resizeCanvas() {
+          canvasEl.width = Math.floor(window.innerWidth * devicePixelRatio);
+          canvasEl.height = Math.floor(window.innerHeight * devicePixelRatio);
+          gl.uniform1f(uniforms.u_ratio, canvasEl.width / canvasEl.height);
+          gl.viewport(0, 0, canvasEl.width, canvasEl.height);
+        }
+
+        function setupEvents() {
+          const updateMousePosition = (x, y) => {
+            pointer.tX = x;
+            pointer.tY = y;
+          };
+
+          window.addEventListener("pointermove", (e) => updateMousePosition(e.clientX, e.clientY), {
+            passive: true,
+          });
+          window.addEventListener(
+            "touchmove",
+            (e) => {
+              if (!e.targetTouches?.length) return;
+              updateMousePosition(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
+            },
+            { passive: true }
+          );
+          window.addEventListener("click", (e) => updateMousePosition(e.clientX, e.clientY), {
+            passive: true,
+          });
+        }
+      })();
+    </script>
+
+    <!-- Form Handling Script -->
+    <script>
+      (function() {
+        const form = document.getElementById('signupForm');
+        const emailInput = document.getElementById('email');
+        const successMessage = document.getElementById('successMessage');
+
+        if (!form || !emailInput || !successMessage) return;
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+
+          // Basic email validation
+          const email = emailInput.value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          if (!emailRegex.test(email)) {
+            emailInput.focus();
+            emailInput.setAttribute('aria-invalid', 'true');
+
+            // Visual feedback for invalid email
+            emailInput.style.borderColor = 'var(--infrared-core)';
+            setTimeout(() => {
+              emailInput.style.borderColor = '';
+            }, 2000);
+            return;
+          }
+
+          emailInput.setAttribute('aria-invalid', 'false');
+
+          // Simulate form submission (replace with actual API call)
+          console.log('Email submitted:', email);
+
+          // Show success message
+          successMessage.classList.add('show');
+          form.querySelector('.formGroup').style.display = 'none';
+
+          // Optional: Send to your backend
+          // fetch('/api/subscribe', {
+          //   method: 'POST',
+          //   headers: { 'Content-Type': 'application/json' },
+          //   body: JSON.stringify({ email: email })
+          // });
+        });
+
+        // Remove validation error on input
+        emailInput.addEventListener('input', function() {
+          emailInput.removeAttribute('aria-invalid');
+          emailInput.style.borderColor = '';
+        });
+      })();
+    </script>
+  </body>
+</html>
+
