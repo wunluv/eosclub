@@ -89,3 +89,27 @@ The landing page includes comprehensive favicon and app icon support across all 
 - [`assets/site.webmanifest`](assets/site.webmanifest) — PWA manifest with branding
 - [`assets/web-app-manifest-192x192.png`](assets/web-app-manifest-192x192.png) — Android maskable icon
 - [`assets/web-app-manifest-512x512.png`](assets/web-app-manifest-512x512.png) — Android maskable icon (large)
+
+### 📧 Email Collection (Google Apps Script)
+
+The landing page uses **Google Apps Script** to capture email signups directly to a Google Spreadsheet.
+
+**Setup Required:**
+1. Create a Google Spreadsheet for collecting emails
+2. Add the script from [`google-apps-script.js`](google-apps-script.js) via Extensions > Apps Script
+3. Deploy as Web App with "Anyone" access permissions
+4. Update the Web App URL in [`index.html`](index.html) line 748
+
+**Files:**
+- [`google-apps-script.js`](google-apps-script.js) — Server-side email capture script
+- [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md) — Complete deployment instructions
+- [`TROUBLESHOOTING_403_ERROR.md`](TROUBLESHOOTING_403_ERROR.md) — Fix common permission issues
+
+**Features:**
+- ✅ CORS-free email submissions
+- ✅ Server-side validation
+- ✅ Automatic timestamps
+- ✅ localStorage backup
+- ✅ Tracks user agent data
+
+See [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md) for full setup instructions.
