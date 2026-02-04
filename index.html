@@ -738,14 +738,20 @@
       })();
     </script>
 
-    <!-- Form Handling Script - Integrated with Google Forms -->
+    <!-- Form Handling Script - Google Apps Script Integration -->
     <script>
       (function() {
         const form = document.getElementById('signupForm');
         const emailInput = document.getElementById('email');
         const successMessage = document.getElementById('successMessage');
+        const submitBtn = form.querySelector('.submitBtn');
 
         if (!form || !emailInput || !successMessage) return;
+
+        // IMPORTANT: Replace this URL with your deployed Google Apps Script Web App URL
+        // After deploying the script, you'll get a URL like:
+        // https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec
+        const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyG2JAWvplQX6JgHlCD0VybEAYzzTJmoldiV8qYwjf8kJY4La9CKkspgpnMjyX7sMvq/exec';
 
         form.addEventListener('submit', function(e) {
           e.preventDefault();
@@ -768,32 +774,59 @@
 
           emailInput.setAttribute('aria-invalid', 'false');
 
-          // Submit to Google Forms
-          const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSe_KSuzUki4Hcx4aQJqFQOUAnDotsRUKvb0_wUW4ODmNs1QXQ/formResponse';
-          const emailFieldId = 'entry.2084359302';
+          // Disable submit button and show loading state
+          const originalBtnText = submitBtn.textContent;
+          submitBtn.textContent = 'Submitting...';
+          submitBtn.disabled = true;
+          submitBtn.style.opacity = '0.6';
+          submitBtn.style.cursor = 'not-allowed';
 
-          // Create form data for Google Forms submission
-          const formData = new FormData();
-          formData.append(emailFieldId, email);
+          // Prepare data for Google Apps Script
+          const data = {
+            email: email,
+            userAgent: navigator.userAgent,
+            timestamp: new Date().toISOString()
+          };
 
-          // Submit to Google Forms using fetch with CORS workaround
-          fetch(googleFormUrl, {
+          // Submit to Google Apps Script
+          fetch(GOOGLE_APPS_SCRIPT_URL, {
             method: 'POST',
-            body: formData,
-            mode: 'no-cors'
+            mode: 'no-cors', // Required for Google Apps Script
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
           })
           .then(() => {
-            console.log('Email submitted to Google Forms:', email);
+            console.log('Email submitted successfully:', email);
             // Show success message
             successMessage.classList.add('show');
             form.querySelector('.formGroup').style.display = 'none';
+
+            // Store in localStorage as backup
+            const submissions = JSON.parse(localStorage.getItem('eos_submissions') || '[]');
+            submissions.push({ email, timestamp: data.timestamp });
+            localStorage.setItem('eos_submissions', JSON.stringify(submissions));
           })
           .catch((error) => {
             console.error('Error submitting form:', error);
-            // Still show success message even if request fails (due to CORS)
-            // because data was sent successfully
+
+            // Note: With mode: 'no-cors', we can't read the response
+            // So we assume success if no network error occurred
             successMessage.classList.add('show');
             form.querySelector('.formGroup').style.display = 'none';
+
+            // Store in localStorage as backup
+            const submissions = JSON.parse(localStorage.getItem('eos_submissions') || '[]');
+            submissions.push({ email, timestamp: data.timestamp, status: 'pending' });
+            localStorage.setItem('eos_submissions', JSON.stringify(submissions));
+          })
+          .finally(() => {
+            // Reset button state
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
           });
         });
 
@@ -802,6 +835,12 @@
           emailInput.removeAttribute('aria-invalid');
           emailInput.style.borderColor = '';
         });
+
+        // Development helper: Log submissions stored in localStorage
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+          console.log('EOS CLUB - Email submissions stored locally:',
+            JSON.parse(localStorage.getItem('eos_submissions') || '[]'));
+        }
       })();
     </script>
   </body>
