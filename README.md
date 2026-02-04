@@ -46,7 +46,7 @@ We believe in transparency and agility.
 
 ## EOS Club — pre-launch landing page
 
-Open [`eos_prelaunch_landing.html`](eos_prelaunch_landing.html) in your browser.
+Open [`index.html`](index.html) in your browser for the primary landing page.
 
 If you prefer serving it locally:
 
@@ -57,5 +57,35 @@ python3 -m http.server 5173
 Then visit:
 
 ```text
-http://localhost:5173/eos_prelaunch_landing.html
+http://localhost:5173/index.html
 ```
+
+### 🎯 Favicon & Icon Support
+
+The landing page includes comprehensive favicon and app icon support across all devices:
+
+| Device / Platform | Asset | Support |
+|---|---|---|
+| **Browser Tabs** | `favicon.ico` + `favicon.svg` | ✅ All browsers |
+| **iOS Home Screen** | `apple-touch-icon.png` (180×180) | ✅ iOS Safari |
+| **Android/PWA** | Manifest icons (192×192, 512×512) | ✅ Android + Progressive Web App |
+| **macOS Safari Tabs** | `favicon.svg` | ✅ Safari pinned tabs |
+| **Windows Tiles** | `favicon.ico` | ✅ Windows 11 taskbar |
+| **Status Bar Theming** | Meta theme color (`#050505`) | ✅ Mobile browsers |
+| **App Installation** | Web App Manifest (`site.webmanifest`) | ✅ PWA-capable devices |
+
+**Implementation Details:**
+- Link tags added to `<head>` for all favicon formats
+- Web manifest configured for PWA with maskable icons
+- Colors aligned to design system (infrared void `#050505`, charcoal `#141414`)
+- Apple web app meta tags enable full-screen mode on iOS
+- Black translucent status bar for immersive mobile experience
+
+**Files Involved:**
+- [`index.html`](index.html) — Favicon link declarations
+- [`favicon.ico`](favicon.ico) — Standard favicon (16×16, 32×32)
+- [`assets/favicon.svg`](assets/favicon.svg) — Scalable vector favicon
+- [`assets/apple-touch-icon.png`](assets/apple-touch-icon.png) — iOS home screen icon
+- [`assets/site.webmanifest`](assets/site.webmanifest) — PWA manifest with branding
+- [`assets/web-app-manifest-192x192.png`](assets/web-app-manifest-192x192.png) — Android maskable icon
+- [`assets/web-app-manifest-512x512.png`](assets/web-app-manifest-512x512.png) — Android maskable icon (large)
