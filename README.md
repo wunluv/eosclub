@@ -60,6 +60,32 @@ Then visit:
 http://localhost:5173/index.html
 ```
 
+### 🌐 Bilingual Support (German/English)
+
+The landing page includes fully accessible bilingual support with automatic language detection:
+
+**Features:**
+- ✅ Language toggle in top-right corner: "Deutsch || English"
+- ✅ Automatic browser language detection on first visit
+- ✅ Persistent language preference via `localStorage`
+- ✅ Instant language switching without page reload
+- ✅ Preserves all animations and state during switch
+- ✅ Full WCAG 2.1 AA accessibility compliance
+
+**Technical Implementation:**
+- `<html lang="de|en">` attribute updated dynamically
+- Semantic `<button>` elements with `aria-label` and `aria-pressed` states
+- Screen reader announcements when language changes
+- Data-i18n attributes for content translation
+- Keyboard navigation (Tab, Enter, Space keys)
+
+**Languages Supported:**
+- **German (de):** Default language; Cologne-focused copy with regional messaging
+- **English (en):** Full English translations with matching messaging
+
+**Files:**
+- [`index.html`](index.html) — Language toggle UI and i18n JavaScript module
+
 ### 🎯 Favicon & Icon Support
 
 The landing page includes comprehensive favicon and app icon support across all devices:

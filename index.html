@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -154,8 +154,8 @@
       }
 
       .logo {
-        width: clamp(56px, 12vw, 80px);
-        height: clamp(56px, 12vw, 80px);
+        width: clamp(200px, 45vw, 360px);
+        height: auto;
         filter: drop-shadow(0 0 24px rgba(255, 46, 0, 0.4));
         transition: transform 0.3s ease, filter 0.3s ease;
       }
@@ -163,29 +163,6 @@
       .logo:hover {
         transform: scale(1.05);
         filter: drop-shadow(0 0 32px rgba(255, 46, 0, 0.6));
-      }
-
-      .brandName {
-        font-size: clamp(48px, 10vw, 88px);
-        line-height: 1;
-        letter-spacing: -0.02em;
-        margin: 0 0 clamp(12px, 2vw, 20px) 0;
-        font-weight: 800;
-        animation: fadeInUp 0.8s ease-out 0.1s both;
-      }
-
-      /* Red gradient for "EOS" only */
-      .brandName .eos {
-        background: linear-gradient(135deg, var(--infrared-core) 0%, var(--infrared-warmth) 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 20px rgba(255, 46, 0, 0.2));
-      }
-
-      /* White for "CLUB" */
-      .brandName .club {
-        color: #ffffff;
       }
 
       .tagline {
@@ -426,6 +403,68 @@
           border-width: 2px;
         }
       }
+
+      /* Language Switcher */
+      .langSwitcher {
+        position: fixed;
+        top: 24px;
+        right: 24px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: rgba(20, 20, 20, 0.7);
+        padding: 8px 16px;
+        border-radius: 100px;
+        border: 1px solid rgba(255, 46, 0, 0.2);
+        backdrop-filter: blur(8px);
+      }
+
+      .langBtn {
+        background: none;
+        border: none;
+        color: var(--oishi-ash);
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        font-family: inherit;
+      }
+
+      .langBtn:hover {
+        color: var(--oishi-mist);
+      }
+
+      .langBtn:focus-visible {
+        outline: 2px solid rgba(255, 46, 0, 0.5);
+        outline-offset: 2px;
+      }
+
+      .langBtn.active {
+        color: var(--infrared-peach);
+        background: rgba(255, 46, 0, 0.1);
+      }
+
+      .langSeparator {
+        color: var(--oishi-ash);
+        opacity: 0.5;
+      }
+
+      @media (max-width: 420px) {
+        .langSwitcher {
+          top: 16px;
+          right: 16px;
+          padding: 6px 12px;
+          gap: 8px;
+        }
+
+        .langBtn {
+          font-size: 12px;
+          padding: 3px 6px;
+        }
+      }
     </style>
   </head>
 
@@ -433,42 +472,56 @@
     <canvas id="neuro" aria-hidden="true"></canvas>
     <div class="heat" aria-hidden="true"></div>
 
+    <!-- Language Switcher -->
+    <nav class="langSwitcher" role="navigation" aria-label="Language selection">
+      <button
+        class="langBtn active"
+        data-lang="de"
+        aria-label="Switch to German"
+        aria-pressed="true">
+        Deutsch
+      </button>
+      <span class="langSeparator" aria-hidden="true">||</span>
+      <button
+        class="langBtn"
+        data-lang="en"
+        aria-label="Switch to English"
+        aria-pressed="false">
+        English
+      </button>
+    </nav>
+
     <main class="app" role="main">
       <article class="hero">
-        <!-- Logo -->
+        <!-- Logo with Brand Name -->
         <div class="logoWrapper">
           <img
             class="logo"
-            src="assets/eos-logo-export_bm-red.svg"
-            alt="EOS Club Logo - Red circular emblem"
-            width="80"
-            height="80"
+            src="assets/eos-logo-export_wb-red.png"
+            alt="EOS CLUB Logo"
+            width="360"
+            height="360"
           />
         </div>
 
-        <!-- Brand Name with Red "EOS" -->
-        <h1 class="brandName font-display">
-          <span class="eos">EOS</span> <span class="eos">CLUB</span>
-        </h1>
+         <!-- Main Tagline -->
+         <p class="tagline" data-i18n="tagline">
+           Dein neuer Club in Köln
+         </p>
 
-        <!-- Main Tagline -->
-        <p class="tagline">
-          A Wellness Community. Sweat in a new light.
-        </p>
+         <!-- Description -->
+         <p class="description" data-i18n="description-main">
+           Infrarot Hot: Yoga, Pilates, Barre, Tai Chi, Calisthenics & Functional Workouts
+         </p>
+         <p class="description" data-i18n="description-sub" style="margin-top: 16px; font-size: clamp(16px, 3vw, 20px); font-weight: 600;">
+           Eos, dein Lifestyleclub für Bewegung.
+         </p>
 
-        <!-- Description -->
-        <p class="description">
-          Pilates, Barre, Calisthenics - (hot) Yoga? <br />
-          Or just hang out with a barista brewed coffee.
-          <br /><strong>Doesn't matter.</strong>
-          <br />Come for the wellness. Stay for the <strong> community</strong>.
-        </p>
-
-        <!-- Launch Info Badge -->
-        <div class="launchInfo" role="status" aria-live="polite">
-          <span class="launchIcon" aria-hidden="true"></span>
-          <span class="launchText">Launching April • 10% opening discount for list members</span>
-        </div>
+         <!-- Launch Info Badge -->
+         <div class="launchInfo" role="status" aria-live="polite">
+           <span class="launchIcon" aria-hidden="true"></span>
+           <span class="launchText" data-i18n="launch-text">Launch im Frühjahr 2026 - 20% Rabatt und Goodie für Gelistete.</span>
+         </div>
 
         <!-- Email Signup Form -->
         <form
@@ -477,38 +530,41 @@
           aria-label="Email signup form"
           novalidate
         >
-          <div class="formGroup">
-            <label for="email" class="sr-only">Email address</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              class="emailInput"
-              placeholder="Enter your email"
-              required
-              aria-required="true"
-              aria-describedby="emailHelp"
-              autocomplete="email"
-            />
-            <button
-              type="submit"
-              class="submitBtn"
-              aria-label="Join the waiting list"
-            >
-              I'm in!
-            </button>
-          </div>
-          <span id="emailHelp" class="sr-only">
-            Enter your email to join our wellness community and receive updates
-          </span>
-          <div
-            class="successMessage"
-            id="successMessage"
-            role="alert"
-            aria-live="polite"
-          >
-            ✨ Welcome to the community! We'll keep you updated on launch details.
-          </div>
+           <div class="formGroup">
+             <label for="email" class="sr-only" data-i18n="email-label">Deine Mailadresse</label>
+             <input
+               type="email"
+               id="email"
+               name="email"
+               class="emailInput"
+               placeholder="Deine Mailadresse"
+               data-i18n-placeholder="email-placeholder"
+               required
+               aria-required="true"
+               aria-describedby="emailHelp"
+               autocomplete="email"
+             />
+             <button
+               type="submit"
+               class="submitBtn"
+               data-i18n="submit-btn"
+               aria-label="Join the waiting list"
+             >
+               Im In!
+             </button>
+           </div>
+           <span id="emailHelp" class="sr-only" data-i18n="email-help">
+             Gib deine E-Mail ein, um unsere Wellness-Community beizutreten und Updates zu erhalten
+           </span>
+           <div
+             class="successMessage"
+             id="successMessage"
+             role="alert"
+             aria-live="polite"
+             data-i18n="success-message"
+           >
+             ✨ Willkommen in der Community! Wir halten dich auf dem Laufenden.
+           </div>
         </form>
       </article>
     </main>
@@ -734,6 +790,143 @@
           window.addEventListener("click", (e) => updateMousePosition(e.clientX, e.clientY), {
             passive: true,
           });
+        }
+      })();
+    </script>
+
+    <!-- Internationalization Script -->
+    <script>
+      (function() {
+        // Translation object with all content in German (de) and English (en)
+        const translations = {
+          de: {
+            tagline: "Dein neuer Club in Köln",
+            'description-main': "Infrarot Hot: Yoga, Pilates, Barre, Tai Chi, Calisthenics & Functional Workouts",
+            'description-sub': "Eos, dein Lifestyleclub für Bewegung.",
+            'launch-text': "Launch im Frühjahr 2026 - 20% Rabatt und Goodie für Gelistete.",
+            'email-label': "Deine Mailadresse",
+            'email-placeholder': "Deine Mailadresse",
+            'email-help': "Gib deine E-Mail ein, um unsere Wellness-Community beizutreten und Updates zu erhalten",
+            'submit-btn': "Im In!",
+            'success-message': "✨ Willkommen in der Community! Wir halten dich auf dem Laufenden."
+          },
+          en: {
+            tagline: "Your new club in Cologne",
+            'description-main': "Infrared Hot: Yoga, Pilates, Barre, Tai Chi, Calisthenics & Functional Workouts",
+            'description-sub': "Eos, your lifestyle club for movement.",
+            'launch-text': "Launching Spring 2026 - 20% discount and goodie for registered users.",
+            'email-label': "Your email address",
+            'email-placeholder': "Your email address",
+            'email-help': "Enter your email to join our wellness community and receive updates",
+            'submit-btn': "Im In!",
+            'success-message': "✨ Welcome to the community! We'll keep you updated on launch details."
+          }
+        };
+
+        // Initialize i18n
+        function initI18n() {
+          const htmlElement = document.documentElement;
+          const savedLang = localStorage.getItem('eosclub_lang');
+
+          // Detect language: saved > browser > default to German
+          let lang = 'de';
+          if (savedLang && ['de', 'en'].includes(savedLang)) {
+            lang = savedLang;
+          } else {
+            const browserLang = navigator.language.split('-')[0];
+            lang = ['de', 'en'].includes(browserLang) ? browserLang : 'de';
+          }
+
+          setLanguage(lang);
+        }
+
+        // Set language and update DOM
+        function setLanguage(lang) {
+          const htmlElement = document.documentElement;
+          htmlElement.lang = lang;
+          localStorage.setItem('eosclub_lang', lang);
+
+          // Update active button states
+          document.querySelectorAll('.langBtn').forEach(btn => {
+            const btnLang = btn.getAttribute('data-lang');
+            if (btnLang === lang) {
+              btn.classList.add('active');
+              btn.setAttribute('aria-pressed', 'true');
+            } else {
+              btn.classList.remove('active');
+              btn.setAttribute('aria-pressed', 'false');
+            }
+          });
+
+          // Update all translatable content
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+              el.textContent = translations[lang][key];
+            }
+          });
+
+          // Update all placeholder translations
+          document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+            const key = el.getAttribute('data-i18n-placeholder');
+            if (translations[lang] && translations[lang][key]) {
+              el.placeholder = translations[lang][key];
+            }
+          });
+
+          // Update label text in sr-only (screen reader only)
+          document.querySelectorAll('label[data-i18n]').forEach(label => {
+            const key = label.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+              label.textContent = translations[lang][key];
+            }
+          });
+
+          // Announce change to screen readers
+          announceLanguageChange(lang);
+        }
+
+        // Announce language change to assistive technologies
+        function announceLanguageChange(lang) {
+          const langName = lang === 'de' ? 'Deutsch' : 'English';
+          const announcement = document.createElement('div');
+          announcement.setAttribute('role', 'status');
+          announcement.setAttribute('aria-live', 'polite');
+          announcement.setAttribute('aria-atomic', 'true');
+          announcement.className = 'sr-only';
+          announcement.textContent = `Sprache geändert zu ${langName}`;
+          document.body.appendChild(announcement);
+
+          setTimeout(() => announcement.remove(), 1000);
+        }
+
+        // Setup language switcher buttons
+        function setupLanguageSwitcher() {
+          document.querySelectorAll('.langBtn').forEach(btn => {
+            btn.addEventListener('click', () => {
+              const lang = btn.getAttribute('data-lang');
+              setLanguage(lang);
+            });
+
+            // Keyboard support
+            btn.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                btn.click();
+              }
+            });
+          });
+        }
+
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            initI18n();
+            setupLanguageSwitcher();
+          });
+        } else {
+          initI18n();
+          setupLanguageSwitcher();
         }
       })();
     </script>
