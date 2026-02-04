@@ -135,42 +135,49 @@
         text-align: center;
       }
 
-      .logoWrapper {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: clamp(20px, 4vw, 32px);
-        animation: fadeInUp 0.8s ease-out;
-      }
-
-      .logo {
-        width: clamp(56px, 12vw, 80px);
-        height: clamp(56px, 12vw, 80px);
-        filter: drop-shadow(0 0 24px rgba(255, 46, 0, 0.4));
-        transition: transform 0.3s ease, filter 0.3s ease;
-      }
-
-      .logo:hover {
-        transform: scale(1.05);
-        filter: drop-shadow(0 0 32px rgba(255, 46, 0, 0.6));
-      }
-
       .brandName {
         font-size: clamp(48px, 10vw, 88px);
         line-height: 1;
         letter-spacing: -0.02em;
         margin: 0 0 clamp(12px, 2vw, 20px) 0;
         font-weight: 800;
-        animation: fadeInUp 0.8s ease-out 0.1s both;
+        animation: fadeInUp 0.8s ease-out both;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(8px, 2vw, 16px);
+        flex-wrap: wrap;
       }
 
-      /* Red gradient for "EOS" only */
-      .brandName .eos {
+      /* E and S in red gradient */
+      .brandName .eos-letter {
         background: linear-gradient(135deg, var(--infrared-core) 0%, var(--infrared-warmth) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
         filter: drop-shadow(0 0 20px rgba(255, 46, 0, 0.2));
+      }
+
+      /* Logo O replacement */
+      .logoO {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: clamp(48px, 10vw, 80px);
+        height: clamp(48px, 10vw, 80px);
+        flex-shrink: 0;
+        filter: drop-shadow(0 0 24px rgba(255, 46, 0, 0.4));
+        transition: transform 0.3s ease, filter 0.3s ease;
+      }
+
+      .logoO:hover {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 32px rgba(255, 46, 0, 0.6));
+      }
+
+      .logoO svg {
+        width: 100%;
+        height: 100%;
       }
 
       /* White for "CLUB" */
@@ -184,7 +191,7 @@
         margin: 0 0 clamp(16px, 3vw, 24px) 0;
         font-weight: 600;
         color: var(--oishi-mist);
-        animation: fadeInUp 0.8s ease-out 0.2s both;
+        animation: fadeInUp 0.8s ease-out 0.1s both;
       }
 
       .description {
@@ -193,7 +200,7 @@
         font-size: clamp(15px, 2.5vw, 18px);
         line-height: 1.65;
         color: color-mix(in srgb, var(--oishi-mist) 85%, var(--oishi-ash));
-        animation: fadeInUp 0.8s ease-out 0.3s both;
+        animation: fadeInUp 0.8s ease-out 0.2s both;
       }
 
       .description strong {
@@ -212,7 +219,7 @@
         background: linear-gradient(135deg, rgba(255, 46, 0, 0.15), rgba(255, 138, 0, 0.08));
         backdrop-filter: blur(8px);
         box-shadow: var(--shadow-glow);
-        animation: fadeInUp 0.8s ease-out 0.4s both, pulse 3s ease-in-out 2s infinite;
+        animation: fadeInUp 0.8s ease-out 0.3s both, pulse 3s ease-in-out 2s infinite;
       }
 
       .launchIcon {
@@ -238,7 +245,7 @@
         gap: 16px;
         max-width: 480px;
         margin: 0 auto;
-        animation: fadeInUp 0.8s ease-out 0.5s both;
+        animation: fadeInUp 0.8s ease-out 0.4s both;
       }
 
       .formGroup {
@@ -370,7 +377,8 @@
       @media (prefers-reduced-motion: reduce) {
         .heat::before,
         .launchInfo,
-        .launchIcon {
+        .launchIcon,
+        .logoO {
           animation: none;
         }
         canvas#neuro {
@@ -397,6 +405,11 @@
           width: 100%;
           padding: 18px 40px;
         }
+
+        .brandName {
+          flex-direction: column;
+          gap: clamp(4px, 1vw, 8px);
+        }
       }
 
       @media (max-width: 420px) {
@@ -406,6 +419,10 @@
 
         .description {
           font-size: 15px;
+        }
+
+        .brandName {
+          gap: 4px;
         }
       }
 
@@ -425,33 +442,58 @@
 
     <main class="app" role="main">
       <article class="hero">
-        <!-- Logo -->
-        <div class="logoWrapper">
-          <img
-            class="logo"
-            src="assets/eos-logo-export_bm-red.svg"
-            alt="EOS Club Logo - Red circular emblem"
-            width="80"
-            height="80"
-          />
-        </div>
-
-        <!-- Brand Name with Red "EOS" -->
+        <!-- Brand Name with Logo O -->
         <h1 class="brandName font-display">
-          <span class="eos">EOS</span> <span class="eos">CLUB</span>
+          <span class="eos-letter">E</span>
+          <div class="logoO" role="img" aria-label="EOS Club logo">
+            <svg id="EOS_O_Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+              <defs>
+                <style>
+                  .eos-core {
+                    fill: #ff2e00;
+                  }
+                  .eos-accent {
+                    fill: #ff8a00;
+                  }
+                </style>
+                <radialGradient id="infraredGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" style="stop-color:#ff5c00;stop-opacity:1" />
+                  <stop offset="100%" style="stop-color:#ff2e00;stop-opacity:0.8" />
+                </radialGradient>
+                <filter id="glowEffect">
+                  <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                  <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+              <circle cx="80" cy="80" r="75" fill="none" stroke="url(#infraredGlow)" stroke-width="2" opacity="0.6" filter="url(#glowEffect)"/>
+              <circle cx="80" cy="80" r="65" class="eos-core" opacity="0.9"/>
+              <circle cx="80" cy="80" r="55" fill="none" stroke="url(#infraredGlow)" stroke-width="3" opacity="0.7"/>
+              <circle cx="80" cy="80" r="35" class="eos-accent" opacity="0.85"/>
+              <circle cx="80" cy="80" r="28" fill="none" stroke="#ffd4b8" stroke-width="2" opacity="0.6"/>
+              <circle cx="80" cy="80" r="50" fill="none" stroke="#ff8a00" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+              <circle cx="80" cy="80" r="8" class="eos-core" opacity="0.95"/>
+            </svg>
+          </div>
+          <span class="eos-letter">S</span> <span class="club">CLUB</span>
         </h1>
 
         <!-- Main Tagline -->
         <p class="tagline">
-          A Wellness Community. Sweat in a new light.
+          A Wellness Community
+        </p>
+
+        <!-- Subtagline -->
+        <p class="description" style="margin-bottom: clamp(16px, 3vw, 24px);">
+          Sweat in a new light.
         </p>
 
         <!-- Description -->
         <p class="description">
-          Pilates, Barre, Calisthenics - (hot) Yoga? <br />
-          Or just hang out with a barista brewed coffee.
-          <br /><strong>Doesn't matter.</strong>
-          <br />Come for the wellness. Stay for the <strong> community</strong>.
+          Pilates, Barre, Calisthenics, Yoga? Or just hang out with a barista brewed coffee.
+          <strong>Doesn't matter.</strong> Come for the wellness. Stay for the community.
         </p>
 
         <!-- Launch Info Badge -->
@@ -782,4 +824,3 @@
     </script>
   </body>
 </html>
-

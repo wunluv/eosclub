@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="EOS_O_Logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160">
+  <defs>
+    <style>
+      .eos-core {
+        fill: #ff2e00;
+      }
+      .eos-accent {
+        fill: #ff8a00;
+      }
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .eos-ring {
+        animation: rotate 8s linear infinite;
+        transform-origin: 80px 80px;
+      }
+    </style>
+    <radialGradient id="infraredGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff5c00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ff2e00;stop-opacity:0.8" />
+    </radialGradient>
+    <filter id="glowEffect">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Outer glow circle -->
+  <circle cx="80" cy="80" r="75" fill="none" stroke="url(#infraredGlow)" stroke-width="2" opacity="0.6" filter="url(#glowEffect)"/>
+
+  <!-- Main circular body -->
+  <circle cx="80" cy="80" r="65" class="eos-core" opacity="0.9"/>
+
+  <!-- Inner accent ring -->
+  <circle cx="80" cy="80" r="55" fill="none" stroke="url(#infraredGlow)" stroke-width="3" opacity="0.7"/>
+
+  <!-- Central heat core -->
+  <circle cx="80" cy="80" r="35" class="eos-accent" opacity="0.85"/>
+
+  <!-- Inner pulse circle -->
+  <circle cx="80" cy="80" r="28" fill="none" stroke="#ffd4b8" stroke-width="2" opacity="0.6"/>
+
+  <!-- Decorative rotating ring -->
+  <g class="eos-ring">
+    <circle cx="80" cy="80" r="50" fill="none" stroke="#ff8a00" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,5"/>
+  </g>
+
+  <!-- Center dot for focus -->
+  <circle cx="80" cy="80" r="8" class="eos-core" opacity="0.95"/>
+</svg>
