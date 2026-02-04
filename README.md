@@ -113,3 +113,72 @@ The landing page uses **Google Apps Script** to capture email signups directly t
 - ✅ Tracks user agent data
 
 See [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md) for full setup instructions.
+
+
+### The following is related to phase #1 for the temporary landing page
+
+
+ # 🎨 Landing Page Design & Visual Hierarchy
+
+**Maintained the stunning neural glow background** with WebGL shader animation that responds to mouse movement, using the infrared color palette from [`design_system_v2.html`](design_system_v2.html)
+
+**Clean, centered layout** with:
+- Large, prominent red EOS logo with glow effect
+- "EOS CLUB" in gradient text with fade-in animations
+- Clear tagline: "A Wellness Community. Sweat in a new light."
+- Engaging description about activities (Pilates, Barre, etc.)
+- Launch info badge with pulsing animation
+- Prominent email signup form
+
+## ♿ Accessibility Features
+
+- **Semantic HTML5**: `<main>`, `<article>`, proper heading hierarchy
+- **ARIA labels**: Form inputs, buttons, live regions for status updates
+- **Screen reader support**: `.sr-only` class for hidden but accessible labels
+- **Keyboard navigation**: Proper focus states with visible outlines
+- **Form validation**: Client-side email validation with clear error feedback
+- **Reduced motion support**: Respects `prefers-reduced-motion` preference
+- **High contrast mode**: Enhanced borders for better visibility
+
+## 📱 Responsive Design
+
+- Fluid typography using `clamp()` for perfect scaling
+- Mobile-first approach with breakpoints at 640px and 420px
+- Stacked form layout on mobile devices
+- Touch-friendly button sizes (minimum 44x44px)
+- Flexible spacing with viewport-relative units
+
+## 🎯 Information Architecture
+
+1. **Visual anchor**: Logo establishes brand identity
+2. **Primary message**: Brand name and tagline
+3. **Value proposition**: Description of offerings
+4. **Urgency/incentive**: Launch date and discount
+5. **Call-to-action**: Email signup form
+6. **Feedback**: Success message after submission
+
+## ✨ Interactive Features
+
+- Smooth fade-in animations for all content
+- Pulsing launch badge to draw attention
+- Hover effects on logo and button
+- Live email validation with visual feedback
+- Success message replaces form after submission
+- Touch and pointer event support for all devices
+
+## 🚀 Performance
+
+- Efficient WebGL rendering with reduced pixel ratio
+- CSS animations using `transform` and `opacity` for GPU acceleration
+- Lazy animation start (animations begin after load)
+- Fallback for browsers without WebGL support
+
+## 📊 Standards Compliance
+
+- Valid HTML5 semantic markup
+- WCAG 2.1 AA compliant contrast ratios
+- Proper meta tags for SEO and social sharing
+- Progressive enhancement (works without JavaScript)
+- Cross-browser compatible (modern browsers)
+
+The form currently logs submissions to console. Replace the commented API endpoint with your actual backend to capture email addresses.
