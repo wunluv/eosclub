@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Geist Font (Vercel) via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
 
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
@@ -21,8 +24,8 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        'serif': ['Merriweather', 'serif'],
-                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Capitolina', 'Merriweather', 'serif'],
+                        'sans': ['Geist Sans', 'Inter', 'sans-serif'],
                     },
                     colors: {
                         'dawn': {
@@ -34,6 +37,19 @@
                             'night': '#1F2933',
                             'light': '#F0EAD6',
                         },
+                        'infrared': {
+                            'core': '#FF2E00',    /* The source of the heat */
+                            'glow': '#FF5C00',    /* The spread */
+                            'warmth': '#FF8A00',  /* The edge */
+                        },
+                        'zen': {
+                            'black': '#09090B',   /* Deepest black for inputs */
+                            'charcoal': '#27272A',
+                        }
+                    },
+                    backgroundImage: {
+                        'dawn-gradient': 'linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%)',
+                        'infrared-gradient': 'linear-gradient(135deg, #FF2E00 0%, #FF8A00 100%)',
                     }
                 }
             }
@@ -42,12 +58,12 @@
 
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Geist Sans', 'Inter', sans-serif;
             background: #F9F9F7;
         }
 
         h1, h2, h3, h4, h5, h6, .font-display {
-            font-family: 'Merriweather', serif;
+            font-family: 'Capitolina', 'Merriweather', serif;
         }
 
         /* Grain texture overlay */
@@ -94,6 +110,11 @@
         /* Dawn gradient */
         .dawn-gradient {
             background: linear-gradient(135deg, #2F3A40 0%, #C57B57 50%, #D6C6A6 100%);
+        }
+
+        /* Infrared gradient (High Energy) */
+        .infrared-gradient {
+            background: linear-gradient(135deg, #FF2E00 0%, #FF8A00 100%);
         }
 
         /* EOS warm gradients (from gradient_palette.json + 14_bg_gradient.jpg) */
@@ -276,7 +297,7 @@
                     <div class="space-y-6">
                         <div class="border-b border-dawn-concrete pb-6">
                             <h1 class="text-5xl font-bold text-dawn-night mb-2">Display heading</h1>
-                            <p class="text-sm text-dawn-clay font-mono">text-5xl font-bold • Merriweather</p>
+                            <p class="text-sm text-dawn-clay font-mono">text-5xl font-bold • Capitolina</p>
                         </div>
                         <div class="border-b border-dawn-concrete pb-6">
                             <h1 class="text-4xl font-bold text-dawn-night mb-2">Heading 1</h1>
@@ -312,7 +333,7 @@
                     <div class="space-y-6">
                         <div>
                             <p class="text-lg text-dawn-night mb-2" style="line-height: 1.75;">Large body text for emphasis and readability. Movement that feels good. Spaces that breathe.</p>
-                            <p class="text-sm text-dawn-clay font-mono">text-lg • Inter • line-height: 1.75</p>
+                            <p class="text-sm text-dawn-clay font-mono">text-lg • Geist Sans • line-height: 1.75</p>
                         </div>
                         <div>
                             <p class="text-base text-dawn-night mb-2" style="line-height: 1.75;">Regular body text is optimized for comfortable reading. This is about healthy living, not self-optimization. You don't have to prove anything. You're allowed to arrive.</p>
@@ -352,7 +373,7 @@
             <section id="colors" class="mb-24">
                 <div class="mb-8">
                     <h2 class="text-4xl font-bold text-dawn-night mb-3">Color palette</h2>
-                    <p class="text-dawn-slate">Atmospheric sunrise. Nordic dawn, not tropical.</p>
+                    <p class="text-dawn-slate">Atmospheric sunrise. Nordic dawn base, Infrared accents.</p>
                 </div>
 
                 <!-- Dawn Colors -->
@@ -414,6 +435,38 @@
                             </div>
                             <p class="text-sm font-semibold text-dawn-night">Night slate</p>
                             <p class="text-xs font-mono text-dawn-clay">dawn-night • Primary text</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Infrared Accents (New) -->
+                <div class="bg-zen-black rounded-2xl shadow-lg border border-zen-charcoal p-10 mb-6 grain-texture relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-infrared-core opacity-10 blur-[80px] rounded-full pointer-events-none"></div>
+                    
+                    <h3 class="text-2xl font-semibold text-white mb-2">Infrared Accents</h3>
+                    <p class="text-gray-400 mb-8 text-sm">High-energy tokens for "Hot" classes and urgent actions. Use sparingly.</p>
+                    
+                    <div class="grid grid-cols-3 gap-6 relative z-10">
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-infrared-core flex items-center justify-center shadow-[0_0_20px_rgba(255,46,0,0.4)]">
+                                <span class="text-xs font-mono text-white font-bold">#FF2E00</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Infrared Core</p>
+                            <p class="text-xs font-mono text-gray-500">infrared-core</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-infrared-glow flex items-center justify-center shadow-[0_0_20px_rgba(255,92,0,0.3)]">
+                                <span class="text-xs font-mono text-black font-bold">#FF5C00</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Infrared Glow</p>
+                            <p class="text-xs font-mono text-gray-500">infrared-glow</p>
+                        </div>
+                        <div class="space-y-2">
+                            <div class="h-32 rounded-xl bg-zen-black border border-zen-charcoal flex items-center justify-center">
+                                <span class="text-xs font-mono text-gray-500">#09090B</span>
+                            </div>
+                            <p class="text-sm font-semibold text-white">Zen Black</p>
+                            <p class="text-xs font-mono text-gray-500">zen-black (Inputs)</p>
                         </div>
                     </div>
                 </div>
@@ -695,6 +748,23 @@
                             </div>
                             <p class="text-sm text-dawn-clay font-mono mt-3">dawn-gradient or bg-dawn-clay • Stable dynamics</p>
                         </div>
+                        
+                        <!-- High Energy Buttons (Infrared) -->
+                        <div>
+                            <h4 class="text-lg font-semibold text-dawn-night mb-4 flex items-center gap-2">
+                                <i data-feather="zap" class="w-4 h-4 text-infrared-core"></i>
+                                High Energy (Infrared)
+                            </h4>
+                            <div class="flex flex-wrap gap-4 items-center">
+                                <button class="px-6 py-3 infrared-gradient text-white rounded-xl font-bold hover:shadow-[0_0_20px_rgba(255,92,0,0.4)] hover:scale-105 transition-all duration-300 shadow-md">
+                                    Book Sweat Session
+                                </button>
+                                <button class="px-6 py-3 border-2 border-infrared-core text-infrared-core rounded-xl font-bold hover:bg-infrared-core hover:text-white transition-all duration-300">
+                                    View Hot Classes
+                                </button>
+                            </div>
+                            <p class="text-sm text-infrared-core font-mono mt-3">infrared-gradient • Use for urgent/hot actions</p>
+                        </div>
 
                         <!-- Secondary Buttons -->
                         <div>
@@ -734,12 +804,12 @@
             <section id="forms" class="mb-24">
                 <div class="mb-8">
                     <h2 class="text-4xl font-bold text-dawn-night mb-3">Form elements</h2>
-                    <p class="text-dawn-slate">Clarity and respect. No pressure to perform.</p>
+                    <p class="text-dawn-slate">Dark mode inputs ("Zen Black") on light backgrounds. High contrast focus states.</p>
                 </div>
 
                 <!-- Text Inputs -->
                 <div class="bg-white rounded-2xl shadow-sm border border-dawn-concrete p-10 mb-6 spotlight-card grain-texture">
-                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Text inputs</h3>
+                    <h3 class="text-2xl font-semibold text-dawn-night mb-8">Text inputs (Zen Mode)</h3>
 
                     <div class="space-y-6 max-w-2xl">
                         <!-- Normal Input -->
@@ -750,9 +820,25 @@
                             <input
                                 type="email"
                                 placeholder="you@example.com"
-                                class="w-full px-4 py-3 border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all duration-300 bg-dawn-mineral"
+                                class="w-full px-4 py-3 bg-zen-black border border-dawn-concrete text-white placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-infrared-glow focus:border-transparent transition-all duration-300"
                             >
-                            <p class="text-sm text-dawn-slate mt-1">Normal state</p>
+                            <p class="text-sm text-dawn-slate mt-1">Default state: Zen Black background</p>
+                        </div>
+
+                        <!-- Active Input (Simulated) -->
+                        <div>
+                            <label class="block text-sm font-semibold text-dawn-night mb-2">
+                                Phone number
+                            </label>
+                            <input
+                                type="tel"
+                                value="+49 123 45678"
+                                class="w-full px-4 py-3 bg-zen-black border-transparent text-white rounded-xl focus:outline-none ring-2 ring-infrared-glow shadow-[0_0_15px_rgba(255,92,0,0.3)] transition-all duration-300"
+                            >
+                            <p class="text-sm text-infrared-core mt-1 flex items-center gap-1">
+                                <i data-feather="zap" class="w-4 h-4"></i>
+                                Focus state: Infrared Glow
+                            </p>
                         </div>
 
                         <!-- Success Input -->
@@ -763,27 +849,11 @@
                             <input
                                 type="text"
                                 value="Sarah Miller"
-                                class="w-full px-4 py-3 border-2 border-green-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 bg-green-50"
+                                class="w-full px-4 py-3 bg-zen-black border-2 border-green-500 text-white rounded-xl focus:outline-none"
                             >
                             <p class="text-sm text-green-600 mt-1 flex items-center gap-1">
                                 <i data-feather="check-circle" class="w-4 h-4"></i>
                                 Available
-                            </p>
-                        </div>
-
-                        <!-- Error Input -->
-                        <div>
-                            <label class="block text-sm font-semibold text-dawn-night mb-2">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                value="123"
-                                class="w-full px-4 py-3 border-2 border-red-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 bg-red-50"
-                            >
-                            <p class="text-sm text-red-600 mt-1 flex items-center gap-1">
-                                <i data-feather="alert-circle" class="w-4 h-4"></i>
-                                Must be at least 8 characters
                             </p>
                         </div>
                     </div>
@@ -799,7 +869,7 @@
                         <textarea
                             rows="4"
                             placeholder="Share your thoughts..."
-                            class="w-full px-4 py-3 border border-dawn-concrete rounded-xl focus:outline-none focus:ring-2 focus:ring-dawn-clay focus:border-transparent transition-all duration-300 resize-none bg-dawn-mineral"
+                            class="w-full px-4 py-3 bg-zen-black border border-dawn-concrete text-white placeholder-gray-500 rounded-xl focus:outline-none focus:ring-2 focus:ring-infrared-glow focus:border-transparent transition-all duration-300 resize-none"
                         ></textarea>
                     </div>
                 </div>
@@ -813,11 +883,11 @@
                             <h4 class="text-lg font-semibold text-dawn-night mb-4">Checkboxes</h4>
                             <div class="space-y-3">
                                 <label class="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" checked class="w-5 h-5 rounded border-dawn-concrete text-dawn-clay focus:ring-dawn-clay">
+                                    <input type="checkbox" checked class="w-5 h-5 rounded border-dawn-concrete text-infrared-core focus:ring-infrared-glow bg-zen-black">
                                     <span class="text-dawn-night">Weekly newsletter</span>
                                 </label>
                                 <label class="flex items-center gap-3 cursor-pointer">
-                                    <input type="checkbox" class="w-5 h-5 rounded border-dawn-concrete text-dawn-clay focus:ring-dawn-clay">
+                                    <input type="checkbox" class="w-5 h-5 rounded border-dawn-concrete text-infrared-core focus:ring-infrared-glow bg-zen-black">
                                     <span class="text-dawn-night">Class reminders</span>
                                 </label>
                             </div>
@@ -829,16 +899,9 @@
                                 <label class="flex items-center gap-3 cursor-pointer">
                                     <div class="relative">
                                         <input type="checkbox" checked class="sr-only peer">
-                                        <div class="w-11 h-6 bg-dawn-clay rounded-full peer peer-focus:ring-2 peer-focus:ring-dawn-clay after:content-[''] after:absolute after:top-0.5 after:left-[22px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                        <div class="w-11 h-6 bg-zen-black rounded-full peer peer-checked:bg-infrared-core peer-focus:ring-2 peer-focus:ring-infrared-glow after:content-[''] after:absolute after:top-0.5 after:left-[2px] peer-checked:after:left-[22px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
                                     </div>
-                                    <span class="text-dawn-night">Notifications</span>
-                                </label>
-                                <label class="flex items-center gap-3 cursor-pointer">
-                                    <div class="relative">
-                                        <input type="checkbox" class="sr-only peer">
-                                        <div class="w-11 h-6 bg-dawn-concrete rounded-full peer peer-focus:ring-2 peer-focus:ring-dawn-clay after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
-                                    </div>
-                                    <span class="text-dawn-night">Auto-renewal</span>
+                                    <span class="text-dawn-night">Infrared Mode</span>
                                 </label>
                             </div>
                         </div>
@@ -950,10 +1013,12 @@
                             <div class="flex items-center gap-8">
                                 <div class="font-bold text-xl text-dawn-night tracking-wider">EOS CLUB</div>
                                 <div class="hidden md:flex items-center gap-6">
-                                    <a href="#" class="text-dawn-night font-medium hover:text-dawn-clay transition-colors duration-300">Classes</a>
-                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">About</a>
-                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Community</a>
-                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Contact</a>
+                                    <a href="#" class="text-dawn-night font-medium hover:text-dawn-clay transition-colors duration-300">Home</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Studio</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Classes</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Pricing</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Events</a>
+                                    <a href="#" class="text-dawn-slate hover:text-dawn-night transition-colors duration-300">Wellness</a>
                                 </div>
                             </div>
                             <button class="px-6 py-2 bg-dawn-clay text-white rounded-lg font-medium hover:bg-opacity-90 transition-all duration-300">
@@ -978,20 +1043,28 @@
                         <div class="bg-white">
                             <nav class="p-4 space-y-2">
                                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-night font-medium bg-dawn-light rounded-lg">
+                                    <i data-feather="home" class="w-5 h-5"></i>
+                                    <span>Home</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
+                                    <i data-feather="map-pin" class="w-5 h-5"></i>
+                                    <span>Studio</span>
+                                </a>
+                                <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
                                     <i data-feather="calendar" class="w-5 h-5"></i>
                                     <span>Classes</span>
                                 </a>
                                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
-                                    <i data-feather="users" class="w-5 h-5"></i>
-                                    <span>Community</span>
+                                    <i data-feather="credit-card" class="w-5 h-5"></i>
+                                    <span>Pricing</span>
                                 </a>
                                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
-                                    <i data-feather="info" class="w-5 h-5"></i>
-                                    <span>About</span>
+                                    <i data-feather="star" class="w-5 h-5"></i>
+                                    <span>Events</span>
                                 </a>
                                 <a href="#" class="flex items-center gap-3 px-4 py-3 text-dawn-slate hover:bg-dawn-mineral rounded-lg transition-colors duration-300">
-                                    <i data-feather="mail" class="w-5 h-5"></i>
-                                    <span>Contact</span>
+                                    <i data-feather="sun" class="w-5 h-5"></i>
+                                    <span>Wellness</span>
                                 </a>
                             </nav>
 
@@ -1082,8 +1155,8 @@
             <footer class="border-t border-dawn-concrete pt-12 pb-8">
                 <div class="text-center">
                     <p class="text-dawn-slate mb-2">EOS CLUB Design System — Living document</p>
-                    <p class="text-sm text-dawn-clay">Merriweather · Inter · Feather Icons</p>
-                    <p class="text-xs text-dawn-slate mt-4">Version 1.0.0 · January 2026</p>
+                    <p class="text-sm text-dawn-clay">Capitolina · Geist Sans · Feather Icons</p>
+                    <p class="text-xs text-dawn-slate mt-4">Version 1.1.0 · Feb 2026</p>
                 </div>
             </footer>
 

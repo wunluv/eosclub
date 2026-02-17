@@ -1,7 +1,13 @@
 {
-  "lastAgent": "agent-d0147e96-9db8-4a0a-b3ed-604c9b216564",
+  "lastAgent": "agent-ce3dd0b7-9a10-4e2f-9c60-157374c8df35",
   "lastSession": {
-    "agentId": "agent-d0147e96-9db8-4a0a-b3ed-604c9b216564",
-    "conversationId": "conv-cc62abd8-448d-4c20-b36b-316e11e1db52"
+    "agentId": "agent-ce3dd0b7-9a10-4e2f-9c60-157374c8df35",
+    "conversationId": "conv-fccb6cce-c8a1-4d02-b834-ae3bf0268146"
+  },
+  "sessionsByServer": {
+    "192.168.8.103:8283": {
+      "agentId": "agent-ce3dd0b7-9a10-4e2f-9c60-157374c8df35",
+      "conversationId": "conv-fccb6cce-c8a1-4d02-b834-ae3bf0268146"
+    }
   }
 }
