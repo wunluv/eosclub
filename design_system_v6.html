@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EOS CLUB - Design System V6 (Mobile Responsive Edition)</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Geist Font (Vercel) via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/geist@1.0.0/dist/fonts/geist-sans/style.css" rel="stylesheet">
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Capitolina', 'Merriweather', 'serif'],
+                        'sans': ['Geist Sans', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        // 60:30:10 Emotional Calm Palette (Ghibli Profile)
+                        'eos': {
+                            'base': '#F9F9F7',     /* 60% - Dominant (Mineral White) */
+                            'contrast': '#2F3A40', /* 30% - Secondary (Deep Slate) */
+                            'accent': '#FF2E00',   /* 10% - Highlight (Infrared Red) */
+                            
+                            // Supporting Neutrals
+                            'subtle': '#E6E5E0',   /* Warm Concrete */
+                            'text': '#1F2933',     /* Night Slate (Primary Text) */
+                        }
+                    },
+                    backgroundImage: {
+                        'accent-gradient': 'linear-gradient(135deg, #FF2E00 0%, #FF5C00 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Geist Sans', 'Inter', sans-serif;
+            background: #F9F9F7; /* EOS Base */
+            color: #1F2933;      /* EOS Text */
+        }
+
+        h1, h2, h3, h4, h5, h6, .font-display {
+            font-family: 'Capitolina', 'Merriweather', serif;
+            color: #FF2E00; /* EOS Accent */
+        }
+        
+        /* Minimalist Button Styles */
+        .btn-primary {
+            background-color: #FF2E00;
+            color: white;
+            transition: all 0.2s ease;
+        }
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid #2F3A40;
+            color: #2F3A40;
+            transition: all 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #2F3A40;
+            color: white;
+        }
+
+        /* Simplified Grain */
+        .grain-texture::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .grain-texture > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #E6E5E0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF2E00; 
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2F3A40;
+        }
+
+        /* Smooth transitions - "Stable Dynamics" */
+        * {
+            scroll-behavior: smooth;
+        }
+
+        /* Spotlight effect for cards */
+        .spotlight-card {
+            position: relative;
+            background: white;
+        }
+
+        .spotlight-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: radial-gradient(circle at center, rgba(255, 46, 0, 0.05) 0%, transparent 70%);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* Subtle logo watermark for photography examples */
+        .photo-with-logo {
+            position: relative;
+        }
+
+        .photo-with-logo::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 0.75rem;
+            pointer-events: none;
+            background: radial-gradient(120% 90% at 90% 85%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.00) 55%);
+            opacity: 0.55;
+        }
+
+        .photo-logo {
+            position: absolute;
+            right: 0.75rem;
+            bottom: 0.75rem;
+            z-index: 2;
+            width: 84px;
+            height: auto;
+            opacity: 0.78;
+            mix-blend-mode: multiply;
+            filter: drop-shadow(0 2px 10px rgba(0,0,0,0.18));
+        }
+
+        /* Sidebar transitions */
+        .sidebar-transition {
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * { scroll-behavior: auto; }
+            .sidebar-transition { transition: none; }
+        }
+    </style>
+</head>
+<body class="bg-eos-base text-eos-contrast antialiased">
+
+    <!-- Mobile Header (Visible only on mobile) -->
+    <header class="lg:hidden sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-eos-subtle px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <img src="assets/eos-logo-export_wb-red.png" alt="EOS" class="h-8 w-auto">
+            <span class="font-serif font-bold text-lg tracking-wider text-eos-accent">EOS CLUB</span>
+        </div>
+        <button id="menu-toggle" class="p-2 text-eos-accent focus:outline-none transition-transform active:scale-95">
+            <i data-feather="menu" id="menu-icon" class="w-6 h-6"></i>
+        </button>
+    </header>
+
+    <!-- Overlay (Mobile only) -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-eos-contrast/20 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"></div>
+
+    <!-- Layout Container -->
+    <div class="flex min-h-screen relative">
+
+        <!-- Sidebar (Fixed Left / Full-screen on Mobile) -->
+        <aside id="sidebar" class="fixed left-0 top-0 h-screen w-full lg:w-80 bg-white border-r border-eos-subtle overflow-y-auto grain-texture z-50 transform -translate-x-full lg:translate-x-0 sidebar-transition">
+            <div class="p-8 h-full flex flex-col">
+                <!-- Close Button (Mobile Only) -->
+                <div class="lg:hidden flex justify-end mb-8">
+                    <button id="menu-close" class="p-2 text-eos-accent focus:outline-none">
+                        <i data-feather="x" class="w-8 h-8"></i>
+                    </button>
+                </div>
+
+                <!-- Brand Logo & Name (Desktop & Mobile) -->
+                <div class="mb-12">
+                    <div class="mb-6">
+                        <img
+                            src="assets/eos-logo-export_wb-red.png"
+                            alt="EOS CLUB logo"
+                            class="mx-auto h-16 w-auto"
+                            loading="eager"
+                            decoding="async"
+                        />
+                    </div>
+                    <h1 class="text-3xl font-bold mb-2 text-center tracking-wider !text-eos-accent uppercase">EOS CLUB</h1>
+                    <p class="text-eos-contrast/60 text-sm text-center">System V6 (Mobile First)</p>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="space-y-4 mt-8 lg:mt-0 flex-1 flex flex-col justify-center lg:justify-start lg:block">
+                    <a href="#principles" class="menu-item flex items-center justify-center lg:justify-start px-4 py-6 lg:py-4 text-eos-accent hover:bg-eos-base rounded-xl transition-all duration-300 group active:bg-eos-subtle">
+                        <i data-feather="sun" class="w-6 h-6 lg:w-5 lg:h-5 mr-4 text-eos-accent/50 group-hover:text-eos-accent"></i>
+                        <span class="font-bold uppercase tracking-widest lg:tracking-tight text-lg lg:text-sm">Design Principles</span>
+                    </a>
+                    <a href="#typography" class="menu-item flex items-center justify-center lg:justify-start px-4 py-6 lg:py-4 text-eos-accent hover:bg-eos-base rounded-xl transition-all duration-300 group active:bg-eos-subtle">
+                        <i data-feather="type" class="w-6 h-6 lg:w-5 lg:h-5 mr-4 text-eos-accent/50 group-hover:text-eos-accent"></i>
+                        <span class="font-bold uppercase tracking-widest lg:tracking-tight text-lg lg:text-sm">Typography</span>
+                    </a>
+                    <a href="#colors" class="menu-item flex items-center justify-center lg:justify-start px-4 py-6 lg:py-4 text-eos-accent hover:bg-eos-base rounded-xl transition-all duration-300 group active:bg-eos-subtle">
+                        <i data-feather="droplet" class="w-6 h-6 lg:w-5 lg:h-5 mr-4 text-eos-accent/50 group-hover:text-eos-accent"></i>
+                        <span class="font-bold uppercase tracking-widest lg:tracking-tight text-lg lg:text-sm">Emotional Palette</span>
+                    </a>
+                    <a href="#assets" class="menu-item flex items-center justify-center lg:justify-start px-4 py-6 lg:py-4 text-eos-accent hover:bg-eos-base rounded-xl transition-all duration-300 group active:bg-eos-subtle">
+                        <i data-feather="image" class="w-6 h-6 lg:w-5 lg:h-5 mr-4 text-eos-accent/50 group-hover:text-eos-accent"></i>
+                        <span class="font-bold uppercase tracking-widest lg:tracking-tight text-lg lg:text-sm">Visual Assets</span>
+                    </a>
+                    <a href="#buttons" class="menu-item flex items-center justify-center lg:justify-start px-4 py-6 lg:py-4 text-eos-accent hover:bg-eos-base rounded-xl transition-all duration-300 group active:bg-eos-subtle">
+                        <i data-feather="square" class="w-6 h-6 lg:w-5 lg:h-5 mr-4 text-eos-accent/50 group-hover:text-eos-accent"></i>
+                        <span class="font-bold uppercase tracking-widest lg:tracking-tight text-lg lg:text-sm">Buttons</span>
+                    </a>
+                </nav>
+
+                <!-- Footer Info -->
+                <div class="mt-12 pt-8 border-t border-eos-subtle">
+                    <p class="text-xs text-eos-contrast/60">Version 6.0.0</p>
+                    <p class="text-xs text-eos-accent/80 font-bold mt-1 uppercase tracking-widest">Mobile Responsive Edition</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="lg:ml-80 flex-1 p-6 lg:p-16 overflow-y-auto bg-eos-base text-eos-contrast">
+
+            <!-- Hero Section -->
+            <div class="mb-16 lg:mb-20">
+                <span class="inline-block py-1 px-3 mb-4 rounded-full border border-eos-accent/20 text-[10px] lg:text-xs font-bold uppercase tracking-widest text-eos-accent">
+                    Responsive / V6
+                </span>
+                <h1 class="text-5xl lg:text-7xl font-bold mb-6">EOS CLUB</h1>
+                <p class="text-xl lg:text-2xl font-light text-eos-contrast/80 max-w-3xl leading-relaxed">
+                    Harmony across all screens. The <span class="font-medium text-eos-accent">Lucid Dawn</span> now adapts effortlessly, ensuring the brand experience remains <span class="font-medium text-eos-contrast">calm and accessible</span> wherever it is encountered.
+                </p>
+            </div>
+
+            <!-- Section 0: Principles -->
+            <section id="principles" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-3">Design Principles</h2>
+                    <p class="text-eos-contrast/80">Evolution of the EOS Brand Identity.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                    <div class="bg-white p-8 rounded-2xl border border-eos-subtle spotlight-card">
+                        <h3 class="text-xl font-bold mb-4">V5: Emotional Calm</h3>
+                        <p class="text-sm leading-relaxed text-eos-contrast/70">
+                            Adopting the <strong>Studio Ghibli 60:30:10 profile</strong>. The Accent color (#FF2E00) became the primary navigator, creating "Infrared" warmth.
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl border border-eos-accent/20 spotlight-card">
+                        <h3 class="text-xl font-bold mb-4">V6: Mobile Fluidity</h3>
+                        <p class="text-sm leading-relaxed text-eos-contrast/70">
+                            Translation of the split-screen layout into a <strong>responsive hamburger system</strong>. Larger tap targets, smooth slide-in transitions, and a focus on one-handed navigation for the mobile athlete.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 1: Typography -->
+            <section id="typography" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-3">Typography</h2>
+                    <p class="text-eos-contrast/80">Capitolina for Focus. Geist for Clarity.</p>
+                </div>
+
+                <!-- Headings -->
+                <div class="bg-white rounded-2xl shadow-sm border border-eos-subtle p-6 lg:p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold mb-8 border-b border-eos-accent/10 pb-4">Headings (Accent)</h3>
+
+                    <div class="space-y-6">
+                        <div class="border-b border-eos-subtle pb-6">
+                            <h1 class="text-4xl lg:text-5xl font-bold mb-2">Display Heading</h1>
+                            <p class="text-xs lg:text-sm text-eos-contrast/50 font-mono">Capitolina Bold • #FF2E00</p>
+                        </div>
+                        <div class="border-b border-eos-subtle pb-6">
+                            <h1 class="text-3xl lg:text-4xl font-bold mb-2">Heading 1</h1>
+                            <p class="text-xs lg:text-sm text-eos-contrast/50 font-mono">Capitolina Bold • #FF2E00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body Text -->
+                <div class="bg-white rounded-2xl shadow-sm border border-eos-subtle p-6 lg:p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold mb-8 border-b border-eos-contrast/10 pb-4 !text-eos-contrast">Body Text (Contrast)</h3>
+
+                    <div class="space-y-6 max-w-2xl">
+                        <div>
+                            <p class="text-base lg:text-lg leading-relaxed mb-2 text-eos-contrast">
+                                Body text scales for readability. On mobile, we maintain ample line-height to prevent visual crowding.
+                            </p>
+                            <p class="text-xs lg:text-sm text-eos-contrast/50 font-mono">Geist Sans • text-base/lg</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Color Palette -->
+            <section id="colors" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-3">Emotional Palette</h2>
+                    <p class="text-eos-contrast/80">Harmonizing warmth and structure.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-eos-subtle p-6 lg:p-10 mb-6 spotlight-card grain-texture">
+                    <h3 class="text-2xl font-semibold mb-8 !text-eos-contrast">The Ratio</h3>
+                    
+                    <div class="flex h-32 lg:h-40 rounded-xl overflow-hidden shadow-lg mb-8">
+                        <div class="w-[60%] bg-eos-base flex items-center justify-center border-r border-eos-subtle relative">
+                            <span class="font-mono text-[10px] text-eos-contrast opacity-50 absolute top-2 left-2">60%</span>
+                            <div class="text-center">
+                                <p class="font-bold text-eos-contrast text-sm lg:text-xl">Base</p>
+                            </div>
+                        </div>
+                        <div class="w-[30%] bg-eos-contrast flex items-center justify-center border-r border-eos-subtle relative">
+                            <span class="font-mono text-[10px] text-white opacity-50 absolute top-2 left-2">30%</span>
+                            <div class="text-center">
+                                <p class="font-bold text-white text-sm lg:text-xl">Contrast</p>
+                            </div>
+                        </div>
+                        <div class="w-[10%] bg-eos-accent flex items-center justify-center relative">
+                            <span class="font-mono text-[10px] text-white opacity-50 absolute top-2 left-2">10%</span>
+                            <div class="text-center">
+                                <p class="font-bold text-white text-sm lg:text-lg">Accent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Visual Assets -->
+            <section id="assets" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-3">Imagery & Assets</h2>
+                    <p class="text-eos-contrast/80">Documentary style meets Infrared energy.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-eos-subtle p-6 lg:p-10 mb-6 spotlight-card grain-texture">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
+                        <div class="photo-with-logo rounded-xl overflow-hidden shadow-sm">
+                            <img src="assets/yoga_studio.jpg" alt="EOS studio" class="w-full aspect-[4/3] object-cover">
+                            <img src="assets/eos-logo-export_wb-red.png" alt="" class="photo-logo">
+                        </div>
+                        <div class="photo-with-logo rounded-xl overflow-hidden shadow-sm">
+                            <img src="assets/yoga_studio_plan.jpg" alt="EOS practice" class="w-full aspect-[4/3] object-cover">
+                            <img src="assets/eos-logo-export_wb-red.png" alt="" class="photo-logo">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Buttons -->
+            <section id="buttons" class="mb-24">
+                <div class="mb-8">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-3">Buttons & Actions</h2>
+                    <p class="text-eos-contrast/80">Clear hierarchy of intent.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-eos-subtle p-6 lg:p-10 mb-6 spotlight-card grain-texture">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="w-full sm:w-auto px-10 py-4 btn-primary rounded-xl font-bold text-lg shadow-lg">
+                            Book Class
+                        </button>
+                        <button class="w-full sm:w-auto px-10 py-4 btn-secondary rounded-xl font-medium">
+                            View Schedule
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="border-t border-eos-subtle pt-12 pb-8">
+                <div class="text-center px-4">
+                    <p class="text-eos-accent font-bold mb-2">EOS CLUB Design System — V6</p>
+                    <p class="text-sm text-eos-contrast/40">Capitolina · Geist Sans · Infrared Red</p>
+                    <p class="text-[10px] text-eos-contrast/30 mt-4 uppercase tracking-widest">Mobile Responsive Edition</p>
+                </div>
+            </footer>
+
+        </main>
+    </div>
+
+    <!-- Logic for Mobile Navigation -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const menuIcon = document.getElementById('menu-icon');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            
+            if (isMenuOpen) {
+                // Open menu
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+                setTimeout(() => overlay.classList.add('opacity-100'), 10);
+                document.body.style.overflow = 'hidden'; // Prevent scroll
+            } else {
+                // Close menu
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.remove('opacity-100');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+                document.body.style.overflow = ''; // Restore scroll
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuClose.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking a link
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Initialize Feather Icons
+        feather.replace();
+    </script>
+
+</body>
+</html>
