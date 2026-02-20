@@ -1,0 +1,15 @@
+---
+interface Props {
+  body: string;
+}
+
+const { body } = Astro.props;
+---
+
+<section class="py-16 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="prose prose-lg prose-slate prose-headings:text-eos-accent prose-a:text-eos-accent hover:prose-a:text-eos-accent transition-colors">
+      <Fragment set:html={body} />
+    </div>
+  </div>
+</section>

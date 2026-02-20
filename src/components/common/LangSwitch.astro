@@ -1,0 +1,31 @@
+---
+interface Props {
+  translationSlug?: string;
+}
+
+const { translationSlug = '' } = Astro.props;
+const currentLocale = Astro.currentLocale || 'de';
+
+const isEn = currentLocale === 'en';
+const targetLocale = isEn ? 'de' : 'en';
+const targetLabel = isEn ? 'Auf Deutsch wechseln' : 'Switch to English';
+const targetText = isEn ? 'DE' : 'EN';
+
+// Logic:
+// If on DE page (no /en/ prefix) -> link to /en/{translationSlug}
+// If on EN page (has /en/ prefix) -> link to /{translationSlug}
+const targetPath = isEn
+  ? `/${translationSlug}`
+  : `/en/${translationSlug}`;
+
+// Clean up double slashes if translationSlug is empty
+const finalPath = targetPath.replace(/\/+/g, '/');
+---
+
+<a
+  href={finalPath}
+  aria-label={targetLabel}
+  class="text-sm font-medium hover:text-eos-accent transition-colors duration-200"
+>
+  {targetText}
+</a>

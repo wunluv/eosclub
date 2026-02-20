@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans bg-eos-base text-eos-text antialiased;
+  }
+
+  /* ALL headings: serif face + Infrared Red */
+  h1, h2, h3, h4, h5, h6, .font-display {
+    @apply font-serif text-eos-accent;
+  }
+
+  /* Exception pattern: headings on dark backgrounds use white */
+  /* Apply via: class="!text-white" or a utility (see §2.3) */
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #E6E5E0;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #FF2E00;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+
+  /* --- Buttons --- */
+  .btn-primary {
+    @apply bg-eos-accent text-white font-bold uppercase tracking-widest text-xs rounded-xl px-8 py-4;
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    @apply bg-transparent border-2 border-eos-contrast text-eos-contrast font-bold uppercase tracking-widest text-xs rounded-xl px-8 py-4;
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    @apply bg-eos-contrast text-white;
+  }
+
+  /* --- Grain Texture Overlay --- */
+  /* Usage: add .grain-texture class to a container with position:relative */
+  .grain-texture {
+    @apply relative;
+  }
+  .grain-texture::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+  .grain-texture > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* --- Sidebar / Mobile Menu Transition --- */
+  .sidebar-transition {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* --- Scrollbar Hidden (mobile nav panels) --- */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* --- Card Effects --- */
+  .spotlight-card {
+    position: relative;
+    background: white;
+  }
+  .spotlight-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: radial-gradient(circle at center, rgba(255, 46, 0, 0.05) 0%, transparent 70%);
+    border-radius: inherit;
+    z-index: -1;
+  }
+
+  /* --- Photo + Logo Watermark --- */
+  .photo-with-logo {
+    position: relative;
+  }
+  .photo-with-logo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    pointer-events: none;
+    background: radial-gradient(120% 90% at 90% 85%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.00) 55%);
+    opacity: 0.55;
+  }
+  .photo-logo {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    z-index: 2;
+    width: 84px;
+    height: auto;
+    opacity: 0.78;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 2px 10px rgba(0,0,0,0.18));
+  }
+
+  /* --- Testimonial Portrait Glow --- */
+  .portrait-glow {
+    box-shadow: 0 0 20px rgba(255, 46, 0, 0.1);
+  }
+}
+
+/* Reduced motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+  .sidebar-transition { transition: none !important; }
+}

@@ -1,0 +1,33 @@
+fragment PagesParts on Pages {
+  __typename
+  title
+  seoDescription
+  ogImage
+  translationSlug
+  blocks {
+    __typename
+    ... on PagesBlocksHeroBlock {
+      headline
+      subheadline
+      backgroundImage
+      ctaLabel
+      ctaUrl
+    }
+    ... on PagesBlocksContentBlock {
+      body
+    }
+    ... on PagesBlocksBookingBlock {
+      enabled
+      bookingUrl
+      label
+    }
+    ... on PagesBlocksFeatureGridBlock {
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+---
+// This file is a fallback.
+// The [...slug].astro route handles the root '/' by matching the 'home' content file with an undefined slug.
+// If for any reason that fails, this will ensure the user lands on the homepage.
+return Astro.redirect('/home');
+---

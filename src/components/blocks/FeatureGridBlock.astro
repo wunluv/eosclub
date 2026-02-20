@@ -1,0 +1,59 @@
+---
+import feather from 'feather-icons';
+
+interface FeatureItem {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  items: FeatureItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="py-20 px-4 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {items.map((item) => (
+        <div class="feature-item p-8 rounded-2xl bg-eos-base border border-eos-subtle/50 hover:shadow-xl transition-shadow duration-300">
+          <div class="w-12 h-12 mb-6 text-eos-accent" set:html={feather.icons[item.icon as keyof typeof feather.icons]?.toSvg() || feather.icons.help.toSvg()} />
+          <h3 class="text-xl font-bold mb-4">{item.title}</h3>
+          <p class="text-eos-contrast/60 leading-relaxed">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initFeatureGridAnimations() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    gsap.from('.feature-item', {
+      scrollTrigger: {
+        trigger: '.feature-item',
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 0,
+      y: 20,
+      duration: 0.4,
+      stagger: 0.08,
+      ease: 'power2.out'
+    });
+  }
+
+  // Run on page load
+  initFeatureGridAnimations();
+
+  // Re-run for TinaCMS live editing if needed
+  document.addEventListener('astro:after-swap', initFeatureGridAnimations);
+</script>

@@ -1,0 +1,75 @@
+---
+interface Props {
+  headline: string;
+  subheadline: string;
+  backgroundImage: string;
+  ctaLabel: string;
+  ctaUrl: string;
+}
+
+const { headline, subheadline, backgroundImage, ctaLabel, ctaUrl } = Astro.props;
+---
+
+<section class="relative h-[80vh] min-h-[600px] w-full overflow-hidden flex items-center justify-center text-center px-4">
+  <!-- Background Image -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src={backgroundImage}
+      alt=""
+      class="w-full h-full object-cover"
+      aria-hidden="true"
+    />
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-black/40"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10 max-w-4xl mx-auto">
+    <h1 class="hero-headline text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+      {headline}
+    </h1>
+    <p class="hero-subheadline text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+      {subheadline}
+    </p>
+    <div class="hero-cta">
+      <a
+        href={ctaUrl}
+        class="inline-block px-8 py-4 bg-eos-accent text-white font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
+      >
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+
+  function initHeroAnimations() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.from('.hero-headline', {
+      y: 20,
+      opacity: 0,
+      duration: 0.6
+    })
+    .from('.hero-subheadline', {
+      y: 20,
+      opacity: 0,
+      duration: 0.6
+    }, '-=0.45') // 150ms delay after headline starts (600 - 450 = 150)
+    .from('.hero-cta', {
+      y: 20,
+      opacity: 0,
+      duration: 0.6
+    }, '-=0.45');
+  }
+
+  // Run on page load
+  initHeroAnimations();
+
+  // Re-run for TinaCMS live editing if needed (optional, but good practice)
+  document.addEventListener('astro:after-swap', initHeroAnimations);
+</script>

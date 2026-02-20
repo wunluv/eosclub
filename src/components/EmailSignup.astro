@@ -1,0 +1,192 @@
+---
+/**
+ * EmailSignup.astro
+ * A lightweight email capture form island component.
+ * POSTs to a Google Apps Script endpoint.
+ */
+
+interface Props {
+  heading?: string;         // Optional section heading
+  description?: string;     // Optional description text
+  buttonLabel?: string;     // Default: "Anmelden" / "Subscribe"
+  successMessage?: string;  // Default: "Vielen Dank!" / "Thank you!"
+  errorMessage?: string;    // Default: "Ein Fehler ist aufgetreten."
+  placeholder?: string;     // Default: "Deine E-Mail-Adresse"
+}
+
+const {
+  heading,
+  description,
+  buttonLabel = "Anmelden",
+  successMessage = "Vielen Dank! Wir halten dich auf dem Laufenden.",
+  errorMessage = "Ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+  placeholder = "Deine E-Mail-Adresse"
+} = Astro.props;
+
+const GAS_ENDPOINT = import.meta.env.PUBLIC_GAS_ENDPOINT;
+---
+
+<section class="email-signup w-full max-w-xl mx-auto p-6 md:p-8 bg-eos-base rounded-2xl border border-eos-subtle shadow-sm">
+  {heading && <h2 class="text-2xl md:text-3xl font-serif text-eos-contrast mb-4">{heading}</h2>}
+  {description && <p class="text-eos-contrast/60 mb-6">{description}</p>}
+
+  <form
+    id="email-signup-form"
+    class="relative group"
+    novalidate
+    data-endpoint={GAS_ENDPOINT}
+    data-success={successMessage}
+    data-error={errorMessage}
+  >
+    <div class="flex flex-col md:flex-row gap-3">
+      <div class="flex-grow relative">
+        <label for="email-input" class="sr-only">E-Mail-Adresse</label>
+        <input
+          type="email"
+          id="email-input"
+          name="email"
+          required
+          placeholder={placeholder}
+          class="w-full px-6 py-4 rounded-full bg-white border border-eos-subtle text-eos-text placeholder:text-eos-contrast/60 focus:outline-none focus:ring-2 focus:ring-eos-accent/20 focus:border-eos-accent transition-all duration-300"
+          aria-describedby="email-status"
+        />
+      </div>
+      <button
+        type="submit"
+        id="submit-button"
+        class="px-8 py-4 rounded-full bg-eos-accent hover:bg-eos-accent/90 text-white font-bold transition-all duration-300 shadow-md hover:shadow-lg active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+      >
+        <span class="button-text">{buttonLabel}</span>
+        <span class="loading-spinner hidden animate-spin inline-block w-5 h-5 border-2 border-white/30 border-t-white rounded-full ml-2"></span>
+      </button>
+    </div>
+
+    <div
+      id="email-status"
+      class="mt-4 text-sm font-medium hidden opacity-0 transition-opacity duration-300"
+      role="aria-live"
+    >
+    </div>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('email-signup-form') as HTMLFormElement;
+  const input = document.getElementById('email-input') as HTMLInputElement;
+  const button = document.getElementById('submit-button') as HTMLButtonElement;
+  const statusEl = document.getElementById('email-status');
+  const buttonText = button?.querySelector('.button-text');
+  const spinner = button?.querySelector('.loading-spinner');
+
+  const endpoint = form?.dataset.endpoint;
+  const successMsg = form?.dataset.success || 'Vielen Dank!';
+  const errorMsg = form?.dataset.error || 'Ein Fehler ist aufgetreten.';
+
+  const showStatus = (message: string, isError = false) => {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.className = `mt-4 text-sm font-medium ${isError ? 'text-red-600' : 'text-eos-accent'}`;
+    statusEl.classList.remove('hidden');
+    setTimeout(() => statusEl.classList.add('opacity-100'), 10);
+  };
+
+  const hideStatus = () => {
+    if (!statusEl) return;
+    statusEl.classList.remove('opacity-100');
+    statusEl.classList.add('opacity-0');
+    setTimeout(() => statusEl.classList.add('hidden'), 300);
+  };
+
+  const setLoading = (loading: boolean) => {
+    if (!button || !input) return;
+    button.disabled = loading;
+    input.disabled = loading;
+
+    if (loading) {
+      spinner?.classList.remove('hidden');
+      if (buttonText) buttonText.textContent = 'Wird gesendet...';
+    } else {
+      spinner?.classList.add('hidden');
+      if (buttonText) buttonText.textContent = button.dataset.originalText || 'Anmelden';
+    }
+  };
+
+  if (button) {
+    button.dataset.originalText = buttonText?.textContent || 'Anmelden';
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hideStatus();
+
+    const email = input.value.trim();
+
+    // Client-side validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      showStatus('Bitte gib eine gültige E-Mail-Adresse ein.', true);
+      input.focus();
+      return;
+    }
+
+    if (!endpoint) {
+      console.error('GAS Endpoint not defined');
+      showStatus('Konfigurationsfehler: Endpoint fehlt.', true);
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // Using no-cors as per reference implementation for GAS
+      await fetch(endpoint, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          userAgent: navigator.userAgent,
+          timestamp: new Date().toISOString()
+        }),
+      });
+
+      // Since no-cors doesn't allow reading the response, we assume success if no error thrown
+      showStatus(successMsg);
+      form.reset();
+
+      // Focus management: move focus to status message
+      statusEl?.focus();
+
+    } catch (err) {
+      console.error('Signup error:', err);
+      showStatus(errorMsg, true);
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  // Clear status on input
+  input?.addEventListener('input', () => {
+    if (statusEl && !statusEl.classList.contains('hidden')) {
+      hideStatus();
+    }
+  });
+</script>
+
+<style>
+  /* Subtle transitions for state changes */
+  .email-signup {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .email-signup,
+    .loading-spinner,
+    #email-status,
+    input,
+    button {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+</style>

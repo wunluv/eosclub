@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroBlock from '../../components/blocks/HeroBlock.astro';
+import ContentBlock from '../../components/blocks/ContentBlock.astro';
+import BookingBlock from '../../components/blocks/BookingBlock.astro';
+import FeatureGridBlock from '../../components/blocks/FeatureGridBlock.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages');
+  // Filter English pages (id starts with 'en/')
+  const enPages = pages.filter(page => page.id.startsWith('en/'));
+
+  return enPages.map(page => {
+    // Extract slug from filename (e.g., 'en/home.md' -> 'home')
+    const slug = page.id.replace('en/', '').replace('.md', '');
+
+    // Find German counterpart via translationSlug
+    // In English pages, translationSlug points to the German slug
+    const dePage = pages.find(p =>
+      p.id.startsWith('de/') &&
+      p.id.replace('de/', '').replace('.md', '') === page.data.translationSlug
+    );
+
+    return {
+      params: { slug: slug === 'home' ? undefined : slug },
+      props: {
+        page,
+        deSlug: page.data.translationSlug === 'home' ? '' : page.data.translationSlug,
+        enSlug: slug === 'home' ? '' : slug,
+      },
+    };
+  });
+}
+
+const { page, deSlug, enSlug } = Astro.props;
+const { title, seoDescription, ogImage, blocks } = page.data;
+---
+
+<BaseLayout
+  title={title}
+  seoDescription={seoDescription}
+  ogImage={ogImage}
+  deSlug={deSlug}
+  enSlug={enSlug}
+>
+  {blocks?.map((block) => {
+    switch (block._template) {
+      case 'HeroBlock':
+        return <HeroBlock {...block} />;
+      case 'ContentBlock':
+        return <ContentBlock {...block} />;
+      case 'BookingBlock':
+        return <BookingBlock {...block} />;
+      case 'FeatureGridBlock':
+        return <FeatureGridBlock {...block} />;
+      default:
+        return null;
+    }
+  })}
+</BaseLayout>

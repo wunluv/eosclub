@@ -1,0 +1,162 @@
+---
+import LangSwitch from './LangSwitch.astro';
+
+const currentLocale = Astro.currentLocale || 'de';
+const isEn = currentLocale === 'en';
+
+const navItems = [
+  { de: 'Home', en: 'Home', dePath: '/', enPath: '/en' },
+  { de: 'Studio', en: 'Studio', dePath: '/studio', enPath: '/en/studio' },
+  { de: 'Kurse', en: 'Classes', dePath: '/kurse', enPath: '/en/classes' },
+  { de: 'Preise', en: 'Pricing', dePath: '/preise', enPath: '/en/pricing' },
+  { de: 'Events', en: 'Events', dePath: '/events', enPath: '/en/events' },
+  { de: 'Wellness', en: 'Wellness', dePath: '/wellness', enPath: '/en/wellness' },
+  { de: 'Team', en: 'Team', dePath: '/team', enPath: '/en/team' },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-eos-subtle">
+  <div class="container mx-auto px-6 py-4 flex items-center justify-between">
+    <!-- Logo + Brand -->
+    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
+      <img src="/assets/eos-logo-export_wb-red.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
+      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
+    </a>
+
+    <!-- Desktop Nav (hidden on mobile) -->
+    <nav class="hidden md:flex items-center space-x-8">
+      {navItems.map((item) => {
+        const path = isEn ? item.enPath : item.dePath;
+        const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
+        return (
+          <a
+            href={path}
+            class={`text-sm font-bold uppercase tracking-widest text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 ${isActive ? 'underline underline-offset-4 decoration-eos-accent' : ''}`}
+          >
+            {isEn ? item.en : item.de}
+          </a>
+        );
+      })}
+      <LangSwitch />
+    </nav>
+
+    <!-- Mobile Hamburger (red icon, visible on mobile only) -->
+    <button
+      id="mobile-menu-button"
+      class="md:hidden p-2 text-eos-accent focus:outline-none transition-transform active:scale-95"
+      aria-label="Toggle Menu"
+      aria-expanded="false"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Overlay -->
+<div
+  id="mobile-overlay"
+  class="fixed inset-0 bg-eos-contrast/20 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"
+></div>
+
+<!-- Mobile Sidebar Panel -->
+<aside
+  id="mobile-sidebar"
+  class="fixed left-0 top-0 h-screen w-full max-w-sm bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col"
+>
+  <!-- Close Button -->
+  <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
+    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
+      <img src="/assets/eos-logo-export_wb-red.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
+      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
+    </a>
+    <button
+      id="mobile-close-button"
+      class="p-2 text-eos-accent focus:outline-none transition-transform active:scale-95"
+      aria-label="Close Menu"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Nav Items -->
+  <nav class="flex-1 px-6 py-8">
+    <div class="flex flex-col space-y-2">
+      {navItems.map((item) => {
+        const path = isEn ? item.enPath : item.dePath;
+        const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
+        return (
+          <a
+            href={path}
+            class={`mobile-nav-item py-3 text-eos-accent font-bold uppercase tracking-widest hover:bg-eos-base rounded-xl transition-colors px-4 ${isActive ? 'bg-eos-base' : ''}`}
+          >
+            {isEn ? item.en : item.de}
+          </a>
+        );
+      })}
+    </div>
+    <div class="mt-8 pt-8 border-t border-eos-subtle">
+      <LangSwitch />
+    </div>
+  </nav>
+
+  <!-- Footer Mark -->
+  <div class="p-6 border-t border-eos-subtle">
+    <p class="text-xs text-eos-contrast/60 uppercase tracking-widest">EOS CLUB</p>
+  </div>
+</aside>
+
+<script>
+  const menuButton = document.getElementById('mobile-menu-button');
+  const closeButton = document.getElementById('mobile-close-button');
+  const sidebar = document.getElementById('mobile-sidebar');
+  const overlay = document.getElementById('mobile-overlay');
+  const navItems = document.querySelectorAll('.mobile-nav-item');
+
+  let isMenuOpen = false;
+
+  function openMenu() {
+    isMenuOpen = true;
+    sidebar?.classList.remove('-translate-x-full');
+    overlay?.classList.remove('hidden');
+    setTimeout(() => overlay?.classList.add('opacity-100'), 10);
+    document.body.style.overflow = 'hidden';
+    menuButton?.setAttribute('aria-expanded', 'true');
+    // Focus moves to close button
+    closeButton?.focus();
+  }
+
+  function closeMenu() {
+    isMenuOpen = false;
+    sidebar?.classList.add('-translate-x-full');
+    overlay?.classList.remove('opacity-100');
+    setTimeout(() => overlay?.classList.add('hidden'), 300);
+    document.body.style.overflow = '';
+    menuButton?.setAttribute('aria-expanded', 'false');
+    // Focus returns to hamburger
+    menuButton?.focus();
+  }
+
+  menuButton?.addEventListener('click', openMenu);
+  closeButton?.addEventListener('click', closeMenu);
+  overlay?.addEventListener('click', closeMenu);
+
+  // Close on nav item click (mobile only)
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      if (window.innerWidth < 768) closeMenu();
+    });
+  });
+
+  // Close on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isMenuOpen) {
+      closeMenu();
+    }
+  });
+</script>

@@ -1,0 +1,61 @@
+---
+import Header from '../components/common/Header.astro';
+import Footer from '../components/common/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  seoDescription: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  deSlug?: string;
+  enSlug?: string;
+}
+
+const {
+  title,
+  seoDescription,
+  ogImage = '/assets/eos-logo-export_bm-black.png',
+  canonicalUrl = Astro.url.href,
+  deSlug = '',
+  enSlug = ''
+} = Astro.props;
+
+const currentLocale = Astro.currentLocale || 'de';
+---
+
+<!DOCTYPE html>
+<html lang={currentLocale} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={seoDescription} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:image" content={new URL(ogImage, Astro.site)} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- hreflang tags -->
+    <link rel="alternate" hreflang="de" href={`https://eos-club.de/${deSlug}`} />
+    <link rel="alternate" hreflang="en" href={`https://eos-club.de/en/${enSlug}`} />
+    <link rel="alternate" hreflang="x-default" href={`https://eos-club.de/${deSlug}`} />
+
+    <!-- Google Fonts: Merriweather — confirmed display/heading font, all weights used in DS V7 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
