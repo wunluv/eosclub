@@ -1,0 +1,113 @@
+---
+/**
+ * BsportLeadCapture.astro
+ *
+ * Renders the bsport lead acquisition / contact capture form widget.
+ * widgetType: "newsletterV2"
+ * dialogMode: 0 = popup trigger (bsport default for this widget type)
+ *
+ * NOTE: This widget uses dialogMode: 0 (popup), unlike the other bsport widgets
+ * which use dialogMode: 3 (inline). Bsport renders a trigger button that opens
+ * a modal form. If an inline form is preferred, discuss with bsport support.
+ *
+ * This may serve as a replacement for the existing EmailSignup.astro component
+ * once bsport is the confirmed CRM/contact system for EOS CLUB.
+ *
+ * Usage:
+ *   <BsportLeadCapture />
+ *
+ * Usage — custom config:
+ *   <BsportLeadCapture
+ *     fieldsType="firstNameAndEmail"
+ *     showSubtitle={true}
+ *     showSuccessTitle={false}
+ *     showSuccessText={false}
+ *   />
+ *
+ * Props map 1:1 to the bsport newsletterV2 config object.
+ * Defaults match the bsport dashboard output.
+ *
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside its <head> block.
+ */
+
+interface Props {
+  /**
+   * Form fields to display.
+   * "fullNameAndEmail"  — first name, last name, email (dashboard default)
+   * "firstNameAndEmail" — first name and email only
+   * "emailOnly"         — email address only (inferred — verify with bsport)
+   */
+  fieldsType?: "fullNameAndEmail" | "firstNameAndEmail" | "emailOnly";
+  /** Show the form subtitle text. Default: false. */
+  showSubtitle?: boolean;
+  /** Show the success state title after submission. Default: true. */
+  showSuccessTitle?: boolean;
+  /** Show the success state body text after submission. Default: true. */
+  showSuccessText?: boolean;
+}
+
+const {
+  fieldsType = "fullNameAndEmail",
+  showSubtitle = false,
+  showSuccessTitle = true,
+  showSuccessText = true,
+} = Astro.props;
+
+const WIDGET_ELEMENT_ID = "bsport-widget-101191";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-lead-capture-widget"></div>
+
+<!-- Mount script -->
+<script
+  is:inline
+  define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, fieldsType, showSubtitle, showSuccessTitle, showSuccessText }}
+>
+  function mountBsportLeadCapture(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportLeadCapture(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportLeadCapture({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 0,
+    widgetType: "newsletterV2",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      newsletterV2: {
+        fieldsType: fieldsType,
+        showSubtitle: showSubtitle,
+        showSuccessTitle: showSuccessTitle,
+        showSuccessText: showSuccessText
+      }
+    }
+  });
+</script>

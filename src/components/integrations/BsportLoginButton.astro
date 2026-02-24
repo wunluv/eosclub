@@ -1,0 +1,85 @@
+---
+/**
+ * BsportLoginButton.astro
+ *
+ * Renders the bsport member login button widget.
+ * widgetType: "loginButton"
+ * dialogMode: 0 = popup trigger
+ *
+ * Renders a login button that opens the bsport member authentication modal.
+ * When openMemberProfile is true, authenticated users are taken directly
+ * to their member profile/dashboard.
+ *
+ * Intended placement: Header navigation (alongside or replacing a custom CTA).
+ *
+ * Usage:
+ *   <BsportLoginButton />
+ *
+ * Usage — disable profile redirect:
+ *   <BsportLoginButton openMemberProfile={false} />
+ *
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside its <head> block.
+ */
+
+interface Props {
+  /**
+   * When true, authenticated members are redirected to their profile page
+   * after login. Default: true (matches bsport dashboard output).
+   */
+  openMemberProfile?: boolean;
+}
+
+const { openMemberProfile = true } = Astro.props;
+
+const WIDGET_ELEMENT_ID = "bsport-widget-741516";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-login-button-widget"></div>
+
+<!-- Mount script -->
+<script is:inline define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, openMemberProfile }}>
+  function mountBsportLoginButton(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportLoginButton(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportLoginButton({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 0,
+    widgetType: "loginButton",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      loginButton: {
+        openMemberProfile: openMemberProfile
+      }
+    }
+  });
+</script>

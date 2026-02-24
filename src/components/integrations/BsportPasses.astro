@@ -1,0 +1,96 @@
+---
+/**
+ * BsportPasses.astro
+ *
+ * Renders the bsport Passes / Pakete widget.
+ * dialogMode: 3 = inline / no popup ("No Popup beta")
+ * widgetType: "pass"
+ *
+ * Same data source as the bsport hosted page:
+ *   https://backoffice.bsport.io/m/Tektonik%2023%20/5082/pass/
+ * This JS SDK embed displays the same passes inline without redirecting.
+ *
+ * Usage — bare (show all passes):
+ *   <BsportPasses />
+ *
+ * Usage — filtered:
+ *   <BsportPasses
+ *     paymentPackCategories={[12, 34]}
+ *     privatePassCategories={[5]}
+ *   />
+ *
+ * Props:
+ *   paymentPackCategories — array of payment pack category IDs (bsport internal)
+ *   privatePassCategories — array of private pass category IDs
+ *
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside its <head> block.
+ */
+
+interface Props {
+  /** Filter by payment pack category IDs (bsport internal IDs). */
+  paymentPackCategories?: number[];
+  /** Filter by private pass category IDs. */
+  privatePassCategories?: number[];
+}
+
+const {
+  paymentPackCategories = [],
+  privatePassCategories = [],
+} = Astro.props;
+
+const WIDGET_ELEMENT_ID = "bsport-widget-533268";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-passes-widget"></div>
+
+<!-- Mount script -->
+<script
+  is:inline
+  define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, paymentPackCategories, privatePassCategories }}
+>
+  function mountBsportPasses(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportPasses(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportPasses({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 3,
+    widgetType: "pass",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      pass: {
+        paymentPackCategories: paymentPackCategories,
+        privatePassCategories: privatePassCategories
+      }
+    }
+  });
+</script>

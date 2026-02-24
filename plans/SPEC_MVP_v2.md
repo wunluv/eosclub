@@ -18,7 +18,7 @@
 | Styling | TailwindCSS | v3+ |
 | Animation | GSAP | v3 (scoped — see §7) |
 | CMS | TinaCMS | Latest |
-| Booking | bsport | CTA link (MVP), API/iframe (future) |
+| Booking / Member Services | bsport | JS SDK widget suite (see §5) |
 | Image Opt | `@astrojs/image` | Latest |
 | Sitemap | `@astrojs/sitemap` | Latest |
 
@@ -37,6 +37,15 @@
 │   │   │   ├── ContentBlock.astro
 │   │   │   ├── BookingBlock.astro
 │   │   │   └── FeatureGridBlock.astro
+│   │   ├── integrations/
+│   │   │   ├── BsportCalendar.astro
+│   │   │   ├── BsportSubscription.astro
+│   │   │   ├── BsportPasses.astro
+│   │   │   ├── BsportWorkshop.astro
+│   │   │   ├── BsportLeadCapture.astro
+│   │   │   ├── BsportLoginButton.astro
+│   │   │   ├── BsportShop.astro
+│   │   │   └── BsportWidget.astro
 │   │   └── EmailSignup.astro
 │   ├── content/
 │   │   └── pages/
@@ -241,21 +250,53 @@ fontFamily: {
 - **Merriweather**: Confirmed display/heading font (Feb 2026 decision — Capitolina dropped). Load via Google Fonts `<link>` in `BaseLayout.astro`. Weights: 300, 400, 700, 900. No self-hosted font files needed.
 - **Geist Sans**: Load via `npm install geist`. Self-host for production.
 
-## 5. bsport Booking Integration
+## 5. bsport Widget Integration
 
-**MVP Implementation:** The booking integration uses a simple CTA link to bsport.
+All bsport widgets live at `src/components/integrations/`. Each component wraps the bsport JS SDK (`https://cdn.bsport.io/scripts/widget.js`) and is self-contained.
 
-### BookingBlock Component
+**Company ID:** `5082` (EOS CLUB / Tektonik 23) — hardcoded in each component.
 
-`src/components/blocks/BookingBlock.astro` renders:
-- A section heading (from `label` field, optional)
-- A prominent CTA button linking to `bookingUrl`
-- Opens in new tab (`target="_blank" rel="noopener"`)
-- Styled with `eos-accent` gradient
+**Prerequisite:** `BaseLayout.astro` must declare `<slot name="head" />` inside its `<head>` — all JS SDK widgets inject the CDN loader through this slot.
 
-### Future Enhancement
+### Widget Component Reference
 
-A tighter bsport integration (iframe embed or API) may be implemented in a future phase. The `BookingBlock` schema supports this by storing the booking URL, which could later point to an embedded widget.
+| Component | `widgetType` | `dialogMode` | Config Keys | Verified |
+|---|---|---|---|---|
+| `BsportCalendar.astro` | `"calendar"` | 3 (inline) | `coaches`, `establishments`, `metaActivities`, `levels`, `variant`, `groupSessionByPeriod` | ✓ |
+| `BsportSubscription.astro` | `"subscription"` | 3 (inline) | _(none)_ | ✓ |
+| `BsportPasses.astro` | `"pass"` | 3 (inline) | `paymentPackCategories[]`, `privatePassCategories[]` | ✓ |
+| `BsportWorkshop.astro` | `"workshop"` | 3 (inline) | `coaches`, `establishments`, `metaActivities`, `levels` | ✓ |
+| `BsportLeadCapture.astro` | `"newsletterV2"` | 0 (popup) | `fieldsType`, `showSubtitle`, `showSuccessTitle`, `showSuccessText` | ✓ |
+| `BsportLoginButton.astro` | `"loginButton"` | 0 (popup) | `openMemberProfile` | ✓ |
+| `BsportShop.astro` | `"shop"` | 3 (inline) | _(none — unverified)_ | ⚠ |
+| `BsportWidget.astro` | prop | prop | catch-all | — |
+
+### `dialogMode` Values
+
+- `3` — Inline embed. Widget renders directly in the page DOM at the mount target `<div>`.
+- `0` — Popup trigger. Widget renders a button; interaction opens a bsport modal overlay.
+
+### `BsportLeadCapture.astro` — `fieldsType` Options
+
+| Value | Fields shown |
+|---|---|
+| `"fullNameAndEmail"` | First name, last name, email |
+| `"firstNameAndEmail"` | First name, email |
+| `"emailOnly"` | Email only *(inferred — verify with bsport)* |
+
+### BookingBlock (Legacy CTA)
+
+`src/components/blocks/BookingBlock.astro` remains in place as a simple CTA link to bsport (opens in new tab). It is the MVP booking entry point. The widget components above are richer integrations for specific pages (Kurse, Preise, Events, etc.).
+
+### BaseLayout Slot Requirement
+
+Add inside `<head>` of `BaseLayout.astro`:
+
+```astro
+<slot name="head" />
+```
+
+Without this, the bsport CDN loader script will not inject into the document and all JS SDK widgets will silently fail to mount.
 
 ---
 
@@ -398,9 +439,9 @@ DEPLOY_WEB_ROOT=/var/www/eos-club
 
 - [ ] Create `src/components/blocks/HeroBlock.astro`: Renders HeroBlock fields. GSAP entry animation per §7.
 - [ ] Create `src/components/blocks/ContentBlock.astro`: Renders rich text / Markdown body.
-- [ ] Create `src/components/blocks/BookingBlock.astro`: Wraps `EversportsWidget.astro`, toggles visibility from `enabled` field.
+- [ ] Create `src/components/blocks/BookingBlock.astro`: CTA link to bsport booking URL (MVP). Toggles visibility from `enabled` field.
 - [ ] Create `src/components/blocks/FeatureGridBlock.astro`: Renders icon/title/description grid. GSAP scroll animation per §7.
-- [ ] Create `src/components/integrations/EversportsWidget.astro`: Client-side widget island per §5.
+- [ ] ~~`EversportsWidget.astro`~~ — replaced by bsport widget suite in `src/components/integrations/` (see §5).
 
 ### Group D — Routing
 
@@ -499,5 +540,6 @@ DEPLOY_WEB_ROOT=/var/www/eos-club
 - **Navigation pages:** There are 7 nav pages (Home, Studio, Kurse/Classes, Preise/Pricing, Events, Wellness, Team) plus Kontakt/Contact in the footer. Impressum is a static DE-only page — do not create an EN equivalent.
 - **Block structure:** Each page's `blocks` array drives the page layout. To add a section, append a new block object. Block types are: `HeroBlock`, `ContentBlock`, `BookingBlock`, `FeatureGridBlock`.
 - **Language identifier:** Language is determined by the file path (`de/` or `en/`) NOT a frontmatter field.
-- **Booking:** The bsport booking URL is configured via the `bookingUrl` field in BookingBlock. For MVP, this renders a CTA link. Do not modify the BookingBlock component code.
+- **Booking (MVP):** The bsport booking URL is configured via the `bookingUrl` field in BookingBlock. For MVP, this renders a CTA link. Do not modify the BookingBlock component code.
+- **bsport widgets:** Full widget components are in `src/components/integrations/`. Use `BsportCalendar` on the Kurse page, `BsportPasses`/`BsportSubscription` on the Preise page, `BsportWorkshop` on the Events page, `BsportLoginButton` in the Header. `BsportLeadCapture` can replace `EmailSignup.astro` once bsport is confirmed as CRM. All require `<slot name="head" />` in `BaseLayout.astro`. Company ID is `5082`.
 - **Deployment:** Push to `main` triggers the server webhook listener. Do not reference Vercel or Netlify anywhere.

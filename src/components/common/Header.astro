@@ -18,15 +18,15 @@ const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-eos-subtle">
-  <div class="container mx-auto px-6 py-4 flex items-center justify-between">
-    <!-- Logo + Brand -->
-    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
-      <img src="/assets/eos-logo-export_wb-red.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
-      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
+  <div class="container mx-auto px-6 py-4 grid grid-cols-3 items-center">
+    <!-- Logo + Brand (Left) -->
+    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3 justify-self-start">
+      <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
+      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
     </a>
 
-    <!-- Desktop Nav (hidden on mobile) -->
-    <nav class="hidden md:flex items-center space-x-8">
+    <!-- Desktop Nav (Center - hidden on mobile) -->
+    <nav class="hidden md:flex items-center justify-center space-x-6 lg:space-x-8">
       {navItems.map((item) => {
         const path = isEn ? item.enPath : item.dePath;
         const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
@@ -39,13 +39,40 @@ const pathname = new URL(Astro.request.url).pathname;
           </a>
         );
       })}
-      <LangSwitch />
     </nav>
+
+    <!-- Right Section: Book Button, User Login, LangSwitch -->
+    <!-- pointer-events-none on the wrapper prevents the transparent grid area from blocking -->
+    <!-- overflow from the center nav (the "Team" link). Children restore pointer-events-auto. -->
+    <div class="hidden md:flex items-center justify-end space-x-4 pointer-events-none">
+      <!-- Book Button -->
+      <a
+        href={isEn ? '/en/classes' : '/kurse'}
+        class="pointer-events-auto inline-flex items-center px-4 py-2 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2"
+      >
+        {isEn ? 'Book' : 'Buchen'}
+      </a>
+
+      <!-- User Login Icon -->
+      <a
+        href="https://www.eversports.de/login"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="pointer-events-auto p-2 text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2 rounded-lg"
+        aria-label={isEn ? 'User Login' : 'Benutzer Login'}
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      </a>
+
+      <span class="pointer-events-auto"><LangSwitch /></span>
+    </div>
 
     <!-- Mobile Hamburger (red icon, visible on mobile only) -->
     <button
       id="mobile-menu-button"
-      class="md:hidden p-2 text-eos-accent focus:outline-none transition-transform active:scale-95"
+      class="md:hidden p-2 text-eos-accent focus:outline-none transition-transform active:scale-95 justify-self-end"
       aria-label="Toggle Menu"
       aria-expanded="false"
     >
@@ -65,12 +92,12 @@ const pathname = new URL(Astro.request.url).pathname;
 <!-- Mobile Sidebar Panel -->
 <aside
   id="mobile-sidebar"
-  class="fixed left-0 top-0 h-screen w-full max-w-sm bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col"
+  class="fixed left-0 top-0 h-screen w-full max-w-sm bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col pointer-events-none"
 >
   <!-- Close Button -->
   <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
     <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
-      <img src="/assets/eos-logo-export_wb-red.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
+      <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
       <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
     </a>
     <button
@@ -100,7 +127,29 @@ const pathname = new URL(Astro.request.url).pathname;
         );
       })}
     </div>
-    <div class="mt-8 pt-8 border-t border-eos-subtle">
+    <!-- Mobile Actions: Book & User Login -->
+    <div class="mt-8 pt-8 border-t border-eos-subtle space-y-4">
+      <!-- Book Button -->
+      <a
+        href={isEn ? '/en/classes' : '/kurse'}
+        class="flex items-center justify-center w-full px-4 py-3 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90"
+      >
+        {isEn ? 'Book' : 'Buchen'}
+      </a>
+
+      <!-- User Login -->
+      <a
+        href="https://www.eversports.de/login"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center justify-center space-x-2 py-3 text-eos-accent font-bold uppercase tracking-widest hover:bg-eos-base rounded-lg transition-colors"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+        <span>{isEn ? 'Login' : 'Anmelden'}</span>
+      </a>
+
       <LangSwitch />
     </div>
   </nav>
@@ -116,13 +165,13 @@ const pathname = new URL(Astro.request.url).pathname;
   const closeButton = document.getElementById('mobile-close-button');
   const sidebar = document.getElementById('mobile-sidebar');
   const overlay = document.getElementById('mobile-overlay');
-  const navItems = document.querySelectorAll('.mobile-nav-item');
 
   let isMenuOpen = false;
 
   function openMenu() {
     isMenuOpen = true;
     sidebar?.classList.remove('-translate-x-full');
+    sidebar?.classList.add('pointer-events-auto');
     overlay?.classList.remove('hidden');
     setTimeout(() => overlay?.classList.add('opacity-100'), 10);
     document.body.style.overflow = 'hidden';
@@ -134,6 +183,7 @@ const pathname = new URL(Astro.request.url).pathname;
   function closeMenu() {
     isMenuOpen = false;
     sidebar?.classList.add('-translate-x-full');
+    sidebar?.classList.remove('pointer-events-auto');
     overlay?.classList.remove('opacity-100');
     setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
@@ -145,13 +195,6 @@ const pathname = new URL(Astro.request.url).pathname;
   menuButton?.addEventListener('click', openMenu);
   closeButton?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
-
-  // Close on nav item click (mobile only)
-  navItems.forEach(item => {
-    item.addEventListener('click', () => {
-      if (window.innerWidth < 768) closeMenu();
-    });
-  });
 
   // Close on escape key
   document.addEventListener('keydown', (e) => {

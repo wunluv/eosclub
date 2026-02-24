@@ -1,0 +1,110 @@
+---
+/**
+ * BsportCalendar.astro
+ *
+ * Renders the bsport class schedule / calendar widget.
+ * dialogMode: 3 = inline / no popup ("No Popup beta")
+ * widgetType: "calendar"
+ *
+ * Usage — bare (show all classes):
+ *   <BsportCalendar />
+ *
+ * Usage — filtered:
+ *   <BsportCalendar
+ *     coaches={[42]}
+ *     establishments={[7]}
+ *     metaActivities={[101, 102]}
+ *     levels={[1]}
+ *     groupSessionByPeriod={false}
+ *   />
+ *
+ * Props map 1:1 to the bsport calendar config object.
+ * All props are optional; defaults match the bsport dashboard "No Popup" output.
+ *
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside its <head> block.
+ */
+
+interface Props {
+  /** Array of coach IDs to filter by (bsport internal IDs). */
+  coaches?: number[];
+  /** Array of establishment/location IDs to filter by. */
+  establishments?: number[];
+  /** Array of meta-activity IDs to filter by (activity category). */
+  metaActivities?: number[];
+  /** Array of level IDs to filter by (e.g. beginner, advanced). */
+  levels?: number[];
+  /** Variant flag — leave null unless bsport support advises otherwise. */
+  variant?: string | null;
+  /** Group sessions by time period (week/day view toggle). Default: true. */
+  groupSessionByPeriod?: boolean;
+}
+
+const {
+  coaches = [],
+  establishments = [],
+  metaActivities = [],
+  levels = [],
+  variant = null,
+  groupSessionByPeriod = true,
+} = Astro.props;
+
+const WIDGET_ELEMENT_ID = "bsport-widget-863381";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-calendar-widget"></div>
+
+<!-- Mount script -->
+<script
+  is:inline
+  define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, coaches, establishments, metaActivities, levels, variant, groupSessionByPeriod }}
+>
+  function mountBsportCalendar(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportCalendar(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportCalendar({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 3,
+    widgetType: "calendar",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      calendar: {
+        coaches: coaches,
+        establishments: establishments,
+        metaActivities: metaActivities,
+        levels: levels,
+        variant: variant,
+        groupSessionByPeriod: groupSessionByPeriod
+      }
+    }
+  });
+</script>

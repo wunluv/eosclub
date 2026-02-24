@@ -1,0 +1,65 @@
+---
+/**
+ * BsportShop.astro
+ *
+ * Renders the bsport shop / merchandise widget.
+ * dialogMode: 3 = inline / no popup ("No Popup beta")
+ * widgetType: "shop"
+ *
+ * Usage:
+ *   <BsportShop />
+ *
+ * The CDN loader is injected into <head> via Astro's slot system.
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside <head>.
+ */
+
+const WIDGET_ELEMENT_ID = "bsport-widget-shop-990933";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-shop-widget"></div>
+
+<!-- Mount script -->
+<script is:inline define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID }}>
+  function mountBsportShop(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportShop(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportShop({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 3,
+    widgetType: "shop",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      shop: {}
+    }
+  });
+</script>

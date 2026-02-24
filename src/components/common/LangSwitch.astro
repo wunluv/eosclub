@@ -6,24 +6,55 @@ interface Props {
 const { translationSlug = '' } = Astro.props;
 const currentLocale = Astro.currentLocale || 'de';
 
+// Get current pathname from the URL
+const pathname = Astro.url.pathname;
+
 const isEn = currentLocale === 'en';
 const targetLocale = isEn ? 'de' : 'en';
 const targetLabel = isEn ? 'Auf Deutsch wechseln' : 'Switch to English';
 const targetText = isEn ? 'DE' : 'EN';
 
-// Logic:
-// If on DE page (no /en/ prefix) -> link to /en/{translationSlug}
-// If on EN page (has /en/ prefix) -> link to /{translationSlug}
-const targetPath = isEn
-  ? `/${translationSlug}`
-  : `/en/${translationSlug}`;
+// Translation mapping for slugs
+const slugMap: Record<string, Record<string, string>> = {
+  '/kurse': { en: '/en/classes' },
+  '/en/classes': { de: '/kurse' },
+  '/preise': { en: '/en/pricing' },
+  '/en/pricing': { de: '/preise' },
+  '/studio': { en: '/en/studio' },
+  '/en/studio': { de: '/studio' },
+  '/events': { en: '/en/events' },
+  '/en/events': { de: '/events' },
+  '/wellness': { en: '/en/wellness' },
+  '/en/wellness': { de: '/wellness' },
+  '/team': { en: '/en/team' },
+  '/en/team': { de: '/team' },
+  '/kontakt': { en: '/en/contact' },
+  '/en/contact': { de: '/kontakt' },
+};
 
-// Clean up double slashes if translationSlug is empty
-const finalPath = targetPath.replace(/\/+/g, '/');
+// Determine target path
+let targetPath: string;
+
+if (pathname === '/' || pathname === '') {
+  // Home page
+  targetPath = isEn ? '/' : '/en';
+} else if (slugMap[pathname]) {
+  // Known translation
+  targetPath = slugMap[pathname][targetLocale];
+} else {
+  // Fallback: just toggle /en/ prefix
+  if (isEn) {
+    // Remove /en prefix
+    targetPath = pathname.replace(/^\/en/, '') || '/';
+  } else {
+    // Add /en prefix
+    targetPath = `/en${pathname}`;
+  }
+}
 ---
 
 <a
-  href={finalPath}
+  href={targetPath}
   aria-label={targetLabel}
   class="text-sm font-medium hover:text-eos-accent transition-colors duration-200"
 >

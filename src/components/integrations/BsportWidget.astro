@@ -1,0 +1,91 @@
+---
+/**
+ * BsportWidget.astro
+ *
+ * General-purpose bsport widget component.
+ * Replaces the legacy EversportsWidget.astro.
+ *
+ * Use this when you need a configurable single-instance widget that doesn't
+ * warrant its own dedicated component (e.g. a custom compound view).
+ *
+ * For specific widget types, prefer the dedicated components:
+ *   - BsportSubscription.astro  → widgetType: "subscription"
+ *   - BsportBooking.astro       → widgetType: "booking"
+ *   - BsportShop.astro          → widgetType: "shop"
+ *
+ * Props:
+ *   widgetType  — bsport widget type string (required)
+ *   elementId   — unique DOM id for the mount target (required, must be unique per page)
+ *   dialogMode  — 0 = popup, 3 = inline/no-popup (default: 3)
+ *   showFab     — show floating action button (default: false)
+ *
+ * Usage:
+ *   <BsportWidget widgetType="booking" elementId="bsport-widget-main" />
+ *
+ * Requires BaseLayout.astro to expose <slot name="head" /> inside <head>.
+ */
+
+interface Props {
+  widgetType: "subscription" | "booking" | "shop" | string;
+  elementId: string;
+  dialogMode?: 0 | 3;
+  showFab?: boolean;
+}
+
+const {
+  widgetType,
+  elementId,
+  dialogMode = 3,
+  showFab = false,
+} = Astro.props;
+
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: guarded against duplicate inserts -->
+  <script id="insert-bsport-widget-cdn" is:inline>
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={elementId} class="bsport-widget"></div>
+
+<!-- Mount script -->
+<script is:inline define:vars={{ elementId, COMPANY_ID, widgetType, dialogMode, showFab }}>
+  function mountBsportWidget(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportWidget(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  var widgetConfig = {};
+  widgetConfig[widgetType] = {};
+
+  mountBsportWidget({
+    parentElement: elementId,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: dialogMode,
+    widgetType: widgetType,
+    showFab: showFab,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: widgetConfig
+  });
+</script>

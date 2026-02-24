@@ -1,0 +1,70 @@
+---
+/**
+ * BsportSubscription.astro
+ *
+ * Renders the bsport subscription widget using the "No Popup (beta)" embed mode.
+ * dialogMode: 3 = inline / no popup
+ * widgetType: "subscription"
+ *
+ * Usage:
+ *   <BsportSubscription />
+ *
+ * The CDN loader script is injected once into <head> via Astro's <Fragment slot="head">.
+ * The mount script is deferred inline to avoid blocking the main thread.
+ *
+ * Company ID and widget mount element ID are scoped to EOS CLUB (id: 5082).
+ */
+
+const WIDGET_ELEMENT_ID = "bsport-widget-990933";
+const COMPANY_ID = 5082;
+---
+
+<Fragment slot="head">
+  <!-- bsport CDN loader: injected once, guarded against duplicate inserts -->
+  <script
+    id="insert-bsport-widget-cdn"
+    is:inline
+  >
+    !function (b, s, p) {
+      typeof window.BsportWidget === "undefined" &&
+        !document.getElementById("bsport-widget-cdn") &&
+        (function () {
+          var m = b.createElement(s);
+          m.id = "bsport-widget-cdn";
+          m.src = p;
+          b.getElementsByTagName("head")[0].appendChild(m);
+        })();
+    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
+  </script>
+</Fragment>
+
+<!-- Mount target -->
+<div id={WIDGET_ELEMENT_ID} class="bsport-subscription-widget"></div>
+
+<!-- Mount script: polls until BsportWidget SDK is ready, then mounts -->
+<script is:inline define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID }}>
+  function mountBsportSubscription(config, repeat) {
+    repeat = repeat || 1;
+    if (repeat > 50) return;
+    if (!window.BsportWidget) {
+      return setTimeout(function () {
+        mountBsportSubscription(config, repeat + 1);
+      }, 100 * repeat || 1);
+    }
+    BsportWidget.mount(config);
+  }
+
+  mountBsportSubscription({
+    parentElement: WIDGET_ELEMENT_ID,
+    companyId: COMPANY_ID,
+    franchiseId: null,
+    dialogMode: 3,
+    widgetType: "subscription",
+    showFab: false,
+    fullScreenPopup: false,
+    styles: undefined,
+    config: {
+      subscription: {}
+    }
+  });
+</script>
