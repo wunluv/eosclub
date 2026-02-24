@@ -24,7 +24,7 @@ const ariaLabel = altText || (isDE ? 'Hintergrundbild' : 'Background image');
 ---
 
 <div
-  class={`w-screen relative left-1/2 -translate-x-1/2 ${minHeight}`}
+  class={`w-full relative ${minHeight}`}
   style={`background-image: url('${image}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   role="img"
   aria-label={ariaLabel}

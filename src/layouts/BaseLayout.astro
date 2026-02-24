@@ -64,13 +64,12 @@ const currentLocale = Astro.currentLocale || 'de';
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <slot name="head" />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col overflow-x-hidden">
     <Header />
     <main class="flex-grow">
-      <div class="max-w-7xl mx-auto w-full px-4">
-        <slot />
-      </div>
+      <slot />
     </main>
     <Footer />
   </body>
