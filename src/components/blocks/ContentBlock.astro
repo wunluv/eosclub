@@ -1,15 +1,92 @@
 ---
 interface Props {
   body: string;
+  backgroundImage?: string;
+  fullBleed?: boolean;
+  name?: string;
 }
 
-const { body } = Astro.props;
+const { body, backgroundImage, fullBleed = false, name } = Astro.props;
+
+const sectionId = name ? `block-${name}` : undefined;
+const isImageBand = fullBleed && !!backgroundImage;
 ---
 
-<section class="py-16 px-4">
-  <div class="max-w-3xl mx-auto">
-    <div class="prose prose-lg prose-slate prose-headings:text-eos-accent prose-a:text-eos-accent hover:prose-a:text-eos-accent transition-colors">
-      <Fragment set:html={body} />
+{isImageBand ? (
+  <section
+    id={sectionId}
+    class="philosophy-intro-block relative w-screen left-1/2 -translate-x-1/2 overflow-hidden"
+    aria-label="Philosophy introduction"
+  >
+    <div
+      class="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+      style={`background-image: url('${backgroundImage}');`}
+      role="presentation"
+      aria-hidden="true"
+    ></div>
+
+    <div class="absolute inset-0 w-full h-full bg-eos-zen/60" aria-hidden="true"></div>
+
+    <div class="philosophy-content relative z-10 max-w-4xl mx-auto px-6 py-24 md:py-32 lg:py-40 text-center">
+      <div
+        class="prose prose-xl md:prose-2xl prose-invert
+               prose-p:font-serif prose-p:leading-relaxed prose-p:text-white
+               prose-headings:font-serif prose-headings:text-white
+               prose-a:text-eos-accent hover:prose-a:underline
+               max-w-none"
+      >
+        <Fragment set:html={body} />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+) : (
+  <section id={sectionId} class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+      <div class="prose prose-lg prose-slate prose-headings:text-eos-accent prose-a:text-eos-accent hover:prose-a:text-eos-accent transition-colors">
+        <Fragment set:html={body} />
+      </div>
+    </div>
+  </section>
+)}
+
+{isImageBand && (
+  <script>
+    import gsap from 'gsap';
+
+    function initPhilosophyIntro() {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      const sections = document.querySelectorAll<HTMLElement>('.philosophy-intro-block');
+
+      sections.forEach((section) => {
+        const content = section.querySelector<HTMLElement>('.philosophy-content');
+        if (!content) return;
+
+        gsap.set(content, { opacity: 0, y: 28 });
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                gsap.to(content, {
+                  opacity: 1,
+                  y: 0,
+                  duration: 1.1,
+                  ease: 'power2.out',
+                  delay: 0.1,
+                });
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.2 }
+        );
+
+        observer.observe(section);
+      });
+    }
+
+    initPhilosophyIntro();
+    document.addEventListener('astro:after-swap', initPhilosophyIntro);
+  </script>
+)}

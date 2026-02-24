@@ -54,6 +54,8 @@ const contentBlockSchema = z.object({
   _template: z.literal('ContentBlock'),
   name: z.string().optional(),
   body: z.string(),
+  backgroundImage: z.string().optional(),
+  fullBleed: z.boolean().optional().default(false),
 });
 
 const bookingBlockSchema = z.object({

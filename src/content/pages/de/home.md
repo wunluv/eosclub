@@ -14,6 +14,8 @@ blocks:
     ctaUrl: "/kurse"
   - _template: ContentBlock
     name: philosophy-intro
+    fullBleed: true
+    backgroundImage: "/assets/bw_horizontal_theme_barre.png"
     body: "<p>EOS CLUB ist mehr als ein Studio – es ist ein Ort der Transformation. Hier verbinden sich traditionelle Praktiken mit modernem Wellness für dein ganzheitliches Wohlbefinden.</p>"
   - _template: FeatureGridBlock
     name: pillars-grid

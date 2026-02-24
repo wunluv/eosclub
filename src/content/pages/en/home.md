@@ -13,6 +13,8 @@ blocks:
     name: home-hero
     _template: HeroBlock
   - name: philosophy-intro
+    fullBleed: true
+    backgroundImage: "/assets/bw_horizontal_theme_barre.png"
     body: |
       <p>EOS CLUB is more than a studio – it's a place of transformation. Here, traditional practices meet modern wellness for your holistic well-being.</p>
     _template: ContentBlock

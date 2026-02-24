@@ -1,6 +1,6 @@
 # EOS CLUB — Astro SSG Website
 
-Static site for a yoga/wellness studio in Germany. Astro v4+ SSG, TailwindCSS v3+, GSAP v3, TinaCMS, bsport booking integration. German default locale (no URL prefix), English at `/en/`.
+Static site for a yoga/wellness studio in Germany. Astro v5 SSG, TailwindCSS v3, GSAP v3, TinaCMS, bsport booking integration. German default locale (no URL prefix), English at `/en/`.
 
 ---
 
@@ -8,8 +8,8 @@ Static site for a yoga/wellness studio in Germany. Astro v4+ SSG, TailwindCSS v3
 
 | Technology | Version | Notes |
 |------------|---------|-------|
-| Astro | v4+ | `output: 'static'` |
-| TailwindCSS | v3+ | Custom design tokens |
+| Astro | v5 | `output: 'static'` |
+| TailwindCSS | v3 | Custom design tokens |
 | GSAP | v3.14.2 | Limited scope — see GSAP Rules |
 | TinaCMS | — | Local + TinaCloud |
 | bsport SDK | CDN | `https://cdn.bsport.io/scripts/widget.js` |

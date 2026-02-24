@@ -88,7 +88,7 @@ type Collection {
 union DocumentNode = Pages | Folder
 
 type PagesBlocksHeroBlock {
-  headline: String!
+  headline: String
   variant: String
   subheadline: String
   backgroundImage: String!
@@ -109,14 +109,45 @@ type PagesBlocksBookingBlock {
 type PagesBlocksFeatureGridBlockItems {
   icon: String!
   title: String!
-  description: String!
+  description: String
 }
 
 type PagesBlocksFeatureGridBlock {
   items: [PagesBlocksFeatureGridBlockItems]
 }
 
-union PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock
+type PagesBlocksFullBleedBlock {
+  image: String!
+  altText: String
+  minHeight: String
+  overlayOpacity: String
+  headline: String
+  subtext: String
+}
+
+type PagesBlocksInteractiveListBlockItems {
+  label: String!
+  description: String
+  image: String!
+  imageAlt: String
+}
+
+type PagesBlocksInteractiveListBlock {
+  title: String
+  items: [PagesBlocksInteractiveListBlockItems]
+}
+
+type PagesBlocksFaqBlockQuestions {
+  question: String!
+  answer: JSON!
+}
+
+type PagesBlocksFaqBlock {
+  title: String
+  questions: [PagesBlocksFaqBlockQuestions]
+}
+
+union PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock
 
 type Pages implements Node & Document {
   title: String!
@@ -183,11 +214,45 @@ input PagesBlocksFeatureGridBlockFilter {
   items: PagesBlocksFeatureGridBlockItemsFilter
 }
 
+input PagesBlocksFullBleedBlockFilter {
+  image: ImageFilter
+  altText: StringFilter
+  minHeight: StringFilter
+  overlayOpacity: StringFilter
+  headline: StringFilter
+  subtext: StringFilter
+}
+
+input PagesBlocksInteractiveListBlockItemsFilter {
+  label: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  imageAlt: StringFilter
+}
+
+input PagesBlocksInteractiveListBlockFilter {
+  title: StringFilter
+  items: PagesBlocksInteractiveListBlockItemsFilter
+}
+
+input PagesBlocksFaqBlockQuestionsFilter {
+  question: StringFilter
+  answer: RichTextFilter
+}
+
+input PagesBlocksFaqBlockFilter {
+  title: StringFilter
+  questions: PagesBlocksFaqBlockQuestionsFilter
+}
+
 input PagesBlocksFilter {
   HeroBlock: PagesBlocksHeroBlockFilter
   ContentBlock: PagesBlocksContentBlockFilter
   BookingBlock: PagesBlocksBookingBlockFilter
   FeatureGridBlock: PagesBlocksFeatureGridBlockFilter
+  FullBleedBlock: PagesBlocksFullBleedBlockFilter
+  InteractiveListBlock: PagesBlocksInteractiveListBlockFilter
+  FaqBlock: PagesBlocksFaqBlockFilter
 }
 
 input PagesFilter {
@@ -257,11 +322,45 @@ input PagesBlocksFeatureGridBlockMutation {
   items: [PagesBlocksFeatureGridBlockItemsMutation]
 }
 
+input PagesBlocksFullBleedBlockMutation {
+  image: String
+  altText: String
+  minHeight: String
+  overlayOpacity: String
+  headline: String
+  subtext: String
+}
+
+input PagesBlocksInteractiveListBlockItemsMutation {
+  label: String
+  description: String
+  image: String
+  imageAlt: String
+}
+
+input PagesBlocksInteractiveListBlockMutation {
+  title: String
+  items: [PagesBlocksInteractiveListBlockItemsMutation]
+}
+
+input PagesBlocksFaqBlockQuestionsMutation {
+  question: String
+  answer: JSON
+}
+
+input PagesBlocksFaqBlockMutation {
+  title: String
+  questions: [PagesBlocksFaqBlockQuestionsMutation]
+}
+
 input PagesBlocksMutation {
   HeroBlock: PagesBlocksHeroBlockMutation
   ContentBlock: PagesBlocksContentBlockMutation
   BookingBlock: PagesBlocksBookingBlockMutation
   FeatureGridBlock: PagesBlocksFeatureGridBlockMutation
+  FullBleedBlock: PagesBlocksFullBleedBlockMutation
+  InteractiveListBlock: PagesBlocksInteractiveListBlockMutation
+  FaqBlock: PagesBlocksFaqBlockMutation
 }
 
 input PagesMutation {

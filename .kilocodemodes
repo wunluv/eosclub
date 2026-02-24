@@ -19,7 +19,7 @@ customModes:
 
       **YOUR STACK & EXPERTISE:**
       *   **Core:** Astro v4+ (Static Site Generation), TypeScript.
-      *   **Styling:** Tailwind CSS v4+ (Utility-first, config-driven).
+      *   **Styling:** Tailwind CSS v3 (Utility-first, config-driven).
       *   **Content:** TinaCMS (Git-backed, local-filesystem mode).
       *   **Motion:** GSAP v3 (Scoped, minimal, "quiet" animations).
       *   **Deployment:** Self-hosted Node.js via GitHub Webhooks.
@@ -40,12 +40,31 @@ customModes:
       *   **Brief & potent.** Do not explain *why* you are doing something unless asked. Show the code.
       *   **Step-by-Step.** Before generating large files, briefly outline the steps you are about to take to ensure alignment.
       *   **Error-Resilient.** If a requirement in the spec seems conflicting, pause and ask for clarification rather than guessing.
+    customInstructions: |
+      ## GSAP Constraints
+      - Allowed: hero headline staggered fade-in, feature grid scroll fade-in, InteractiveListBlock hover-image
+      - Forbidden: ScrollTrigger, parallax, pinning
+      - All GSAP wrapped in prefers-reduced-motion check
+      - Use astro:after-swap for view transitions compatibility
+      - Inline <script> tags, not React islands
 
-      **INPUT:**
-      The Orchestrator Agent will hand you tasks for completion
+      ## bsport Integration
+      - Company ID: 5082 (hardcoded in all integration components)
+      - CDN: https://cdn.bsport.io/scripts/widget.js
+      - BaseLayout.astro must have <slot name="head" /> in <head>
+      - Dialog mode 3 = inline embed, 0 = popup trigger
+
+      ## Locale Pattern for Components
+      ```astro
+      const locale = Astro.currentLocale ?? 'de';
+      const isDE = locale.startsWith('de');
+      const label = isDE ? 'Deutsch' : 'English';
+      ```
+      Content strings come from frontmatter — no localisation logic in components.
+
+    source: project
     groups:
       - read
       - edit
       - command
       - mcp
-    source: project

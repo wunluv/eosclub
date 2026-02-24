@@ -10,11 +10,21 @@ const legalLinks = [
   { de: 'Datenschutz', en: 'Privacy', path: '/datenschutz' },
   { de: 'AGB', en: 'Terms', path: '/agb' },
 ];
+
+const menuLinks = [
+  { de: 'Home',     en: 'Home',    dePath: '/',        enPath: '/en' },
+  { de: 'Studio',   en: 'Studio',  dePath: '/studio',  enPath: '/en/studio' },
+  { de: 'Kurse',    en: 'Classes', dePath: '/kurse',   enPath: '/en/classes' },
+  { de: 'Preise',   en: 'Pricing', dePath: '/preise',  enPath: '/en/pricing' },
+  { de: 'Events',   en: 'Events',  dePath: '/events',  enPath: '/en/events' },
+  { de: 'Wellness', en: 'Wellness',dePath: '/wellness',enPath: '/en/wellness' },
+  { de: 'Team',     en: 'Team',    dePath: '/team',    enPath: '/en/team' },
+];
 ---
 
 <footer class="bg-eos-contrast text-white py-12 mt-auto">
   <div class="max-w-7xl mx-auto w-full px-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
       <!-- Studio Info -->
       <div>
         <h2 class="font-serif text-2xl mb-4 !text-white">EOS CLUB</h2>
@@ -30,6 +40,19 @@ const legalLinks = [
         </div>
       </div>
 
+      <!-- Menu Links -->
+      <nav class="flex flex-col space-y-2">
+        <h3 class="font-medium mb-2 !text-white">{isEn ? 'Menu' : 'Menü'}</h3>
+        {menuLinks.map((link) => {
+          const path = isEn ? link.enPath : link.dePath;
+          return (
+            <a href={path} class="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-eos-accent transition-colors">
+              {isEn ? link.en : link.de}
+            </a>
+          );
+        })}
+      </nav>
+
       <!-- Legal Links -->
       <nav class="flex flex-col space-y-2">
         <h3 class="font-medium mb-2 !text-white">{isEn ? 'Legal' : 'Rechtliches'}</h3>
@@ -44,9 +67,9 @@ const legalLinks = [
       </nav>
 
       <!-- Language & Copyright -->
-      <div class="flex flex-col items-start md:items-end justify-between">
+      <div class="flex flex-col items-start lg:items-end justify-between">
         <LangSwitch />
-        <p class="text-sm text-white/60 mt-8 md:mt-0">
+        <p class="text-sm text-white/60 mt-8 lg:mt-0">
           © {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}
         </p>
       </div>

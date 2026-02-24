@@ -167,7 +167,7 @@ export type DocumentNode = Pages | Folder;
 
 export type PagesBlocksHeroBlock = {
   __typename?: 'PagesBlocksHeroBlock';
-  headline: Scalars['String']['output'];
+  headline?: Maybe<Scalars['String']['output']>;
   variant?: Maybe<Scalars['String']['output']>;
   subheadline?: Maybe<Scalars['String']['output']>;
   backgroundImage: Scalars['String']['output'];
@@ -191,7 +191,7 @@ export type PagesBlocksFeatureGridBlockItems = {
   __typename?: 'PagesBlocksFeatureGridBlockItems';
   icon: Scalars['String']['output'];
   title: Scalars['String']['output'];
-  description: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
 };
 
 export type PagesBlocksFeatureGridBlock = {
@@ -199,7 +199,43 @@ export type PagesBlocksFeatureGridBlock = {
   items?: Maybe<Array<Maybe<PagesBlocksFeatureGridBlockItems>>>;
 };
 
-export type PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock;
+export type PagesBlocksFullBleedBlock = {
+  __typename?: 'PagesBlocksFullBleedBlock';
+  image: Scalars['String']['output'];
+  altText?: Maybe<Scalars['String']['output']>;
+  minHeight?: Maybe<Scalars['String']['output']>;
+  overlayOpacity?: Maybe<Scalars['String']['output']>;
+  headline?: Maybe<Scalars['String']['output']>;
+  subtext?: Maybe<Scalars['String']['output']>;
+};
+
+export type PagesBlocksInteractiveListBlockItems = {
+  __typename?: 'PagesBlocksInteractiveListBlockItems';
+  label: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  image: Scalars['String']['output'];
+  imageAlt?: Maybe<Scalars['String']['output']>;
+};
+
+export type PagesBlocksInteractiveListBlock = {
+  __typename?: 'PagesBlocksInteractiveListBlock';
+  title?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<PagesBlocksInteractiveListBlockItems>>>;
+};
+
+export type PagesBlocksFaqBlockQuestions = {
+  __typename?: 'PagesBlocksFaqBlockQuestions';
+  question: Scalars['String']['output'];
+  answer: Scalars['JSON']['output'];
+};
+
+export type PagesBlocksFaqBlock = {
+  __typename?: 'PagesBlocksFaqBlock';
+  title?: Maybe<Scalars['String']['output']>;
+  questions?: Maybe<Array<Maybe<PagesBlocksFaqBlockQuestions>>>;
+};
+
+export type PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock;
 
 export type Pages = Node & Document & {
   __typename?: 'Pages';
@@ -267,11 +303,45 @@ export type PagesBlocksFeatureGridBlockFilter = {
   items?: InputMaybe<PagesBlocksFeatureGridBlockItemsFilter>;
 };
 
+export type PagesBlocksFullBleedBlockFilter = {
+  image?: InputMaybe<ImageFilter>;
+  altText?: InputMaybe<StringFilter>;
+  minHeight?: InputMaybe<StringFilter>;
+  overlayOpacity?: InputMaybe<StringFilter>;
+  headline?: InputMaybe<StringFilter>;
+  subtext?: InputMaybe<StringFilter>;
+};
+
+export type PagesBlocksInteractiveListBlockItemsFilter = {
+  label?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imageAlt?: InputMaybe<StringFilter>;
+};
+
+export type PagesBlocksInteractiveListBlockFilter = {
+  title?: InputMaybe<StringFilter>;
+  items?: InputMaybe<PagesBlocksInteractiveListBlockItemsFilter>;
+};
+
+export type PagesBlocksFaqBlockQuestionsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<RichTextFilter>;
+};
+
+export type PagesBlocksFaqBlockFilter = {
+  title?: InputMaybe<StringFilter>;
+  questions?: InputMaybe<PagesBlocksFaqBlockQuestionsFilter>;
+};
+
 export type PagesBlocksFilter = {
   HeroBlock?: InputMaybe<PagesBlocksHeroBlockFilter>;
   ContentBlock?: InputMaybe<PagesBlocksContentBlockFilter>;
   BookingBlock?: InputMaybe<PagesBlocksBookingBlockFilter>;
   FeatureGridBlock?: InputMaybe<PagesBlocksFeatureGridBlockFilter>;
+  FullBleedBlock?: InputMaybe<PagesBlocksFullBleedBlockFilter>;
+  InteractiveListBlock?: InputMaybe<PagesBlocksInteractiveListBlockFilter>;
+  FaqBlock?: InputMaybe<PagesBlocksFaqBlockFilter>;
 };
 
 export type PagesFilter = {
@@ -389,11 +459,45 @@ export type PagesBlocksFeatureGridBlockMutation = {
   items?: InputMaybe<Array<InputMaybe<PagesBlocksFeatureGridBlockItemsMutation>>>;
 };
 
+export type PagesBlocksFullBleedBlockMutation = {
+  image?: InputMaybe<Scalars['String']['input']>;
+  altText?: InputMaybe<Scalars['String']['input']>;
+  minHeight?: InputMaybe<Scalars['String']['input']>;
+  overlayOpacity?: InputMaybe<Scalars['String']['input']>;
+  headline?: InputMaybe<Scalars['String']['input']>;
+  subtext?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksInteractiveListBlockItemsMutation = {
+  label?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imageAlt?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksInteractiveListBlockMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<PagesBlocksInteractiveListBlockItemsMutation>>>;
+};
+
+export type PagesBlocksFaqBlockQuestionsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type PagesBlocksFaqBlockMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  questions?: InputMaybe<Array<InputMaybe<PagesBlocksFaqBlockQuestionsMutation>>>;
+};
+
 export type PagesBlocksMutation = {
   HeroBlock?: InputMaybe<PagesBlocksHeroBlockMutation>;
   ContentBlock?: InputMaybe<PagesBlocksContentBlockMutation>;
   BookingBlock?: InputMaybe<PagesBlocksBookingBlockMutation>;
   FeatureGridBlock?: InputMaybe<PagesBlocksFeatureGridBlockMutation>;
+  FullBleedBlock?: InputMaybe<PagesBlocksFullBleedBlockMutation>;
+  InteractiveListBlock?: InputMaybe<PagesBlocksInteractiveListBlockMutation>;
+  FaqBlock?: InputMaybe<PagesBlocksFaqBlockMutation>;
 };
 
 export type PagesMutation = {
@@ -404,14 +508,14 @@ export type PagesMutation = {
   blocks?: InputMaybe<Array<InputMaybe<PagesBlocksMutation>>>;
 };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null };
 
 export type PagesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -423,7 +527,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null } | null } | null> | null } };
 
 export const PagesPartsFragmentDoc = gql`
     fragment PagesParts on Pages {
@@ -456,6 +560,32 @@ export const PagesPartsFragmentDoc = gql`
         icon
         title
         description
+      }
+    }
+    ... on PagesBlocksFullBleedBlock {
+      image
+      altText
+      minHeight
+      overlayOpacity
+      headline
+      subtext
+    }
+    ... on PagesBlocksInteractiveListBlock {
+      title
+      items {
+        __typename
+        label
+        description
+        image
+        imageAlt
+      }
+    }
+    ... on PagesBlocksFaqBlock {
+      title
+      questions {
+        __typename
+        question
+        answer
       }
     }
   }

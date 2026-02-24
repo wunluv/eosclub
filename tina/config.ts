@@ -36,7 +36,7 @@ export default defineConfig({
                 name: 'HeroBlock',
                 label: 'Hero Block',
                 fields: [
-                  { type: 'string', name: 'headline', label: 'Headline', required: true },
+                  { type: 'string', name: 'headline', label: 'Headline' },
                   {
                     type: 'string',
                     name: 'variant',
@@ -81,7 +81,7 @@ export default defineConfig({
                     fields: [
                       { type: 'string', name: 'icon', label: 'Feather Icon Name', required: true },
                       { type: 'string', name: 'title', label: 'Title', required: true },
-                      { type: 'string', name: 'description', label: 'Description', required: true },
+                      { type: 'string', name: 'description', label: 'Description' },
                     ],
                   },
                 ],
