@@ -1,0 +1,31 @@
+{
+  "name": "EOS CLUB - A Wellness Community",
+  "short_name": "EOS CLUB",
+  "description": "A wellness community with Pilates, Barre, Calisthenics, Yoga, and more in infrared heat.",
+  "icons": [
+    {
+      "src": "/assets/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "theme_color": "#050505",
+  "background_color": "#141414",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "orientation": "portrait-primary"
+}
