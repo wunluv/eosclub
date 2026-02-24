@@ -18,15 +18,17 @@ const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-eos-subtle">
-  <div class="container mx-auto px-6 py-4 grid grid-cols-3 items-center">
+  <div class="max-w-7xl mx-auto w-full px-6 py-4 flex items-center justify-between gap-6">
     <!-- Logo + Brand (Left) -->
-    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3 justify-self-start">
-      <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
-      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
-    </a>
+    <div class="flex items-center space-x-3">
+      <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
+        <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
+        <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
+      </a>
+    </div>
 
     <!-- Desktop Nav (Center - hidden on mobile) -->
-    <nav class="hidden md:flex items-center justify-center space-x-6 lg:space-x-8">
+    <nav class="hidden lg:flex flex-1 items-center justify-center space-x-6 lg:space-x-8">
       {navItems.map((item) => {
         const path = isEn ? item.enPath : item.dePath;
         const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
@@ -44,7 +46,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <!-- Right Section: Book Button, User Login, LangSwitch -->
     <!-- pointer-events-none on the wrapper prevents the transparent grid area from blocking -->
     <!-- overflow from the center nav (the "Team" link). Children restore pointer-events-auto. -->
-    <div class="hidden md:flex items-center justify-end space-x-4 pointer-events-none">
+    <div class="hidden lg:flex items-center justify-end space-x-4 pointer-events-none">
       <!-- Book Button -->
       <a
         href={isEn ? '/en/classes' : '/kurse'}
@@ -72,7 +74,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <!-- Mobile Hamburger (red icon, visible on mobile only) -->
     <button
       id="mobile-menu-button"
-      class="md:hidden p-2 text-eos-accent focus:outline-none transition-transform active:scale-95 justify-self-end"
+      class="lg:hidden p-2 text-eos-accent focus:outline-none transition-transform active:scale-95 justify-self-end"
       aria-label="Toggle Menu"
       aria-expanded="false"
     >

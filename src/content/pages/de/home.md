@@ -5,9 +5,9 @@ ogImage: "/assets/yoga_studio.jpg"
 translationSlug: "home"
 blocks:
   - _template: HeroBlock
-    headline: "Willkommen bei EOS CLUB"
-    subheadline: "Dein Raum für Yoga, Bewegung und innere Balance"
-    backgroundImage: "/assets/yoga_studio.jpg"
+    headline: "Practice over promise"
+    subheadline: "Energy is our Element"
+    subBodyText: "Gesundes Leben, keine Selbstoptimierung. Eine Gemeinschaft, in der niemand perfekt sein muss."
     ctaLabel: "Kurse entdecken"
     ctaUrl: "/kurse"
   - _template: ContentBlock

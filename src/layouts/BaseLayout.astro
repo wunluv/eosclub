@@ -68,7 +68,9 @@ const currentLocale = Astro.currentLocale || 'de';
   <body class="min-h-screen flex flex-col">
     <Header />
     <main class="flex-grow">
-      <slot />
+      <div class="max-w-7xl mx-auto w-full px-4">
+        <slot />
+      </div>
     </main>
     <Footer />
   </body>

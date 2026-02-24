@@ -5,7 +5,8 @@ const heroBlockSchema = z.object({
   _template: z.literal('HeroBlock'),
   headline: z.string(),
   subheadline: z.string().optional(),
-  backgroundImage: z.string(),
+  subBodyText: z.string().optional(),
+  backgroundImage: z.string().optional(),
   ctaLabel: z.string().optional(),
   ctaUrl: z.string().optional(),
 });

@@ -4,9 +4,9 @@ seoDescription: 'Discover EOS CLUB: Yoga, Pilates, Barre and holistic wellness i
 ogImage: /assets/yoga_studio.jpg
 translationSlug: home
 blocks:
-  - headline: Welcome to EOS CLUB
-    subheadline: Your space for movement and inner balance
-    backgroundImage: /assets/yoga_studio.jpg
+  - headline: Practice over promise
+    subheadline: Energy is our Element
+    subBodyText: "Healthy living, not self-optimization. A community where nobody has to be perfect."
     ctaLabel: Explore Classes
     ctaUrl: /en/classes
     _template: HeroBlock

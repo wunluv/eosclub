@@ -47,4 +47,5 @@ customModes:
       - read
       - edit
       - command
+      - mcp
     source: project

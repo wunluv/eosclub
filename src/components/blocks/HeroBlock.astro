@@ -2,78 +2,142 @@
 interface Props {
   headline: string;
   subheadline?: string;
-  backgroundImage: string;
+  subBodyText?: string;
   ctaLabel?: string;
   ctaUrl?: string;
+  images?: string[];
 }
 
-const { headline, subheadline = '', backgroundImage, ctaLabel = '', ctaUrl = '' } = Astro.props;
+const {
+  headline,
+  subheadline = '',
+  subBodyText = '',
+  ctaLabel,
+  ctaUrl = '',
+} = Astro.props as Props;
+
+const locale = Astro.currentLocale ?? 'de';
+const localizedCtaLabel = ctaLabel || (locale.startsWith('de') ? 'Kurse Buchen' : 'Book Classes');
+const showCta = Boolean(ctaUrl);
+
+const gridImages = [
+  { src: '/assets/tiled_yoga_closeup_1.png',       alt: locale.startsWith('de') ? 'Yoga Nahaufnahme' : 'Yoga closeup' },
+  { src: '/assets/tiled_theme_pilates.png',         alt: locale.startsWith('de') ? 'Pilates' : 'Pilates' },
+  { src: '/assets/tiled_theme_calisthenics.png',    alt: locale.startsWith('de') ? 'Kalisthenics' : 'Calisthenics' },
+  { src: '/assets/tiled_emotional_calm_pilates.png',alt: locale.startsWith('de') ? 'Ruhiger Moment' : 'Calm moment' },
+];
 ---
 
-<section class="relative h-[80vh] min-h-[600px] w-full overflow-hidden flex items-center justify-center text-center px-4">
-  <!-- Background Image -->
-  <div class="absolute inset-0 z-0">
-    <img
-      src={backgroundImage}
-      alt=""
-      class="w-full h-full object-cover"
-      aria-hidden="true"
-    />
-    <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-black/40"></div>
-  </div>
+<section class="w-full bg-eos-base py-16 lg:py-24">
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid w-full gap-12 lg:grid-cols-2 lg:gap-16 lg:items-center">
 
-  <!-- Content -->
-  <div class="relative z-10 max-w-4xl mx-auto">
-    <h1 class="hero-headline text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-      {headline}
-    </h1>
-    {subheadline && (
-      <p class="hero-subheadline text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-        {subheadline}
-      </p>
-    )}
-    {ctaLabel && ctaUrl && (
-      <div class="hero-cta">
-        <a
-          href={ctaUrl}
-          class="inline-block px-8 py-4 bg-eos-accent text-white font-bold rounded-full hover:scale-105 transition-transform duration-300 shadow-lg"
-        >
-          {ctaLabel}
-        </a>
+      <!-- Left column: Text + CTA -->
+      <div class="flex flex-col items-start gap-y-6">
+        <h1 class="font-serif text-4xl font-black leading-tight text-eos-zen md:text-5xl lg:text-6xl">
+          {headline}
+        </h1>
+
+        {subheadline && (
+          <h2 class="font-serif text-2xl font-semibold leading-snug text-eos-contrast md:text-3xl">
+            {subheadline}
+          </h2>
+        )}
+
+        {subBodyText && (
+          <p class="max-w-lg text-base leading-relaxed text-eos-text/80 md:text-lg">
+            {subBodyText}
+          </p>
+        )}
+
+        {showCta && (
+          <a
+            href={ctaUrl}
+            class="mt-2 inline-flex items-center justify-center rounded-full bg-eos-accent px-8 py-4 text-base font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-eos-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-eos-accent"
+          >
+            {localizedCtaLabel}
+          </a>
+        )}
       </div>
-    )}
+
+      <!-- Right column: 2×2 image grid -->
+      <div
+        id="hero-grid"
+        class="grid grid-cols-2 gap-3 sm:gap-4"
+        aria-hidden="true"
+      >
+        {gridImages.map((img, i) => (
+          <div
+            class={`hero-grid-item delay-${i} aspect-square overflow-hidden rounded-2xl`}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="h-full w-full object-cover"
+              loading={(i === 0 || i === 1) ? 'eager' : 'lazy'}
+              decoding="async"
+            />
+          </div>
+        ))}
+      </div>
+
+    </div>
   </div>
 </section>
 
-<script>
-  import { gsap } from 'gsap';
-
-  function initHeroAnimations() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
-
-    tl.from('.hero-headline', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6
-    })
-    .from('.hero-subheadline', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6
-    }, '-=0.45') // 150ms delay after headline starts (600 - 450 = 150)
-    .from('.hero-cta', {
-      y: 20,
-      opacity: 0,
-      duration: 0.6
-    }, '-=0.45');
+<style>
+  .hero-grid-item {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: heroFadeUp 0.7s ease forwards;
   }
 
-  // Run on page load
-  initHeroAnimations();
+  .hero-grid-item.delay-0 { animation-delay: 0.05s; }
+  .hero-grid-item.delay-1 { animation-delay: 0.18s; }
+  .hero-grid-item.delay-2 { animation-delay: 0.31s; }
+  .hero-grid-item.delay-3 { animation-delay: 0.44s; }
 
-  // Re-run for TinaCMS live editing if needed (optional, but good practice)
-  document.addEventListener('astro:after-swap', initHeroAnimations);
+  @keyframes heroFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-grid-item {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const grid = document.getElementById('hero-grid');
+    if (!grid) return;
+
+    const handleScroll = () => {
+      const scrolled = window.scrollY;
+      const rect = grid.getBoundingClientRect();
+      const viewH = window.innerHeight;
+
+      if (rect.top < viewH && rect.bottom > 0) {
+        const progress = Math.max(0, (viewH - rect.top) / (viewH + rect.height));
+        const offset = (progress - 0.5) * -24;
+        grid.style.transform = `translateY(${offset}px)`;
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    document.addEventListener('astro:after-swap', handleScroll);
+  })();
 </script>
