@@ -4,6 +4,7 @@ seoDescription: "Meet our team of experienced yoga and pilates teachers."
 translationSlug: "team"
 blocks:
   - _template: HeroBlock
+    variant: cover
     headline: "Our Team"
     subheadline: "Here for you with heart and expertise"
     backgroundImage: "/assets/theme_yoga.png"

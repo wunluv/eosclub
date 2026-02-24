@@ -4,6 +4,7 @@ seoDescription: "Lerne unser Team aus erfahrenen Yoga- und Pilates-Lehrern kenne
 translationSlug: "team"
 blocks:
   - _template: HeroBlock
+    variant: cover
     headline: "Unser Team"
     subheadline: "Mit Herz und Expertise für dich da"
     backgroundImage: "/assets/theme_yoga.png"

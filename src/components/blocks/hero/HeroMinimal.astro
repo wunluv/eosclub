@@ -1,0 +1,52 @@
+---
+interface Props {
+  headline: string;
+  subheadline?: string;
+  subBodyText?: string;
+  ctaLabel?: string;
+  ctaUrl?: string;
+}
+
+const {
+  headline,
+  subheadline,
+  subBodyText,
+  ctaLabel,
+  ctaUrl,
+} = Astro.props as Props;
+
+const locale = Astro.currentLocale ?? 'de';
+const isDE = locale.startsWith('de');
+const defaultCta = isDE ? 'Mehr erfahren' : 'Learn more';
+const localizedCtaLabel = ctaLabel || defaultCta;
+const showCta = Boolean(ctaUrl);
+---
+
+<section class="bg-eos-base py-12 lg:py-16">
+  <div class="max-w-3xl mx-auto text-center px-4">
+    <h1 class="text-3xl lg:text-4xl font-bold text-eos-zen">
+      {headline}
+    </h1>
+
+    {subheadline && (
+      <h2 class="text-lg text-eos-text mt-4">
+        {subheadline}
+      </h2>
+    )}
+
+    {subBodyText && (
+      <p class="text-base text-eos-text mt-3 max-w-prose mx-auto">
+        {subBodyText}
+      </p>
+    )}
+
+    {showCta && (
+      <a
+        href={ctaUrl}
+        class="bg-eos-accent text-eos-base rounded-full px-8 py-3 mt-6 inline-block font-semibold transition-opacity hover:opacity-90"
+      >
+        {localizedCtaLabel}
+      </a>
+    )}
+  </div>
+</section>

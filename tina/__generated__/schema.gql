@@ -89,6 +89,7 @@ union DocumentNode = Pages | Folder
 
 type PagesBlocksHeroBlock {
   headline: String!
+  variant: String
   subheadline: String
   backgroundImage: String!
   ctaLabel: String
@@ -144,6 +145,7 @@ input ImageFilter {
 
 input PagesBlocksHeroBlockFilter {
   headline: StringFilter
+  variant: StringFilter
   subheadline: StringFilter
   backgroundImage: ImageFilter
   ctaLabel: StringFilter
@@ -228,6 +230,7 @@ input DocumentMutation {
 
 input PagesBlocksHeroBlockMutation {
   headline: String
+  variant: String
   subheadline: String
   backgroundImage: String
   ctaLabel: String

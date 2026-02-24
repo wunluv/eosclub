@@ -4,6 +4,7 @@ seoDescription: "Our class offerings: Vinyasa Yoga, Hatha, Pilates, Barre and mo
 translationSlug: "kurse"
 blocks:
   - _template: HeroBlock
+    variant: cover
     headline: "Our Classes"
     subheadline: "Find the class that fits you"
     backgroundImage: "/assets/theme_yoga.png"

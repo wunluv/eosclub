@@ -4,6 +4,7 @@ seoDescription: "Infrared sauna and holistic wellness offerings for regeneration
 translationSlug: "wellness"
 blocks:
   - _template: HeroBlock
+    variant: cover
     headline: "Wellness"
     subheadline: "Regeneration for body and mind"
     backgroundImage: "/assets/infrared_therapy_studio.png"

@@ -5,6 +5,7 @@ ogImage: "/assets/yoga_studio.jpg"
 translationSlug: "home"
 blocks:
   - _template: HeroBlock
+    variant: split-grid
     headline: "Practice over promise"
     subheadline: "Energy is our Element"
     subBodyText: "Gesundes Leben, keine Selbstoptimierung. Eine Gemeinschaft, in der niemand perfekt sein muss."
@@ -23,4 +24,23 @@ blocks:
       - icon: "users"
         title: "Community"
         description: "Eine warmherzige Gemeinschaft erwartet dich"
+  - _template: InteractiveListBlock
+    title: "Was wir anbieten"
+    items:
+      - label: "Yoga"
+        description: "Vinyasa, Hatha und Yin für alle Level"
+        image: "/assets/tiled_yoga_closeup_1.png"
+        imageAlt: "Yoga Praxis"
+      - label: "Pilates"
+        description: "Körpermitte, Kraft und Kontrolle"
+        image: "/assets/tiled_theme_pilates.png"
+        imageAlt: "Pilates Stunde"
+      - label: "Kalisthenics"
+        description: "Funktionale Kraft mit dem eigenen Körpergewicht"
+        image: "/assets/tiled_theme_calisthenics.png"
+        imageAlt: "Kalisthenics Training"
+      - label: "Infrarot-Wellness"
+        description: "Tiefenwärme und Regeneration"
+        image: "/assets/tiled_infrared_therapy_studio.png"
+        imageAlt: "Infrarot Therapie Studio"
 ---

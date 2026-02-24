@@ -37,6 +37,16 @@ var config_default = defineConfig({
                 label: "Hero Block",
                 fields: [
                   { type: "string", name: "headline", label: "Headline", required: true },
+                  {
+                    type: "string",
+                    name: "variant",
+                    label: "Hero Layout Variant",
+                    options: [
+                      { value: "split-grid", label: "Split + Image Grid (Home)" },
+                      { value: "cover", label: "Cover / Background Image" },
+                      { value: "minimal", label: "Minimal (Text Only)" }
+                    ]
+                  },
                   { type: "string", name: "subheadline", label: "Subheadline" },
                   { type: "image", name: "backgroundImage", label: "Background Image", required: true },
                   { type: "string", name: "ctaLabel", label: "CTA Label" },
@@ -72,6 +82,54 @@ var config_default = defineConfig({
                       { type: "string", name: "icon", label: "Feather Icon Name", required: true },
                       { type: "string", name: "title", label: "Title", required: true },
                       { type: "string", name: "description", label: "Description", required: true }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: "FullBleedBlock",
+                label: "Full Bleed Image Section",
+                fields: [
+                  { type: "image", name: "image", label: "Background Image", required: true },
+                  { type: "string", name: "altText", label: "Alt Text" },
+                  { type: "string", name: "minHeight", label: "Min Height (Tailwind class, e.g. min-h-[50vh])" },
+                  { type: "string", name: "overlayOpacity", label: "Overlay Opacity (Tailwind class, e.g. opacity-50)" },
+                  { type: "string", name: "headline", label: "Headline (optional overlay text)" },
+                  { type: "string", name: "subtext", label: "Subtext (optional overlay text)" }
+                ]
+              },
+              {
+                name: "InteractiveListBlock",
+                label: "Interactive List with Image Hover",
+                fields: [
+                  { type: "string", name: "title", label: "Section Title" },
+                  {
+                    type: "object",
+                    name: "items",
+                    label: "List Items",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "label", label: "Label", required: true },
+                      { type: "string", name: "description", label: "Description" },
+                      { type: "image", name: "image", label: "Hover Image", required: true },
+                      { type: "string", name: "imageAlt", label: "Image Alt Text" }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: "FaqBlock",
+                label: "FAQ Accordion",
+                fields: [
+                  { type: "string", name: "title", label: "Section Title" },
+                  {
+                    type: "object",
+                    name: "questions",
+                    label: "Questions",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "question", label: "Question", required: true },
+                      { type: "rich-text", name: "answer", label: "Answer", required: true }
                     ]
                   }
                 ]

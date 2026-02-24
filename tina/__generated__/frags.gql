@@ -8,6 +8,7 @@ fragment PagesParts on Pages {
     __typename
     ... on PagesBlocksHeroBlock {
       headline
+      variant
       subheadline
       backgroundImage
       ctaLabel
@@ -27,6 +28,32 @@ fragment PagesParts on Pages {
         icon
         title
         description
+      }
+    }
+    ... on PagesBlocksFullBleedBlock {
+      image
+      altText
+      minHeight
+      overlayOpacity
+      headline
+      subtext
+    }
+    ... on PagesBlocksInteractiveListBlock {
+      title
+      items {
+        __typename
+        label
+        description
+        image
+        imageAlt
+      }
+    }
+    ... on PagesBlocksFaqBlock {
+      title
+      questions {
+        __typename
+        question
+        answer
       }
     }
   }

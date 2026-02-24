@@ -4,6 +4,7 @@ seoDescription: "Infrarot-Sauna und ganzheitliche Wellness-Angebote für Regener
 translationSlug: "wellness"
 blocks:
   - _template: HeroBlock
+    variant: cover
     headline: "Wellness"
     subheadline: "Regeneration für Körper und Geist"
     backgroundImage: "/assets/infrared_therapy_studio.png"

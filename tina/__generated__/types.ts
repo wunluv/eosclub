@@ -168,6 +168,7 @@ export type DocumentNode = Pages | Folder;
 export type PagesBlocksHeroBlock = {
   __typename?: 'PagesBlocksHeroBlock';
   headline: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
   subheadline?: Maybe<Scalars['String']['output']>;
   backgroundImage: Scalars['String']['output'];
   ctaLabel?: Maybe<Scalars['String']['output']>;
@@ -228,6 +229,7 @@ export type ImageFilter = {
 
 export type PagesBlocksHeroBlockFilter = {
   headline?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
   subheadline?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   ctaLabel?: InputMaybe<StringFilter>;
@@ -360,6 +362,7 @@ export type DocumentMutation = {
 
 export type PagesBlocksHeroBlockMutation = {
   headline?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
   subheadline?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   ctaLabel?: InputMaybe<Scalars['String']['input']>;
@@ -401,14 +404,14 @@ export type PagesMutation = {
   blocks?: InputMaybe<Array<InputMaybe<PagesBlocksMutation>>>;
 };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null };
 
 export type PagesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -420,7 +423,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline: string, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description: string } | null> | null } | null> | null } | null } | null> | null } };
 
 export const PagesPartsFragmentDoc = gql`
     fragment PagesParts on Pages {
@@ -433,6 +436,7 @@ export const PagesPartsFragmentDoc = gql`
     __typename
     ... on PagesBlocksHeroBlock {
       headline
+      variant
       subheadline
       backgroundImage
       ctaLabel

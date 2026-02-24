@@ -1,0 +1,112 @@
+---
+interface Props {
+  title?: string;
+  items: Array<{
+    label: string;
+    description?: string;
+    image: string;       // path to image shown on hover
+    imageAlt?: string;
+  }>;
+}
+
+const { title, items } = Astro.props;
+const locale = Astro.currentLocale ?? 'de';
+const isDE = locale.startsWith('de');
+---
+
+<section class="bg-eos-base py-16 lg:py-24" data-interactive-list>
+  <!-- Optional title -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {title && <h2 class="text-2xl lg:text-3xl font-bold text-eos-zen mb-12">{title}</h2>}
+
+    <div class="relative flex gap-12 lg:gap-20 items-start">
+
+      <!-- LEFT: List of items -->
+      <ul class="flex-1 divide-y divide-eos-subtle" role="list">
+        {items.map((item, i) => (
+          <li
+            class="interactive-list-item py-6 lg:py-8 cursor-default group"
+            data-index={i}
+            aria-describedby={`item-desc-${i}`}
+          >
+            <div class="flex items-baseline justify-between">
+              <span class="text-xl lg:text-2xl font-semibold text-eos-zen group-hover:text-eos-accent transition-colors duration-200">
+                {item.label}
+              </span>
+              <span class="text-eos-subtle text-sm ml-4 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+            {item.description && (
+              <p id={`item-desc-${i}`} class="text-eos-text text-sm mt-1 max-w-prose">
+                {item.description}
+              </p>
+            )}
+            <!-- Mobile: static image below each item (visible only on touch devices) -->
+            <div class="mt-4 lg:hidden">
+              <img
+                src={item.image}
+                alt={item.imageAlt ?? item.label}
+                class="w-full h-48 object-cover rounded-lg"
+                loading="lazy"
+              />
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <!-- RIGHT: Floating image panel (desktop only) -->
+      <div class="hidden lg:block sticky top-24 w-[42%] flex-shrink-0" aria-hidden="true">
+        <div class="relative aspect-[4/5] overflow-hidden rounded-xl bg-eos-subtle">
+          {items.map((item, i) => (
+            <img
+              src={item.image}
+              alt={item.imageAlt ?? item.label}
+              class="hover-image absolute inset-0 w-full h-full object-cover"
+              data-index={i}
+              style={i === 0 ? "opacity: 1;" : "opacity: 0;"}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+
+  function initInteractiveList() {
+    const sections = document.querySelectorAll('[data-interactive-list]');
+
+    sections.forEach((section) => {
+      const items = section.querySelectorAll('.interactive-list-item');
+      const images = section.querySelectorAll('.hover-image');
+
+      if (images.length === 0) return;
+
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isTouch = window.matchMedia('(hover: none)').matches;
+
+      // Show first image by default
+      gsap.set(images, { opacity: 0 });
+      gsap.set(images[0], { opacity: 1 });
+
+      if (reducedMotion || isTouch) return;
+
+      items.forEach((item, i) => {
+        item.addEventListener('mouseenter', () => {
+          gsap.set(images, { opacity: 0 });
+          gsap.fromTo(
+            images[i],
+            { opacity: 0, y: 12 },
+            { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
+          );
+        });
+      });
+    });
+  }
+
+  initInteractiveList();
+  document.addEventListener('astro:after-swap', initInteractiveList);
+</script>

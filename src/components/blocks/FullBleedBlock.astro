@@ -1,0 +1,40 @@
+---
+interface Props {
+  image: string;
+  altText?: string;
+  minHeight?: string;
+  overlayOpacity?: string;
+  headline?: string;
+  subtext?: string;
+}
+
+const {
+  image,
+  altText,
+  minHeight = 'min-h-[40vh]',
+  overlayOpacity = 'opacity-40',
+  headline,
+  subtext,
+} = Astro.props;
+
+const locale = Astro.currentLocale ?? 'de';
+const isDE = locale.startsWith('de');
+
+const ariaLabel = altText || (isDE ? 'Hintergrundbild' : 'Background image');
+---
+
+<div
+  class={`w-screen relative left-1/2 -translate-x-1/2 ${minHeight}`}
+  style={`background-image: url('${image}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+  role="img"
+  aria-label={ariaLabel}
+>
+  <div class={`absolute inset-0 bg-black ${overlayOpacity}`}></div>
+
+  {(headline || subtext) && (
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+      {headline && <h2 class="text-2xl lg:text-4xl font-bold text-white">{headline}</h2>}
+      {subtext && <p class="text-base lg:text-lg text-white/80 mt-3 max-w-prose">{subtext}</p>}
+    </div>
+  )}
+</div>

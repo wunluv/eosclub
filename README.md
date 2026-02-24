@@ -81,6 +81,54 @@ All bsport widgets live in `src/components/integrations/`. Each is a self-contai
 > Company ID for all widgets: `5082` (EOS CLUB / Tektonik 23).
 > All widget element IDs are scoped per component — safe to use multiple widgets on the same page.
 
+## Block System
+
+The site uses a **dispatcher pattern** for content blocks: thin wrapper components that delegate to variant-specific sub-components based on frontmatter fields. This enables flexible page composition through TinaCMS while keeping components maintainable.
+
+### Architecture
+
+- **Dispatcher blocks** (e.g., [`HeroBlock.astro`](src/components/blocks/HeroBlock.astro)) read a `variant` field from frontmatter and render the appropriate sub-component
+- **Sub-components** live in subdirectories (e.g., [`src/components/blocks/hero/`](src/components/blocks/hero/)) and handle actual rendering
+- All blocks are registered in **two places**:
+  - [`src/content/config.ts`](src/content/config.ts) - Zod schemas for content validation
+  - [`tina/config.ts`](tina/config.ts) - CMS UI templates for editors
+- Blocks are dispatched in [`src/pages/[...slug].astro`](src/pages/[...slug].astro) and [`src/pages/index.astro`](src/pages/index.astro)
+
+### Available Blocks
+
+| Block | Description |
+|-------|-------------|
+| [`HeroBlock.astro`](src/components/blocks/HeroBlock.astro) | Dispatcher for hero variants (see below) |
+| [`ContentBlock.astro`](src/components/blocks/ContentBlock.astro) | Simple rich-text content section |
+| [`FeatureGridBlock.astro`](src/components/blocks/FeatureGridBlock.astro) | Grid of feature cards with icons |
+| [`FullBleedBlock.astro`](src/components/blocks/FullBleedBlock.astro) | Edge-to-edge full-width image section (breaks out of container) |
+| [`InteractiveListBlock.astro`](src/components/blocks/InteractiveListBlock.astro) | List with GSAP hover-image reveal (desktop) / static fallback (mobile) |
+| [`FaqBlock.astro`](src/components/blocks/FaqBlock.astro) | Progressive-enhancement accordion using native `<details>`/`<summary>` |
+| [`BookingBlock.astro`](src/components/blocks/BookingBlock.astro) | Wrapper for bsport booking widgets |
+
+### HeroBlock Variants
+
+| Variant | Component | Use Case |
+|---------|-----------|----------|
+| `split-grid` | [`HeroSplitGrid.astro`](src/components/blocks/hero/HeroSplitGrid.astro) | Left text + right 2×2 image grid (home page default) |
+| `cover` | [`HeroCover.astro`](src/components/blocks/hero/HeroCover.astro) | Full-width background image with gradient overlay, CTA lower-left (interior pages) |
+| `minimal` | [`HeroMinimal.astro`](src/components/blocks/hero/HeroMinimal.astro) | Centered text only, no image (reserved for future use) |
+
+### Adding a New Block
+
+1. Create the component in `src/components/blocks/`
+2. Add Zod schema to [`src/content/config.ts`](src/content/config.ts)
+3. Add TinaCMS template to [`tina/config.ts`](tina/config.ts)
+4. Add dispatch logic in [`src/pages/[...slug].astro`](src/pages/[...slug].astro) and/or [`src/pages/index.astro`](src/pages/index.astro)
+5. Use `Astro.currentLocale` for any hardcoded string fallbacks
+
+### Locale Support
+
+All blocks use `Astro.currentLocale` for hardcoded string fallbacks. Content is stored in separate locale directories:
+
+- `src/content/pages/de/` - German content
+- `src/content/pages/en/` - English content
+
 ## Documentation
 
 - [MVP Specification](plans/SPEC_MVP_v2.md)
