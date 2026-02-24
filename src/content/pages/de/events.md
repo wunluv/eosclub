@@ -4,13 +4,16 @@ seoDescription: "Workshops, Teacher Trainings und besondere Events bei EOS CLUB 
 translationSlug: "events"
 blocks:
   - _template: HeroBlock
+    name: events-hero
     variant: cover
     headline: "Events"
     subheadline: "Vertiefe deine Praxis"
     backgroundImage: "/assets/theme_pilates.png"
   - _template: ContentBlock
+    name: events-intro
     body: "<h2>Workshops & Specials</h2><p>Regelmäßig bieten wir workshops, Retreats und besondere Veranstaltungen an. Bleib informiert und melde dich für unseren Newsletter an.</p>"
   - _template: FaqBlock
+    name: events-faq
     title: "Häufige Fragen"
     questions:
       - question: "Wie buche ich einen Workshop?"

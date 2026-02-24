@@ -10,11 +10,14 @@ blocks:
     ctaLabel: Explore Classes
     ctaUrl: /en/classes
     variant: split-grid
+    name: home-hero
     _template: HeroBlock
-  - body: |
+  - name: philosophy-intro
+    body: |
       <p>EOS CLUB is more than a studio – it's a place of transformation. Here, traditional practices meet modern wellness for your holistic well-being.</p>
     _template: ContentBlock
-  - items:
+  - name: pillars-grid
+    items:
       - icon: heart
         title: Yoga & Pilates
         description: Classes for all levels – from gentle to powerful
@@ -26,6 +29,7 @@ blocks:
         description: A warm-hearted community awaits you
     _template: FeatureGridBlock
   - _template: InteractiveListBlock
+    name: offerings-list
     title: "What we offer"
     items:
       - label: "Yoga"
@@ -45,4 +49,3 @@ blocks:
         image: "/assets/tiled_infrared_therapy_studio.png"
         imageAlt: "Infrared therapy studio"
 ---
-

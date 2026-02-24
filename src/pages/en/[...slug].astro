@@ -5,6 +5,9 @@ import HeroBlock from '../../components/blocks/HeroBlock.astro';
 import ContentBlock from '../../components/blocks/ContentBlock.astro';
 import BookingBlock from '../../components/blocks/BookingBlock.astro';
 import FeatureGridBlock from '../../components/blocks/FeatureGridBlock.astro';
+import FullBleedBlock from '../../components/blocks/FullBleedBlock.astro';
+import InteractiveListBlock from '../../components/blocks/InteractiveListBlock.astro';
+import FaqBlock from '../../components/blocks/FaqBlock.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -45,17 +48,23 @@ const { title, seoDescription, ogImage, blocks } = page.data;
   enSlug={enSlug}
 >
   {blocks?.map((block) => {
-    switch (block._template) {
-      case 'HeroBlock':
-        return <HeroBlock {...block} />;
-      case 'ContentBlock':
-        return <ContentBlock {...block} />;
-      case 'BookingBlock':
-        return <BookingBlock {...block} />;
-      case 'FeatureGridBlock':
-        return <FeatureGridBlock {...block} />;
-      default:
-        return null;
-    }
-  })}
+      switch (block._template) {
+        case 'HeroBlock':
+          return <HeroBlock {...block} />;
+        case 'ContentBlock':
+          return <ContentBlock {...block} />;
+        case 'BookingBlock':
+          return <BookingBlock {...block} />;
+        case 'FeatureGridBlock':
+          return <FeatureGridBlock {...block} />;
+        case 'FullBleedBlock':
+          return <FullBleedBlock {...block} />;
+        case 'InteractiveListBlock':
+          return <InteractiveListBlock {...block} />;
+        case 'FaqBlock':
+          return <FaqBlock {...block} />;
+        default:
+          return null;
+      }
+    })}
 </BaseLayout>

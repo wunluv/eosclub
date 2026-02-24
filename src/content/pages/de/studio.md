@@ -4,13 +4,16 @@ seoDescription: "Entdecke unseren lichtdurchfluteten Raum im Herzen Berlins. Mod
 translationSlug: "studio"
 blocks:
   - _template: HeroBlock
+    name: studio-hero
     variant: cover
     headline: "Unser Studio"
     subheadline: "Ein Ort der Ruhe mitten in Berlin"
     backgroundImage: "/assets/yoga_studio.jpg"
   - _template: ContentBlock
+    name: studio-intro
     body: "<h2>Dein Rückzugsort</h2><p>Unser Studio bietet dir 200m² Raum für Bewegung, Atmung und Entspannung. Natürliches Licht, hochwertige Materialien und durchdachte Akustik schaffen eine Atmosphäre, in der du ganz bei dir ankommen kannst.</p>"
   - _template: InteractiveListBlock
+    name: studio-spaces-list
     title: "Unser Raum"
     items:
       - label: "200m² Studiofläche"

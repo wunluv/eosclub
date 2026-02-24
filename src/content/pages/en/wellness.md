@@ -4,13 +4,16 @@ seoDescription: "Infrared sauna and holistic wellness offerings for regeneration
 translationSlug: "wellness"
 blocks:
   - _template: HeroBlock
+    name: wellness-hero
     variant: cover
     headline: "Wellness"
     subheadline: "Regeneration for body and mind"
     backgroundImage: "/assets/infrared_therapy_studio.png"
   - _template: ContentBlock
+    name: wellness-intro
     body: "<h2>Infrared Therapy</h2><p>Our infrared cabins offer deep-acting heat that releases muscle tension, promotes circulation, and strengthens the immune system. Ideal after training or as a standalone wellness session.</p>"
   - _template: FeatureGridBlock
+    name: wellness-benefits-grid
     items:
       - icon: "thermometer"
         title: "Deep Heat"

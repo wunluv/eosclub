@@ -3,6 +3,7 @@ import { defineCollection, z } from 'astro:content';
 // Block schemas
 const heroBlockSchema = z.object({
   _template: z.literal('HeroBlock'),
+  name: z.string().optional(),
   variant: z.enum(['split-grid', 'cover', 'minimal']).optional().default('split-grid'),
   headline: z.string(),
   subheadline: z.string().optional(),
@@ -14,6 +15,7 @@ const heroBlockSchema = z.object({
 
 const fullBleedBlockSchema = z.object({
   _template: z.literal('FullBleedBlock'),
+  name: z.string().optional(),
   image: z.string(),
   altText: z.string().optional(),
   minHeight: z.string().optional(),
@@ -31,6 +33,7 @@ const interactiveListItemSchema = z.object({
 
 const interactiveListBlockSchema = z.object({
   _template: z.literal('InteractiveListBlock'),
+  name: z.string().optional(),
   title: z.string().optional(),
   items: z.array(interactiveListItemSchema),
 });
@@ -42,17 +45,20 @@ const faqItemSchema = z.object({
 
 const faqBlockSchema = z.object({
   _template: z.literal('FaqBlock'),
+  name: z.string().optional(),
   title: z.string().optional(),
   questions: z.array(faqItemSchema),
 });
 
 const contentBlockSchema = z.object({
   _template: z.literal('ContentBlock'),
+  name: z.string().optional(),
   body: z.string(),
 });
 
 const bookingBlockSchema = z.object({
   _template: z.literal('BookingBlock'),
+  name: z.string().optional(),
   enabled: z.boolean().default(true),
   bookingUrl: z.string(),
   label: z.string().optional(),
@@ -60,6 +66,7 @@ const bookingBlockSchema = z.object({
 
 const featureGridBlockSchema = z.object({
   _template: z.literal('FeatureGridBlock'),
+  name: z.string().optional(),
   items: z.array(z.object({
     icon: z.string(),
     title: z.string(),

@@ -4,13 +4,16 @@ seoDescription: "Infrarot-Sauna und ganzheitliche Wellness-Angebote für Regener
 translationSlug: "wellness"
 blocks:
   - _template: HeroBlock
+    name: wellness-hero
     variant: cover
     headline: "Wellness"
     subheadline: "Regeneration für Körper und Geist"
     backgroundImage: "/assets/infrared_therapy_studio.png"
   - _template: ContentBlock
+    name: wellness-intro
     body: "<h2>Infrarot-Therapie</h2><p>Unsere Infrarot-Kabinen bieten tiefenwirksame Wärme, die Muskelverspannungen löst, die Durchblutung fördert und das Immunsystem stärkt. Ideal nach dem Training oder als eigenständige Wellness-Einheit.</p>"
   - _template: FeatureGridBlock
+    name: wellness-benefits-grid
     items:
       - icon: "thermometer"
         title: "Tiefenwärme"

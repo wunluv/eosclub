@@ -202,13 +202,41 @@ blocks: []               # array of block objects
 
 | Block | Key Fields |
 |-------|------------|
-| `HeroBlock` | `_template`, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `ctaLabel`, `ctaUrl` |
-| `ContentBlock` | `_template`, `body` |
-| `BookingBlock` | `_template`, `enabled`, `bookingUrl`, `label` |
-| `FeatureGridBlock` | `_template`, `items[]` {`icon`, `title`, `description`} |
-| `FullBleedBlock` | `_template`, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
-| `InteractiveListBlock` | `_template`, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
-| `FaqBlock` | `_template`, `title`, `questions[]` {`question`, `answer`} |
+| `HeroBlock` | `_template`, `name` *(optional)*, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `ctaLabel`, `ctaUrl` |
+| `ContentBlock` | `_template`, `name` *(optional)*, `body` |
+| `BookingBlock` | `_template`, `name` *(optional)*, `enabled`, `bookingUrl`, `label` |
+| `FeatureGridBlock` | `_template`, `name` *(optional)*, `items[]` {`icon`, `title`, `description`} |
+| `FullBleedBlock` | `_template`, `name` *(optional)*, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
+| `InteractiveListBlock` | `_template`, `name` *(optional)*, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
+| `FaqBlock` | `_template`, `name` *(optional)*, `title`, `questions[]` {`question`, `answer`} |
+
+> **Note:** The `name` field is informational metadata only. It has no runtime rendering effect. It exists purely for agent/human referencing. See [Section Pattern Language](#section-pattern-language) below.
+
+---
+
+## Section Pattern Language
+
+Every block in every page frontmatter has a `name` field — a stable, human-readable handle used to reference specific sections precisely.
+
+**How to reference a section:**
+> "On the `home` page, in the `philosophy-intro` block, update the body text to…"
+> "Across all `*-hero` blocks using the `cover` variant, change the overlay opacity to…"
+
+**Finding a block by name:**
+```bash
+grep -r "name: philosophy-intro" src/content/
+```
+
+**Canonical reference:** See `plans/page-section-map.md` for the full page × section map.
+
+**Naming conventions:**
+- `[page]-hero` — HeroBlock on a given page (e.g., `home-hero`, `studio-hero`)
+- `[descriptor]-intro` — Opening ContentBlock (e.g., `philosophy-intro`, `wellness-intro`)
+- `[descriptor]-grid` — FeatureGridBlock (e.g., `pillars-grid`, `classes-grid`)
+- `[descriptor]-list` — InteractiveListBlock (e.g., `offerings-list`, `studio-spaces-list`)
+- `[descriptor]-faq` — FaqBlock (e.g., `pricing-faq`, `events-faq`)
+- `[descriptor]-booking-cta` — BookingBlock (e.g., `classes-booking-cta`)
+- Global zones: `site-header` (Header.astro) · `site-footer` (Footer.astro)
 
 ---
 

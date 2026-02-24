@@ -4,17 +4,21 @@ seoDescription: "Flexible pricing options: single tickets, 10-class passes and f
 translationSlug: "preise"
 blocks:
   - _template: HeroBlock
+    name: pricing-hero
     variant: cover
     headline: "Pricing"
     subheadline: "Train flexibly, pay fairly"
     backgroundImage: "/assets/14_bg_gradient.jpg"
   - _template: ContentBlock
+    name: pricing-intro
     body: "<h2>Our Options</h2><p>Whether it's a drop-in, a 10-class pass, or an unlimited membership – we have the right offer for your lifestyle.</p><ul><li><strong>Drop-in:</strong> 25€ per class</li><li><strong>10-Class Pass:</strong> 200€ (valid for 3 months)</li><li><strong>Flatrate:</strong> 99€/month</li></ul>"
   - _template: BookingBlock
+    name: pricing-booking-cta
     enabled: true
     bookingUrl: "https://bsport.io/studio/eosclub/pricing"
     label: "Choose Membership"
   - _template: FaqBlock
+    name: pricing-faq
     title: "Frequently Asked Questions"
     questions:
       - question: "Can I try a class before committing to a membership?"

@@ -4,15 +4,18 @@ seoDescription: "Unser Kursangebot: Vinyasa Yoga, Hatha, Pilates, Barre und mehr
 translationSlug: "classes"
 blocks:
   - _template: HeroBlock
+    name: classes-hero
     variant: cover
     headline: "Unsere Kurse"
     subheadline: "Finde den Kurs, der zu dir passt"
     backgroundImage: "/assets/theme_yoga.png"
   - _template: BookingBlock
+    name: classes-booking-cta
     enabled: true
     bookingUrl: "https://bsport.io/studio/eosclub"
     label: "Jetzt buchen"
   - _template: FeatureGridBlock
+    name: classes-grid
     items:
       - icon: "wind"
         title: "Vinyasa Flow"

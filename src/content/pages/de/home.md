@@ -5,6 +5,7 @@ ogImage: "/assets/yoga_studio.jpg"
 translationSlug: "home"
 blocks:
   - _template: HeroBlock
+    name: home-hero
     variant: split-grid
     headline: "Practice over promise"
     subheadline: "Energy is our Element"
@@ -12,8 +13,10 @@ blocks:
     ctaLabel: "Kurse entdecken"
     ctaUrl: "/kurse"
   - _template: ContentBlock
+    name: philosophy-intro
     body: "<p>EOS CLUB ist mehr als ein Studio – es ist ein Ort der Transformation. Hier verbinden sich traditionelle Praktiken mit modernem Wellness für dein ganzheitliches Wohlbefinden.</p>"
   - _template: FeatureGridBlock
+    name: pillars-grid
     items:
       - icon: "heart"
         title: "Yoga & Pilates"
@@ -25,6 +28,7 @@ blocks:
         title: "Community"
         description: "Eine warmherzige Gemeinschaft erwartet dich"
   - _template: InteractiveListBlock
+    name: offerings-list
     title: "Was wir anbieten"
     items:
       - label: "Yoga"

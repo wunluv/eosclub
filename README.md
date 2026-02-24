@@ -85,6 +85,8 @@ All bsport widgets live in `src/components/integrations/`. Each is a self-contai
 
 The site uses a **dispatcher pattern** for content blocks: thin wrapper components that delegate to variant-specific sub-components based on frontmatter fields. This enables flexible page composition through TinaCMS while keeping components maintainable.
 
+Every block has a `name` field (e.g., `name: philosophy-intro`) — a stable, language-agnostic identifier for precise agent and human referencing. See [Page Section Map](plans/page-section-map.md) for the canonical name registry.
+
 ### Architecture
 
 - **Dispatcher blocks** (e.g., [`HeroBlock.astro`](src/components/blocks/HeroBlock.astro)) read a `variant` field from frontmatter and render the appropriate sub-component
@@ -133,6 +135,7 @@ All blocks use `Astro.currentLocale` for hardcoded string fallbacks. Content is 
 
 - [MVP Specification](plans/SPEC_MVP_v2.md)
 - [Orchestrator Task Plan](plans/ORCHESTRATOR_TASKS_MVP.md)
+- [Page Section Map](plans/page-section-map.md) — Canonical pattern language for referencing page sections
 
 ## Environment Variables
 
