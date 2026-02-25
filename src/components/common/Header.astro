@@ -1,8 +1,18 @@
 ---
 import LangSwitch from './LangSwitch.astro';
 
+interface Props {
+  deSlug?: string;
+  enSlug?: string;
+}
+
+const { deSlug = '', enSlug = '' } = Astro.props;
+
 const currentLocale = Astro.currentLocale || 'de';
 const isEn = currentLocale === 'en';
+
+// The translation target is the slug of the OTHER language
+const translationSlug = isEn ? deSlug : enSlug;
 
 const navItems = [
   { de: 'Home', en: 'Home', dePath: '/', enPath: '/en' },
@@ -68,7 +78,7 @@ const pathname = new URL(Astro.request.url).pathname;
         </svg>
       </a>
 
-      <span class="pointer-events-auto"><LangSwitch /></span>
+      <span class="pointer-events-auto"><LangSwitch translationSlug={translationSlug} /></span>
     </div>
 
     <!-- Mobile Hamburger (red icon, visible on mobile only) -->
@@ -152,7 +162,7 @@ const pathname = new URL(Astro.request.url).pathname;
         <span>{isEn ? 'Login' : 'Anmelden'}</span>
       </a>
 
-      <LangSwitch />
+      <LangSwitch translationSlug={translationSlug} />
     </div>
   </nav>
 

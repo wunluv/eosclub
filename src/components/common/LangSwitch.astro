@@ -14,7 +14,7 @@ const targetLocale = isEn ? 'de' : 'en';
 const targetLabel = isEn ? 'Auf Deutsch wechseln' : 'Switch to English';
 const targetText = isEn ? 'DE' : 'EN';
 
-// Translation mapping for slugs
+// Translation mapping for slugs (legacy/fallback)
 const slugMap: Record<string, Record<string, string>> = {
   '/kurse': { en: '/en/classes' },
   '/en/classes': { de: '/kurse' },
@@ -35,21 +35,40 @@ const slugMap: Record<string, Record<string, string>> = {
 // Determine target path
 let targetPath: string;
 
-if (pathname === '/' || pathname === '') {
-  // Home page
+// Normalize pathname for map lookup (remove trailing slash)
+const normalizedPath = pathname.endsWith('/') && pathname.length > 1
+  ? pathname.slice(0, -1)
+  : pathname;
+
+if (translationSlug) {
+  // 1. Use the provided translation slug from frontmatter
+  if (isEn) {
+    // English -> German
+    targetPath = translationSlug === 'home' || translationSlug === '' ? '/' : `/${translationSlug}`;
+  } else {
+    // German -> English
+    targetPath = translationSlug === 'home' || translationSlug === '' ? '/en' : `/en/${translationSlug}`;
+  }
+} else if (normalizedPath === '/' || normalizedPath === '/en') {
+  // 2. Home page
   targetPath = isEn ? '/' : '/en';
-} else if (slugMap[pathname]) {
-  // Known translation
-  targetPath = slugMap[pathname][targetLocale];
+} else if (slugMap[normalizedPath]) {
+  // 3. Known translation from map
+  targetPath = slugMap[normalizedPath][targetLocale];
 } else {
-  // Fallback: just toggle /en/ prefix
+  // 4. Fallback: just toggle /en/ prefix
   if (isEn) {
     // Remove /en prefix
-    targetPath = pathname.replace(/^\/en/, '') || '/';
+    targetPath = normalizedPath.replace(/^\/en/, '') || '/';
   } else {
     // Add /en prefix
-    targetPath = `/en${pathname}`;
+    targetPath = `/en${normalizedPath}`;
   }
+}
+
+// Ensure targetPath has a trailing slash if the current one did (for consistency)
+if (pathname.endsWith('/') && !targetPath.endsWith('/')) {
+  targetPath += '/';
 }
 ---
 

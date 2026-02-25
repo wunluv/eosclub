@@ -1,9 +1,19 @@
 ---
 import LangSwitch from './LangSwitch.astro';
 
+interface Props {
+  deSlug?: string;
+  enSlug?: string;
+}
+
+const { deSlug = '', enSlug = '' } = Astro.props;
+
 const currentLocale = Astro.currentLocale || 'de';
 const isEn = currentLocale === 'en';
 const currentYear = new Date().getFullYear();
+
+// The translation target is the slug of the OTHER language
+const translationSlug = isEn ? deSlug : enSlug;
 
 const legalLinks = [
   { de: 'Impressum', en: 'Imprint', path: '/impressum', enPath: '/en/imprint' },
@@ -128,7 +138,7 @@ const socialLinks = [
 
       <!-- Language & Copyright -->
       <div class="flex flex-col items-center md:items-start lg:items-end justify-between gap-8 lg:gap-0">
-        <LangSwitch />
+        <LangSwitch translationSlug={translationSlug} />
         <p class="text-sm text-white/60 mt-8 lg:mt-0">
           © {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}
         </p>
