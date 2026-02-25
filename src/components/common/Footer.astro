@@ -6,9 +6,9 @@ const isEn = currentLocale === 'en';
 const currentYear = new Date().getFullYear();
 
 const legalLinks = [
-  { de: 'Impressum', en: 'Imprint', path: '/impressum' },
-  { de: 'Datenschutz', en: 'Privacy', path: '/datenschutz' },
-  { de: 'AGB', en: 'Terms', path: '/agb' },
+  { de: 'Impressum', en: 'Imprint', path: '/impressum', enPath: '/en/imprint' },
+  { de: 'Datenschutz', en: 'Privacy', path: '/datenschutz', enPath: '/en/privacy' },
+  { de: 'AGB', en: 'Terms', path: '/agb', enPath: '/en/terms' },
 ];
 
 const menuLinks = [
@@ -108,7 +108,7 @@ const socialLinks = [
       <nav class="flex flex-col space-y-3 md:space-y-2">
         <h3 class="font-medium mb-2 !text-white">{isEn ? 'Legal' : 'Rechtliches'}</h3>
         {legalLinks.map((link) => {
-          const path = isEn ? `/en${link.path}` : link.path;
+          const path = isEn ? link.enPath : link.path;
           return (
             <a href={path} class="text-xs md:text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-eos-accent transition-colors py-1 md:py-0">
               {isEn ? link.en : link.de}
