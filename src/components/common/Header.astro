@@ -62,7 +62,9 @@ const pathname = new URL(Astro.request.url).pathname;
     <div class="hidden lg:flex items-center justify-end space-x-4 pointer-events-none">
       <!-- Book Button -->
       <a
-        href={isEn ? '/en/classes' : '/kurse'}
+        href="https://backoffice.bsport.io/c/5082/home/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="pointer-events-auto inline-flex items-center px-4 py-2 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2"
       >
         {isEn ? 'Book' : 'Buchen'}
@@ -70,7 +72,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
       <!-- User Login Icon -->
       <a
-        href="https://www.eversports.de/login"
+        href="https://backoffice.bsport.io/login?membership=5082"
         target="_blank"
         rel="noopener noreferrer"
         class="pointer-events-auto inline-flex items-center px-4 py-2 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2"
@@ -147,7 +149,9 @@ const pathname = new URL(Astro.request.url).pathname;
     <div class="mt-8 pt-8 border-t border-eos-subtle space-y-4 flex flex-col items-center">
       <!-- Book Button -->
       <a
-        href={isEn ? '/en/classes' : '/kurse'}
+        href="https://backoffice.bsport.io/c/5082/home/"
+        target="_blank"
+        rel="noopener noreferrer"
         class="flex items-center justify-center w-full px-4 py-3 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90"
       >
         {isEn ? 'Book' : 'Buchen'}
@@ -155,7 +159,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
       <!-- User Login -->
       <a
-        href="https://www.eversports.de/login"
+        href="https://backoffice.bsport.io/login?membership=5082"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center justify-center w-full space-x-2 py-3 text-eos-accent font-bold uppercase tracking-widest hover:bg-eos-base rounded-lg transition-colors"

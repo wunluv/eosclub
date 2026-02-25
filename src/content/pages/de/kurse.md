@@ -12,7 +12,7 @@ blocks:
   - _template: BookingBlock
     name: classes-booking-cta
     enabled: true
-    bookingUrl: "https://bsport.io/studio/eosclub"
+    bookingUrl: "https://backoffice.bsport.io/c/5082/home/"
     label: "Jetzt buchen"
   - _template: FeatureGridBlock
     name: classes-grid
