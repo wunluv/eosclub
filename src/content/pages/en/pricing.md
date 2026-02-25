@@ -9,18 +9,14 @@ blocks:
     headline: "Pricing"
     subheadline: "Train flexibly, pay fairly"
     backgroundImage: "/assets/14_bg_gradient.jpg"
+    logoOverlay: "/assets/eos-logo-export_bm-red.svg"
   - _template: ContentBlock
     name: pricing-intro
-    body: "<h2>Our Options</h2><p>Whether it's a drop-in, a 10-class pass, or an unlimited membership – we have the right offer for your lifestyle.</p><ul><li><strong>Drop-in:</strong> 25€ per class</li><li><strong>10-Class Pass:</strong> 200€ (valid for 3 months)</li><li><strong>Flatrate:</strong> 99€/month</li></ul>"
+    body: "<h2>Passes and Memberships</h2>"
   - _template: BsportPasses
     name: pricing-passes
   - _template: BsportSubscription
     name: pricing-subscriptions
-  - _template: BookingBlock
-    name: pricing-booking-cta
-    enabled: true
-    bookingUrl: "https://bsport.io/studio/eosclub/pricing"
-    label: "Choose Membership"
   - _template: FaqBlock
     name: pricing-faq
     title: "Frequently Asked Questions"

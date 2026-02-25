@@ -9,18 +9,14 @@ blocks:
     headline: "Preise"
     subheadline: "Flexibel trainieren, fair bezahlen"
     backgroundImage: "/assets/14_bg_gradient.jpg"
+    logoOverlay: "/assets/eos-logo-export_bm-red.svg"
   - _template: ContentBlock
     name: pricing-intro
-    body: "<h2>Unsere Optionen</h2><p>Ob Drop-in, 10er-Karte oder unlimitierte Mitgliedschaft – wir haben das passende Angebot für deinen Lebensstil.</p><ul><li><strong>Drop-in:</strong> 25€ pro Klasse</li><li><strong>10er-Karte:</strong> 200€ (3 Monate gültig)</li><li><strong>Flatrate:</strong> 99€/Monat</li></ul>"
+    body: "<h2>Pässe und Mitgliedschaften</h2>"
   - _template: BsportPasses
     name: pricing-passes
   - _template: BsportSubscription
     name: pricing-subscriptions
-  - _template: BookingBlock
-    name: pricing-booking-cta
-    enabled: true
-    bookingUrl: "https://bsport.io/studio/eosclub/pricing"
-    label: "Mitgliedschaft wählen"
   - _template: FaqBlock
     name: pricing-faq
     title: "Häufige Fragen"

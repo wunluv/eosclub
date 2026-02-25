@@ -6,6 +6,7 @@ interface Props {
   backgroundImage?: string;
   ctaLabel?: string;
   ctaUrl?: string;
+  logoOverlay?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   backgroundImage,
   ctaLabel,
   ctaUrl,
+  logoOverlay,
 } = Astro.props as Props;
 
 const locale = Astro.currentLocale ?? 'de';
@@ -30,14 +32,32 @@ const bgStyle = backgroundImage
 
 <section
   class={`relative w-full min-h-[60vh] overflow-hidden ${!backgroundImage ? 'bg-eos-base' : ''}`}
-  style={bgStyle}
 >
+  {backgroundImage && (
+    <img
+      src={backgroundImage}
+      alt=""
+      class="absolute inset-0 w-full h-full object-cover img-greyscale"
+      aria-hidden="true"
+    />
+  )}
+
   {backgroundImage && (
     <div
       class="absolute inset-0 pointer-events-none"
       style="background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%);"
       aria-hidden="true"
     ></div>
+  )}
+
+  {logoOverlay && (
+    <div class="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
+      <img
+        src={logoOverlay}
+        alt="EOS CLUB Logo Overlay"
+        class="max-w-[300px] w-full px-6"
+      />
+    </div>
   )}
 
   <div class="absolute bottom-8 left-8 lg:left-16 max-w-3xl z-10">
