@@ -12,6 +12,10 @@ blocks:
   - _template: ContentBlock
     name: pricing-intro
     body: "<h2>Unsere Optionen</h2><p>Ob Drop-in, 10er-Karte oder unlimitierte Mitgliedschaft – wir haben das passende Angebot für deinen Lebensstil.</p><ul><li><strong>Drop-in:</strong> 25€ pro Klasse</li><li><strong>10er-Karte:</strong> 200€ (3 Monate gültig)</li><li><strong>Flatrate:</strong> 99€/Monat</li></ul>"
+  - _template: BsportPasses
+    name: pricing-passes
+  - _template: BsportSubscription
+    name: pricing-subscriptions
   - _template: BookingBlock
     name: pricing-booking-cta
     enabled: true

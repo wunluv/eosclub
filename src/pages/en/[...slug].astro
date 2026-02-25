@@ -8,6 +8,9 @@ import FeatureGridBlock from '../../components/blocks/FeatureGridBlock.astro';
 import FullBleedBlock from '../../components/blocks/FullBleedBlock.astro';
 import InteractiveListBlock from '../../components/blocks/InteractiveListBlock.astro';
 import FaqBlock from '../../components/blocks/FaqBlock.astro';
+import BsportCalendar from '../../components/integrations/BsportCalendar.astro';
+import BsportPasses from '../../components/integrations/BsportPasses.astro';
+import BsportSubscription from '../../components/integrations/BsportSubscription.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -63,6 +66,18 @@ const { title, seoDescription, ogImage, blocks } = page.data;
           return <InteractiveListBlock {...block} />;
         case 'FaqBlock':
           return <FaqBlock {...block} />;
+        case 'BsportCalendar': {
+          const { _template: _t1, name: _n1, ...calProps } = block;
+          return <BsportCalendar {...calProps} />;
+        }
+        case 'BsportPasses': {
+          const { _template: _t2, name: _n2, ...passProps } = block;
+          return <BsportPasses {...passProps} />;
+        }
+        case 'BsportSubscription': {
+          const { _template: _t3, name: _n3, ...subProps } = block;
+          return <BsportSubscription {...subProps} />;
+        }
         default:
           return null;
       }

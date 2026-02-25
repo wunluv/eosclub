@@ -76,6 +76,21 @@ const featureGridBlockSchema = z.object({
   })),
 });
 
+const bsportCalendarBlockSchema = z.object({
+  _template: z.literal('BsportCalendar'),
+  name: z.string().optional(),
+});
+
+const bsportPassesBlockSchema = z.object({
+  _template: z.literal('BsportPasses'),
+  name: z.string().optional(),
+});
+
+const bsportSubscriptionBlockSchema = z.object({
+  _template: z.literal('BsportSubscription'),
+  name: z.string().optional(),
+});
+
 // Discriminated union for all blocks
 const blockSchema = z.discriminatedUnion('_template', [
   heroBlockSchema,
@@ -85,6 +100,9 @@ const blockSchema = z.discriminatedUnion('_template', [
   fullBleedBlockSchema,
   interactiveListBlockSchema,
   faqBlockSchema,
+  bsportCalendarBlockSchema,
+  bsportPassesBlockSchema,
+  bsportSubscriptionBlockSchema,
 ]);
 
 // Pages collection

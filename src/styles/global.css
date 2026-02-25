@@ -127,6 +127,11 @@
   .portrait-glow {
     box-shadow: 0 0 20px rgba(255, 46, 0, 0.1);
   }
+
+  /* --- Greyscale Images --- */
+  .img-greyscale {
+    @apply grayscale transition-all duration-500 hover:grayscale-0;
+  }
 }
 
 /* Reduced motion overrides */

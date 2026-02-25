@@ -1,5 +1,6 @@
 ---
 import LangSwitch from './LangSwitch.astro';
+import BsportLeadCapture from '../integrations/BsportLeadCapture.astro';
 
 interface Props {
   deSlug?: string;
@@ -138,6 +139,9 @@ const socialLinks = [
 
       <!-- Language & Copyright -->
       <div class="flex flex-col items-center md:items-start lg:items-end justify-between gap-8 lg:gap-0">
+        <div class="w-full max-w-xs mb-6">
+          <BsportLeadCapture fieldsType="firstNameAndEmail" />
+        </div>
         <LangSwitch translationSlug={translationSlug} />
         <p class="text-sm text-white/60 mt-8 lg:mt-0">
           © {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}

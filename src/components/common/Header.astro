@@ -38,19 +38,22 @@ const pathname = new URL(Astro.request.url).pathname;
     </div>
 
     <!-- Desktop Nav (Center - hidden on mobile) -->
-    <nav class="hidden lg:flex flex-1 items-center justify-center space-x-6 lg:space-x-8">
+    <nav id="desktop-nav" class="hidden lg:flex flex-1 items-center justify-center space-x-6 lg:space-x-8 relative">
       {navItems.map((item) => {
         const path = isEn ? item.enPath : item.dePath;
-        const isActive = pathname === path || (path !== '/' && pathname.startsWith(path));
+        const isActive = pathname === path;
         return (
           <a
             href={path}
-            class={`text-sm font-bold uppercase tracking-widest text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 ${isActive ? 'underline underline-offset-4 decoration-eos-accent' : ''}`}
+            data-nav-link
+            class={`text-sm font-bold uppercase tracking-widest text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 relative py-2 ${isActive ? 'is-active' : ''}`}
           >
             {isEn ? item.en : item.de}
           </a>
         );
       })}
+      <!-- Sliding Underline -->
+      <div id="nav-underline" class="absolute bottom-0 h-0.5 bg-eos-accent opacity-0 pointer-events-none"></div>
     </nav>
 
     <!-- Right Section: Book Button, User Login, LangSwitch -->
@@ -70,12 +73,13 @@ const pathname = new URL(Astro.request.url).pathname;
         href="https://www.eversports.de/login"
         target="_blank"
         rel="noopener noreferrer"
-        class="pointer-events-auto p-2 text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2 rounded-lg"
+        class="pointer-events-auto inline-flex items-center px-4 py-2 bg-eos-accent text-white text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-200 hover:bg-eos-accent/90 focus:outline-none focus:ring-2 focus:ring-eos-accent focus:ring-offset-2"
         aria-label={isEn ? 'User Login' : 'Benutzer Login'}
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
         </svg>
+        <span>{isEn ? 'Login' : 'Login'}</span>
       </a>
 
       <span class="pointer-events-auto"><LangSwitch translationSlug={translationSlug} /></span>
@@ -95,16 +99,16 @@ const pathname = new URL(Astro.request.url).pathname;
   </div>
 </header>
 
-<!-- Mobile Overlay -->
+  <!-- Mobile Overlay -->
 <div
   id="mobile-overlay"
-  class="fixed inset-0 bg-eos-contrast/20 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"
+  class="fixed inset-0 bg-eos-contrast z-40 hidden opacity-0 transition-opacity duration-300"
 ></div>
 
 <!-- Mobile Sidebar Panel -->
 <aside
   id="mobile-sidebar"
-  class="fixed left-0 top-0 h-screen w-full max-w-sm bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col pointer-events-none"
+  class="fixed left-0 top-0 h-screen w-full bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col pointer-events-none"
 >
   <!-- Close Button -->
   <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
@@ -173,6 +177,9 @@ const pathname = new URL(Astro.request.url).pathname;
 </aside>
 
 <script>
+  import { gsap } from 'gsap';
+
+  // --- Mobile Menu Logic ---
   const menuButton = document.getElementById('mobile-menu-button');
   const closeButton = document.getElementById('mobile-close-button');
   const sidebar = document.getElementById('mobile-sidebar');
@@ -188,7 +195,6 @@ const pathname = new URL(Astro.request.url).pathname;
     setTimeout(() => overlay?.classList.add('opacity-100'), 10);
     document.body.style.overflow = 'hidden';
     menuButton?.setAttribute('aria-expanded', 'true');
-    // Focus moves to close button
     closeButton?.focus();
   }
 
@@ -200,7 +206,6 @@ const pathname = new URL(Astro.request.url).pathname;
     setTimeout(() => overlay?.classList.add('hidden'), 300);
     document.body.style.overflow = '';
     menuButton?.setAttribute('aria-expanded', 'false');
-    // Focus returns to hamburger
     menuButton?.focus();
   }
 
@@ -208,10 +213,52 @@ const pathname = new URL(Astro.request.url).pathname;
   closeButton?.addEventListener('click', closeMenu);
   overlay?.addEventListener('click', closeMenu);
 
-  // Close on escape key
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isMenuOpen) {
       closeMenu();
     }
   });
+
+  // --- Desktop Nav Underline Animation ---
+  function initNavUnderline() {
+    const nav = document.getElementById('desktop-nav');
+    const underline = document.getElementById('nav-underline');
+    const links = document.querySelectorAll('[data-nav-link]');
+    const activeLink = document.querySelector('[data-nav-link].is-active') as HTMLElement;
+
+    if (!nav || !underline || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const setUnderline = (el: HTMLElement, immediate = false) => {
+      const rect = el.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+
+      gsap.to(underline, {
+        left: rect.left - navRect.left,
+        width: rect.width,
+        opacity: 1,
+        duration: immediate ? 0 : 0.4,
+        ease: 'power2.out'
+      });
+    };
+
+    if (activeLink) {
+      setUnderline(activeLink, true);
+    }
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', () => setUnderline(link as HTMLElement));
+    });
+
+    nav.addEventListener('mouseleave', () => {
+      if (activeLink) {
+        setUnderline(activeLink);
+      } else {
+        gsap.to(underline, { opacity: 0, duration: 0.3 });
+      }
+    });
+  }
+
+  // Initialize on load and after swap
+  initNavUnderline();
+  document.addEventListener('astro:after-swap', initNavUnderline);
 </script>

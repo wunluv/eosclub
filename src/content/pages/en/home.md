@@ -50,4 +50,12 @@ blocks:
         description: "Deep heat and regeneration"
         image: "/assets/tiled_infrared_therapy_studio.png"
         imageAlt: "Infrared therapy studio"
+      - label: "Tai Chi"
+        description: "Meditation in motion for inner balance"
+        image: "/assets/tiled_theme_taichi.png"
+        imageAlt: "Tai Chi practice"
+      - label: "Barre"
+        description: "Ballet-inspired workout for strength and posture"
+        image: "/assets/theme_barre.png"
+        imageAlt: "Barre training"
 ---

@@ -12,6 +12,10 @@ blocks:
   - _template: ContentBlock
     name: pricing-intro
     body: "<h2>Our Options</h2><p>Whether it's a drop-in, a 10-class pass, or an unlimited membership – we have the right offer for your lifestyle.</p><ul><li><strong>Drop-in:</strong> 25€ per class</li><li><strong>10-Class Pass:</strong> 200€ (valid for 3 months)</li><li><strong>Flatrate:</strong> 99€/month</li></ul>"
+  - _template: BsportPasses
+    name: pricing-passes
+  - _template: BsportSubscription
+    name: pricing-subscriptions
   - _template: BookingBlock
     name: pricing-booking-cta
     enabled: true

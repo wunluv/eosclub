@@ -49,4 +49,12 @@ blocks:
         description: "Tiefenwärme und Regeneration"
         image: "/assets/tiled_infrared_therapy_studio.png"
         imageAlt: "Infrarot Therapie Studio"
+      - label: "Tai Chi"
+        description: "Meditation in Bewegung für innere Balance"
+        image: "/assets/tiled_theme_taichi.png"
+        imageAlt: "Tai Chi Praxis"
+      - label: "Barre"
+        description: "Ballett-inspiriertes Training für Kraft und Haltung"
+        image: "/assets/theme_barre.png"
+        imageAlt: "Barre Training"
 ---
