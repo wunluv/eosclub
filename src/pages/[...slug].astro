@@ -12,10 +12,11 @@ import FaqBlock from '../components/blocks/FaqBlock.astro';
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
   // Filter German pages (id starts with 'de/')
-  const dePages = pages.filter(page => page.id.startsWith('de/'));
+  // We exclude 'home' because it is handled by src/pages/index.astro
+  const dePages = pages.filter(page => page.id.startsWith('de/') && page.id !== 'de/home.md');
 
   return dePages.map(page => {
-    // Extract slug from filename (e.g., 'de/home.md' -> 'home')
+    // Extract slug from filename (e.g., 'de/kontakt.md' -> 'kontakt')
     const slug = page.id.replace('de/', '').replace('.md', '');
 
     // Find English counterpart via translationSlug
@@ -25,10 +26,10 @@ export async function getStaticPaths() {
     );
 
     return {
-      params: { slug: slug === 'home' ? undefined : slug },
+      params: { slug },
       props: {
         page,
-        deSlug: slug === 'home' ? '' : slug,
+        deSlug: slug,
         enSlug: page.data.translationSlug === 'home' ? '' : page.data.translationSlug,
       },
     };
