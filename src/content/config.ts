@@ -11,6 +11,7 @@ const heroBlockSchema = z.object({
   backgroundImage: z.string().optional(),
   ctaLabel: z.string().optional(),
   ctaUrl: z.string().optional(),
+  logoOverlay: z.string().optional(),
 });
 
 const fullBleedBlockSchema = z.object({

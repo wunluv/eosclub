@@ -49,6 +49,7 @@ export default defineConfig({
                   },
                   { type: 'string', name: 'subheadline', label: 'Subheadline' },
                   { type: 'image', name: 'backgroundImage', label: 'Background Image', required: true },
+                  { type: 'image', name: 'logoOverlay', label: 'Logo Overlay (Centered)' },
                   { type: 'string', name: 'ctaLabel', label: 'CTA Label' },
                   { type: 'string', name: 'ctaUrl', label: 'CTA URL' },
                 ],
