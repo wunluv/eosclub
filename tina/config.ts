@@ -1,12 +1,14 @@
 import { defineConfig } from 'tinacms';
 
+const isSelfHosted = process.env.TINA_SELF_HOSTED === 'true';
+
 export default defineConfig({
-  contentApiUrlOverride: process.env.TINA_SELF_HOSTED === 'true'
+  contentApiUrlOverride: isSelfHosted
     ? '/api/tina/graphql'
     : undefined,
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
-  clientId: process.env.TINA_PUBLIC_CLIENT_ID || '',
-  token: process.env.TINA_TOKEN || '',
+  clientId: isSelfHosted ? null : (process.env.TINA_PUBLIC_CLIENT_ID || ''),
+  token: isSelfHosted ? null : (process.env.TINA_TOKEN || ''),
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
