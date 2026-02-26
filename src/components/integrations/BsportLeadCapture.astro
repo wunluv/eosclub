@@ -87,8 +87,6 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget .cleanslate,
   .bsport-lead-capture-widget .bs-newsletter-form__container,
   .bsport-lead-capture-widget .bs-newsletter-form__root,
-  .bsport-lead-capture-widget .jss1,
-  .bsport-lead-capture-widget .jss2,
   .bsport-lead-capture-widget div[class*="jss"] {
     background-color: transparent !important;
     background: transparent !important;
@@ -115,7 +113,8 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget .bs-fabrique-textfield__input,
   .bsport-lead-capture-widget input,
   .bsport-lead-capture-widget .bs-fabrique-textfield__input__container,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input__text {
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input__text,
+  .bsport-lead-capture-widget .bs-fabrique-textfield__wrapper {
     background-color: #09090B !important; /* eos-zen */
     color: white !important;
     border: 1px solid #E6E5E0 !important; /* eos-subtle */
@@ -124,14 +123,19 @@ const COMPANY_ID = 5082;
     width: 100% !important;
   }
 
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container {
+    border: none !important; /* Remove internal border */
+    background-color: transparent !important;
+  }
+
   .bsport-lead-capture-widget input {
     padding: 0.75rem 1rem !important;
     background-color: #09090B !important;
     color: white !important;
+    border: none !important; /* Input itself is borderless, border is on wrapper */
   }
 
-  .bsport-lead-capture-widget .bs-fabrique-input-base:focus,
-  .bsport-lead-capture-widget input:focus {
+  .bsport-lead-capture-widget .bs-fabrique-textfield__wrapper:focus-within {
     outline: none !important;
     border-color: #FF2E00 !important; /* eos-accent */
     box-shadow: 0 0 0 2px rgba(255, 46, 0, 0.2) !important;
@@ -161,21 +165,19 @@ const COMPANY_ID = 5082;
   }
 
   /* 5. Remove Bsport Branding */
-  .bsport-lead-capture-widget .jss17, /* Logo container */
-  .bsport-lead-capture-widget .jss18,
-  .bsport-lead-capture-widget .jss19,
-  .bsport-lead-capture-widget .jss20,
   .bsport-lead-capture-widget [class*="MuiTypography-caption"],
   .bsport-lead-capture-widget img[src*="bsport_logo"],
   .bsport-lead-capture-widget img[src*="bsport"],
   .bsport-lead-capture-widget .MuiTypography-colorTextSecondary,
-  .bsport-lead-capture-widget div[class*="jss"][style*="position: absolute; bottom: 0"] {
+  .bsport-lead-capture-widget div[class*="jss"][style*="position: absolute; bottom: 0"],
+  .bsport-lead-capture-widget div[class*="jss"][style*="height: 100%"] > div:last-child {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+</style>
 </style>
 </style>
 </style>
