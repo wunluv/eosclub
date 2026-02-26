@@ -160,12 +160,21 @@ const pathname = new URL(Astro.request.url).pathname;
 
   <!-- ── Bottom bar ── -->
   <div>
-    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-      <p class="text-xs text-white/40">
-        © {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}
-      </p>
+    <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <!-- Left: copyright + address -->
+      <div class="flex flex-col items-center sm:items-start gap-1 text-xs text-white/40">
+        <p>© {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}</p>
+        <a
+          href="https://www.google.com/maps/place/Eupener+Str.+84,+50933+K%C3%B6ln"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-white transition-colors"
+        >
+          Eupener Str. 84, 50933 Köln
+        </a>
+      </div>
 
-      <!-- Social icon row -->
+      <!-- Center: social icons -->
       <div class="flex items-center gap-4">
         {socialLinks.map((link) => (
           <a
@@ -179,9 +188,13 @@ const pathname = new URL(Astro.request.url).pathname;
         ))}
       </div>
 
-      <p class="text-xs text-white/40">
-        {isEn ? 'Cologne, Germany' : 'Köln, Deutschland'}
-      </p>
+      <!-- Right: phone -->
+      <a
+        href="tel:+491726955550"
+        class="text-xs text-white/40 hover:text-white transition-colors"
+      >
+        +49 172 6955550
+      </a>
     </div>
   </div>
 
