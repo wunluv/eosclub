@@ -27,4 +27,5 @@ volumes:
 
 networks:
   backend:
+    name: docker_backend
     external: true
