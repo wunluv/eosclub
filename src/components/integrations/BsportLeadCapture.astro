@@ -80,11 +80,52 @@ const COMPANY_ID = 5082;
   /*
    * Bsport Lead Capture Widget Styling
    * Targets the internal elements of the bsport newsletterV2 widget
-   * to match the EOS CLUB design system.
+   * based on actual rendered HTML structure.
    */
-  /* Trigger Button */
-  .bsport-lead-capture-widget .bsport-newsletter-v2__button,
-  .bsport-newsletter-v2__button {
+
+  /* 1. Form Container & Cleanslate Overrides */
+  .bsport-lead-capture-widget .cleanslate,
+  .bsport-lead-capture-widget .bs-newsletter-form__container,
+  .bsport-lead-capture-widget .bs-newsletter-form__root {
+    background-color: transparent !important;
+    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+  }
+
+  /* 2. Labels & Typography */
+  .bsport-lead-capture-widget .bs-newsletter-form__root__form__field-label,
+  .bsport-lead-capture-widget .bs-typography-body-sm,
+  .bsport-lead-capture-widget label p {
+    color: #1F2933 !important; /* eos-text */
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* 3. Inputs (Zen Mode) */
+  .bsport-lead-capture-widget .bs-fabrique-input-base,
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input,
+  .bsport-lead-capture-widget input {
+    background-color: #09090B !important; /* eos-zen */
+    color: white !important;
+    border: 1px solid #E6E5E0 !important; /* eos-subtle */
+    border-radius: 0.75rem !important;
+    padding: 0.75rem 1rem !important;
+    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    width: 100% !important;
+  }
+
+  .bsport-lead-capture-widget .bs-fabrique-input-base:focus,
+  .bsport-lead-capture-widget input:focus {
+    outline: none !important;
+    border-color: #FF2E00 !important; /* eos-accent */
+    box-shadow: 0 0 0 2px rgba(255, 46, 0, 0.2) !important;
+  }
+
+  /* 4. Submit Button */
+  .bsport-lead-capture-widget .bs-newsletter-form__root__form__submit,
+  .bsport-lead-capture-widget button[type="submit"] {
     background-color: #FF2E00 !important; /* eos-accent */
     color: white !important;
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
@@ -95,84 +136,34 @@ const COMPANY_ID = 5082;
     padding: 0.75rem 1.5rem !important;
     transition: all 0.2s ease !important;
     border: none !important;
-    font-size: 0.875rem !important;
+    width: 100% !important;
+    margin-top: 1rem !important;
+    cursor: pointer !important;
   }
 
-  .bsport-lead-capture-widget .bsport-newsletter-v2__button:hover,
-  .bsport-newsletter-v2__button:hover {
+  .bsport-lead-capture-widget .bs-newsletter-form__root__form__submit:hover {
     opacity: 0.9 !important;
     transform: translateY(-1px) !important;
   }
 
-  /* Form Container & Modal */
-  .bsport-widget-modal .bsport-newsletter-v2__form,
-  .bsport-newsletter-v2__form,
-  [class*="bsport-newsletter-v2__form"],
-  .bsport-widget-modal {
-    background-color: #F9F9F7 !important; /* eos-base */
-    font-family: 'Geist Sans', 'Inter', sans-serif !important;
-    color: #1F2933 !important; /* eos-text */
-  }
-
-  /* Inputs */
-  .bsport-widget-modal .bsport-newsletter-v2__input,
-  .bsport-newsletter-v2__input,
-  [class*="bsport-newsletter-v2__input"],
-  input[class*="bsport-newsletter-v2"],
-  .bsport-widget-modal input {
-    background-color: #09090B !important; /* eos-zen */
-    color: white !important;
-    border: 1px solid #E6E5E0 !important; /* eos-subtle */
-    border-radius: 0.75rem !important;
-    padding: 1rem 1.25rem !important;
-  }
-
-  .bsport-widget-modal .bsport-newsletter-v2__input:focus,
-  .bsport-newsletter-v2__input:focus,
-  .bsport-widget-modal input:focus {
-    outline: none !important;
-    box-shadow: 0 0 0 2px #FF2E00 !important; /* eos-accent */
-  }
-
-  /* Labels & Help Text */
-  .bsport-widget-modal label,
-  .bsport-newsletter-v2__label,
-  [class*="bsport-newsletter-v2__label"],
-  .bsport-widget-modal .help-text,
-  [class*="help-text"] {
-    color: #1F2933 !important; /* eos-text */
-    font-weight: 600 !important;
-    text-transform: uppercase !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.05em !important;
-  }
-
-  /* Submit Button */
-  .bsport-widget-modal .bsport-newsletter-v2__submit,
-  .bsport-newsletter-v2__submit,
-  [class*="bsport-newsletter-v2__submit"],
-  .bsport-widget-modal button[type="submit"] {
-    background-color: #FF2E00 !important;
-    color: white !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 0.1em !important;
-    border-radius: 0.5rem !important;
-    padding: 1rem !important;
-    border: none !important;
-  }
-
-  /* Remove Bsport Logo */
-  .bsport-widget-modal .bsport-logo,
-  .bsport-logo,
-  [class*="bsport-logo"],
-  .bsport-powered-by,
-  [class*="powered-by"],
-  img[src*="bsport"] {
+  /* 5. Remove Bsport Branding */
+  .bsport-lead-capture-widget .jss17, /* Logo container */
+  .bsport-lead-capture-widget .jss18,
+  .bsport-lead-capture-widget .jss19,
+  .bsport-lead-capture-widget .jss20,
+  .bsport-lead-capture-widget [class*="MuiTypography-caption"],
+  .bsport-lead-capture-widget img[src*="bsport_logo"],
+  .bsport-lead-capture-widget span:contains("Powered by") {
     display: none !important;
     visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Fallback for "Powered by" text if :contains is not supported */
+  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary {
+    display: none !important;
   }
 </style>
 
