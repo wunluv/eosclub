@@ -86,16 +86,21 @@ const COMPANY_ID = 5082;
   /* 1. Form Container & Cleanslate Overrides */
   .bsport-lead-capture-widget .cleanslate,
   .bsport-lead-capture-widget .bs-newsletter-form__container,
-  .bsport-lead-capture-widget .bs-newsletter-form__root {
+  .bsport-lead-capture-widget .bs-newsletter-form__root,
+  .bsport-lead-capture-widget .jss1,
+  .bsport-lead-capture-widget .jss2 {
     background-color: transparent !important;
+    background: transparent !important;
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    box-shadow: none !important;
+    border: none !important;
   }
 
   /* 2. Labels & Typography */
   .bsport-lead-capture-widget .bs-newsletter-form__root__form__field-label,
   .bsport-lead-capture-widget .bs-typography-body-sm,
   .bsport-lead-capture-widget label p {
-    color: #1F2933 !important; /* eos-text */
+    color: white !important; /* White text for footer contrast */
     font-weight: 700 !important;
     text-transform: uppercase !important;
     font-size: 0.75rem !important;
@@ -106,14 +111,18 @@ const COMPANY_ID = 5082;
   /* 3. Inputs (Zen Mode) */
   .bsport-lead-capture-widget .bs-fabrique-input-base,
   .bsport-lead-capture-widget .bs-fabrique-textfield__input,
-  .bsport-lead-capture-widget input {
+  .bsport-lead-capture-widget input,
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container {
     background-color: #09090B !important; /* eos-zen */
     color: white !important;
     border: 1px solid #E6E5E0 !important; /* eos-subtle */
     border-radius: 0.75rem !important;
-    padding: 0.75rem 1rem !important;
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
     width: 100% !important;
+  }
+
+  .bsport-lead-capture-widget input {
+    padding: 0.75rem 1rem !important;
   }
 
   .bsport-lead-capture-widget .bs-fabrique-input-base:focus,
@@ -153,18 +162,15 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget .jss20,
   .bsport-lead-capture-widget [class*="MuiTypography-caption"],
   .bsport-lead-capture-widget img[src*="bsport_logo"],
-  .bsport-lead-capture-widget span:contains("Powered by") {
+  .bsport-lead-capture-widget img[src*="bsport"],
+  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-
-  /* Fallback for "Powered by" text if :contains is not supported */
-  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary {
-    display: none !important;
-  }
+</style>
 </style>
 
 <!-- Mount script -->
