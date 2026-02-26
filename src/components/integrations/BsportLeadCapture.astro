@@ -88,7 +88,8 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget .bs-newsletter-form__container,
   .bsport-lead-capture-widget .bs-newsletter-form__root,
   .bsport-lead-capture-widget .jss1,
-  .bsport-lead-capture-widget .jss2 {
+  .bsport-lead-capture-widget .jss2,
+  .bsport-lead-capture-widget div[class*="jss"] {
     background-color: transparent !important;
     background: transparent !important;
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
@@ -99,7 +100,8 @@ const COMPANY_ID = 5082;
   /* 2. Labels & Typography */
   .bsport-lead-capture-widget .bs-newsletter-form__root__form__field-label,
   .bsport-lead-capture-widget .bs-typography-body-sm,
-  .bsport-lead-capture-widget label p {
+  .bsport-lead-capture-widget label p,
+  .bsport-lead-capture-widget .bs-typography-body-md {
     color: white !important; /* White text for footer contrast */
     font-weight: 700 !important;
     text-transform: uppercase !important;
@@ -112,7 +114,8 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget .bs-fabrique-input-base,
   .bsport-lead-capture-widget .bs-fabrique-textfield__input,
   .bsport-lead-capture-widget input,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container {
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container,
+  .bsport-lead-capture-widget .bs-fabrique-textfield__input__text {
     background-color: #09090B !important; /* eos-zen */
     color: white !important;
     border: 1px solid #E6E5E0 !important; /* eos-subtle */
@@ -123,6 +126,8 @@ const COMPANY_ID = 5082;
 
   .bsport-lead-capture-widget input {
     padding: 0.75rem 1rem !important;
+    background-color: #09090B !important;
+    color: white !important;
   }
 
   .bsport-lead-capture-widget .bs-fabrique-input-base:focus,
@@ -163,13 +168,15 @@ const COMPANY_ID = 5082;
   .bsport-lead-capture-widget [class*="MuiTypography-caption"],
   .bsport-lead-capture-widget img[src*="bsport_logo"],
   .bsport-lead-capture-widget img[src*="bsport"],
-  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary {
+  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary,
+  .bsport-lead-capture-widget div[class*="jss"][style*="position: absolute; bottom: 0"] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
+</style>
 </style>
 </style>
 
