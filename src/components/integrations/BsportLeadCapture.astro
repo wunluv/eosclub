@@ -4,205 +4,183 @@
  *
  * Renders the bsport lead acquisition / contact capture form widget.
  * widgetType: "newsletterV2"
- * dialogMode: 0 = popup trigger (bsport default for this widget type)
+ * dialogMode: 3 = inline embed
  *
- * NOTE: This widget uses dialogMode: 0 (popup), unlike the other bsport widgets
- * which use dialogMode: 3 (inline). Bsport renders a trigger button that opens
- * a modal form. If an inline form is preferred, discuss with bsport support.
- *
- * This may serve as a replacement for the existing EmailSignup.astro component
- * once bsport is the confirmed CRM/contact system for EOS CLUB.
+ * All visual overrides are handled locally via <style is:inline> below.
+ * The bsport admin "Custom CSS" should be left at defaults or minimal.
  *
  * Usage:
  *   <BsportLeadCapture />
- *
- * Usage — custom config:
- *   <BsportLeadCapture
- *     fieldsType="firstNameAndEmail"
- *     showSubtitle={true}
- *     showSuccessTitle={false}
- *     showSuccessText={false}
- *   />
- *
- * Props map 1:1 to the bsport newsletterV2 config object.
- * Defaults match the bsport dashboard output.
  *
  * Requires BaseLayout.astro to expose <slot name="head" /> inside its <head> block.
  */
 
 interface Props {
-  /**
-   * Form fields to display.
-   * "fullNameAndEmail"  — first name, last name, email (dashboard default)
-   * "firstNameAndEmail" — first name and email only
-   * "emailOnly"         — email address only (inferred — verify with bsport)
-   */
-  fieldsType?: "fullNameAndEmail" | "firstNameAndEmail" | "emailOnly";
-  /** Show the form subtitle text. Default: false. */
+  fieldsType?: "emailOnly" | "firstNameAndEmail" | "fullNameAndEmail";
   showSubtitle?: boolean;
-  /** Show the success state title after submission. Default: true. */
   showSuccessTitle?: boolean;
-  /** Show the success state body text after submission. Default: true. */
   showSuccessText?: boolean;
 }
 
 const {
-  fieldsType = "fullNameAndEmail",
+  fieldsType = "emailOnly",
   showSubtitle = false,
   showSuccessTitle = true,
   showSuccessText = true,
 } = Astro.props;
 
-const WIDGET_ELEMENT_ID = "bsport-widget-101191";
+const WIDGET_ELEMENT_ID = "bsport-widget-263658";
 const COMPANY_ID = 5082;
 ---
 
 <Fragment slot="head">
-  <!-- bsport CDN loader: guarded against duplicate inserts -->
   <script id="insert-bsport-widget-cdn" is:inline>
-    !function (b, s, p) {
+    !function (b, s, p, o, r, t) {
       typeof window.BsportWidget === "undefined" &&
         !document.getElementById("bsport-widget-cdn") &&
-        (function () {
+        !function () {
           var m = b.createElement(s);
           m.id = "bsport-widget-cdn";
           m.src = p;
           b.getElementsByTagName("head")[0].appendChild(m);
-        })();
+        }();
     }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
   </script>
 </Fragment>
 
 <!-- Mount target -->
-<div id={WIDGET_ELEMENT_ID} class="bsport-lead-capture-widget"></div>
+<div id={WIDGET_ELEMENT_ID} class="bsport-lead-capture"></div>
 
-<style is:global>
-  /*
-   * Bsport Lead Capture Widget Styling
-   * Targets the internal elements of the bsport newsletterV2 widget
-   * based on actual rendered HTML structure.
-   */
-
-  /* 1. Form Container & Cleanslate Overrides */
-  .bsport-lead-capture-widget .cleanslate,
-  .bsport-lead-capture-widget .bs-newsletter-form__container,
-  .bsport-lead-capture-widget .bs-newsletter-form__root,
-  .bsport-lead-capture-widget div[class*="jss"] {
-    background-color: transparent !important;
+<!--
+  ALL visual overrides live here — not in bsport admin panel.
+  Uses [id*="bsport-widget"] .cleanslate prefix to match widget's
+  own specificity. Every rule uses !important to beat JSS runtime styles.
+-->
+<style is:inline>
+  /* ── Transparent backgrounds on EVERY wrapper layer ── */
+  [id*="bsport-widget"],
+  [id*="bsport-widget"] > .cleanslate,
+  [id*="bsport-widget"] .cleanslate,
+  [id*="bsport-widget"] .cleanslate > div,
+  [id*="bsport-widget"] .cleanslate > div > div,
+  [id*="bsport-widget"] .cleanslate > div > div > div,
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__container,
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root {
     background: transparent !important;
-    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
+    padding: 0 !important;
   }
 
-  /* 2. Labels & Typography */
-  .bsport-lead-capture-widget .bs-newsletter-form__root__form__field-label,
-  .bsport-lead-capture-widget .bs-typography-body-sm,
-  .bsport-lead-capture-widget label p,
-  .bsport-lead-capture-widget .bs-typography-body-md {
-    color: white !important; /* White text for footer contrast */
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 0.1em !important;
-    margin-bottom: 0.5rem !important;
+  /* ── Hide Email label — placeholder "Email" is sufficient ── */
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__field-label,
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__label,
+  [id*="bsport-widget"] .cleanslate label {
+    display: none !important;
   }
 
-  /* 3. Inputs (Zen Mode) */
-  .bsport-lead-capture-widget .bs-fabrique-input-base,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input,
-  .bsport-lead-capture-widget input,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input__text,
-  .bsport-lead-capture-widget .bs-fabrique-textfield__wrapper {
-    background-color: #09090B !important; /* eos-zen */
-    color: white !important;
-    border: 1px solid #E6E5E0 !important; /* eos-subtle */
-    border-radius: 0.75rem !important;
-    font-family: 'Geist Sans', 'Inter', sans-serif !important;
-    width: 100% !important;
-  }
-
-  .bsport-lead-capture-widget .bs-fabrique-textfield__input__container {
-    border: none !important; /* Remove internal border */
+  /* ── Input wrapper — no border, transparent bg, subtle underline ── */
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__wrapper {
+    background: transparent !important;
     background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25) !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    margin-bottom: 0.75rem !important;
+  }
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__wrapper:focus-within {
+    border-bottom-color: #FF2E00 !important;
+    box-shadow: none !important;
   }
 
-  .bsport-lead-capture-widget input {
-    padding: 0.75rem 1rem !important;
-    background-color: #09090B !important;
+  /* ── Input and its container ── */
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__container,
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__field-input-container,
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__input__container {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__field-input,
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-textfield__input,
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-input-base {
+    background: transparent !important;
     color: white !important;
-    border: none !important; /* Input itself is borderless, border is on wrapper */
+    padding: 0.75rem 0 !important;
+    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    font-size: 0.875rem !important;
+    border: none !important;
+    border-radius: 0 !important;
   }
 
-  .bsport-lead-capture-widget .bs-fabrique-textfield__wrapper:focus-within {
-    outline: none !important;
-    border-color: #FF2E00 !important; /* eos-accent */
-    box-shadow: 0 0 0 2px rgba(255, 46, 0, 0.2) !important;
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__field-input::placeholder,
+  [id*="bsport-widget"] .cleanslate .bs-fabrique-input-base::placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
   }
 
-  /* 4. Submit Button */
-  .bsport-lead-capture-widget .bs-newsletter-form__root__form__submit,
-  .bsport-lead-capture-widget button[type="submit"] {
-    background-color: #FF2E00 !important; /* eos-accent */
+  /* ── Submit button ── */
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__submit {
+    background-color: #FF2E00 !important;
     color: white !important;
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
     font-weight: 700 !important;
+    font-size: 0.75rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
-    border-radius: 0.5rem !important;
-    padding: 0.75rem 1.5rem !important;
-    transition: all 0.2s ease !important;
     border: none !important;
+    border-radius: 9999px !important;
+    padding: 1rem 1.5rem !important;
     width: 100% !important;
-    margin-top: 1rem !important;
+    margin-top: 0.5rem !important;
     cursor: pointer !important;
+    transition: opacity 0.2s ease !important;
+  }
+  [id*="bsport-widget"] .cleanslate .bs-newsletter-form__root__form__submit:hover {
+    opacity: 0.88 !important;
   }
 
-  .bsport-lead-capture-widget .bs-newsletter-form__root__form__submit:hover {
-    opacity: 0.9 !important;
-    transform: translateY(-1px) !important;
-  }
-
-  /* 5. Remove Bsport Branding */
-  .bsport-lead-capture-widget [class*="MuiTypography-caption"],
-  .bsport-lead-capture-widget img[src*="bsport_logo"],
-  .bsport-lead-capture-widget img[src*="bsport"],
-  .bsport-lead-capture-widget .MuiTypography-colorTextSecondary,
-  .bsport-lead-capture-widget div[class*="jss"][style*="position: absolute; bottom: 0"],
-  .bsport-lead-capture-widget div[class*="jss"][style*="height: 100%"] > div:last-child {
+  /* ── Hide bsport powered-by / logo — aggressive selectors ── */
+  [id*="bsport-widget"] .cleanslate a[href*="bsport"],
+  [id*="bsport-widget"] .cleanslate a[href*="pro.bsport"],
+  [id*="bsport-widget"] .cleanslate img[alt="bsport"],
+  [id*="bsport-widget"] .cleanslate img[src*="bsport_logo"],
+  [id*="bsport-widget"] .cleanslate [class*="jss3"],
+  [id*="bsport-widget"] .cleanslate span[class*="MuiTypography"] {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    overflow: hidden !important;
   }
 </style>
-</style>
-</style>
-</style>
 
-<!-- Mount script -->
-<script
-  is:inline
-  define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, fieldsType, showSubtitle, showSuccessTitle, showSuccessText }}
->
-  function mountBsportLeadCapture(config, repeat) {
+<!-- Global mount function -->
+<script id="bsport-widget-mount" is:inline>
+  function MountBsportWidget(config, repeat) {
     repeat = repeat || 1;
     if (repeat > 50) return;
     if (!window.BsportWidget) {
       return setTimeout(function () {
-        mountBsportLeadCapture(config, repeat + 1);
+        MountBsportWidget(config, repeat + 1);
       }, 100 * repeat || 1);
     }
     BsportWidget.mount(config);
   }
+</script>
 
-  mountBsportLeadCapture({
+<!-- Widget config -->
+<script
+  is:inline
+  define:vars={{ WIDGET_ELEMENT_ID, COMPANY_ID, fieldsType, showSubtitle, showSuccessTitle, showSuccessText }}
+>
+  MountBsportWidget({
     parentElement: WIDGET_ELEMENT_ID,
     companyId: COMPANY_ID,
     franchiseId: null,
-    dialogMode: 0,
+    dialogMode: 3,
     widgetType: "newsletterV2",
     showFab: false,
     fullScreenPopup: false,

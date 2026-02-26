@@ -1,6 +1,9 @@
 import { defineConfig } from 'tinacms';
 
 export default defineConfig({
+  contentApiUrlOverride: process.env.TINA_SELF_HOSTED === 'true'
+    ? '/api/tina/graphql'
+    : undefined,
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
   clientId: process.env.TINA_PUBLIC_CLIENT_ID || '',
   token: process.env.TINA_TOKEN || '',

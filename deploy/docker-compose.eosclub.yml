@@ -1,0 +1,30 @@
+services:
+  eosclub-tina:
+    build:
+      context: ..
+      dockerfile: tina-backend/Dockerfile
+    container_name: eosclub_tina
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:4001:4001"
+    volumes:
+      - /var/www/public/eosclub/repo:/app/repo
+      - /var/www/public/eosclub/dist:/app/dist
+      - eosclub_leveldb:/app/tina-backend/data
+    env_file:
+      - /var/www/private/eosclub/.env
+    networks:
+      - backend
+    logging:
+      driver: journald
+      options:
+        tag: "eosclub-tina"
+        mode: non-blocking
+        max-buffer-size: "4m"
+
+volumes:
+  eosclub_leveldb:
+
+networks:
+  backend:
+    external: true
