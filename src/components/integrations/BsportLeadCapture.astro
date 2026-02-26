@@ -76,6 +76,60 @@ const COMPANY_ID = 5082;
 <!-- Mount target -->
 <div id={WIDGET_ELEMENT_ID} class="bsport-lead-capture-widget"></div>
 
+<style is:global>
+  /*
+   * Bsport Lead Capture Widget Styling
+   * Targets the internal elements of the bsport newsletterV2 widget
+   * to match the EOS CLUB design system.
+   */
+  .bsport-lead-capture-widget .bsport-newsletter-v2__button {
+    background-color: #FF2E00 !important; /* eos-accent */
+    color: white !important;
+    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    border-radius: 0.5rem !important;
+    padding: 0.75rem 1.5rem !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    font-size: 0.875rem !important;
+  }
+
+  .bsport-lead-capture-widget .bsport-newsletter-v2__button:hover {
+    opacity: 0.9 !important;
+    transform: translateY(-1px) !important;
+  }
+
+  /* Modal / Popup Styling (if applicable) */
+  .bsport-widget-modal .bsport-newsletter-v2__form {
+    background-color: #F9F9F7 !important; /* eos-base */
+    font-family: 'Geist Sans', 'Inter', sans-serif !important;
+  }
+
+  .bsport-widget-modal .bsport-newsletter-v2__input {
+    background-color: #09090B !important; /* eos-zen */
+    color: white !important;
+    border: 1px solid #E6E5E0 !important; /* eos-subtle */
+    border-radius: 0.75rem !important;
+    padding: 1rem 1.25rem !important;
+  }
+
+  .bsport-widget-modal .bsport-newsletter-v2__input:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px #FF2E00 !important; /* eos-accent */
+  }
+
+  .bsport-widget-modal .bsport-newsletter-v2__submit {
+    background-color: #FF2E00 !important;
+    color: white !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    border-radius: 0.5rem !important;
+  }
+</style>
+
 <!-- Mount script -->
 <script
   is:inline
