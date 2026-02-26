@@ -7,8 +7,8 @@ export default defineConfig({
     ? '/api/tina/graphql'
     : undefined,
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
-  clientId: isSelfHosted ? null : (process.env.TINA_PUBLIC_CLIENT_ID || ''),
-  token: isSelfHosted ? null : (process.env.TINA_TOKEN || ''),
+  clientId: process.env.TINA_PUBLIC_CLIENT_ID,
+  token: process.env.TINA_TOKEN,
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
