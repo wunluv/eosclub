@@ -3,10 +3,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { createDatabase, createLocalDatabase } from '@tinacms/datalayer';
-import { createAndExportRouter } from '@tinacms/graphql';
+import { resolve } from '@tinacms/graphql';
 import { login, authenticate } from './auth.js';
 import path from 'path';
-import fs from 'fs';
 import { exec } from 'child_process';
 
 dotenv.config();
@@ -25,7 +24,6 @@ app.post('/api/auth/login', login);
 const triggerRebuild = () => {
   if (process.env.NODE_ENV === 'production') {
     console.log('Triggering local rebuild inside container...');
-    // Execute the rebuild script that lives in the deploy folder (which is part of the repo)
     exec('sh /app/repo/deploy/rebuild.sh', (error, stdout, stderr) => {
       if (error) {
         console.error(`Rebuild error: ${error}`);
@@ -38,21 +36,34 @@ const triggerRebuild = () => {
 };
 
 // TinaCMS Data Layer setup
-const isProd = process.env.NODE_ENV === 'production';
-const database = createLocalDatabase(); // Use LevelDB for indexing
+const database = createLocalDatabase();
 
-// Create TinaCMS GraphQL Router
-// We need to point to the project's tina/config.ts
-// The Dockerfile will ensure it's at /app/tina/config.ts or similar
-const tinaConfigPath = path.resolve(process.cwd(), '../tina/config.ts');
+// GraphQL endpoint
+app.post('/graphql', authenticate, async (req, res) => {
+  const { query, variables } = req.body;
+  try {
+    const tinaConfigPath = path.resolve(process.cwd(), '../tina/config.ts');
+    // Note: In production, we might need to use the generated schema
+    const result = await resolve({
+      config: {
+        configPath: tinaConfigPath,
+      },
+      database,
+      query,
+      variables,
+    });
 
-const tinaRouter = await createAndExportRouter({
-  database,
-  configPath: tinaConfigPath,
+    // Trigger rebuild if this was a mutation (save)
+    if (query.includes('mutation') && result.errors === undefined) {
+       triggerRebuild();
+    }
+
+    res.json(result);
+  } catch (error) {
+    console.error('GraphQL Error:', error);
+    res.status(500).json({ errors: [{ message: error.message }] });
+  }
 });
-
-// Protect GraphQL endpoint
-app.use('/graphql', authenticate, tinaRouter);
 
 app.listen(port, () => {
   console.log(`TinaCMS backend listening at http://localhost:${port}`);
