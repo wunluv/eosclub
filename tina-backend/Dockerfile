@@ -1,7 +1,7 @@
 FROM node:20-alpine
 
-# Install git for push operations
-RUN apk add --no-cache git
+# Install git and rsync for deployment operations
+RUN apk add --no-cache git rsync
 
 WORKDIR /app
 
