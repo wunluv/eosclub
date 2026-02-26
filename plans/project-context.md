@@ -309,11 +309,19 @@ Content strings (labels, body text) come from frontmatter — no localisation lo
 ## Environment Variables
 
 ```bash
-TINA_PUBLIC_CLIENT_ID=    # TinaCloud
-TINA_TOKEN=               # TinaCloud
+# Frontend / Shared
 PUBLIC_GAS_ENDPOINT=      # Google Apps Script email capture endpoint
 PUBLIC_SITE_URL=https://eos-club.de
-WEBHOOK_SECRET=           # GitHub webhook HMAC secret (server-side only)
+
+# TinaCMS Self-Hosted (Server-side)
+TINA_SELF_HOSTED=true
+TINA_ADMIN_PASSWORD_HASH= # bcrypt hash of CMS password
+TINA_JWT_SECRET=          # Secret for JWT signing
+TINA_JWT_EXPIRY=7d
+GITHUB_PERSONAL_ACCESS_TOKEN= # For backend git push
+
+# Legacy / Alternative Deploy
+WEBHOOK_SECRET=           # GitHub webhook HMAC secret
 DEPLOY_WEB_ROOT=/var/www/eos-club
 ```
 
@@ -324,7 +332,10 @@ DEPLOY_WEB_ROOT=/var/www/eos-club
 | Aspect | Details |
 |--------|---------|
 | Build | `pnpm build` → `dist/` |
-| Hosting | Self-hosted server (NO Vercel/Netlify) |
-| Trigger | GitHub push to `main` |
-| Mechanism | Webhook listener (`deploy/webhook-listener.js`) → `git pull && pnpm build` → serves `dist/` from web root |
-| Process | Webhook listener runs as persistent PM2 or systemd process |
+| Hosting | DigitalOcean Droplet (Docker) |
+| CMS Backend | Self-hosted Express server (`tina-backend/`) |
+| Trigger | GitHub Actions on push to `main` |
+| Mechanism | SSH → git pull → pnpm build → rsync to nginx web root |
+| Process | Docker Compose (services: `eosclub_tina`, `nginx`) |
+
+See [`plans/deployment-tinacms-plan.md`](plans/deployment-tinacms-plan.md) for full architecture.

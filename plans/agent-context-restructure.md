@@ -54,7 +54,7 @@ Every block has a `name` field for precise referencing. Conventions:
 - `tina/config.ts` — TinaCMS UI schema
 
 ## Full Reference
-For complete block schemas, bsport widget details, env vars, and deployment info: see `plans/project-context.md`
+For complete block schemas, bsport widget details, env vars, and deployment info: see `plans/project-context.md` and `plans/deployment-tinacms-plan.md`
 ```
 
 ---

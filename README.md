@@ -5,13 +5,14 @@ Bilingual (DE/EN) Astro website for EOS CLUB wellness studio in Berlin.
 ## Tech Stack
 
 - **Framework:** Astro v5 (SSG)
-- **CMS:** TinaCMS (self-hosted planned, local dev ready)
-- **Styling:** TailwindCSS v4 + EOS design tokens
+- **CMS:** TinaCMS (self-hosted backend via Node.js/Express)
+- **Styling:** TailwindCSS v3 + EOS design tokens
 - **Animation:** GSAP (scoped, respects prefers-reduced-motion)
 - **Booking / Member Services:** bsport JS SDK widget suite
 
 ## Development
 
+### Frontend
 ```bash
 # Install dependencies
 pnpm install
@@ -19,24 +20,37 @@ pnpm install
 # Start development server
 pnpm dev
 
-# Start TinaCMS admin (separate terminal)
+# Start TinaCMS admin (local dev mode)
 npx tinacms dev
-
-# Build for production
-pnpm build
-
-# Preview production build
-pnpm preview
 ```
 
-## URLs (Development)
+### Self-Hosted Backend (Optional for local testing)
+```bash
+cd tina-backend
+pnpm install
+# Set TINA_SELF_HOSTED=true in root .env
+pnpm dev
+```
 
-| URL | Description |
-|-----|-------------|
-| http://localhost:4321/ | Site root (redirects to /home) |
-| http://localhost:4321/home | German homepage |
-| http://localhost:4321/en/home | English homepage |
-| http://localhost:4321/admin/index.html | TinaCMS editor |
+## URLs
+
+| URL | Environment | Description |
+|-----|-------------|-------------|
+| http://localhost:4321/ | Dev | Site root (redirects to /home) |
+| http://localhost:4321/admin/ | Dev | TinaCMS local editor |
+| https://eos-club.de/ | Prod | Production site |
+| https://eos-club.de/admin/ | Prod | Production CMS Admin |
+| https://staging.prod.khanyi.com/ | Staging | Staging/Test site |
+
+## Deployment Architecture
+
+The site uses a self-hosted TinaCMS backend running in a Docker container on a DigitalOcean droplet.
+
+1. **Content Save:** Editor saves in `/admin/` → Backend commits & pushes to GitHub.
+2. **Build Trigger:** GitHub Action fires on push to `main`.
+3. **Deploy:** Action SSHs into droplet, pulls changes, runs `pnpm build`, and rsyncs to nginx web root.
+
+See [`plans/deployment-tinacms-plan.md`](plans/deployment-tinacms-plan.md) for full details.
 
 ## Project Structure
 

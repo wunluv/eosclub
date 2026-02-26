@@ -1,0 +1,22 @@
+name: Deploy EOS CLUB
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to DigitalOcean
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: ${{ secrets.DO_USER }}
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: |
+            cd /var/www/public/eosclub/repo
+            git pull origin main
+            pnpm install --frozen-lockfile
+            pnpm run build
+            rsync -a --delete dist/ /var/www/public/eosclub/dist/
+            echo "Deploy complete: $(date)"

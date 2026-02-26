@@ -60,6 +60,10 @@ const currentLocale = Astro.currentLocale || 'de';
     <link rel="alternate" hreflang="en" href={`https://eos-club.de/en/${enSlug}`} />
     <link rel="alternate" hreflang="x-default" href={`https://eos-club.de/${deSlug}`} />
 
+    <!-- Resource Hints: Speed up external integrations -->
+    <link rel="preconnect" href="https://cdn.bsport.io" />
+    <link rel="dns-prefetch" href="https://cdn.bsport.io" />
+
     <!-- Google Fonts: Merriweather — confirmed display/heading font, all weights used in DS V7 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
