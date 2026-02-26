@@ -80,16 +80,19 @@ const featureGridBlockSchema = z.object({
 const bsportCalendarBlockSchema = z.object({
   _template: z.literal('BsportCalendar'),
   name: z.string().optional(),
+  elementId: z.string(),
 });
 
 const bsportPassesBlockSchema = z.object({
   _template: z.literal('BsportPasses'),
   name: z.string().optional(),
+  elementId: z.string(),
 });
 
 const bsportSubscriptionBlockSchema = z.object({
   _template: z.literal('BsportSubscription'),
   name: z.string().optional(),
+  elementId: z.string(),
 });
 
 // Discriminated union for all blocks

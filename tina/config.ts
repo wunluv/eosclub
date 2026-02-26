@@ -140,6 +140,27 @@ export default defineConfig({
                   },
                 ],
               },
+              {
+                name: 'BsportCalendar',
+                label: 'bsport: Calendar',
+                fields: [
+                  { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
+                ],
+              },
+              {
+                name: 'BsportPasses',
+                label: 'bsport: Passes',
+                fields: [
+                  { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
+                ],
+              },
+              {
+                name: 'BsportSubscription',
+                label: 'bsport: Subscriptions',
+                fields: [
+                  { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
+                ],
+              },
             ],
           },
         ],

@@ -14,6 +14,7 @@ blocks:
     body: "<h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats and special events. Stay informed and sign up for our newsletter.</p>"
   - _template: BsportCalendar
     name: events-calendar
+    elementId: bsport-events-calendar
   - _template: FaqBlock
     name: events-faq
     title: "Frequently Asked Questions"

@@ -15,8 +15,10 @@ blocks:
     body: "<h2>Passes and Memberships</h2>"
   - _template: BsportPasses
     name: pricing-passes
+    elementId: bsport-pricing-passes
   - _template: BsportSubscription
     name: pricing-subscriptions
+    elementId: bsport-pricing-subscriptions
   - _template: FaqBlock
     name: pricing-faq
     title: "Frequently Asked Questions"
