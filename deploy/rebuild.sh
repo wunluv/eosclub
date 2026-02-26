@@ -3,10 +3,11 @@
 # EOS CLUB - Manual Rebuild Script
 # This script runs inside the droplet to pull changes and rebuild the static site.
 
-REPO_DIR="/var/www/public/eosclub/repo"
-DIST_DIR="/var/www/public/eosclub/dist"
+# REPO_DIR and DIST_DIR are set relative to the container paths
+REPO_DIR="/app/repo"
+DIST_DIR="/app/dist"
 
-echo "Starting rebuild at $(date)"
+echo "Starting rebuild inside container at $(date)"
 
 cd "$REPO_DIR" || { echo "Error: Could not enter repo directory"; exit 1; }
 

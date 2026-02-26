@@ -24,8 +24,9 @@ app.post('/api/auth/login', login);
 // Rebuild trigger (local)
 const triggerRebuild = () => {
   if (process.env.NODE_ENV === 'production') {
-    console.log('Triggering local rebuild...');
-    exec('cd /app/repo && pnpm build && rsync -a --delete dist/ /var/www/public/eosclub/dist/', (error, stdout, stderr) => {
+    console.log('Triggering local rebuild inside container...');
+    // Execute the rebuild script that lives in the deploy folder (which is part of the repo)
+    exec('sh /app/repo/deploy/rebuild.sh', (error, stdout, stderr) => {
       if (error) {
         console.error(`Rebuild error: ${error}`);
         return;
