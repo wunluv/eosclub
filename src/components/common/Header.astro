@@ -41,7 +41,11 @@ const pathname = new URL(Astro.request.url).pathname;
     <nav id="desktop-nav" class="hidden lg:flex flex-1 items-center justify-center space-x-6 lg:space-x-8 relative">
       {navItems.map((item) => {
         const path = isEn ? item.enPath : item.dePath;
-        const isActive = pathname === path;
+        // Exact match for home, startsWith for others to handle subpages if any
+        const isActive = path === '/' || path === '/en'
+          ? pathname === path
+          : pathname === path || pathname.startsWith(path + '/');
+
         return (
           <a
             href={path}

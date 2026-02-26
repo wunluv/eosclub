@@ -32,6 +32,8 @@ const menuLinks = [
   { de: 'Team',     en: 'Team',    dePath: '/team',    enPath: '/en/team' },
 ];
 
+const pathname = new URL(Astro.request.url).pathname;
+
 const socialLinks = [
   {
     name: 'Instagram',
@@ -100,8 +102,14 @@ const socialLinks = [
         <h3 class="font-medium mb-2 !text-white">{isEn ? 'Menu' : 'Menü'}</h3>
         {menuLinks.map((link) => {
           const path = isEn ? link.enPath : link.dePath;
+          const isActive = path === '/' || path === '/en'
+            ? pathname === path
+            : pathname === path || pathname.startsWith(path + '/');
           return (
-            <a href={path} class="text-xs md:text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-eos-accent transition-colors py-1 md:py-0">
+            <a
+              href={path}
+              class={`text-xs md:text-[10px] font-bold uppercase tracking-widest transition-colors py-1 md:py-0 ${isActive ? 'text-eos-accent' : 'text-white/40 hover:text-eos-accent'}`}
+            >
               {isEn ? link.en : link.de}
             </a>
           );
@@ -129,8 +137,12 @@ const socialLinks = [
         <h3 class="font-medium mb-2 !text-white">{isEn ? 'Legal' : 'Rechtliches'}</h3>
         {legalLinks.map((link) => {
           const path = isEn ? link.enPath : link.path;
+          const isActive = pathname === path;
           return (
-            <a href={path} class="text-xs md:text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-eos-accent transition-colors py-1 md:py-0">
+            <a
+              href={path}
+              class={`text-xs md:text-[10px] font-bold uppercase tracking-widest transition-colors py-1 md:py-0 ${isActive ? 'text-eos-accent' : 'text-white/40 hover:text-eos-accent'}`}
+            >
               {isEn ? link.en : link.de}
             </a>
           );
