@@ -8,8 +8,8 @@ services:
     ports:
       - "127.0.0.1:4001:4001"
     volumes:
-      - /var/www/public/eosclub/repo:/app/repo
-      - /var/www/public/eosclub/dist:/app/dist
+      - /var/www/public/eos.khanyi.com:/app/repo
+      - /var/www/public/eos.khanyi.com/dist:/app/dist
       - eosclub_leveldb:/app/tina-backend/data
     env_file:
       - /var/www/private/eosclub/.env
