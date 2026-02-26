@@ -82,6 +82,7 @@ const COMPANY_ID = 5082;
    * Targets the internal elements of the bsport newsletterV2 widget
    * to match the EOS CLUB design system.
    */
+  /* Trigger Button */
   .bsport-lead-capture-widget .bsport-newsletter-v2__button,
   .bsport-newsletter-v2__button {
     background-color: #FF2E00 !important; /* eos-accent */
@@ -103,15 +104,22 @@ const COMPANY_ID = 5082;
     transform: translateY(-1px) !important;
   }
 
-  /* Modal / Popup Styling (if applicable) */
+  /* Form Container & Modal */
   .bsport-widget-modal .bsport-newsletter-v2__form,
-  .bsport-newsletter-v2__form {
+  .bsport-newsletter-v2__form,
+  [class*="bsport-newsletter-v2__form"],
+  .bsport-widget-modal {
     background-color: #F9F9F7 !important; /* eos-base */
     font-family: 'Geist Sans', 'Inter', sans-serif !important;
+    color: #1F2933 !important; /* eos-text */
   }
 
+  /* Inputs */
   .bsport-widget-modal .bsport-newsletter-v2__input,
-  .bsport-newsletter-v2__input {
+  .bsport-newsletter-v2__input,
+  [class*="bsport-newsletter-v2__input"],
+  input[class*="bsport-newsletter-v2"],
+  .bsport-widget-modal input {
     background-color: #09090B !important; /* eos-zen */
     color: white !important;
     border: 1px solid #E6E5E0 !important; /* eos-subtle */
@@ -120,19 +128,51 @@ const COMPANY_ID = 5082;
   }
 
   .bsport-widget-modal .bsport-newsletter-v2__input:focus,
-  .bsport-newsletter-v2__input:focus {
+  .bsport-newsletter-v2__input:focus,
+  .bsport-widget-modal input:focus {
     outline: none !important;
     box-shadow: 0 0 0 2px #FF2E00 !important; /* eos-accent */
   }
 
+  /* Labels & Help Text */
+  .bsport-widget-modal label,
+  .bsport-newsletter-v2__label,
+  [class*="bsport-newsletter-v2__label"],
+  .bsport-widget-modal .help-text,
+  [class*="help-text"] {
+    color: #1F2933 !important; /* eos-text */
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* Submit Button */
   .bsport-widget-modal .bsport-newsletter-v2__submit,
-  .bsport-newsletter-v2__submit {
+  .bsport-newsletter-v2__submit,
+  [class*="bsport-newsletter-v2__submit"],
+  .bsport-widget-modal button[type="submit"] {
     background-color: #FF2E00 !important;
     color: white !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.1em !important;
     border-radius: 0.5rem !important;
+    padding: 1rem !important;
+    border: none !important;
+  }
+
+  /* Remove Bsport Logo */
+  .bsport-widget-modal .bsport-logo,
+  .bsport-logo,
+  [class*="bsport-logo"],
+  .bsport-powered-by,
+  [class*="powered-by"],
+  img[src*="bsport"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
   }
 </style>
 
