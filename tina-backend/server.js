@@ -61,7 +61,16 @@ app.post('/graphql', authenticate, async (req, res) => {
     res.json(result);
   } catch (error) {
     console.error('GraphQL Error:', error);
-    res.status(500).json({ errors: [{ message: error.message }] });
+    // Log more details about the error to help debugging
+    if (error.stack) {
+      console.error('Stack trace:', error.stack);
+    }
+    res.status(500).json({
+      errors: [{
+        message: error.message,
+        stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      }]
+    });
   }
 });
 

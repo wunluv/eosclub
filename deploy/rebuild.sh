@@ -36,6 +36,15 @@ case $MODE in
     echo "Building Astro site only..."
     pnpm exec astro build
     ;;
+  "backend")
+    echo "Rebuilding TinaCMS backend container..."
+    # This assumes we are running on the host or have access to docker
+    # But the script is designed to run INSIDE the container?
+    # Wait, look at the script comments: "This script runs inside the droplet to pull changes and rebuild the static site."
+    # If it runs inside a container, it can't rebuild itself easily.
+    echo "Error: Backend rebuild must be done via docker-compose on the host."
+    exit 1
+    ;;
   "all")
     echo "Building everything..."
     pnpm run build
