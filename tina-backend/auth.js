@@ -18,13 +18,17 @@ export const verifyToken = (token) => {
 
 export const authenticate = (req, res, next) => {
   const authHeader = req.headers.authorization;
+  console.log(`Authenticating request to ${req.url}. Auth header present: ${!!authHeader}`);
+
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    console.warn('Missing or invalid Authorization header');
     return res.status(401).json({ message: 'Unauthorized' });
   }
 
   const token = authHeader.split(' ')[1];
   const payload = verifyToken(token);
   if (!payload) {
+    console.warn('Invalid or expired token');
     return res.status(401).json({ message: 'Invalid or expired token' });
   }
 
