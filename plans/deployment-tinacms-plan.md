@@ -125,16 +125,75 @@ Simple password-based auth for a single non-technical editor:
 
 ### 1.5 Update `tina/config.ts` for self-hosted mode
 
-Current config points to TinaCloud. Needs conditional logic:
+When `TINA_SELF_HOSTED=true`, point to the local backend and use a custom `AuthProvider` to handle JWT authentication:
 
 ```typescript
-// When TINA_SELF_HOSTED=true, point to local backend
-contentApiUrlOverride: process.env.TINA_SELF_HOSTED === 'true'
-  ? '/api/tina/graphql'
-  : undefined,
-```
+const CustomAuthProvider = () => {
+  return {
+    authenticate: async () => {
+      const token = localStorage.getItem('tina_jwt');
+      if (token) return { id_token: token };
 
-Also update the `branch` config and add the `search` configuration for indexed queries.
+      const password = window.prompt('Please enter the admin password');
+      if (!password) return null;
+
+      const response = await fetch('/api/tina/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+
+      if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem('tina_jwt', token);
+        return { id_token: token };
+      }
+      return null;
+    },
+    getToken: async () => {
+      const token = localStorage.getItem('tina_jwt');
+      return { id_token: token };
+    },
+    getUser: async () => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    logout: async () => {
+      localStorage.removeItem('tina_jwt');
+    },
+    authorize: async (context: any) => {
+      const token = localStorage.getItem('tina_jwt');
+      if (token) return { id_token: token };
+      return null;
+    },
+    isAuthorized: async (context: any) => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    isAuthenticated: async () => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    fetchWithToken: async (input: any, init: any) => {
+      const headers = (init == null ? void 0 : init.headers) || {};
+      const token = localStorage.getItem('tina_jwt');
+      if (token) {
+        headers["Authorization"] = "Bearer " + token;
+      }
+      return await fetch(input, {
+        ...init || {},
+        headers: new Headers(headers)
+      });
+    },
+    getLoginStrategy: () => "Redirect",
+    getLoginScreen: () => null,
+    getSessionProvider: () => (props: any) => props.children,
+  };
+};
+
+export default defineConfig({
+  contentApiUrlOverride: '/api/tina/graphql',
+  authProvider: CustomAuthProvider() as any,
+  // ...
+});
+```
 
 ### 1.6 Update `.env.example`
 

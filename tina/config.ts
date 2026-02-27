@@ -1,11 +1,79 @@
-import { defineConfig, LocalAuthProvider } from 'tinacms';
+import { defineConfig } from 'tinacms';
+
+const CustomAuthProvider = () => {
+  return {
+    authenticate: async () => {
+      const token = localStorage.getItem('tina_jwt');
+      if (token) return { id_token: token };
+
+      const password = window.prompt('Please enter the admin password');
+      if (!password) return null;
+
+      try {
+        const response = await fetch('/api/tina/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password }),
+        });
+
+        if (response.ok) {
+          const { token } = await response.json();
+          localStorage.setItem('tina_jwt', token);
+          return { id_token: token };
+        } else {
+          const errorData = await response.json();
+          alert(`Login failed: ${errorData.message || response.statusText}`);
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        alert('Login failed: Could not connect to the authentication server.');
+      }
+      return null;
+    },
+    getToken: async () => {
+      const token = localStorage.getItem('tina_jwt');
+      return { id_token: token };
+    },
+    getUser: async () => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    logout: async () => {
+      localStorage.removeItem('tina_jwt');
+    },
+    authorize: async (context: any) => {
+      const token = localStorage.getItem('tina_jwt');
+      if (token) return { id_token: token };
+      return null;
+    },
+    isAuthorized: async (context: any) => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    isAuthenticated: async () => {
+      return !!localStorage.getItem('tina_jwt');
+    },
+    fetchWithToken: async (input: any, init: any) => {
+      const headers = (init == null ? void 0 : init.headers) || {};
+      const token = localStorage.getItem('tina_jwt');
+      if (token) {
+        headers["Authorization"] = "Bearer " + token;
+      }
+      return await fetch(input, {
+        ...init || {},
+        headers: new Headers(headers)
+      });
+    },
+    getLoginStrategy: () => "Redirect",
+    getLoginScreen: () => null,
+    getSessionProvider: () => (props: any) => props.children,
+  };
+};
 
 export default defineConfig({
   contentApiUrlOverride: '/api/tina/graphql',
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
   clientId: '00000000-0000-0000-0000-000000000000',
   token: '0000000000000000000000000000000000000000',
-  authProvider: new LocalAuthProvider(),
+  authProvider: CustomAuthProvider() as any,
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
