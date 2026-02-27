@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # EOS CLUB - Manual Rebuild Script
 # This script runs inside the droplet to pull changes and rebuild the static site.
 
