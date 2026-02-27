@@ -1,0 +1,24 @@
+{
+  "name": "eosclub-tina-backend",
+  "version": "1.0.0",
+  "description": "Self-hosted backend for TinaCMS",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "@tinacms/auth": "^1.0.1",
+    "@tinacms/datalayer": "^1.4.1",
+    "@tinacms/graphql": "^1.4.21",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "isomorphic-git": "^1.25.8",
+    "jsonwebtoken": "^9.0.2",
+    "level": "^8.0.0",
+    "morgan": "^1.10.0"
+  }
+}

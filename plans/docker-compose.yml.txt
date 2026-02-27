@@ -1,0 +1,207 @@
+services:
+  # Nginx with Certbot for handling SSL and serving web content
+  nginx:
+    build:
+      context: ./nginx-certbot  # Path to your custom Dockerfile
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/www/public:/var/www/public
+      - /var/www/private/nginx/conf.d:/etc/nginx/conf.d
+      - /var/www/private/nginx/ssl:/etc/letsencrypt
+      - /var/www/private/nginx/logs:/var/log/nginx
+      - /var/www/private/nginx/nginx.conf:/etc/nginx/nginx.conf:rw
+      - /var/www/private/nginx/mime.types:/etc/nginx/mime.types:rw
+    security_opt:
+      - apparmor=unconfined
+    logging:
+      driver: journald
+      options:
+        tag: "nginx"
+        mode: non-blocking
+        max-buffer-size: "4m"
+    networks:
+      - web
+      - backend
+
+  # MYSQL Database Service (legacy - being replaced by MariaDB)
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - /var/www/private/mysql:/var/lib/mysql
+      - /var/www/private/docker/my.cnf:/etc/my.cnf:ro
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+    logging:
+      driver: journald
+      options:
+        tag: "mysql"
+        mode: non-blocking
+        max-buffer-size: "4m"
+
+  # MariaDB Database Service (for Ghost and future use)
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    volumes:
+      - /var/www/private/mariadb:/var/lib/mysql
+      - /var/www/private/config/mariadb-override.cnf:/etc/mysql/conf.d/override.cnf:ro
+    ports:
+      - "3307:3306"
+    networks:
+      - backend
+    logging:
+      driver: journald
+      options:
+        tag: "mariadb"
+        mode: non-blocking
+        max-buffer-size: "4m"
+
+  # Ghost CMS Service
+  ghost:
+    image: ghost:5.97.0-alpine
+    container_name: ghost_oneplusone
+    restart: unless-stopped
+    ports:
+      - "2368:2368"
+    environment:
+      url: "https://ghost.mojah2.mojahmedia.net"
+      database__client: mysql
+      database__connection__host: mariadb
+      database__connection__user: ${GHOST_DB_USER}
+      database__connection__password: ${GHOST_DB_PASSWORD}
+      database__connection__database: ${GHOST_DB_NAME}
+      cache__client: redis
+      cache__connection__host: redis
+      security__staffDeviceVerification: "false"
+    volumes:
+      - /var/www/public/oneplusone/ghost:/var/lib/ghost/content
+      - /var/www/private/docker/apps/config.production.json:/var/lib/ghost/config.production.json:ro
+    depends_on:
+      - mariadb
+      - redis
+    networks:
+      - backend
+    logging:
+      driver: journald
+      options:
+        tag: "ghost"
+        mode: non-blocking
+        max-buffer-size: "4m"
+
+  # Astro.js Frontend Service
+  astro:
+    image: node:20-alpine
+    container_name: astro_oneplusone
+    restart: unless-stopped
+    working_dir: /var/www/public/oneplusone/front
+    command: /bin/sh -c "apk add curl && curl -L https://unpkg.com/@pnpm/self-installer | node && pnpm install && pnpm run build && pnpm start"
+    env_file:
+      - /var/www/public/oneplusone/front/.env
+    volumes:
+      - /var/www/public/oneplusone/front:/var/www/public/oneplusone/front
+      - /var/www/public/oneplusone/ghost/images:/var/www/public/oneplusone/front/images:ro
+    ports:
+      - "4321:4321"
+    networks:
+      - backend
+    logging:
+      driver: journald
+      options:
+        tag: "astro"
+        mode: non-blocking
+        max-buffer-size: "4m"
+
+  # PHP 5.3 FPM Service
+  php53:
+    image: satyadeep/php-53-fpm-alpine-3.4-with-ext
+    container_name: php53
+    restart: unless-stopped
+    volumes:
+      - /var/www/public:/var/www/public
+    logging:
+      driver: journald
+      options:
+        tag: "php53"
+        mode: non-blocking
+        max-buffer-size: "4m"
+    networks:
+      - backend
+
+  # PHP 7.3 FPM Service
+  php73:
+    image: satyadeep/php-73-fpm-alpine-3.9-with-ext
+    container_name: php73
+    restart: unless-stopped
+    volumes:
+      - /var/www/public:/var/www/public
+    logging:
+      driver: journald
+      options:
+        tag: "php73"
+        mode: non-blocking
+        max-buffer-size: "4m"
+    networks:
+      - backend
+
+  # PHP 8.1 FPM Service
+  php81:
+    image: satyadeep/php-81-fpm-alpine-with-ext
+    container_name: php81
+    restart: unless-stopped
+    volumes:
+      - /var/www/public:/var/www/public
+      - /var/www/private/config/php-8-overrides.ini:/usr/local/etc/php/conf.d/overrides.ini:ro
+    logging:
+      driver: journald
+      options:
+        tag: "php81"
+        mode: non-blocking
+        max-buffer-size: "4m"
+    networks:
+      - backend
+
+  # Redis Cache Service
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "127.0.0.1:6379:6379"
+    sysctls:
+      - net.core.somaxconn=511
+    restart: unless-stopped
+    volumes:
+      - /var/www/private/redis:/data
+    logging:
+      driver: journald
+      options:
+        tag: "redis"
+        mode: non-blocking
+        max-buffer-size: "4m"
+    networks:
+      - backend
+
+# Networks Definition
+networks:
+  web:
+    driver: bridge
+  backend:
+    driver: bridge
