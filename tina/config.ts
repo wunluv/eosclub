@@ -1,26 +1,11 @@
-import { defineConfig } from 'tinacms';
-
-const isSelfHosted = process.env.TINA_SELF_HOSTED === 'true';
+import { defineConfig, LocalAuthProvider } from 'tinacms';
 
 export default defineConfig({
-  contentApiUrlOverride: isSelfHosted
-    ? '/api/tina/graphql'
-    : undefined,
+  contentApiUrlOverride: '/api/tina/graphql',
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
-  clientId: isSelfHosted ? '00000000-0000-0000-0000-000000000000' : (process.env.TINA_PUBLIC_CLIENT_ID || ''),
-  token: isSelfHosted ? '0000000000000000000000000000000000000000' : (process.env.TINA_TOKEN || ''),
-  admin: {
-    auth: {
-      customAuth: isSelfHosted,
-      authenticate: async () => true,
-      getToken: async () => ({ id_token: localStorage.getItem('tina_jwt_token') || '' }),
-      getUser: async () => !!localStorage.getItem('tina_jwt_token'),
-      logout: async () => {
-        localStorage.removeItem('tina_jwt_token');
-        window.location.href = '/';
-      },
-    },
-  },
+  clientId: '00000000-0000-0000-0000-000000000000',
+  token: '0000000000000000000000000000000000000000',
+  authProvider: new LocalAuthProvider(),
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
