@@ -42,6 +42,23 @@ If your self-hosted backend requires a JWT (as implemented in `tina-backend/auth
 
 ```typescript
 const CustomAuthProvider = () => {
+  // SSR Safety: Return a dummy provider when running on the server (Node.js)
+  if (typeof window === 'undefined') {
+    return {
+      authenticate: async () => null,
+      getToken: async () => ({ id_token: null }),
+      getUser: async () => null,
+      logout: async () => {},
+      authorize: async () => null,
+      isAuthorized: async () => false,
+      isAuthenticated: async () => false,
+      fetchWithToken: async (input: any, init: any) => fetch(input, init),
+      getLoginStrategy: () => "Redirect",
+      getLoginScreen: () => null,
+      getSessionProvider: () => (props: any) => props.children,
+    };
+  }
+
   return {
     authenticate: async () => {
       const token = localStorage.getItem('tina_jwt');

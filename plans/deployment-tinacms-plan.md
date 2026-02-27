@@ -129,6 +129,22 @@ When `TINA_SELF_HOSTED=true`, point to the local backend and use a custom `AuthP
 
 ```typescript
 const CustomAuthProvider = () => {
+  if (typeof window === 'undefined') {
+    return {
+      authenticate: async () => null,
+      getToken: async () => ({ id_token: null }),
+      getUser: async () => null,
+      logout: async () => {},
+      authorize: async () => null,
+      isAuthorized: async () => false,
+      isAuthenticated: async () => false,
+      fetchWithToken: async (input: any, init: any) => fetch(input, init),
+      getLoginStrategy: () => "Redirect",
+      getLoginScreen: () => null,
+      getSessionProvider: () => (props: any) => props.children,
+    };
+  }
+
   return {
     authenticate: async () => {
       const token = localStorage.getItem('tina_jwt');
