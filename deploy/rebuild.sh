@@ -71,3 +71,4 @@ else
   echo "Error: Build output directory 'dist' not found"
   exit 1
 fi
+

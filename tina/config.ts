@@ -85,6 +85,9 @@ const CustomAuthProvider = () => {
 };
 
 export default defineConfig({
+  // @ts-expect-error — isLocalClient is unlisted in types but required for self-hosted;
+  // bypasses the TinaCloud runtime validation check in tinacms/dist/index.js:121467
+  isLocalClient: true,
   contentApiUrlOverride: '/api/tina/graphql',
   branch: process.env.TINA_BRANCH || process.env.HEAD || 'main',
   clientId: '00000000-0000-0000-0000-000000000000',
