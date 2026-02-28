@@ -27,45 +27,49 @@ app.use((req, res, next) => {
 });
 
 // ---------------------------------------------------------------------------
-// Resolve paths: check volume-mounted repo first, then Docker-copied fallback
+// Resolve project root: volume-mounted repo first, then Docker-copied fallback
 // ---------------------------------------------------------------------------
-const repoTinaDir = path.resolve('/app/repo/tina');
-const fallbackTinaDir = path.resolve(__dirname, '../tina');
+const repoRoot = '/app/repo';
+const fallbackRoot = path.resolve(__dirname, '..');
 
-let tinaDir;
-if (existsSync(path.join(repoTinaDir, '__generated__', '_schema.json'))) {
-  tinaDir = repoTinaDir;
-  console.log(`Using volume-mounted tina dir: ${tinaDir}`);
-} else if (existsSync(path.join(fallbackTinaDir, '__generated__', '_schema.json'))) {
-  tinaDir = fallbackTinaDir;
-  console.log(`Using Docker-copied tina dir: ${tinaDir}`);
+let projectRoot;
+if (existsSync(path.join(repoRoot, 'tina', '__generated__', '_schema.json'))) {
+  projectRoot = repoRoot;
+  console.log(`Using volume-mounted project root: ${projectRoot}`);
+} else if (existsSync(path.join(fallbackRoot, 'tina', '__generated__', '_schema.json'))) {
+  projectRoot = fallbackRoot;
+  console.log(`Using Docker-copied project root: ${projectRoot}`);
 } else {
   console.error('FATAL: Cannot find tina/__generated__/_schema.json in any known location');
-  console.error(`  Checked: ${repoTinaDir}`);
-  console.error(`  Checked: ${fallbackTinaDir}`);
-  // Don't crash — we can still start the server and return helpful errors
-  tinaDir = fallbackTinaDir;
+  console.error(`  Checked: ${repoRoot}/tina/__generated__/_schema.json`);
+  console.error(`  Checked: ${fallbackRoot}/tina/__generated__/_schema.json`);
+  projectRoot = fallbackRoot;
 }
 
-// Log what generated files we can find
+const tinaDir = path.join(projectRoot, 'tina');
 const generatedDir = path.join(tinaDir, '__generated__');
 const schemaJsonPath = path.join(generatedDir, '_schema.json');
 const graphqlJsonPath = path.join(generatedDir, '_graphql.json');
 const lookupJsonPath = path.join(generatedDir, '_lookup.json');
 
+console.log(`Project root: ${projectRoot}`);
+console.log(`Tina directory: ${tinaDir}`);
 console.log(`Schema JSON exists: ${existsSync(schemaJsonPath)}`);
 console.log(`GraphQL JSON exists: ${existsSync(graphqlJsonPath)}`);
 console.log(`Lookup JSON exists: ${existsSync(lookupJsonPath)}`);
 
 // ---------------------------------------------------------------------------
-// TinaCMS Data Layer setup — wrapped in try-catch to prevent crash-on-boot
+// TinaCMS Data Layer setup
+// createLocalDatabase() needs rootPath to find tina/__generated__/ and content
+// Without rootPath, it defaults to cwd (/app/tina-backend) where nothing exists
 // ---------------------------------------------------------------------------
 let database = null;
 try {
-  database = createLocalDatabase();
-  console.log('Local database created successfully');
+  database = createLocalDatabase({ rootPath: projectRoot });
+  console.log('Local database created successfully with rootPath:', projectRoot);
 } catch (err) {
   console.error('Failed to create local database:', err.message);
+  if (err.stack) console.error(err.stack);
   console.error('The GraphQL endpoint will return errors until the database is available');
 }
 
@@ -161,7 +165,7 @@ app.post('/graphql', async (req, res) => {
   try {
     const result = await resolve({
       config: {
-        configPath: path.join(tinaDir, 'config.ts'),
+        useRelativeMedia: true,
       },
       database,
       query,
