@@ -15,6 +15,14 @@ echo "Starting rebuild ($MODE) inside container at $(date)"
 
 cd "$REPO_DIR" || { echo "Error: Could not enter repo directory"; exit 1; }
 
+# Reset build-generated files that tinacms build / astro build recreate.
+# These are regenerated every build, so local copies can safely be discarded
+# before pulling. Without this, git pull fails if the container previously
+# ran a build that modified these tracked files.
+echo "Resetting build-generated files..."
+git checkout -- tina/__generated__/ 2>/dev/null || true
+git checkout -- public/admin/ 2>/dev/null || true
+
 # Pull latest changes
 git pull origin main
 
