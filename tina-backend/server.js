@@ -164,12 +164,9 @@ app.post('/graphql', async (req, res) => {
 
   try {
     const result = await resolve({
-      config: {
-        useRelativeMedia: true,
-      },
-      database,
       query,
       variables,
+      database,
     });
 
     // Trigger rebuild if this was a mutation (save) with no errors
