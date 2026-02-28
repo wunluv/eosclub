@@ -88,19 +88,26 @@ type Collection {
 union DocumentNode = Pages | Folder
 
 type PagesBlocksHeroBlock {
+  name: String
   headline: String
   variant: String
   subheadline: String
-  backgroundImage: String!
+  subBodyText: String
+  backgroundImage: String
+  logoOverlay: String
   ctaLabel: String
   ctaUrl: String
 }
 
 type PagesBlocksContentBlock {
+  name: String
   body: JSON!
+  fullBleed: Boolean
+  backgroundImage: String
 }
 
 type PagesBlocksBookingBlock {
+  name: String
   enabled: Boolean!
   bookingUrl: String!
   label: String
@@ -113,10 +120,12 @@ type PagesBlocksFeatureGridBlockItems {
 }
 
 type PagesBlocksFeatureGridBlock {
+  name: String
   items: [PagesBlocksFeatureGridBlockItems]
 }
 
 type PagesBlocksFullBleedBlock {
+  name: String
   image: String!
   altText: String
   minHeight: String
@@ -133,6 +142,7 @@ type PagesBlocksInteractiveListBlockItems {
 }
 
 type PagesBlocksInteractiveListBlock {
+  name: String
   title: String
   items: [PagesBlocksInteractiveListBlockItems]
 }
@@ -143,11 +153,27 @@ type PagesBlocksFaqBlockQuestions {
 }
 
 type PagesBlocksFaqBlock {
+  name: String
   title: String
   questions: [PagesBlocksFaqBlockQuestions]
 }
 
-union PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock
+type PagesBlocksBsportCalendar {
+  name: String
+  elementId: String!
+}
+
+type PagesBlocksBsportPasses {
+  name: String
+  elementId: String!
+}
+
+type PagesBlocksBsportSubscription {
+  name: String
+  elementId: String!
+}
+
+union PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock | PagesBlocksBsportCalendar | PagesBlocksBsportPasses | PagesBlocksBsportSubscription
 
 type Pages implements Node & Document {
   title: String!
@@ -175,10 +201,13 @@ input ImageFilter {
 }
 
 input PagesBlocksHeroBlockFilter {
+  name: StringFilter
   headline: StringFilter
   variant: StringFilter
   subheadline: StringFilter
+  subBodyText: StringFilter
   backgroundImage: ImageFilter
+  logoOverlay: ImageFilter
   ctaLabel: StringFilter
   ctaUrl: StringFilter
 }
@@ -189,16 +218,20 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PagesBlocksContentBlockFilter {
-  body: RichTextFilter
-}
-
 input BooleanFilter {
   eq: Boolean
   exists: Boolean
 }
 
+input PagesBlocksContentBlockFilter {
+  name: StringFilter
+  body: RichTextFilter
+  fullBleed: BooleanFilter
+  backgroundImage: ImageFilter
+}
+
 input PagesBlocksBookingBlockFilter {
+  name: StringFilter
   enabled: BooleanFilter
   bookingUrl: StringFilter
   label: StringFilter
@@ -211,10 +244,12 @@ input PagesBlocksFeatureGridBlockItemsFilter {
 }
 
 input PagesBlocksFeatureGridBlockFilter {
+  name: StringFilter
   items: PagesBlocksFeatureGridBlockItemsFilter
 }
 
 input PagesBlocksFullBleedBlockFilter {
+  name: StringFilter
   image: ImageFilter
   altText: StringFilter
   minHeight: StringFilter
@@ -231,6 +266,7 @@ input PagesBlocksInteractiveListBlockItemsFilter {
 }
 
 input PagesBlocksInteractiveListBlockFilter {
+  name: StringFilter
   title: StringFilter
   items: PagesBlocksInteractiveListBlockItemsFilter
 }
@@ -241,8 +277,24 @@ input PagesBlocksFaqBlockQuestionsFilter {
 }
 
 input PagesBlocksFaqBlockFilter {
+  name: StringFilter
   title: StringFilter
   questions: PagesBlocksFaqBlockQuestionsFilter
+}
+
+input PagesBlocksBsportCalendarFilter {
+  name: StringFilter
+  elementId: StringFilter
+}
+
+input PagesBlocksBsportPassesFilter {
+  name: StringFilter
+  elementId: StringFilter
+}
+
+input PagesBlocksBsportSubscriptionFilter {
+  name: StringFilter
+  elementId: StringFilter
 }
 
 input PagesBlocksFilter {
@@ -253,6 +305,9 @@ input PagesBlocksFilter {
   FullBleedBlock: PagesBlocksFullBleedBlockFilter
   InteractiveListBlock: PagesBlocksInteractiveListBlockFilter
   FaqBlock: PagesBlocksFaqBlockFilter
+  BsportCalendar: PagesBlocksBsportCalendarFilter
+  BsportPasses: PagesBlocksBsportPassesFilter
+  BsportSubscription: PagesBlocksBsportSubscriptionFilter
 }
 
 input PagesFilter {
@@ -294,19 +349,26 @@ input DocumentMutation {
 }
 
 input PagesBlocksHeroBlockMutation {
+  name: String
   headline: String
   variant: String
   subheadline: String
+  subBodyText: String
   backgroundImage: String
+  logoOverlay: String
   ctaLabel: String
   ctaUrl: String
 }
 
 input PagesBlocksContentBlockMutation {
+  name: String
   body: JSON
+  fullBleed: Boolean
+  backgroundImage: String
 }
 
 input PagesBlocksBookingBlockMutation {
+  name: String
   enabled: Boolean
   bookingUrl: String
   label: String
@@ -319,10 +381,12 @@ input PagesBlocksFeatureGridBlockItemsMutation {
 }
 
 input PagesBlocksFeatureGridBlockMutation {
+  name: String
   items: [PagesBlocksFeatureGridBlockItemsMutation]
 }
 
 input PagesBlocksFullBleedBlockMutation {
+  name: String
   image: String
   altText: String
   minHeight: String
@@ -339,6 +403,7 @@ input PagesBlocksInteractiveListBlockItemsMutation {
 }
 
 input PagesBlocksInteractiveListBlockMutation {
+  name: String
   title: String
   items: [PagesBlocksInteractiveListBlockItemsMutation]
 }
@@ -349,8 +414,24 @@ input PagesBlocksFaqBlockQuestionsMutation {
 }
 
 input PagesBlocksFaqBlockMutation {
+  name: String
   title: String
   questions: [PagesBlocksFaqBlockQuestionsMutation]
+}
+
+input PagesBlocksBsportCalendarMutation {
+  name: String
+  elementId: String
+}
+
+input PagesBlocksBsportPassesMutation {
+  name: String
+  elementId: String
+}
+
+input PagesBlocksBsportSubscriptionMutation {
+  name: String
+  elementId: String
 }
 
 input PagesBlocksMutation {
@@ -361,6 +442,9 @@ input PagesBlocksMutation {
   FullBleedBlock: PagesBlocksFullBleedBlockMutation
   InteractiveListBlock: PagesBlocksInteractiveListBlockMutation
   FaqBlock: PagesBlocksFaqBlockMutation
+  BsportCalendar: PagesBlocksBsportCalendarMutation
+  BsportPasses: PagesBlocksBsportPassesMutation
+  BsportSubscription: PagesBlocksBsportSubscriptionMutation
 }
 
 input PagesMutation {

@@ -167,21 +167,28 @@ export type DocumentNode = Pages | Folder;
 
 export type PagesBlocksHeroBlock = {
   __typename?: 'PagesBlocksHeroBlock';
+  name?: Maybe<Scalars['String']['output']>;
   headline?: Maybe<Scalars['String']['output']>;
   variant?: Maybe<Scalars['String']['output']>;
   subheadline?: Maybe<Scalars['String']['output']>;
-  backgroundImage: Scalars['String']['output'];
+  subBodyText?: Maybe<Scalars['String']['output']>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+  logoOverlay?: Maybe<Scalars['String']['output']>;
   ctaLabel?: Maybe<Scalars['String']['output']>;
   ctaUrl?: Maybe<Scalars['String']['output']>;
 };
 
 export type PagesBlocksContentBlock = {
   __typename?: 'PagesBlocksContentBlock';
+  name?: Maybe<Scalars['String']['output']>;
   body: Scalars['JSON']['output'];
+  fullBleed?: Maybe<Scalars['Boolean']['output']>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
 };
 
 export type PagesBlocksBookingBlock = {
   __typename?: 'PagesBlocksBookingBlock';
+  name?: Maybe<Scalars['String']['output']>;
   enabled: Scalars['Boolean']['output'];
   bookingUrl: Scalars['String']['output'];
   label?: Maybe<Scalars['String']['output']>;
@@ -196,11 +203,13 @@ export type PagesBlocksFeatureGridBlockItems = {
 
 export type PagesBlocksFeatureGridBlock = {
   __typename?: 'PagesBlocksFeatureGridBlock';
+  name?: Maybe<Scalars['String']['output']>;
   items?: Maybe<Array<Maybe<PagesBlocksFeatureGridBlockItems>>>;
 };
 
 export type PagesBlocksFullBleedBlock = {
   __typename?: 'PagesBlocksFullBleedBlock';
+  name?: Maybe<Scalars['String']['output']>;
   image: Scalars['String']['output'];
   altText?: Maybe<Scalars['String']['output']>;
   minHeight?: Maybe<Scalars['String']['output']>;
@@ -219,6 +228,7 @@ export type PagesBlocksInteractiveListBlockItems = {
 
 export type PagesBlocksInteractiveListBlock = {
   __typename?: 'PagesBlocksInteractiveListBlock';
+  name?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   items?: Maybe<Array<Maybe<PagesBlocksInteractiveListBlockItems>>>;
 };
@@ -231,11 +241,30 @@ export type PagesBlocksFaqBlockQuestions = {
 
 export type PagesBlocksFaqBlock = {
   __typename?: 'PagesBlocksFaqBlock';
+  name?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   questions?: Maybe<Array<Maybe<PagesBlocksFaqBlockQuestions>>>;
 };
 
-export type PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock;
+export type PagesBlocksBsportCalendar = {
+  __typename?: 'PagesBlocksBsportCalendar';
+  name?: Maybe<Scalars['String']['output']>;
+  elementId: Scalars['String']['output'];
+};
+
+export type PagesBlocksBsportPasses = {
+  __typename?: 'PagesBlocksBsportPasses';
+  name?: Maybe<Scalars['String']['output']>;
+  elementId: Scalars['String']['output'];
+};
+
+export type PagesBlocksBsportSubscription = {
+  __typename?: 'PagesBlocksBsportSubscription';
+  name?: Maybe<Scalars['String']['output']>;
+  elementId: Scalars['String']['output'];
+};
+
+export type PagesBlocks = PagesBlocksHeroBlock | PagesBlocksContentBlock | PagesBlocksBookingBlock | PagesBlocksFeatureGridBlock | PagesBlocksFullBleedBlock | PagesBlocksInteractiveListBlock | PagesBlocksFaqBlock | PagesBlocksBsportCalendar | PagesBlocksBsportPasses | PagesBlocksBsportSubscription;
 
 export type Pages = Node & Document & {
   __typename?: 'Pages';
@@ -264,10 +293,13 @@ export type ImageFilter = {
 };
 
 export type PagesBlocksHeroBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   headline?: InputMaybe<StringFilter>;
   variant?: InputMaybe<StringFilter>;
   subheadline?: InputMaybe<StringFilter>;
+  subBodyText?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
+  logoOverlay?: InputMaybe<ImageFilter>;
   ctaLabel?: InputMaybe<StringFilter>;
   ctaUrl?: InputMaybe<StringFilter>;
 };
@@ -278,16 +310,20 @@ export type RichTextFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PagesBlocksContentBlockFilter = {
-  body?: InputMaybe<RichTextFilter>;
-};
-
 export type BooleanFilter = {
   eq?: InputMaybe<Scalars['Boolean']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type PagesBlocksContentBlockFilter = {
+  name?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  fullBleed?: InputMaybe<BooleanFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+};
+
 export type PagesBlocksBookingBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   enabled?: InputMaybe<BooleanFilter>;
   bookingUrl?: InputMaybe<StringFilter>;
   label?: InputMaybe<StringFilter>;
@@ -300,10 +336,12 @@ export type PagesBlocksFeatureGridBlockItemsFilter = {
 };
 
 export type PagesBlocksFeatureGridBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   items?: InputMaybe<PagesBlocksFeatureGridBlockItemsFilter>;
 };
 
 export type PagesBlocksFullBleedBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
   altText?: InputMaybe<StringFilter>;
   minHeight?: InputMaybe<StringFilter>;
@@ -320,6 +358,7 @@ export type PagesBlocksInteractiveListBlockItemsFilter = {
 };
 
 export type PagesBlocksInteractiveListBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   items?: InputMaybe<PagesBlocksInteractiveListBlockItemsFilter>;
 };
@@ -330,8 +369,24 @@ export type PagesBlocksFaqBlockQuestionsFilter = {
 };
 
 export type PagesBlocksFaqBlockFilter = {
+  name?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   questions?: InputMaybe<PagesBlocksFaqBlockQuestionsFilter>;
+};
+
+export type PagesBlocksBsportCalendarFilter = {
+  name?: InputMaybe<StringFilter>;
+  elementId?: InputMaybe<StringFilter>;
+};
+
+export type PagesBlocksBsportPassesFilter = {
+  name?: InputMaybe<StringFilter>;
+  elementId?: InputMaybe<StringFilter>;
+};
+
+export type PagesBlocksBsportSubscriptionFilter = {
+  name?: InputMaybe<StringFilter>;
+  elementId?: InputMaybe<StringFilter>;
 };
 
 export type PagesBlocksFilter = {
@@ -342,6 +397,9 @@ export type PagesBlocksFilter = {
   FullBleedBlock?: InputMaybe<PagesBlocksFullBleedBlockFilter>;
   InteractiveListBlock?: InputMaybe<PagesBlocksInteractiveListBlockFilter>;
   FaqBlock?: InputMaybe<PagesBlocksFaqBlockFilter>;
+  BsportCalendar?: InputMaybe<PagesBlocksBsportCalendarFilter>;
+  BsportPasses?: InputMaybe<PagesBlocksBsportPassesFilter>;
+  BsportSubscription?: InputMaybe<PagesBlocksBsportSubscriptionFilter>;
 };
 
 export type PagesFilter = {
@@ -431,19 +489,26 @@ export type DocumentMutation = {
 };
 
 export type PagesBlocksHeroBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   headline?: InputMaybe<Scalars['String']['input']>;
   variant?: InputMaybe<Scalars['String']['input']>;
   subheadline?: InputMaybe<Scalars['String']['input']>;
+  subBodyText?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
+  logoOverlay?: InputMaybe<Scalars['String']['input']>;
   ctaLabel?: InputMaybe<Scalars['String']['input']>;
   ctaUrl?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PagesBlocksContentBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
+  fullBleed?: InputMaybe<Scalars['Boolean']['input']>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PagesBlocksBookingBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   enabled?: InputMaybe<Scalars['Boolean']['input']>;
   bookingUrl?: InputMaybe<Scalars['String']['input']>;
   label?: InputMaybe<Scalars['String']['input']>;
@@ -456,10 +521,12 @@ export type PagesBlocksFeatureGridBlockItemsMutation = {
 };
 
 export type PagesBlocksFeatureGridBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   items?: InputMaybe<Array<InputMaybe<PagesBlocksFeatureGridBlockItemsMutation>>>;
 };
 
 export type PagesBlocksFullBleedBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
   altText?: InputMaybe<Scalars['String']['input']>;
   minHeight?: InputMaybe<Scalars['String']['input']>;
@@ -476,6 +543,7 @@ export type PagesBlocksInteractiveListBlockItemsMutation = {
 };
 
 export type PagesBlocksInteractiveListBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   items?: InputMaybe<Array<InputMaybe<PagesBlocksInteractiveListBlockItemsMutation>>>;
 };
@@ -486,8 +554,24 @@ export type PagesBlocksFaqBlockQuestionsMutation = {
 };
 
 export type PagesBlocksFaqBlockMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   questions?: InputMaybe<Array<InputMaybe<PagesBlocksFaqBlockQuestionsMutation>>>;
+};
+
+export type PagesBlocksBsportCalendarMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  elementId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksBsportPassesMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  elementId?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PagesBlocksBsportSubscriptionMutation = {
+  name?: InputMaybe<Scalars['String']['input']>;
+  elementId?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type PagesBlocksMutation = {
@@ -498,6 +582,9 @@ export type PagesBlocksMutation = {
   FullBleedBlock?: InputMaybe<PagesBlocksFullBleedBlockMutation>;
   InteractiveListBlock?: InputMaybe<PagesBlocksInteractiveListBlockMutation>;
   FaqBlock?: InputMaybe<PagesBlocksFaqBlockMutation>;
+  BsportCalendar?: InputMaybe<PagesBlocksBsportCalendarMutation>;
+  BsportPasses?: InputMaybe<PagesBlocksBsportPassesMutation>;
+  BsportSubscription?: InputMaybe<PagesBlocksBsportSubscriptionMutation>;
 };
 
 export type PagesMutation = {
@@ -508,14 +595,14 @@ export type PagesMutation = {
   blocks?: InputMaybe<Array<InputMaybe<PagesBlocksMutation>>>;
 };
 
-export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null };
+export type PagesPartsFragment = { __typename: 'Pages', title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', name?: string | null, headline?: string | null, variant?: string | null, subheadline?: string | null, subBodyText?: string | null, backgroundImage?: string | null, logoOverlay?: string | null, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', name?: string | null, body: any, fullBleed?: boolean | null, backgroundImage?: string | null } | { __typename: 'PagesBlocksBookingBlock', name?: string | null, enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', name?: string | null, items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', name?: string | null, image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', name?: string | null, title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', name?: string | null, title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | { __typename: 'PagesBlocksBsportCalendar', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportPasses', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportSubscription', name?: string | null, elementId: string } | null> | null };
 
 export type PagesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null } };
+export type PagesQuery = { __typename?: 'Query', pages: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', name?: string | null, headline?: string | null, variant?: string | null, subheadline?: string | null, subBodyText?: string | null, backgroundImage?: string | null, logoOverlay?: string | null, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', name?: string | null, body: any, fullBleed?: boolean | null, backgroundImage?: string | null } | { __typename: 'PagesBlocksBookingBlock', name?: string | null, enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', name?: string | null, items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', name?: string | null, image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', name?: string | null, title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', name?: string | null, title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | { __typename: 'PagesBlocksBsportCalendar', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportPasses', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportSubscription', name?: string | null, elementId: string } | null> | null } };
 
 export type PagesConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -527,7 +614,7 @@ export type PagesConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', headline?: string | null, variant?: string | null, subheadline?: string | null, backgroundImage: string, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', body: any } | { __typename: 'PagesBlocksBookingBlock', enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | null> | null } | null } | null> | null } };
+export type PagesConnectionQuery = { __typename?: 'Query', pagesConnection: { __typename?: 'PagesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PagesConnectionEdges', cursor: string, node?: { __typename: 'Pages', id: string, title: string, seoDescription: string, ogImage?: string | null, translationSlug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PagesBlocksHeroBlock', name?: string | null, headline?: string | null, variant?: string | null, subheadline?: string | null, subBodyText?: string | null, backgroundImage?: string | null, logoOverlay?: string | null, ctaLabel?: string | null, ctaUrl?: string | null } | { __typename: 'PagesBlocksContentBlock', name?: string | null, body: any, fullBleed?: boolean | null, backgroundImage?: string | null } | { __typename: 'PagesBlocksBookingBlock', name?: string | null, enabled: boolean, bookingUrl: string, label?: string | null } | { __typename: 'PagesBlocksFeatureGridBlock', name?: string | null, items?: Array<{ __typename: 'PagesBlocksFeatureGridBlockItems', icon: string, title: string, description?: string | null } | null> | null } | { __typename: 'PagesBlocksFullBleedBlock', name?: string | null, image: string, altText?: string | null, minHeight?: string | null, overlayOpacity?: string | null, headline?: string | null, subtext?: string | null } | { __typename: 'PagesBlocksInteractiveListBlock', name?: string | null, title?: string | null, items?: Array<{ __typename: 'PagesBlocksInteractiveListBlockItems', label: string, description?: string | null, image: string, imageAlt?: string | null } | null> | null } | { __typename: 'PagesBlocksFaqBlock', name?: string | null, title?: string | null, questions?: Array<{ __typename: 'PagesBlocksFaqBlockQuestions', question: string, answer: any } | null> | null } | { __typename: 'PagesBlocksBsportCalendar', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportPasses', name?: string | null, elementId: string } | { __typename: 'PagesBlocksBsportSubscription', name?: string | null, elementId: string } | null> | null } | null } | null> | null } };
 
 export const PagesPartsFragmentDoc = gql`
     fragment PagesParts on Pages {
@@ -539,22 +626,30 @@ export const PagesPartsFragmentDoc = gql`
   blocks {
     __typename
     ... on PagesBlocksHeroBlock {
+      name
       headline
       variant
       subheadline
+      subBodyText
       backgroundImage
+      logoOverlay
       ctaLabel
       ctaUrl
     }
     ... on PagesBlocksContentBlock {
+      name
       body
+      fullBleed
+      backgroundImage
     }
     ... on PagesBlocksBookingBlock {
+      name
       enabled
       bookingUrl
       label
     }
     ... on PagesBlocksFeatureGridBlock {
+      name
       items {
         __typename
         icon
@@ -563,6 +658,7 @@ export const PagesPartsFragmentDoc = gql`
       }
     }
     ... on PagesBlocksFullBleedBlock {
+      name
       image
       altText
       minHeight
@@ -571,6 +667,7 @@ export const PagesPartsFragmentDoc = gql`
       subtext
     }
     ... on PagesBlocksInteractiveListBlock {
+      name
       title
       items {
         __typename
@@ -581,12 +678,25 @@ export const PagesPartsFragmentDoc = gql`
       }
     }
     ... on PagesBlocksFaqBlock {
+      name
       title
       questions {
         __typename
         question
         answer
       }
+    }
+    ... on PagesBlocksBsportCalendar {
+      name
+      elementId
+    }
+    ... on PagesBlocksBsportPasses {
+      name
+      elementId
+    }
+    ... on PagesBlocksBsportSubscription {
+      name
+      elementId
     }
   }
 }
@@ -704,7 +814,7 @@ export const ExperimentalGetTinaClient = () =>
   getSdk(
     generateRequester(
       createClient({
-        url: "http://localhost:4001/graphql",
+        url: "/api/tina/graphql",
         queries,
       })
     )

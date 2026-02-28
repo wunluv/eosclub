@@ -122,6 +122,7 @@ export default defineConfig({
                 name: 'HeroBlock',
                 label: 'Hero Block',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'headline', label: 'Headline' },
                   {
                     type: 'string',
@@ -134,7 +135,8 @@ export default defineConfig({
                     ],
                   },
                   { type: 'string', name: 'subheadline', label: 'Subheadline' },
-                  { type: 'image', name: 'backgroundImage', label: 'Background Image', required: true },
+                  { type: 'string', name: 'subBodyText', label: 'Sub-body Text' },
+                  { type: 'image', name: 'backgroundImage', label: 'Background Image' },
                   { type: 'image', name: 'logoOverlay', label: 'Logo Overlay (Centered)' },
                   { type: 'string', name: 'ctaLabel', label: 'CTA Label' },
                   { type: 'string', name: 'ctaUrl', label: 'CTA URL' },
@@ -144,13 +146,17 @@ export default defineConfig({
                 name: 'ContentBlock',
                 label: 'Content Block',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'rich-text', name: 'body', label: 'Body Content', required: true },
+                  { type: 'boolean', name: 'fullBleed', label: 'Full Bleed Layout' },
+                  { type: 'image', name: 'backgroundImage', label: 'Background Image' },
                 ],
               },
               {
                 name: 'BookingBlock',
                 label: 'Booking Block',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'boolean', name: 'enabled', label: 'Enabled', required: true },
                   { type: 'string', name: 'bookingUrl', label: 'bsport Booking URL', required: true },
                   { type: 'string', name: 'label', label: 'Section Label' },
@@ -160,6 +166,7 @@ export default defineConfig({
                 name: 'FeatureGridBlock',
                 label: 'Feature Grid Block',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   {
                     type: 'object',
                     name: 'items',
@@ -177,6 +184,7 @@ export default defineConfig({
                 name: 'FullBleedBlock',
                 label: 'Full Bleed Image Section',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'image', name: 'image', label: 'Background Image', required: true },
                   { type: 'string', name: 'altText', label: 'Alt Text' },
                   { type: 'string', name: 'minHeight', label: 'Min Height (Tailwind class, e.g. min-h-[50vh])' },
@@ -189,6 +197,7 @@ export default defineConfig({
                 name: 'InteractiveListBlock',
                 label: 'Interactive List with Image Hover',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'title', label: 'Section Title' },
                   {
                     type: 'object',
@@ -208,6 +217,7 @@ export default defineConfig({
                 name: 'FaqBlock',
                 label: 'FAQ Accordion',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'title', label: 'Section Title' },
                   {
                     type: 'object',
@@ -225,6 +235,7 @@ export default defineConfig({
                 name: 'BsportCalendar',
                 label: 'bsport: Calendar',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
                 ],
               },
@@ -232,6 +243,7 @@ export default defineConfig({
                 name: 'BsportPasses',
                 label: 'bsport: Passes',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
                 ],
               },
@@ -239,6 +251,7 @@ export default defineConfig({
                 name: 'BsportSubscription',
                 label: 'bsport: Subscriptions',
                 fields: [
+                  { type: 'string', name: 'name', label: 'Section Name (internal reference)' },
                   { type: 'string', name: 'elementId', label: 'Unique Element ID', required: true },
                 ],
               },

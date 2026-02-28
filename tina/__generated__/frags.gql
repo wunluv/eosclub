@@ -7,22 +7,30 @@ fragment PagesParts on Pages {
   blocks {
     __typename
     ... on PagesBlocksHeroBlock {
+      name
       headline
       variant
       subheadline
+      subBodyText
       backgroundImage
+      logoOverlay
       ctaLabel
       ctaUrl
     }
     ... on PagesBlocksContentBlock {
+      name
       body
+      fullBleed
+      backgroundImage
     }
     ... on PagesBlocksBookingBlock {
+      name
       enabled
       bookingUrl
       label
     }
     ... on PagesBlocksFeatureGridBlock {
+      name
       items {
         __typename
         icon
@@ -31,6 +39,7 @@ fragment PagesParts on Pages {
       }
     }
     ... on PagesBlocksFullBleedBlock {
+      name
       image
       altText
       minHeight
@@ -39,6 +48,7 @@ fragment PagesParts on Pages {
       subtext
     }
     ... on PagesBlocksInteractiveListBlock {
+      name
       title
       items {
         __typename
@@ -49,12 +59,25 @@ fragment PagesParts on Pages {
       }
     }
     ... on PagesBlocksFaqBlock {
+      name
       title
       questions {
         __typename
         question
         answer
       }
+    }
+    ... on PagesBlocksBsportCalendar {
+      name
+      elementId
+    }
+    ... on PagesBlocksBsportPasses {
+      name
+      elementId
+    }
+    ... on PagesBlocksBsportSubscription {
+      name
+      elementId
     }
   }
 }
