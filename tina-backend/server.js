@@ -137,9 +137,13 @@ const triggerRebuild = () => {
 };
 
 // ---------------------------------------------------------------------------
-// GraphQL endpoint — POST only, with auth
+// GraphQL endpoint — POST only
+// Auth is handled by the TinaCMS admin SPA (CustomAuthProvider password prompt).
+// The backend is NOT publicly accessible (port 4001 is 127.0.0.1-only, proxied by Nginx).
+// Removing server-side JWT auth resolves the LocalClient/LocalAuthProvider token mismatch
+// where TinaCMS's LocalClient doesn't send the JWT from CustomAuthProvider.
 // ---------------------------------------------------------------------------
-app.post('/graphql', authenticate, async (req, res) => {
+app.post('/graphql', async (req, res) => {
   if (!database) {
     return res.status(503).json({
       errors: [{ message: 'Database not initialized. Check server logs.' }],

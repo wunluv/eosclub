@@ -11,7 +11,7 @@ Static site for a yoga/wellness studio in Germany. Astro v5 SSG, TailwindCSS v3,
 | Astro | v5 | `output: 'static'` |
 | TailwindCSS | v3 | Custom design tokens |
 | GSAP | v3.14.2 | Limited scope — see GSAP Rules |
-| TinaCMS | — | Local + TinaCloud |
+| TinaCMS | v3.5.0 | Self-hosted (`isLocalClient: true`, custom JWT auth) |
 | bsport SDK | CDN | `https://cdn.bsport.io/scripts/widget.js` |
 | pnpm | — | Package manager |
 
@@ -175,6 +175,9 @@ astro.config.mjs
 | `FullBleedBlock.astro` | `FullBleedBlock` | Edge-to-edge bg image. Breaks `max-w-7xl` via `w-screen relative left-1/2 -translate-x-1/2` |
 | `InteractiveListBlock.astro` | `InteractiveListBlock` | List with GSAP hover-image reveal (desktop). Static on mobile/touch. `prefers-reduced-motion` respected. Used: home, studio |
 | `FaqBlock.astro` | `FaqBlock` | `<details>/<summary>` accordion. Single-open accordion script. Used: pricing, events |
+| `BsportCalendar.astro` | `BsportCalendar` | bsport calendar widget embed. Used: events |
+| `BsportPasses.astro` | `BsportPasses` | bsport passes widget embed. Used: pricing |
+| `BsportSubscription.astro` | `BsportSubscription` | bsport subscription widget embed. Used: pricing |
 
 **HeroBlock Variants:**
 
@@ -202,15 +205,20 @@ blocks: []               # array of block objects
 
 | Block | Key Fields |
 |-------|------------|
-| `HeroBlock` | `_template`, `name` *(optional)*, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `ctaLabel`, `ctaUrl` |
-| `ContentBlock` | `_template`, `name` *(optional)*, `body` |
-| `BookingBlock` | `_template`, `name` *(optional)*, `enabled`, `bookingUrl`, `label` |
-| `FeatureGridBlock` | `_template`, `name` *(optional)*, `items[]` {`icon`, `title`, `description`} |
-| `FullBleedBlock` | `_template`, `name` *(optional)*, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
-| `InteractiveListBlock` | `_template`, `name` *(optional)*, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
-| `FaqBlock` | `_template`, `name` *(optional)*, `title`, `questions[]` {`question`, `answer`} |
+| `HeroBlock` | `_template`, `name`, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `logoOverlay`, `ctaLabel`, `ctaUrl` |
+| `ContentBlock` | `_template`, `name`, `body`, `fullBleed`, `backgroundImage` |
+| `BookingBlock` | `_template`, `name`, `enabled`, `bookingUrl`, `label` |
+| `FeatureGridBlock` | `_template`, `name`, `items[]` {`icon`, `title`, `description`} |
+| `FullBleedBlock` | `_template`, `name`, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
+| `InteractiveListBlock` | `_template`, `name`, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
+| `FaqBlock` | `_template`, `name`, `title`, `questions[]` {`question`, `answer`} |
+| `BsportCalendar` | `_template`, `name`, `elementId` |
+| `BsportPasses` | `_template`, `name`, `elementId` |
+| `BsportSubscription` | `_template`, `name`, `elementId` |
 
 > **Note:** The `name` field is informational metadata only. It has no runtime rendering effect. It exists purely for agent/human referencing. See [Section Pattern Language](#section-pattern-language) below.
+>
+> **Important:** The `name` field MUST be defined in the TinaCMS schema (`tina/config.ts`) on every block template. TinaCMS strips unknown fields when saving — without it in the schema, saving via the CMS would delete all `name` values from content files.
 
 ---
 
@@ -333,9 +341,19 @@ DEPLOY_WEB_ROOT=/var/www/eos-club
 |--------|---------|
 | Build | `pnpm build` → `dist/` |
 | Hosting | DigitalOcean Droplet (Docker) |
-| CMS Backend | Self-hosted Express server (`tina-backend/`) |
+| CMS Backend | Self-hosted Express server (`tina-backend/`) on port 4001 |
 | Trigger | GitHub Actions on push to `main` |
 | Mechanism | SSH → git pull → pnpm build → rsync to nginx web root |
 | Process | Docker Compose (services: `eosclub_tina`, `nginx`) |
 
+**Backend health check:** `curl -s https://staging.prod.khanyi.com/api/tina/health`
+
+**TinaCMS deployment gotchas:**
+- `tina/__generated__/` files are tracked in git and MUST be regenerated (`tinacms build`) after any schema change
+- `public/admin/` is gitignored — regenerated on server during build
+- `deploy/rebuild.sh` resets `tina/__generated__/` before `git pull` to avoid merge conflicts from in-container builds
+- The Docker container uses volume-mounted repo at `/app/repo/tina` for generated files (not the stale Docker-build copy at `/app/tina`)
+- `isLocalClient: true` in `tina/config.ts` is **mandatory** for self-hosted — without it the admin SPA crashes on load
+
 See [`plans/deployment-tinacms-plan.md`](plans/deployment-tinacms-plan.md) for full architecture.
+See [`archive/TROUBLESHOOTING_TINACMS_ADMIN.md`](../archive/TROUBLESHOOTING_TINACMS_ADMIN.md) for known issues and fixes.
