@@ -1,16 +1,12 @@
 services:
-  eosclub-tina:
-    build:
-      context: ..
-      dockerfile: tina-backend/Dockerfile
-    container_name: eosclub_tina
+  eosclub-astro:
+    image: node:20-alpine
+    container_name: eosclub_astro
     restart: unless-stopped
-    ports:
-      - "127.0.0.1:4001:4001"
+    command: tail -f /dev/null
     volumes:
       - /var/www/public/eos.khanyi.com:/app/repo
       - /var/www/public/eos.khanyi.com/dist:/app/dist
-      - eosclub_leveldb:/app/tina-backend/data
     env_file:
       - /var/www/private/eosclub/.env
     networks:
@@ -18,12 +14,9 @@ services:
     logging:
       driver: journald
       options:
-        tag: "eosclub-tina"
+        tag: "eosclub-astro"
         mode: non-blocking
         max-buffer-size: "4m"
-
-volumes:
-  eosclub_leveldb:
 
 networks:
   backend:

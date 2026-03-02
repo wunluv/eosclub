@@ -4,16 +4,19 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "NODE_OPTIONS=\"--max-old-space-size=3072\" tinacms build --skip-cloud-checks && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.6",
+    "@astrojs/node": "^9.5.4",
+    "@astrojs/react": "^4.4.2",
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "^6.0.2",
+    "@keystatic/astro": "^5.0.6",
+    "@keystatic/core": "^0.5.48",
     "@tailwindcss/typography": "^0.5.19",
-    "@tinacms/cli": "^2.1.6",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.17.1",
@@ -22,7 +25,10 @@
     "gsap": "^3.14.2",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "tinacms": "^3.5.0",
     "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "tailwindcss": "^3.4.19"
   }
 }

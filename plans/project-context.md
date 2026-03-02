@@ -1,6 +1,6 @@
 # EOS CLUB — Astro SSG Website
 
-Static site for a yoga/wellness studio in Germany. Astro v5 SSG, TailwindCSS v3, GSAP v3, TinaCMS, bsport booking integration. German default locale (no URL prefix), English at `/en/`.
+Static site for a yoga/wellness studio in Germany. Astro v5 SSG, TailwindCSS v3, GSAP v3, Keystatic CMS, bsport booking integration. German default locale (no URL prefix), English at `/en/`.
 
 ---
 
@@ -11,7 +11,7 @@ Static site for a yoga/wellness studio in Germany. Astro v5 SSG, TailwindCSS v3,
 | Astro | v5 | `output: 'static'` |
 | TailwindCSS | v3 | Custom design tokens |
 | GSAP | v3.14.2 | Limited scope — see GSAP Rules |
-| TinaCMS | v3.5.0 | Self-hosted (`isLocalClient: true`, custom JWT auth) |
+| Keystatic | — | Git-based CMS (Local/GitHub modes) |
 | bsport SDK | CDN | `https://cdn.bsport.io/scripts/widget.js` |
 | pnpm | — | Package manager |
 
@@ -144,8 +144,7 @@ src/
     index.astro                    # Home page (also DE)
     404.astro
     impressum.astro
-tina/
-  config.ts                        # TinaCMS UI schema
+keystatic.config.ts                # Keystatic configuration and schemas
 tailwind.config.mjs
 astro.config.mjs
 ```
@@ -160,7 +159,7 @@ astro.config.mjs
 
 1. Create `src/components/blocks/MyBlock.astro`
 2. Add Zod schema to `src/content/config.ts` → add to `z.discriminatedUnion` in `blockSchema`
-3. Add TinaCMS template to `tina/config.ts` → `pages` collection templates array
+3. Add Keystatic schema to `keystatic.config.ts` → `collections.pages.schema`
 4. Add import + switch case to `src/pages/[...slug].astro`
 5. Add import + switch case to `src/pages/index.astro`
 
@@ -217,8 +216,6 @@ blocks: []               # array of block objects
 | `BsportSubscription` | `_template`, `name`, `elementId` |
 
 > **Note:** The `name` field is informational metadata only. It has no runtime rendering effect. It exists purely for agent/human referencing. See [Section Pattern Language](#section-pattern-language) below.
->
-> **Important:** The `name` field MUST be defined in the TinaCMS schema (`tina/config.ts`) on every block template. TinaCMS strips unknown fields when saving — without it in the schema, saving via the CMS would delete all `name` values from content files.
 
 ---
 
@@ -317,20 +314,15 @@ Content strings (labels, body text) come from frontmatter — no localisation lo
 ## Environment Variables
 
 ```bash
-# Frontend / Shared
+# Shared / Frontend
 PUBLIC_GAS_ENDPOINT=      # Google Apps Script email capture endpoint
 PUBLIC_SITE_URL=https://eos-club.de
 
-# TinaCMS Self-Hosted (Server-side)
-TINA_SELF_HOSTED=true
-TINA_ADMIN_PASSWORD_HASH= # bcrypt hash of CMS password
-TINA_JWT_SECRET=          # Secret for JWT signing
-TINA_JWT_EXPIRY=7d
-GITHUB_PERSONAL_ACCESS_TOKEN= # For backend git push
-
-# Legacy / Alternative Deploy
-WEBHOOK_SECRET=           # GitHub webhook HMAC secret
-DEPLOY_WEB_ROOT=/var/www/eos-club
+# Keystatic (GitHub mode)
+KEYSTATIC_GITHUB_CLIENT_ID=
+KEYSTATIC_GITHUB_CLIENT_SECRET=
+KEYSTATIC_SECRET=
+PUBLIC_GITHUB_REPO=       # owner/repo
 ```
 
 ---
@@ -340,20 +332,9 @@ DEPLOY_WEB_ROOT=/var/www/eos-club
 | Aspect | Details |
 |--------|---------|
 | Build | `pnpm build` → `dist/` |
-| Hosting | DigitalOcean Droplet (Docker) |
-| CMS Backend | Self-hosted Express server (`tina-backend/`) on port 4001 |
+| Hosting | DigitalOcean Droplet (NGINX) |
+| CMS | Keystatic (accessible at `/keystatic`) |
 | Trigger | GitHub Actions on push to `main` |
-| Mechanism | SSH → git pull → pnpm build → rsync to nginx web root |
-| Process | Docker Compose (services: `eosclub_tina`, `nginx`) |
+| Mechanism | SSH → git pull → pnpm build → serve static output |
 
-**Backend health check:** `curl -s https://staging.prod.khanyi.com/api/tina/health`
-
-**TinaCMS deployment gotchas:**
-- `tina/__generated__/` files are tracked in git and MUST be regenerated (`tinacms build`) after any schema change
-- `public/admin/` is gitignored — regenerated on server during build
-- `deploy/rebuild.sh` resets `tina/__generated__/` before `git pull` to avoid merge conflicts from in-container builds
-- The Docker container uses volume-mounted repo at `/app/repo/tina` for generated files (not the stale Docker-build copy at `/app/tina`)
-- `isLocalClient: true` in `tina/config.ts` is **mandatory** for self-hosted — without it the admin SPA crashes on load
-
-See [`plans/deployment-tinacms-plan.md`](plans/deployment-tinacms-plan.md) for full architecture.
-See [`archive/TROUBLESHOOTING_TINACMS_ADMIN.md`](../archive/TROUBLESHOOTING_TINACMS_ADMIN.md) for known issues and fixes.
+See [`deploy/KEYSTATIC_DEPLOYMENT_GUIDE.md`](deploy/KEYSTATIC_DEPLOYMENT_GUIDE.md) for full architecture.

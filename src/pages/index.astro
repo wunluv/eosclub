@@ -27,31 +27,31 @@ const homePage = pages.find(page => page.id === 'de/home.md');
     enSlug=""
   >
     {homePage.data.blocks?.map((block) => {
-      switch (block._template) {
+      switch (block.discriminant) {
         case 'HeroBlock':
-          return <HeroBlock {...block} />;
+          return <HeroBlock {...block.value} />;
         case 'ContentBlock':
-          return <ContentBlock {...block} />;
+          return <ContentBlock {...block.value} />;
         case 'BookingBlock':
-          return <BookingBlock {...block} />;
+          return <BookingBlock {...block.value} />;
         case 'FeatureGridBlock':
-          return <FeatureGridBlock {...block} />;
+          return <FeatureGridBlock {...block.value} />;
         case 'FullBleedBlock':
-          return <FullBleedBlock {...block} />;
+          return <FullBleedBlock {...block.value} />;
         case 'InteractiveListBlock':
-          return <InteractiveListBlock {...block} />;
+          return <InteractiveListBlock {...block.value} />;
         case 'FaqBlock':
-          return <FaqBlock {...block} />;
+          return <FaqBlock {...block.value} />;
         case 'BsportCalendar': {
-          const { _template: _t1, name: _n1, ...calProps } = block;
+          const { name: _n1, ...calProps } = block.value;
           return <BsportCalendar {...calProps} />;
         }
         case 'BsportPasses': {
-          const { _template: _t2, name: _n2, ...passProps } = block;
+          const { name: _n2, ...passProps } = block.value;
           return <BsportPasses {...passProps} />;
         }
         case 'BsportSubscription': {
-          const { _template: _t3, name: _n3, ...subProps } = block;
+          const { name: _n3, ...subProps } = block.value;
           return <BsportSubscription {...subProps} />;
         }
         default:

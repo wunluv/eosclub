@@ -51,35 +51,74 @@ const { title, seoDescription, ogImage, blocks } = page.data;
   enSlug={enSlug}
 >
   {blocks?.map((block) => {
-      switch (block._template) {
-        case 'HeroBlock':
-          return <HeroBlock {...block} />;
-        case 'ContentBlock':
-          return <ContentBlock {...block} />;
-        case 'BookingBlock':
-          return <BookingBlock {...block} />;
-        case 'FeatureGridBlock':
-          return <FeatureGridBlock {...block} />;
-        case 'FullBleedBlock':
-          return <FullBleedBlock {...block} />;
-        case 'InteractiveListBlock':
-          return <InteractiveListBlock {...block} />;
-        case 'FaqBlock':
-          return <FaqBlock {...block} />;
-        case 'BsportCalendar': {
-          const { _template: _t1, name: _n1, ...calProps } = block;
-          return <BsportCalendar {...calProps} />;
+      // Primary format (current): Astro content schema discriminated union
+      if ('discriminant' in block && 'value' in block) {
+        switch (block.discriminant) {
+          case 'HeroBlock':
+            return <HeroBlock {...block.value} />;
+          case 'ContentBlock':
+            return <ContentBlock {...block.value} />;
+          case 'BookingBlock':
+            return <BookingBlock {...block.value} />;
+          case 'FeatureGridBlock':
+            return <FeatureGridBlock {...block.value} />;
+          case 'FullBleedBlock':
+            return <FullBleedBlock {...block.value} />;
+          case 'InteractiveListBlock':
+            return <InteractiveListBlock {...block.value} />;
+          case 'FaqBlock':
+            return <FaqBlock {...block.value} />;
+          case 'BsportCalendar': {
+            const { name: _n1, ...calProps } = block.value;
+            return <BsportCalendar {...calProps} />;
+          }
+          case 'BsportPasses': {
+            const { name: _n2, ...passProps } = block.value;
+            return <BsportPasses {...passProps} />;
+          }
+          case 'BsportSubscription': {
+            const { name: _n3, ...subProps } = block.value;
+            return <BsportSubscription {...subProps} />;
+          }
+          default:
+            return null;
         }
-        case 'BsportPasses': {
-          const { _template: _t2, name: _n2, ...passProps } = block;
-          return <BsportPasses {...passProps} />;
-        }
-        case 'BsportSubscription': {
-          const { _template: _t3, name: _n3, ...subProps } = block;
-          return <BsportSubscription {...subProps} />;
-        }
-        default:
-          return null;
       }
+
+      // Backward compatibility: legacy _template shape
+      if ('_template' in block) {
+        switch (block._template) {
+          case 'HeroBlock':
+            return <HeroBlock {...block} />;
+          case 'ContentBlock':
+            return <ContentBlock {...block} />;
+          case 'BookingBlock':
+            return <BookingBlock {...block} />;
+          case 'FeatureGridBlock':
+            return <FeatureGridBlock {...block} />;
+          case 'FullBleedBlock':
+            return <FullBleedBlock {...block} />;
+          case 'InteractiveListBlock':
+            return <InteractiveListBlock {...block} />;
+          case 'FaqBlock':
+            return <FaqBlock {...block} />;
+          case 'BsportCalendar': {
+            const { _template: _t1, name: _n1, ...calProps } = block;
+            return <BsportCalendar {...calProps} />;
+          }
+          case 'BsportPasses': {
+            const { _template: _t2, name: _n2, ...passProps } = block;
+            return <BsportPasses {...passProps} />;
+          }
+          case 'BsportSubscription': {
+            const { _template: _t3, name: _n3, ...subProps } = block;
+            return <BsportSubscription {...subProps} />;
+          }
+          default:
+            return null;
+        }
+      }
+
+      return null;
     })}
 </BaseLayout>
