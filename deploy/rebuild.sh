@@ -26,8 +26,8 @@ echo "==> Resetting build-generated files..."
 git checkout -- public/keystatic/ 2>/dev/null || true
 
 # Pull latest from GitHub
-echo "==> Pulling latest changes from origin/main..."
-git pull origin main
+echo "==> Pulling latest changes from origin/feature/keystatic-migration..."
+git pull origin feature/keystatic-migration
 
 # Install / sync dependencies
 echo "==> Installing dependencies..."
