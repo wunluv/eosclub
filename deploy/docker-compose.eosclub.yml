@@ -17,10 +17,10 @@ services:
     env_file:
       - /var/www/private/eosclub/.env
     volumes:
-      # Repo clone lives here — GitHub Actions pulls into this directory
-      - /var/www/public/eos.khanyi.com/repo:/app/repo
-      # Nginx reads the compiled static site from this directory
-      - /var/www/public/eos.khanyi.com/dist:/app/dist
+      # Repo root — git was cloned directly into eos.khanyi.com/ (no /repo subdir).
+      # Astro builds to /app/repo/dist which maps to /var/www/public/eos.khanyi.com/dist
+      # on the host — exactly what Nginx serves. No separate /app/dist mount needed.
+      - /var/www/public/eos.khanyi.com:/app/repo
     networks:
       - backend
     logging:

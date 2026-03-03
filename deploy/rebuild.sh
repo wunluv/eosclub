@@ -11,7 +11,9 @@ set -e
 #   host: /var/www/public/eos.khanyi.com/dist  →  container: /app/dist
 
 REPO_DIR="/app/repo"
-DIST_DIR="/app/dist"
+# dist/ is inside the repo, which mounts directly to /var/www/public/eos.khanyi.com
+# on the host — the same path Nginx serves. No separate rsync target needed.
+DIST_DIR="$REPO_DIR/dist"
 
 # pnpm is installed to /root/.local/share/pnpm by the container start-up script
 export PATH="/root/.local/share/pnpm:$PATH"
