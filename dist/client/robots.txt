@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://eos-club.de/sitemap-index.xml
