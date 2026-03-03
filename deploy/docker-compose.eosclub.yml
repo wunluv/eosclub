@@ -18,8 +18,9 @@ services:
       - /var/www/private/eosclub/.env
     ports:
       # Astro Node server — handles /keystatic/* and /api/keystatic/* (SSR)
-      # Nginx (on the host network) proxies these paths to 127.0.0.1:4321
-      - "127.0.0.1:4321:4321"
+      # Nginx (on the host network) proxies these paths to 127.0.0.1:4322
+      # Port 4321 is reserved by astro_oneplusone on this host
+      - "127.0.0.1:4322:4322"
     volumes:
       # Repo root — git was cloned directly into eos.khanyi.com/ (no /repo subdir).
       # Astro builds to /app/repo/dist/client (static, served by Nginx) and

@@ -60,7 +60,7 @@ if [ -f "$NODE_SERVER_PID_FILE" ]; then
   kill "$OLD_PID" 2>/dev/null || true
   rm -f "$NODE_SERVER_PID_FILE"
 fi
-HOST=0.0.0.0 PORT=4321 node "$REPO_DIR/dist/server/entry.mjs" &
+HOST=0.0.0.0 PORT=4322 node "$REPO_DIR/dist/server/entry.mjs" &
 echo $! > "$NODE_SERVER_PID_FILE"
 echo "==> Node server started (PID: $(cat $NODE_SERVER_PID_FILE))"
 
