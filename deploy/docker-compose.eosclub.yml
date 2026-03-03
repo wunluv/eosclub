@@ -3,12 +3,24 @@ services:
     image: node:20-alpine
     container_name: eosclub_astro
     restart: unless-stopped
-    command: tail -f /dev/null
-    volumes:
-      - /var/www/public/eos.khanyi.com:/app/repo
-      - /var/www/public/eos.khanyi.com/dist:/app/dist
+    working_dir: /app/repo
+    # On first start: install pnpm, then run rebuild.sh to build and deploy.
+    # Kept alive with tail after an explicit rebuild; GitHub Actions calls
+    # `docker exec eosclub_astro /app/repo/deploy/rebuild.sh` instead.
+    command: >
+      /bin/sh -c "
+        apk add --no-cache git curl rsync &&
+        curl -fsSL https://get.pnpm.io/install.sh | ENV=/root/.shrc SHELL=/bin/sh sh - &&
+        export PATH=/root/.local/share/pnpm:$$PATH &&
+        tail -f /dev/null
+      "
     env_file:
       - /var/www/private/eosclub/.env
+    volumes:
+      # Repo clone lives here — GitHub Actions pulls into this directory
+      - /var/www/public/eos.khanyi.com/repo:/app/repo
+      # Nginx reads the compiled static site from this directory
+      - /var/www/public/eos.khanyi.com/dist:/app/dist
     networks:
       - backend
     logging:

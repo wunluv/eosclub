@@ -17,6 +17,9 @@ export default config({
       path: 'src/content/pages/**',
       format: {
         data: 'yaml',
+        // contentField is required so Keystatic discovers .md files (not .yaml).
+        // fields.emptyContent() satisfies the ContentFormField type without
+        // showing any WYSIWYG editor — the markdown body is intentionally empty.
         contentField: 'content',
       },
       schema: {
@@ -30,14 +33,22 @@ export default config({
           publicPath: '/assets/',
         }),
         translationSlug: fields.text({ label: 'Translation Slug' }),
-        content: fields.markdoc({ label: 'Content', extension: 'md' }),
+        // emptyContent tells Keystatic the file is .md but has no editable body.
+        // This resolves the P2 "orphan content field" issue — editors no longer
+        // see a disconnected WYSIWYG field.
+        content: fields.emptyContent({ extension: 'md' }),
+        // Each block schema is wrapped with fields.object() to satisfy the
+        // ComponentSchema type constraint of fields.blocks(). Image path fields
+        // use fields.text() (plain string) since fields.image() inside
+        // fields.object() inside fields.blocks() has known crashing issues
+        // in @keystar/ui@0.7.x (formKind: "asset" triggers assertNever).
         blocks: fields.blocks(
           {
             HeroBlock: {
               label: 'Hero Block',
               schema: fields.object({
                 name: fields.text({ label: 'Section Name (internal reference)' }),
-                headline: fields.text({ label: 'Headline' }),
+                headline: fields.text({ label: 'Headline', multiline: true }),
                 variant: fields.select({
                   label: 'Hero Layout Variant',
                   options: [
@@ -47,17 +58,15 @@ export default config({
                   ],
                   defaultValue: 'split-grid',
                 }),
-                subheadline: fields.text({ label: 'Subheadline' }),
-                subBodyText: fields.text({ label: 'Sub-body Text' }),
-                backgroundImage: fields.image({
+                subheadline: fields.text({ label: 'Subheadline', multiline: true }),
+                subBodyText: fields.text({ label: 'Sub-body Text', multiline: true }),
+                backgroundImage: fields.text({
                   label: 'Background Image',
-                  directory: 'public/assets',
-                  publicPath: '/assets/',
+                  description: 'Path to public asset, e.g. /assets/yoga_studio.jpg',
                 }),
-                logoOverlay: fields.image({
+                logoOverlay: fields.text({
                   label: 'Logo Overlay (Centered)',
-                  directory: 'public/assets',
-                  publicPath: '/assets/',
+                  description: 'Path to public asset, e.g. /assets/eos-logo.png',
                 }),
                 ctaLabel: fields.text({ label: 'CTA Label' }),
                 ctaUrl: fields.text({ label: 'CTA URL' }),
@@ -69,10 +78,9 @@ export default config({
                 name: fields.text({ label: 'Section Name (internal reference)' }),
                 body: fields.text({ label: 'Body Content', multiline: true }),
                 fullBleed: fields.checkbox({ label: 'Full Bleed Layout' }),
-                backgroundImage: fields.image({
+                backgroundImage: fields.text({
                   label: 'Background Image',
-                  directory: 'public/assets',
-                  publicPath: '/assets/',
+                  description: 'Path to public asset, e.g. /assets/...',
                 }),
               }),
             },
@@ -93,7 +101,7 @@ export default config({
                   fields.object({
                     icon: fields.text({ label: 'Feather Icon Name' }),
                     title: fields.text({ label: 'Title' }),
-                    description: fields.text({ label: 'Description' }),
+                    description: fields.text({ label: 'Description', multiline: true }),
                   }),
                   {
                     label: 'Features',
@@ -106,10 +114,9 @@ export default config({
               label: 'Full Bleed Image Section',
               schema: fields.object({
                 name: fields.text({ label: 'Section Name (internal reference)' }),
-                image: fields.image({
+                image: fields.text({
                   label: 'Background Image',
-                  directory: 'public/assets',
-                  publicPath: '/assets/',
+                  description: 'Path to public asset, e.g. /assets/...',
                 }),
                 altText: fields.text({ label: 'Alt Text' }),
                 minHeight: fields.text({ label: 'Min Height (Tailwind class, e.g. min-h-[50vh])' }),
@@ -126,11 +133,10 @@ export default config({
                 items: fields.array(
                   fields.object({
                     label: fields.text({ label: 'Label' }),
-                    description: fields.text({ label: 'Description' }),
-                    image: fields.image({
+                    description: fields.text({ label: 'Description', multiline: true }),
+                    image: fields.text({
                       label: 'Hover Image',
-                      directory: 'public/assets',
-                      publicPath: '/assets/',
+                      description: 'Path to public asset, e.g. /assets/...',
                     }),
                     imageAlt: fields.text({ label: 'Image Alt Text' }),
                   }),
@@ -148,7 +154,7 @@ export default config({
                 title: fields.text({ label: 'Section Title' }),
                 questions: fields.array(
                   fields.object({
-                    question: fields.text({ label: 'Question' }),
+                    question: fields.text({ label: 'Question', multiline: true }),
                     answer: fields.text({ label: 'Answer', multiline: true }),
                   }),
                   {

@@ -1,4 +1,5 @@
 name: Deploy EOS CLUB
+
 on:
   push:
     branches: [main]
@@ -7,16 +8,16 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to DigitalOcean
+      - name: SSH → exec rebuild inside eosclub_astro container
         uses: appleboy/ssh-action@v1
         with:
           host: ${{ secrets.DO_HOST }}
           username: ${{ secrets.DO_USER }}
           key: ${{ secrets.DO_SSH_KEY }}
           script: |
-            cd /var/www/public/eosclub/repo
-            git pull origin main
-            pnpm install --frozen-lockfile
-            pnpm run build
-            rsync -a --delete dist/ /var/www/public/eosclub/dist/
+            # The rebuild script runs inside the Docker container where pnpm,
+            # node, git, and rsync are available.
+            # Host path /var/www/public/eos.khanyi.com/repo mounts to /app/repo
+            # inside the container, so the script is reachable at:
+            docker exec eosclub_astro /app/repo/deploy/rebuild.sh
             echo "Deploy complete: $(date)"

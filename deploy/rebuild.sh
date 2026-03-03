@@ -2,37 +2,47 @@
 
 set -e
 
-# EOS CLUB - Manual Rebuild Script
-# This script runs inside the droplet to pull changes and rebuild the static site.
+# EOS CLUB — Rebuild Script
+# Executed inside the eosclub_astro Docker container by GitHub Actions:
+#   docker exec eosclub_astro /app/repo/deploy/rebuild.sh
+#
+# Volume map (docker-compose.eosclub.yml):
+#   host: /var/www/public/eos.khanyi.com/repo  →  container: /app/repo
+#   host: /var/www/public/eos.khanyi.com/dist  →  container: /app/dist
 
-# REPO_DIR and DIST_DIR are set relative to the container paths
 REPO_DIR="/app/repo"
 DIST_DIR="/app/dist"
 
-echo "Starting rebuild inside container at $(date)"
+# pnpm is installed to /root/.local/share/pnpm by the container start-up script
+export PATH="/root/.local/share/pnpm:$PATH"
 
-cd "$REPO_DIR" || { echo "Error: Could not enter repo directory"; exit 1; }
+echo "==> Rebuild started at $(date)"
 
-# Reset build-generated files that keystatic build / astro build recreate.
-# These are regenerated every build, so local copies can safely be discarded
-# before pulling.
-echo "Resetting build-generated files..."
+cd "$REPO_DIR" || { echo "Error: Could not enter repo directory $REPO_DIR"; exit 1; }
+
+# Discard any build-generated files that Astro/Keystatic recreate each build
+# so that git pull never conflicts on them.
+echo "==> Resetting build-generated files..."
 git checkout -- public/keystatic/ 2>/dev/null || true
 
-# Pull latest changes
+# Pull latest from GitHub
+echo "==> Pulling latest changes from origin/main..."
 git pull origin main
 
-# Install dependencies
+# Install / sync dependencies
+echo "==> Installing dependencies..."
 pnpm install --frozen-lockfile
 
-echo "Building Astro site..."
-pnpm run build
+# Build the static site
+echo "==> Building Astro site (NODE_ENV=production)..."
+NODE_ENV=production pnpm run build
 
-# Copy build output to the web root
+# Sync built output to the directory Nginx serves
 if [ -d "dist" ]; then
+  echo "==> Syncing dist/ to $DIST_DIR ..."
   rsync -a --delete dist/ "$DIST_DIR/"
-  echo "Rebuild and deploy successful at $(date)"
+  echo "==> Rebuild and deploy successful at $(date)"
 else
-  echo "Error: Build output directory 'dist' not found"
+  echo "Error: dist/ directory not found after build"
   exit 1
 fi

@@ -10,7 +10,7 @@ blocks:
       name: wellness-hero
       headline: Wellness
       variant: cover
-      subheadline: Regeneration for body, mind and soul
+      subheadline: Regeneration for body, mind and spirit
       backgroundImage: /assets/infrared_therapy_studio.png
   - discriminant: ContentBlock
     value:
@@ -18,8 +18,8 @@ blocks:
       body: >-
         <h2>Infrared Therapy</h2><p>Our infrared cabins offer deep-acting heat
         that releases muscle tension, promotes circulation, and strengthens the
-        immune system. Ideal after training or as a standalone wellness
-        session.</p>
+        immune system. Ideal after training or as a standalone wellness session.
+        Vitamin D for free!</p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -35,4 +35,3 @@ blocks:
           title: Regeneration
           description: Accelerates recovery after exercise
 ---
-Our studios are full infrared

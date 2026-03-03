@@ -1,5 +1,5 @@
 /* empty css                                                   */
-import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_Di5Tg-vh.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_Dc_Omf6q.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const prerender = false;
