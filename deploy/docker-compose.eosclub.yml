@@ -4,9 +4,9 @@ services:
     container_name: eosclub_astro
     restart: unless-stopped
     working_dir: /app/repo
-    # On first start: install pnpm, then run rebuild.sh to build and deploy.
-    # Kept alive with tail after an explicit rebuild; GitHub Actions calls
-    # `docker exec eosclub_astro /app/repo/deploy/rebuild.sh` instead.
+    # On first start: install pnpm. Kept alive by the Node server process.
+    # GitHub Actions calls `docker exec eosclub_astro /app/repo/deploy/rebuild.sh`
+    # which builds the site and (re)starts the Node server for Keystatic SSR routes.
     command: >
       /bin/sh -c "
         apk add --no-cache git curl rsync &&
@@ -16,10 +16,14 @@ services:
       "
     env_file:
       - /var/www/private/eosclub/.env
+    ports:
+      # Astro Node server — handles /keystatic/* and /api/keystatic/* (SSR)
+      # Nginx (on the host network) proxies these paths to 127.0.0.1:4321
+      - "127.0.0.1:4321:4321"
     volumes:
       # Repo root — git was cloned directly into eos.khanyi.com/ (no /repo subdir).
-      # Astro builds to /app/repo/dist which maps to /var/www/public/eos.khanyi.com/dist
-      # on the host — exactly what Nginx serves. No separate /app/dist mount needed.
+      # Astro builds to /app/repo/dist/client (static, served by Nginx) and
+      # /app/repo/dist/server (SSR, run by the Node server on port 4321).
       - /var/www/public/eos.khanyi.com:/app/repo
     networks:
       - backend

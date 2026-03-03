@@ -6,6 +6,10 @@ import keystatic from '@keystatic/astro';
 import node from '@astrojs/node';
 
 // https://astro.build/config
+// output: 'static' + node adapter = hybrid mode:
+//   - Static pages  → dist/client/   (served by Nginx)
+//   - Keystatic SSR → dist/server/   (served by the Astro Node server)
+// Nginx proxies /keystatic/* and /api/keystatic/* to the Node process.
 export default defineConfig({
   output: 'static',
   adapter: node({
