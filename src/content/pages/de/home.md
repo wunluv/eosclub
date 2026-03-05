@@ -1,8 +1,8 @@
 ---
 cmsSlug: de/home
-title: EOS CLUB – Dein Yoga & Wellness Studio in Berlin
+title: EOS CLUB – Dein Yoga & Wellness Studio in Köln
 seoDescription: >-
-  Entdecke EOS CLUB: Yoga, Pilates, Barre und ganzheitliches Wellness in Berlin.
+  Entdecke EOS CLUB: Yoga, Pilates, Barre und ganzheitliches Wellness in Köln.
   Buche jetzt deine erste Klasse.
 ogImage: /assets/yoga_studio.jpg
 translationSlug: home

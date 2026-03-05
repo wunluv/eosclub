@@ -1,8 +1,8 @@
 ---
 cmsSlug: de/studio
-title: Unser Studio – EOS CLUB Berlin
+title: Unser Studio – EOS CLUB Köln
 seoDescription: >-
-  Entdecke unseren lichtdurchfluteten Raum im Herzen Berlins. Moderne
+  Entdecke unseren lichtdurchfluteten Raum im Herzen Kölns. Moderne
   Ausstattung trifft auf warme Atmosphäre.
 translationSlug: studio
 blocks:
@@ -11,7 +11,7 @@ blocks:
       name: studio-hero
       variant: cover
       headline: Unser Studio
-      subheadline: Ein Ort der Ruhe mitten in Berlin
+      subheadline: Ein Ort der Ruhe mitten in Köln
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
     value:

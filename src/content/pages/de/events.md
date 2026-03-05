@@ -1,7 +1,7 @@
 ---
 cmsSlug: de/events
 title: Events & Workshops
-seoDescription: Workshops, Teacher Trainings und besondere Events bei EOS CLUB Berlin.
+seoDescription: Workshops, Teacher Trainings und besondere Events bei EOS CLUB Köln.
 translationSlug: events
 blocks:
   - discriminant: HeroBlock

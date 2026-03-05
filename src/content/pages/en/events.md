@@ -1,7 +1,7 @@
 ---
 cmsSlug: en/events
 title: Events & Workshops
-seoDescription: 'Workshops, teacher trainings and special events at EOS CLUB Berlin.'
+seoDescription: 'Workshops, teacher trainings and special events at EOS CLUB Cologne.'
 translationSlug: events
 blocks:
   - discriminant: HeroBlock

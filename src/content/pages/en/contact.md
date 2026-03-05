@@ -1,7 +1,7 @@
 ---
 cmsSlug: en/contact
 title: Contact
-seoDescription: 'Contact EOS CLUB Berlin: address, opening hours and directions.'
+seoDescription: 'Contact EOS CLUB Cologne: address, opening hours and directions.'
 translationSlug: kontakt
 blocks:
   - discriminant: HeroBlock
@@ -15,7 +15,7 @@ blocks:
       name: contact-info
       body: >-
         <h2>How to Reach Us</h2><p><strong>EOS CLUB</strong><br>Musterstraße
-        1<br>10115 Berlin</p><p>Email: <a
+        1<br>10115 Cologne</p><p>Email: <a
         href='mailto:kontakt@eos-club.de'>kontakt@eos-club.de</a><br>Phone: +49
         (0) 30 12345678</p><h3>Opening Hours</h3><p>Mon–Fri:
         07:00–21:00<br>Sat–Sun: 09:00–18:00</p>

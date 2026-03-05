@@ -1,8 +1,8 @@
 ---
 cmsSlug: en/studio
-title: Our Studio – EOS CLUB Berlin
+title: Our Studio – EOS CLUB Cologne
 seoDescription: >-
-  Discover our light-filled space in the heart of Berlin. Modern equipment meets
+  Discover our light-filled space in the heart of Cologne. Modern equipment meets
   a warm atmosphere.
 translationSlug: studio
 blocks:
@@ -11,7 +11,7 @@ blocks:
       name: studio-hero
       variant: cover
       headline: Our Studio
-      subheadline: A place of peace in the middle of Berlin
+      subheadline: A place of peace in the middle of Cologne
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
     value:
