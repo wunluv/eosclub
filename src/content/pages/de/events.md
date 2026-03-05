@@ -16,7 +16,7 @@ blocks:
       body: >-
         <h2>Workshops & Specials</h2><p>Regelmäßig bieten wir workshops,
         Retreats und besondere Veranstaltungen an. Bleib informiert und melde
-        dich für unseren Newsletter an. Test from San</p>
+        dich für unseren Newsletter an. Test from San. New test 1pm 05/03</p>
       fullBleed: false
   - discriminant: BsportCalendar
     value:
