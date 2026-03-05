@@ -1,4 +1,5 @@
 ---
+cmsSlug: en/studio
 title: Our Studio – EOS CLUB Cologne
 seoDescription: >-
   Discover our light-filled space in the heart of Cologne. Modern equipment

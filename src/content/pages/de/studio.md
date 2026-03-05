@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/studio
 title: Unser Studio – EOS CLUB Köln
 seoDescription: >-
   Entdecke unseren lichtdurchfluteten Raum im Herzen Kölns. Moderne Ausstattung

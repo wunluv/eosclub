@@ -105,9 +105,9 @@ const pages = defineCollection({
   schema: z.object({
     cmsSlug: z.string().optional(),
     title: z.string(),
-    seoDescription: z.string(),
+    seoDescription: z.string().optional(),
     ogImage: z.string().optional(),
-    translationSlug: z.string(),
+    translationSlug: z.string().optional(),
     blocks: z.array(blockSchema).optional(),
   }),
 });
