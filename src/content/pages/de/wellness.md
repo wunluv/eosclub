@@ -1,15 +1,16 @@
 ---
-title: EOS CLUB Studioräume
+cmsSlug: de/wellness
+title: Wellness & Infrarot-Therapie
 seoDescription: >-
-  Studioräume in Köln mieten – flexible Räume im EOS CLUB für Workshops,
-  Therapie, Personal Training, Kurse und Events.
-translationSlug: Studioräume
+  Infrarot-Sauna und ganzheitliche Wellness-Angebote für Regeneration und
+  Wohlbefinden.
+translationSlug: wellness
 blocks:
   - discriminant: HeroBlock
     value:
       name: wellness-hero
-      headline: Wellness
       variant: cover
+      headline: Wellness
       subheadline: Regeneration für Körper und Geist
       backgroundImage: /assets/infrared_therapy_studio.png
   - discriminant: ContentBlock
@@ -20,14 +21,13 @@ blocks:
         tiefenwirksame Wärme, die Muskelverspannungen löst, die Durchblutung
         fördert und das Immunsystem stärkt. Ideal nach dem Training oder als
         eigenständige Wellness-Einheit.</p>
-      fullBleed: false
   - discriminant: FeatureGridBlock
     value:
       name: wellness-benefits-grid
       items:
         - icon: thermometer
           title: Tiefenwärme
-          description: Sanfte, durchdringende Wärme für maximale Entspannung
+          description: 'Sanfte, durchdringende Wärme für maximale Entspannung'
         - icon: droplet
           title: Detox
           description: Unterstützt die natürliche Entgiftung des Körpers
@@ -35,3 +35,4 @@ blocks:
           title: Regeneration
           description: Beschleunigt die Erholung nach dem Sport
 ---
+
