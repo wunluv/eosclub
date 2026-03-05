@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { resolveImage } from '../../lib/image-registry';
+
 interface Props {
   title?: string;
   items: Array<{
@@ -12,6 +16,20 @@ interface Props {
 const { title, items } = Astro.props;
 const locale = Astro.currentLocale ?? 'de';
 const isDE = locale.startsWith('de');
+
+// Resolve images for each item upfront
+const resolvedItems = items.map((item) => ({
+  ...item,
+  optimizedImage: resolveImage(item.image) as ImageMetadata | null,
+}));
+
+// Mobile image dimensions (h-48 aspect ratio ~ 16:7.5)
+const MOBILE_WIDTH = 400;
+const MOBILE_HEIGHT = 192;
+
+// Desktop hover image dimensions (square aspect)
+const DESKTOP_WIDTH = 600;
+const DESKTOP_HEIGHT = 600;
 ---
 
 <section class="bg-eos-base py-16 lg:py-24" data-interactive-list>
@@ -44,12 +62,26 @@ const isDE = locale.startsWith('de');
             )}
             <!-- Mobile: static image below each item (visible only on touch devices) -->
             <div class="mt-4 lg:hidden">
-              <img
-                src={item.image}
-                alt={item.imageAlt ?? item.label}
-                class="w-full h-48 object-cover rounded-lg img-greyscale"
-                loading="lazy"
-              />
+              {resolvedItems[i].optimizedImage ? (
+                <Image
+                  src={resolvedItems[i].optimizedImage}
+                  alt={item.imageAlt ?? item.label}
+                  width={MOBILE_WIDTH}
+                  height={MOBILE_HEIGHT}
+                  format="webp"
+                  loading="lazy"
+                  class="w-full h-48 object-cover rounded-lg img-greyscale"
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.imageAlt ?? item.label}
+                  width={MOBILE_WIDTH}
+                  height={MOBILE_HEIGHT}
+                  loading="lazy"
+                  class="w-full h-48 object-cover rounded-lg img-greyscale"
+                />
+              )}
             </div>
           </li>
         ))}
@@ -58,15 +90,34 @@ const isDE = locale.startsWith('de');
       <!-- RIGHT: Floating image panel (desktop only) -->
       <div class="hidden lg:block sticky top-24 w-[42%] flex-shrink-0" aria-hidden="true">
         <div class="relative aspect-square overflow-hidden rounded-xl bg-eos-subtle">
-          {items.map((item, i) => (
-            <img
-              src={item.image}
-              alt={item.imageAlt ?? item.label}
+          {resolvedItems.map((item, i) => (
+            <div
               class="hover-image absolute inset-0 w-full h-full object-cover img-greyscale"
               data-index={i}
               style={i === 0 ? "opacity: 1;" : "opacity: 0;"}
-              loading={i === 0 ? "eager" : "lazy"}
-            />
+            >
+              {item.optimizedImage ? (
+                <Image
+                  src={item.optimizedImage}
+                  alt={item.imageAlt ?? item.label}
+                  width={DESKTOP_WIDTH}
+                  height={DESKTOP_HEIGHT}
+                  format="webp"
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  fetchpriority={i === 0 ? 'high' : undefined}
+                  class="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={item.image}
+                  alt={item.imageAlt ?? item.label}
+                  width={DESKTOP_WIDTH}
+                  height={DESKTOP_HEIGHT}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                  class="w-full h-full object-cover"
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>

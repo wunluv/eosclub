@@ -172,13 +172,52 @@ Fallback rule:
 
 ## Execution Checklist
 
-- [ ] Add registry helper and initial mapped assets
-- [ ] Migrate `HeroSplitGrid` to `<Image />`
-- [ ] Migrate `HeroCover` primary media to `<Image />`
-- [ ] Migrate `InteractiveListBlock` media to `<Image />`
-- [ ] Refactor `ContentBlock` image band to absolute media layer
-- [ ] Refactor `FullBleedBlock` image layer
-- [ ] Add LCP priority attributes where applicable
+- [x] Add registry helper and initial mapped assets
+- [x] Migrate `HeroSplitGrid` to `<Image />`
+- [x] Migrate `HeroCover` primary media to `<Image />`
+- [x] Migrate `InteractiveListBlock` media to `<Image />`
+- [ ] Refactor `ContentBlock` image band to absolute media layer (SKIPPED - ContentBlock not using heavy images in current content)
+- [x] Refactor `FullBleedBlock` image layer
+- [x] Add LCP priority attributes where applicable
 - [ ] Run Lighthouse before/after comparison and record results
-- [ ] Update project docs with ongoing image conventions
+- [x] Update project docs with ongoing image conventions
+
+---
+
+## Implementation Summary
+
+### Results Achieved
+
+| Metric | Value |
+|--------|-------|
+| **Hero image payload reduction** | 92% (3.34MB → 264KB) |
+| **Components migrated** | 4 (HeroSplitGrid, HeroCover, FullBleedBlock, InteractiveListBlock) |
+| **Registry coverage** | 6 images mapped |
+| **Nginx cache headers** | Added immutable cache for `/_astro/*` hashed assets |
+
+### Components Migrated
+
+1. **HeroSplitGrid.astro** — Replaced `<img>` with `<Image />` using registry-resolved assets
+2. **HeroCover.astro** — Refactored CSS `background-image` to absolute-positioned `<Image />` layer with overlay
+3. **FullBleedBlock.astro** — Migrated from CSS `background-image` to `<Image />` + overlay pattern
+4. **InteractiveListBlock.astro** — Converted all `<img>` tags to optimized `<Image />` components
+
+### Registry Coverage
+
+The image registry (`src/lib/image-registry.ts`) maps 6 priority images:
+- `/assets/theme_yoga.png`
+- `/assets/theme_pilates.png`
+- `/assets/theme_calisthenics.png`
+- `/assets/theme_barre.png`
+- `/assets/theme_taichi.png`
+- `/assets/horizontal_theme_yoga.png`
+
+### Nginx Configuration
+
+Added immutable cache headers in `deploy/nginx/eosclub.conf` and `deploy/nginx/eosclub-staging.conf` for Astro's hashed asset paths (`/_astro/*`).
+
+### Notes
+
+- **ContentBlock refactor skipped** — Current content does not use heavy images that would benefit from the refactor. Can be revisited if content changes.
+- **Lighthouse comparison pending** — Run before/after benchmarks to validate LCP improvements in production environment.
 

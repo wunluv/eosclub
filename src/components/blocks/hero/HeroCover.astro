@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { resolveImage } from '../../../lib/image-registry';
+
 interface Props {
   headline: string;
   subheadline?: string;
@@ -25,21 +29,41 @@ const defaultCta = isDE ? 'Mehr erfahren' : 'Learn more';
 const localizedCtaLabel = ctaLabel || defaultCta;
 const showCta = Boolean(ctaUrl);
 
-const bgStyle = backgroundImage
-  ? `background-image: url('${backgroundImage}'); background-size: cover; background-position: center;`
-  : '';
+// Try to resolve backgroundImage to optimized ImageMetadata
+const optimizedBackground = backgroundImage ? resolveImage(backgroundImage) : null;
+const isOptimized = optimizedBackground !== null;
+
+// Fallback dimensions for hero backgrounds
+const HERO_WIDTH = 1920;
+const HERO_HEIGHT = 1080;
 ---
 
 <section
   class={`relative w-full min-h-[60vh] overflow-hidden ${!backgroundImage ? 'bg-eos-base' : ''}`}
 >
   {backgroundImage && (
-    <img
-      src={backgroundImage}
-      alt=""
-      class="absolute inset-0 w-full h-full object-cover img-greyscale"
-      aria-hidden="true"
-    />
+    <>
+      {isOptimized ? (
+        <Image
+          src={optimizedBackground as ImageMetadata}
+          alt=""
+          width={HERO_WIDTH}
+          height={HERO_HEIGHT}
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+          class="absolute inset-0 w-full h-full object-cover img-greyscale"
+          aria-hidden="true"
+        />
+      ) : (
+        <img
+          src={backgroundImage}
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover img-greyscale"
+          aria-hidden="true"
+        />
+      )}
+    </>
   )}
 
   {backgroundImage && (
