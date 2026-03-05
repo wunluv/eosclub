@@ -27,10 +27,9 @@ export default config({
         cmsSlug: fields.text({ label: 'CMS Slug (do not change)' }),
         title: fields.text({ label: 'Page Title' }),
         seoDescription: fields.text({ label: 'SEO Description' }),
-        ogImage: fields.image({
+        ogImage: fields.text({
           label: 'OG Image',
-          directory: 'public/assets',
-          publicPath: '/assets/',
+          description: 'Path to public asset, e.g. /assets/yoga_studio.jpg',
         }),
         translationSlug: fields.text({ label: 'Translation Slug' }),
         // emptyContent tells Keystatic the file is .md but has no editable body.
