@@ -1,16 +1,15 @@
 ---
-cmsSlug: de/studio
 title: Unser Studio – EOS CLUB Köln
 seoDescription: >-
-  Entdecke unseren lichtdurchfluteten Raum im Herzen Kölns. Moderne
-  Ausstattung trifft auf warme Atmosphäre.
+  Entdecke unseren lichtdurchfluteten Raum im Herzen Kölns. Moderne Ausstattung
+  trifft auf warme Atmosphäre.
 translationSlug: studio
 blocks:
   - discriminant: HeroBlock
     value:
       name: studio-hero
-      variant: cover
       headline: Unser Studio
+      variant: cover
       subheadline: Ein Ort der Ruhe mitten in Köln
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
@@ -21,17 +20,18 @@ blocks:
         Bewegung, Atmung und Entspannung. Natürliches Licht, hochwertige
         Materialien und durchdachte Akustik schaffen eine Atmosphäre, in der du
         ganz bei dir ankommen kannst.</p>
+      fullBleed: false
   - discriminant: InteractiveListBlock
     value:
       name: studio-spaces-list
       title: Unser Raum
       items:
-        - label: 200m² Studiofläche
+        - label: 200m² Studiofläche Test San
           description: Großzügiger Raum für ungestörte Bewegung
           image: /assets/yoga_studio.jpg
           imageAlt: Yoga Studio Fläche
         - label: Natürliches Licht
-          description: 'Große Fenster für eine helle, einladende Atmosphäre'
+          description: Große Fenster für eine helle, einladende Atmosphäre
           image: /assets/horizontal_yoga_closeup_3.png
           imageAlt: Studio Licht
         - label: Infrarot-Kabinen
@@ -39,4 +39,3 @@ blocks:
           image: /assets/tiled_infrared_therapy_studio.png
           imageAlt: Infrarot Kabine
 ---
-
