@@ -45,6 +45,10 @@ git pull origin main
 echo "==> Installing dependencies..."
 pnpm install --frozen-lockfile
 
+# Clean previous build output before rebuilding to prevent stale manifest references
+echo "==> Cleaning previous build output..."
+rm -rf "$REPO_DIR/dist"
+
 # Build the static site
 echo "==> Building Astro site (NODE_ENV=production)..."
 NODE_ENV=production pnpm run build
