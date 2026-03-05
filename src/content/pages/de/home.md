@@ -12,7 +12,7 @@ blocks:
       subheadline: Energy is our Element
       subBodyText: >-
         Gesundes Leben, keine Selbstoptimierung. Eine Gemeinschaft, in der
-        niemand perfekt sein muss.
+        niemand perfekt sein muss. test
       ctaLabel: Kurse entdecken
       ctaUrl: /kurse
   - discriminant: ContentBlock
