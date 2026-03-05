@@ -10,7 +10,7 @@ blocks:
       name: studio-hero
       headline: EOS CLUB Köln
       variant: cover
-      subheadline: Raum für Hot Yoga, Hot Pilates und moderne Bewegung in Köln
+      subheadline: Der Club für Hot Yoga, Hot Pilates und moderne Bewegung in Köln
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
     value:
@@ -20,6 +20,9 @@ blocks:
         EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes auf
         eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
         großzügige Spiegel – für Energie, Fokus und echte Praxis.t.</p>
+      fullBleed: false
+  - discriminant: ContentBlock
+    value:
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
