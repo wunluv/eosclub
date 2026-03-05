@@ -13,8 +13,9 @@ set -e
 #   dist/client/  — static HTML/assets → served by Nginx from host fs
 #   dist/server/  — Keystatic SSR routes → served by the Astro Node server
 #
-# The Node server runs inside the container on port 4321.
-# Nginx proxies /keystatic/* and /api/keystatic/* to 127.0.0.1:4321.
+# The Node server runs inside the container on port 4322.
+# Nginx proxies /keystatic/* and /api/keystatic/* to eosclub-astro:4322
+# over the shared Docker backend network.
 
 REPO_DIR="/app/repo"
 NODE_SERVER_PID_FILE="/tmp/astro-node-server.pid"
@@ -32,8 +33,8 @@ echo "==> Resetting build-generated files..."
 git checkout -- public/keystatic/ 2>/dev/null || true
 
 # Pull latest from GitHub
-echo "==> Pulling latest changes from origin/feature/keystatic-migration..."
-git pull origin feature/keystatic-migration
+echo "==> Pulling latest changes from origin/main..."
+git pull origin main
 
 # Install / sync dependencies
 echo "==> Installing dependencies..."
@@ -54,13 +55,13 @@ fi
 chmod -R o+rX "$REPO_DIR/dist/client"
 
 # (Re)start the Astro Node server for Keystatic SSR routes
-echo "==> Starting Astro Node server on port 4321..."
+echo "==> Starting Astro Node server on port 4322..."
 if [ -f "$NODE_SERVER_PID_FILE" ]; then
   OLD_PID=$(cat "$NODE_SERVER_PID_FILE")
   kill "$OLD_PID" 2>/dev/null || true
   rm -f "$NODE_SERVER_PID_FILE"
 fi
-HOST=0.0.0.0 PORT=4322 node "$REPO_DIR/dist/server/entry.mjs" &
+NODE_ENV=production HOST=0.0.0.0 PORT=4322 node "$REPO_DIR/dist/server/entry.mjs" &
 echo $! > "$NODE_SERVER_PID_FILE"
 echo "==> Node server started (PID: $(cat $NODE_SERVER_PID_FILE))"
 

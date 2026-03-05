@@ -35,7 +35,7 @@ export default defineConfig({
       noExternal: ['@keystatic/core', '@keystatic/astro', /^@keystar\/ui/],
     },
   },
-  site: 'https://eos-club.de',
+  site: process.env.PUBLIC_SITE_URL || 'https://eos-club.de',
   i18n: {
     defaultLocale: 'de',
     locales: ['de', 'en'],

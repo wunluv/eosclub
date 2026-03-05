@@ -17,7 +17,7 @@ jobs:
           script: |
             # The rebuild script runs inside the Docker container where pnpm,
             # node, git, and rsync are available.
-            # Host path /var/www/public/eos.khanyi.com/repo mounts to /app/repo
+            # Host path /var/www/public/eos.khanyi.com mounts to /app/repo
             # inside the container, so the script is reachable at:
             docker exec eosclub_astro /app/repo/deploy/rebuild.sh
             echo "Deploy complete: $(date)"

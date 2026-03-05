@@ -4,27 +4,37 @@ services:
     container_name: eosclub_astro
     restart: unless-stopped
     working_dir: /app/repo
-    # On first start: install pnpm. Kept alive by the Node server process.
-    # GitHub Actions calls `docker exec eosclub_astro /app/repo/deploy/rebuild.sh`
-    # which builds the site and (re)starts the Node server for Keystatic SSR routes.
+    # On first start: install pnpm.
+    # If a previous build exists, auto-start the Astro Node server so Keystatic
+    # survives container restarts without requiring a manual rebuild.
+    # GitHub Actions still calls:
+    #   docker exec eosclub_astro /app/repo/deploy/rebuild.sh
     command: >
       /bin/sh -c "
         apk add --no-cache git curl rsync &&
         curl -fsSL https://get.pnpm.io/install.sh | ENV=/root/.shrc SHELL=/bin/sh sh - &&
         export PATH=/root/.local/share/pnpm:$$PATH &&
+        if [ -f /app/repo/dist/server/entry.mjs ]; then
+          echo 'Starting existing Astro Node server on port 4322...' &&
+          NODE_ENV=production HOST=0.0.0.0 PORT=4322 node /app/repo/dist/server/entry.mjs &
+          echo $$! > /tmp/astro-node-server.pid;
+        else
+          echo 'No build found at /app/repo/dist/server/entry.mjs. Waiting for first rebuild.sh run.';
+        fi &&
         tail -f /dev/null
       "
     env_file:
       - /var/www/private/eosclub/.env
     ports:
       # Astro Node server — handles /keystatic/* and /api/keystatic/* (SSR)
-      # Nginx (on the host network) proxies these paths to 127.0.0.1:4322
+      # Nginx (Docker container) proxies these paths to eosclub-astro:4322
+      # over the shared backend Docker network
       # Port 4321 is reserved by astro_oneplusone on this host
       - "127.0.0.1:4322:4322"
     volumes:
       # Repo root — git was cloned directly into eos.khanyi.com/ (no /repo subdir).
       # Astro builds to /app/repo/dist/client (static, served by Nginx) and
-      # /app/repo/dist/server (SSR, run by the Node server on port 4321).
+      # /app/repo/dist/server (SSR, run by the Node server on port 4322).
       - /var/www/public/eos.khanyi.com:/app/repo
     networks:
       - backend
@@ -37,5 +47,7 @@ services:
 
 networks:
   backend:
-    name: docker_backend
+    # Match this to the backend network created by the main Docker stack.
+    # Default assumes compose project name "deploy" for deploy/docker-compose.yaml.
+    name: ${EOS_BACKEND_NETWORK:-deploy_backend}
     external: true

@@ -1,15 +1,12 @@
 import { config, fields, collection } from '@keystatic/core';
 
 export default config({
-  storage:
-    process.env.NODE_ENV === 'production'
-      ? {
-          kind: 'github',
-          repo: (process.env.PUBLIC_GITHUB_REPO as any) || 'wunluv/eosclub',
-        }
-      : {
-          kind: 'local',
-        },
+  storage: {
+    kind: 'cloud',
+  },
+  cloud: {
+    project: 'eos-club/eosclub',
+  },
   collections: {
     pages: collection({
       label: 'Pages',

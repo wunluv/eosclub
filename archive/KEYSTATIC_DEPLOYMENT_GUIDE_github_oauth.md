@@ -1,26 +1,17 @@
-# Keystatic Deployment Guide — EOS CLUB (Keystatic Cloud)
+# Keystatic Deployment Guide — EOS CLUB
 
-This guide defines the deployment model for EOS CLUB using **Keystatic Cloud** on the DigitalOcean Docker host.
-
----
-
-## 1) Storage Mode
-
-EOS CLUB uses **Keystatic Cloud** for content storage:
-
-- Authentication and session management handled by Keystatic Cloud (sign in via keystatic.cloud)
-- No GitHub OAuth app required
-- No `KEYSTATIC_GITHUB_CLIENT_ID`, `KEYSTATIC_GITHUB_CLIENT_SECRET`, `KEYSTATIC_SECRET`, or `PUBLIC_GITHUB_REPO` env vars needed
-- Content syncs between keystatic.cloud and your local repo via git
+This guide defines the correct Keystatic deployment model for EOS CLUB on the DigitalOcean Docker host.
 
 ---
 
-## 2) Runtime Model
+## 1) Runtime Model (Authoritative)
 
 EOS CLUB uses Astro hybrid output:
 
 - `dist/client/` = static pages/assets served directly by Nginx
 - `dist/server/` = Astro Node runtime for Keystatic SSR routes
+
+Keystatic is **not** served as a static `try_files` SPA fallback in production.
 
 Correct route model:
 
@@ -29,56 +20,38 @@ Correct route model:
 
 ---
 
-## 3) Environment Variables
+## 2) Environment Variables
 
-Required:
+Required for GitHub mode:
 
 | Variable | Purpose |
 |---|---|
+| `KEYSTATIC_GITHUB_CLIENT_ID` | GitHub OAuth app client ID |
+| `KEYSTATIC_GITHUB_CLIENT_SECRET` | GitHub OAuth app client secret |
+| `KEYSTATIC_SECRET` | Keystatic session/auth secret |
+| `PUBLIC_GITHUB_REPO` | Repo path (e.g. `wunluv/eosclub`) |
 | `PUBLIC_SITE_URL` | Canonical site base URL for build output |
-| `NODE_ENV=production` | Required for production builds |
 
-Optional:
+Optional for server network naming differences:
 
 | Variable | Purpose |
 |---|---|
 | `EOS_BACKEND_NETWORK` | Override shared backend Docker network name (default: `deploy_backend`) |
-| `PUBLIC_GAS_ENDPOINT` | Google Apps Script endpoint for email capture |
 
 ---
 
-## 4) Keystatic Cloud Setup (One-Time)
+## 3) OAuth App Requirements (Exact Match)
 
-1. Create an account at [keystatic.cloud](https://keystatic.cloud)
-2. Create a team (e.g., `eos-club`)
-3. Create a project (e.g., `eosclub`)
-4. Link the project to your GitHub repo: `wunluv/eosclub`
-5. Enable "Allow local development" if you want local dev at `localhost:4321/keystatic`
-6. Add your deployment domains as **Primary URLs** in the project settings:
-   - Staging: `https://staging.prod.khanyi.com`
-   - Production: `https://eos-club.de`
+GitHub OAuth callback URL must exactly match the active domain:
+
+- Staging callback: `https://staging.prod.khanyi.com/api/keystatic/github/callback`
+- Production callback: `https://eos-club.de/api/keystatic/github/callback`
+
+Use separate OAuth apps for staging and production.
 
 ---
 
-## 5) Keystatic Config
-
-In `keystatic.config.ts`, storage is configured as:
-
-```ts
-export default config({
-  storage: {
-    kind: 'cloud',
-  },
-  cloud: {
-    project: 'eos-club/eosclub',
-  },
-  // ... collections
-});
-```
-
----
-
-## 6) Docker + Nginx Networking Rules
+## 4) Docker + Nginx Networking Rules
 
 Nginx runs in Docker and must reach EOS via shared Docker network DNS.
 
@@ -92,7 +65,7 @@ Do **not** use `proxy_pass http://127.0.0.1:4322;` inside nginx container config
 
 ---
 
-## 7) Rebuild and Runtime Lifecycle
+## 5) Rebuild and Runtime Lifecycle
 
 Deployment command:
 
@@ -116,7 +89,7 @@ Container startup also attempts to start runtime automatically if `dist/server/e
 
 ---
 
-## 8) Nginx Requirements (Staging + Production)
+## 6) Nginx Requirements (Staging + Production)
 
 For both `deploy/nginx/eosclub-staging.conf` and `deploy/nginx/eosclub.conf`:
 
@@ -133,16 +106,17 @@ location / {
 
 ---
 
-## 9) Branch Strategy
+## 7) Branch Strategy
 
 Deployment branch is `main` end-to-end:
 
 - CI workflow trigger branch: `main`
 - Rebuild pull target: `main`
+- Keystatic save target branch: repository default (`main`)
 
 ---
 
-## 10) Verification Commands
+## 8) Verification Commands
 
 Run on server:
 
@@ -157,29 +131,14 @@ Expected outcomes:
 
 - Network overlap exists between `nginx` and `eosclub_astro`
 - Both internal fetch commands return HTML (not connection refused)
-- Public `/keystatic` redirects to keystatic.cloud for authentication
+- Public `/keystatic` and callback route are reachable via domain
 
 ---
 
-## 11) Local Development
+## 9) Deprecated Patterns (Do Not Reintroduce)
 
-With "Allow local development" enabled in keystatic.cloud:
-
-```bash
-pnpm dev
-# Visit http://localhost:4321/keystatic
-```
-
-Authentication happens via your keystatic.cloud account (no local OAuth setup needed).
-
----
-
-## 12) Deprecated Patterns (Do Not Use)
-
-- GitHub OAuth storage mode (`kind: 'github'`)
-- Local storage mode (`kind: 'local'`) in production
 - `try_files $uri $uri/ /keystatic/index.html` for Keystatic routes
 - Rooting Nginx at `dist/` for hybrid Astro output
 - Proxying Keystatic from Nginx container to `127.0.0.1`
+- Mixing deployment branches between CI and rebuild script
 
-See `archive/KEYSTATIC_DEPLOYMENT_GUIDE_github_oauth.md` for the old GitHub OAuth setup (deprecated).

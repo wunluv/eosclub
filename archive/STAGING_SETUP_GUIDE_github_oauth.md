@@ -1,9 +1,8 @@
-# EOS CLUB — Staging Deployment Setup Guide (Keystatic Cloud)
+# EOS CLUB — Staging Deployment Setup Guide
 
 **Target URL:** `https://staging.prod.khanyi.com`
 **Server:** DigitalOcean Droplet (shared Docker host)
 **Architecture:** Astro hybrid build (`dist/client` + `dist/server`) with Nginx reverse proxy
-**CMS:** Keystatic Cloud
 
 ---
 
@@ -23,7 +22,7 @@ If older notes conflict with this document, follow this file.
 
 ## Architecture Overview
 
-```
+```text
 GitHub push to main
   -> GitHub Actions (deploy workflow)
   -> SSH to droplet
@@ -32,10 +31,9 @@ GitHub push to main
   -> static site served from /var/www/public/eos.khanyi.com/dist/client
   -> Astro Node server serves Keystatic SSR routes on :4322
   -> Nginx proxies /keystatic and /api/keystatic to eosclub-astro:4322
-  -> Keystatic redirects to keystatic.cloud for authentication
 ```
 
-Keystatic in staging/production runs in **Cloud storage mode** (sign in via keystatic.cloud, no GitHub OAuth).
+Keystatic in staging/production runs in GitHub storage mode (OAuth login + repo commits).
 
 ---
 
@@ -72,9 +70,12 @@ ssh -T git@github.com
 Create `/var/www/private/eosclub/.env`:
 
 ```dotenv
-# Keystatic Cloud — no OAuth secrets needed
-# Auth handled by keystatic.cloud
+# GitHub OAuth app (staging domain)
+KEYSTATIC_GITHUB_CLIENT_ID=<from_github_oauth_app>
+KEYSTATIC_GITHUB_CLIENT_SECRET=<from_github_oauth_app>
+KEYSTATIC_SECRET=<run: openssl rand -hex 32>
 
+PUBLIC_GITHUB_REPO=wunluv/eosclub
 PUBLIC_SITE_URL=https://staging.prod.khanyi.com
 PUBLIC_GAS_ENDPOINT=
 
@@ -90,14 +91,14 @@ sudo chmod 600 /var/www/private/eosclub/.env
 
 ---
 
-## Phase 4 — Keystatic Cloud Setup (One-Time)
+## Phase 4 — GitHub OAuth App (Required)
 
-1. Go to [keystatic.cloud](https://keystatic.cloud) and sign in
-2. Create a team: `eos-club`
-3. Create a project: `eosclub`
-4. Link to GitHub repo: `wunluv/eosclub`
-5. Enable **Allow local development** (for local dev at `localhost:4321/keystatic`)
-6. In project settings, add **Primary URL**: `https://staging.prod.khanyi.com`
+Create OAuth app:
+
+- Homepage URL: `https://staging.prod.khanyi.com`
+- Callback URL: `https://staging.prod.khanyi.com/api/keystatic/github/callback`
+
+Each domain requires exact callback matching. Production must use a separate OAuth app.
 
 ---
 
@@ -172,6 +173,9 @@ Deployment branch is **`main`** end-to-end:
 
 - GitHub Actions deploy workflow triggers on `main`
 - `deploy/rebuild.sh` pulls `origin/main`
+- Keystatic saves should commit to `main`
+
+Do not deploy mixed branch state.
 
 ---
 
@@ -179,9 +183,10 @@ Deployment branch is **`main`** end-to-end:
 
 - [ ] `docker exec nginx wget -qO- http://eosclub-astro:4322/keystatic` returns HTML
 - [ ] `https://staging.prod.khanyi.com` loads
-- [ ] `https://staging.prod.khanyi.com/keystatic` redirects to keystatic.cloud
-- [ ] Sign in with keystatic.cloud account succeeds
-- [ ] Content saves create commits in the repo
+- [ ] `https://staging.prod.khanyi.com/keystatic` loads (no blank screen)
+- [ ] `https://staging.prod.khanyi.com/api/keystatic/github/callback` is reachable
+- [ ] OAuth login roundtrip succeeds
+- [ ] Save in Keystatic creates commit on `main`
 - [ ] Restart `eosclub_astro` and confirm `/keystatic` still works without manual rebuild
 - [ ] Canonical/sitemap URLs on staging point to `https://staging.prod.khanyi.com`
 
@@ -191,10 +196,11 @@ Deployment branch is **`main`** end-to-end:
 
 After staging is verified:
 
-1. In keystatic.cloud project settings, add Primary URL: `https://eos-club.de`
-2. Update `/var/www/private/eosclub/.env` with `PUBLIC_SITE_URL=https://eos-club.de`
-3. Copy `deploy/nginx/eosclub.conf` into Nginx conf directory
-4. Reload Nginx and rebuild:
+1. Create second OAuth app for `https://eos-club.de/api/keystatic/github/callback`
+2. Update `/var/www/private/eosclub/.env` with production OAuth values
+3. Set `PUBLIC_SITE_URL=https://eos-club.de`
+4. Copy `deploy/nginx/eosclub.conf` into Nginx conf directory
+5. Reload Nginx and rebuild:
 
 ```bash
 docker exec nginx nginx -t && docker exec nginx nginx -s reload
@@ -208,13 +214,8 @@ docker exec eosclub_astro /app/repo/deploy/rebuild.sh
 | Symptom | Primary check |
 |---|---|
 | 502 on `/keystatic` | `docker exec nginx wget -qO- http://eosclub-astro:4322/keystatic` |
-| Keystatic not redirecting to cloud | Verify `keystatic.config.ts` has `storage: { kind: 'cloud' }` |
+| OAuth redirect failure | Exact callback URL in GitHub OAuth app |
 | Site 404s | Verify `dist/client/index.html` exists |
+| Keystatic seems local-only | Verify Node process starts with `NODE_ENV=production` |
 | Container rebuild uses wrong code | Verify server branch is `main` + `git pull origin main` succeeds |
 
----
-
-## See Also
-
-- [`deploy/KEYSTATIC_DEPLOYMENT_GUIDE.md`](deploy/KEYSTATIC_DEPLOYMENT_GUIDE.md) — Full deployment reference
-- [`archive/STAGING_SETUP_GUIDE_github_oauth.md`](archive/STAGING_SETUP_GUIDE_github_oauth.md) — Old GitHub OAuth setup (deprecated)
