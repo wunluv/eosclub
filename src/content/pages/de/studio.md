@@ -1,42 +1,52 @@
 ---
-cmsSlug: de/studio
-title: Unser Studio – EOS CLUB Köln
+title: Studio – EOS CLUB Köln
 seoDescription: >-
-  Entdecke unseren lichtdurchfluteten Raum im Herzen Kölns. Moderne Ausstattung
-  trifft auf warme Atmosphäre.
+  Entdecke unser lichtdurchflutetes Studio im Herzen von Köln – der Ort für Hot
+  Yoga, Hot Pilates und moderne Bewegung
 translationSlug: studio
 blocks:
   - discriminant: HeroBlock
     value:
       name: studio-hero
-      headline: Unser Studio
+      headline: EOS CLUB Köln
       variant: cover
-      subheadline: Ein Ort der Ruhe mitten in Köln
+      subheadline: Der Club für Hot Yoga, Hot Pilates und moderne Bewegung in Köln
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
     value:
       name: studio-intro
       body: >-
-        <h2>Dein Rückzugsort</h2><p>Unser Studio bietet dir 200m² Raum für
-        Bewegung, Atmung und Entspannung. Natürliches Licht, hochwertige
-        Materialien und durchdachte Akustik schaffen eine Atmosphäre, in der du
-        ganz bei dir ankommen kannst.</p>
+        <h2>Das EOS Studio</h2><p>Unser lichtdurchfluteter Raum ist das Herz des
+        EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes auf
+        eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
+        großzügige Spiegel – für Energie, Fokus und echte Praxis.t.</p>
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
       name: studio-spaces-list
       title: Unser Raum
       items:
-        - label: 200m² Studiofläche Test San
-          description: Großzügiger Raum für ungestörte Bewegung
+        - label: 200 m² Studiofläche
+          description: >-
+            Großzügiger Raum für Hot Yoga, Hot Pilates und moderne Movement
+            Classes
           image: /assets/yoga_studio.jpg
           imageAlt: Yoga Studio Fläche
         - label: Natürliches Licht
-          description: Große Fenster für eine helle, einladende Atmosphäre
+          description: Große Fensterfronten schaffen eine helle und offene Atmosphäre
           image: /assets/horizontal_yoga_closeup_3.png
-          imageAlt: Studio Licht
-        - label: Infrarot-Kabinen
-          description: Private Wellness-Einheit direkt im Studio
+          imageAlt: Natürliches Licht
+        - label: Infrared Heat
+          description: Moderne Infrarottechnologie für unsere energiegeladenen Hot Classes
           image: /assets/tiled_infrared_therapy_studio.png
-          imageAlt: Infrarot Kabine
+          imageAlt: Infrared Heat
+  - discriminant: ContentBlock
+    value:
+      name: terrasse-intro
+      body: >-
+        <h2>Die EOS Terrasse</h2><p>Unsere großzügige, sonnenbeflutete Terrasse
+        erweitert den EOS CLUB nach draußen. Hier finden Outdoor Yoga und
+        Movement Classes unter freiem Himmel statt – umgeben von Grün und
+        frischer Luft.t.</p>
+      fullBleed: false
 ---
