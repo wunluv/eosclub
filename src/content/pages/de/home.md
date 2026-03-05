@@ -1,17 +1,14 @@
 ---
-cmsSlug: de/home
-title: EOS CLUB – Dein Yoga & Wellness Studio in Köln
+title: EOS CLUB – Dein Yoga & Wellness Studio in Cologne Köln
 seoDescription: >-
-  Entdecke EOS CLUB: Yoga, Pilates, Barre und ganzheitliches Wellness in Köln.
-  Buche jetzt deine erste Klasse.
-ogImage: /assets/yoga_studio.jpg
-translationSlug: home
+  Entdecke EOS CLUB: Yoga, Pilates, Barre und ganzheitliches Wellness in Berlin.
+  Buche jetzt deine erste Klasse. Test
 blocks:
   - discriminant: HeroBlock
     value:
       name: home-hero
-      variant: split-grid
       headline: Practice over promise
+      variant: split-grid
       subheadline: Energy is our Element
       subBodyText: >-
         Gesundes Leben, keine Selbstoptimierung. Eine Gemeinschaft, in der
@@ -21,12 +18,12 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: philosophy-intro
-      fullBleed: true
-      backgroundImage: /assets/bw_horizontal_theme_barre.png
       body: >-
         <p>EOS CLUB ist mehr als ein Studio – es ist ein Ort der Transformation.
         Hier verbinden sich traditionelle Praktiken mit modernem Wellness für
         dein ganzheitliches Wohlbefinden.</p>
+      fullBleed: true
+      backgroundImage: /assets/bw_horizontal_theme_barre.png
   - discriminant: FeatureGridBlock
     value:
       name: pillars-grid
@@ -46,11 +43,11 @@ blocks:
       title: Was wir anbieten
       items:
         - label: Yoga
-          description: 'Vinyasa, Hatha und Yin für alle Level'
+          description: Vinyasa, Hatha und Yin für alle Level
           image: /assets/tiled_yoga_closeup_1.png
           imageAlt: Yoga Praxis
         - label: Pilates
-          description: 'Körpermitte, Kraft und Kontrolle'
+          description: Körpermitte, Kraft und Kontrolle
           image: /assets/tiled_theme_pilates.png
           imageAlt: Pilates Stunde
         - label: Kalisthenics
@@ -70,4 +67,3 @@ blocks:
           image: /assets/theme_barre.png
           imageAlt: Barre Training
 ---
-
