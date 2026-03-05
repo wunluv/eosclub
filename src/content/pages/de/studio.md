@@ -1,16 +1,16 @@
 ---
 title: Studio – EOS CLUB Köln
 seoDescription: >-
-  Entdecke unseren lichtdurchfluteten Raum im Herzen Köln. Moderne Ausstattung
-  trifft auf warme Atmosphäre.
+  Entdecke unser lichtdurchflutetes Studio im Herzen von Köln – der Ort für Hot
+  Yoga, Hot Pilates und moderne Bewegung
 translationSlug: studio
 blocks:
   - discriminant: HeroBlock
     value:
       name: studio-hero
-      headline: Unser Studio
+      headline: EOS CLUB Köln
       variant: cover
-      subheadline: Ein Ort der Ruhe mitten in Berlin
+      subheadline: Raum für Hot Yoga, Hot Pilates und moderne Bewegung in Köln
       backgroundImage: /assets/yoga_studio.jpg
   - discriminant: ContentBlock
     value:
