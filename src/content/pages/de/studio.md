@@ -24,6 +24,11 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: terrasse-intro
+      body: >-
+        <h2>Die EOS Terrasse</h2><p>Unser lichtdurchfluteter Raum ist das Herz
+        des EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes
+        auf eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
+        großzügige Spiegel – für Energie, Fokus und echte Praxis.t.</p>
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
