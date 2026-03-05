@@ -27,6 +27,11 @@ echo "==> Rebuild started at $(date)"
 
 cd "$REPO_DIR" || { echo "Error: Could not enter repo directory $REPO_DIR"; exit 1; }
 
+# Repo may be bind-mounted from host and owned by a different uid (for example
+# deploy user on host while container runs as root). Mark as safe so git pull
+# does not fail with "detected dubious ownership".
+git config --global --add safe.directory "$REPO_DIR" 2>/dev/null || true
+
 # Discard any build-generated files that Astro/Keystatic recreate each build
 # so that git pull never conflicts on them.
 echo "==> Resetting build-generated files..."

@@ -152,3 +152,84 @@ Safe to do — the rebuild script regenerates `dist/` on every run.
 | `deploy/docker-compose.eosclub.yml` | Fixed volume mount path; added port `127.0.0.1:4322:4322` |
 | `deploy/nginx/eosclub-staging.conf` | Root = `dist/client`; proxy `/keystatic` + `/api/keystatic` to port 4322 |
 | `astro.config.mjs` | No code change — added comment explaining hybrid mode architecture |
+
+---
+
+## 2026-03-05 Follow-up — Keystatic Cloud Branch + Deploy Automation Stabilization
+
+### 12. Keystatic UI branch selection can mask valid server fixes
+**Issue:** Keystatic opened with URL path `.../keystatic/branch/main` while testing happened on `feature/keystatic-migration`. This caused apparent schema/content mismatch and confusion about whether server updates were applied.
+
+**Lesson:** Keystatic branch selection is independent from server checkout. Always verify branch in the Keystatic UI dropdown before debugging content schema errors.
+
+---
+
+### 13. Mainline deployment model restored
+**Action:** `feature/keystatic-migration` was merged into `main`, then staging was switched to `main` and rebuilt.
+
+**Result:** Staging now follows the documented deployment contract again:
+- Keystatic edits saved on `main`
+- push to `main`
+- GitHub Actions deploy
+- server rebuild via `deploy/rebuild.sh`
+
+---
+
+### 14. GitHub Actions failures (red crosses) traced to missing SSH host secret
+**Error:** `appleboy/ssh-action` returned `error: missing server host`.
+
+**Root cause:** `DO_HOST` repository secret was missing/empty.
+
+**Fix:** Added/validated all required repo secrets:
+- `DO_HOST`
+- `DO_USER`
+- `DO_SSH_KEY`
+
+---
+
+### 15. Security hardening: moved deploy automation off root user
+**Action:** Created dedicated `deploy` user for GitHub Actions SSH and configured key-based auth.
+
+**Actions taken:**
+- created `deploy` user
+- added deploy keypair
+- stored private key in `DO_SSH_KEY`
+- set `DO_USER=deploy`
+
+---
+
+### 16. Ownership change introduced container git safety block
+**Error:** Inside container git commands failed with:
+`fatal: detected dubious ownership in repository at '/app/repo'`
+
+**Root cause:** Host repo ownership changed to `deploy`, while rebuild runs as container `root`.
+
+**Immediate fix used:**
+```bash
+docker exec eosclub_astro sh -c 'git config --global --add safe.directory /app/repo'
+```
+
+**Permanent fix:** Added safe-directory guard into `deploy/rebuild.sh` before `git pull`:
+```sh
+git config --global --add safe.directory "$REPO_DIR" 2>/dev/null || true
+```
+
+This prevents future rebuild failures after container restarts.
+
+---
+
+### 17. Operational verification pattern (recommended)
+After any Keystatic save:
+1. Confirm commit lands on expected branch in GitHub.
+2. Confirm Actions workflow run status.
+3. Confirm rebuild completed and runtime healthy.
+4. Confirm staging page reflects the change after cache-bypass refresh.
+
+---
+
+## Updated Current State (as of 2026-03-05)
+
+- Keystatic Cloud is functioning.
+- Staging server is aligned to `main`.
+- Deploy workflow can run green with non-root `deploy` user.
+- `deploy/rebuild.sh` now handles git safe-directory when bind-mounted ownership differs.

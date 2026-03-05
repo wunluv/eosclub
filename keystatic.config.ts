@@ -10,7 +10,7 @@ export default config({
   collections: {
     pages: collection({
       label: 'Pages',
-      slugField: 'title',
+      slugField: 'translationSlug',
       path: 'src/content/pages/**',
       format: {
         data: 'yaml',
@@ -20,9 +20,7 @@ export default config({
         contentField: 'content',
       },
       schema: {
-        title: fields.slug({
-          name: { label: 'Page Title' },
-        }),
+        title: fields.text({ label: 'Page Title' }),
         seoDescription: fields.text({ label: 'SEO Description' }),
         ogImage: fields.image({
           label: 'OG Image',
