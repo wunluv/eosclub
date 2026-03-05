@@ -23,6 +23,7 @@ blocks:
       fullBleed: false
   - discriminant: ContentBlock
     value:
+      name: terrasse-intro
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
