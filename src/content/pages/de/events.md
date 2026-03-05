@@ -30,7 +30,7 @@ blocks:
         - question: Wie buche ich einen Workshop?
           answer: >-
             Workshops können direkt über unser Buchungssystem reserviert werden.
-            Früh buchen empfohlen – Plätze sind begrenzt. San Test
+            Früh buchen empfohlen – Plätze sind begrenzt. San Test 3pm test
         - question: Sind die Workshops für Anfänger geeignet?
           answer: >-
             Jeder Workshop gibt Hinweise zum empfohlenen Level. Viele unserer
