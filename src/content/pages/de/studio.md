@@ -1,8 +1,8 @@
 ---
-title: Unser Studio – EOS CLUB Köln
+title: Studio – EOS CLUB Köln
 seoDescription: >-
-  Entdecke unseren lichtdurchfluteten Raum im Herzen Berlins. Moderne
-  Ausstattung trifft auf warme Atmosphäre.
+  Entdecke unseren lichtdurchfluteten Raum im Herzen Köln. Moderne Ausstattung
+  trifft auf warme Atmosphäre.
 translationSlug: studio
 blocks:
   - discriminant: HeroBlock
