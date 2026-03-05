@@ -43,7 +43,7 @@ blocks:
       title: Was wir anbieten
       items:
         - label: Yoga
-          description: Vinyasa, Hatha und Yin für alle Level
+          description: Vinyasa, Hatha und Yin für alle Levels
           image: /assets/tiled_yoga_closeup_1.png
           imageAlt: Yoga Praxis
         - label: Pilates
