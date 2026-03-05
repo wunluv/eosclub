@@ -1,0 +1,34 @@
+name: Merge Keystatic branch to main
+
+# Keystatic Cloud commits content to a branch named after the project
+# (e.g. "eosclub"). This workflow automatically merges it into main
+# so the standard deploy workflow fires and the site rebuilds.
+
+on:
+  push:
+    branches:
+      - eosclub
+
+jobs:
+  merge-to-main:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Merge eosclub into main
+        run: |
+          git checkout main
+          git pull origin main
+          git merge --no-ff origin/eosclub -m "chore: merge content from eosclub branch [auto]"
+          git push origin main
