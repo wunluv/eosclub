@@ -16,7 +16,7 @@ blocks:
     value:
       name: studio-intro
       body: >-
-        <h2>Dein Rückzugsort</h2><p>Unser Studio bietet dir 200m² Raum für
+        <h2>Das EOS Studio</h2><p>Unser Studio bietet dir 200m² Raum für
         Bewegung, Atmung und Entspannung. Natürliches Licht, hochwertige
         Materialien und durchdachte Akustik schaffen eine Atmosphäre, in der du
         ganz bei dir ankommen kannst.</p>
