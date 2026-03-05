@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/team
 title: Unser Team
 seoDescription: Lerne unser Team aus erfahrenen Yoga- und Pilates-Lehrern kennen.
 translationSlug: team

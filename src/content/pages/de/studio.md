@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/studio
 title: Unser Studio – EOS CLUB Berlin
 seoDescription: >-
   Entdecke unseren lichtdurchfluteten Raum im Herzen Berlins. Moderne

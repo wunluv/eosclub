@@ -10,7 +10,7 @@ export default config({
   collections: {
     pages: collection({
       label: 'Pages',
-      slugField: 'translationSlug',
+      slugField: 'cmsSlug',
       path: 'src/content/pages/**',
       format: {
         data: 'yaml',
@@ -20,6 +20,11 @@ export default config({
         contentField: 'content',
       },
       schema: {
+        // cmsSlug stores the full path slug (e.g. "de/home") so that Keystatic
+        // can correctly map the entry to its file without attempting a rename.
+        // This field is used as slugField — it must match the actual file path
+        // relative to src/content/pages/. Editors should not change this value.
+        cmsSlug: fields.text({ label: 'CMS Slug (do not change)' }),
         title: fields.text({ label: 'Page Title' }),
         seoDescription: fields.text({ label: 'SEO Description' }),
         ogImage: fields.image({

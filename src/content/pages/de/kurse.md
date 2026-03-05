@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/kurse
 title: 'Kurse – Yoga, Pilates & mehr'
 seoDescription: >-
   Unser Kursangebot: Vinyasa Yoga, Hatha, Pilates, Barre und mehr. Finde den

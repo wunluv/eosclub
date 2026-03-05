@@ -1,4 +1,5 @@
 ---
+cmsSlug: en/wellness
 title: Wellness & Infrared Therapy
 seoDescription: >-
   Infrared sauna and holistic wellness offerings for regeneration and

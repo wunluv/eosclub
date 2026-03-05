@@ -103,6 +103,7 @@ const blockSchema = z.discriminatedUnion('discriminant', [
 const pages = defineCollection({
   type: 'content',
   schema: z.object({
+    cmsSlug: z.string().optional(),
     title: z.string(),
     seoDescription: z.string(),
     ogImage: z.string().optional(),

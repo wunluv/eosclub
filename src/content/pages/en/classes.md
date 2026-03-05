@@ -1,4 +1,5 @@
 ---
+cmsSlug: en/classes
 title: 'Classes – Yoga, Pilates & more'
 seoDescription: >-
   Our class offerings: Vinyasa Yoga, Hatha, Pilates, Barre and more. Find the

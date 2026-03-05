@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/wellness
 title: Wellness & Infrarot-Therapie
 seoDescription: >-
   Infrarot-Sauna und ganzheitliche Wellness-Angebote für Regeneration und

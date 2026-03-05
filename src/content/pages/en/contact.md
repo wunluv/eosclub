@@ -1,4 +1,5 @@
 ---
+cmsSlug: en/contact
 title: Contact
 seoDescription: 'Contact EOS CLUB Berlin: address, opening hours and directions.'
 translationSlug: kontakt
