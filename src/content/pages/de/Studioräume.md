@@ -1,5 +1,5 @@
 ---
-title: EOS CLU Studioräume
+title: EOS CLUB Studioräume
 seoDescription: >-
   Studioräume in Köln mieten – flexible Räume im EOS CLUB für Workshops,
   Therapie, Personal Training, Kurse und Events.
