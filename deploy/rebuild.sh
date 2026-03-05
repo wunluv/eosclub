@@ -45,10 +45,6 @@ git pull origin main
 echo "==> Installing dependencies..."
 pnpm install --frozen-lockfile
 
-# Clean previous build output before rebuilding to prevent stale manifest references
-echo "==> Cleaning previous build output..."
-rm -rf "$REPO_DIR/dist"
-
 # Build the static site
 echo "==> Building Astro site (NODE_ENV=production)..."
 NODE_ENV=production pnpm run build
@@ -63,7 +59,9 @@ fi
 # (Docker build runs as root; Nginx worker needs read + traverse access)
 chmod -R o+rX "$REPO_DIR/dist/client"
 
-# (Re)start the Astro Node server for Keystatic SSR routes
+# (Re)start the Astro Node server for Keystatic SSR routes.
+# Kill AFTER the build so the new entry.mjs always references the new manifest.
+# The old server may still serve briefly during the build — that is acceptable.
 echo "==> Starting Astro Node server on port 4322..."
 if [ -f "$NODE_SERVER_PID_FILE" ]; then
   OLD_PID=$(cat "$NODE_SERVER_PID_FILE")
