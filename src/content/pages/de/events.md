@@ -1,13 +1,13 @@
 ---
 title: Events & Workshops
-seoDescription: 'Workshops, Teacher Trainings und besondere Events bei EOS CLUB Berlin.'
+seoDescription: Workshops, Teacher Trainings und besondere Events bei EOS CLUB Cologne
 translationSlug: events
 blocks:
   - discriminant: HeroBlock
     value:
       name: events-hero
-      variant: cover
       headline: Events
+      variant: cover
       subheadline: Vertiefe deine Praxis
       backgroundImage: /assets/theme_pilates.png
   - discriminant: ContentBlock
@@ -17,6 +17,7 @@ blocks:
         <h2>Workshops & Specials</h2><p>Regelmäßig bieten wir workshops,
         Retreats und besondere Veranstaltungen an. Bleib informiert und melde
         dich für unseren Newsletter an.</p>
+      fullBleed: false
   - discriminant: BsportCalendar
     value:
       name: events-calendar
@@ -39,4 +40,3 @@ blocks:
             Ab 3 Personen aus einer Gruppe kontaktiere uns für ein individuelles
             Angebot.
 ---
-
