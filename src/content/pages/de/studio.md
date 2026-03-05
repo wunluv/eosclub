@@ -16,10 +16,10 @@ blocks:
     value:
       name: studio-intro
       body: >-
-        <h2>Das EOS Studio</h2><p>Unser Studio bietet dir 200m² Raum für
-        Bewegung, Atmung und Entspannung. Natürliches Licht, hochwertige
-        Materialien und durchdachte Akustik schaffen eine Atmosphäre, in der du
-        ganz bei dir ankommen kannst.</p>
+        <h2>Das EOS Studio</h2><p>Unser lichtdurchfluteter Raum ist das Herz des
+        EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes auf
+        eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
+        großzügige Spiegel – für Energie, Fokus und echte Praxis.t.</p>
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
