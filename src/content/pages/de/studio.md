@@ -47,7 +47,7 @@ blocks:
         <h2>Die EOS Terrasse</h2><p>Unsere großzügige, sonnenbeflutete Terrasse
         erweitert den EOS CLUB nach draußen. Hier finden Outdoor Yoga und
         Movement Classes unter freiem Himmel statt – umgeben von Grün und
-        frischer Luft.t.</p>
+        frischer Luft.</p>
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
