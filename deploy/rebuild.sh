@@ -45,6 +45,12 @@ git pull origin main
 echo "==> Installing dependencies..."
 pnpm install --frozen-lockfile
 
+# Clear Astro/Vite build caches to prevent stale module resolution errors
+# (e.g. "Unable to find the module for src/pages/404.astro") that can occur
+# when rebuilding on top of a previously-failed build.
+echo "==> Clearing build caches (dist/, .astro/)..."
+rm -rf "$REPO_DIR/dist" "$REPO_DIR/.astro"
+
 # Build the static site
 echo "==> Building Astro site (NODE_ENV=production)..."
 NODE_ENV=production pnpm run build
