@@ -19,7 +19,7 @@ blocks:
         <h2>Das EOS Studio</h2><p>Unser lichtdurchfluteter Raum ist das Herz des
         EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes auf
         eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
-        großzügige Spiegel – für Energie, Fokus und echte Praxis.t.</p>
+        großzügige Spiegel – für Energie, Fokus und echte Praxis.</p>
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
