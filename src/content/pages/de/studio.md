@@ -49,4 +49,9 @@ blocks:
         Movement Classes unter freiem Himmel statt – umgeben von Grün und
         frischer Luft.t.</p>
       fullBleed: false
+  - discriminant: InteractiveListBlock
+    value:
+      name: studio-terasse-list
+      items:
+        - {}
 ---
