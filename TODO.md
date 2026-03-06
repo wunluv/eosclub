@@ -51,6 +51,65 @@ The `cmsSlug` field in Keystatic is configured as the `slugField` for the Pages 
 
 ---
 
+### `InteractiveListBlock` Items Saved Empty via Keystatic — Build Breaks on Missing Required Fields
+
+**Date:** 2026-03-06
+**Status:** Partial fix applied (empty item replaced); schema hardening pending
+**Risk:** High — An editor can add an `InteractiveListBlock` item in Keystatic without filling in `label` or `image`, and the block saves an empty `{}` record that fails Astro schema validation at build time
+
+**Problem:**
+[`interactiveListItemSchema`](src/content/config.ts:26) requires `label: z.string()` and `image: z.string()`. The Keystatic item form for `InteractiveListBlock` has no `defaultValue` and no validation. If an editor clicks "Add Item" and saves without filling in the required fields, Keystatic writes `- {}` to the YAML — which Astro rejects with `Required` errors during content sync.
+
+**Incident:** Client added an empty item to the `studio-terasse-list` block on `de/studio.md`, causing the production build to fail with:
+```
+blocks.4.value.items.0.label: Required
+blocks.4.value.items.0.image: Required
+```
+
+**Immediate fix applied:**
+Empty `- {}` item in `src/content/pages/de/studio.md` replaced with valid minimal content:
+```yaml
+- label: Outdoor Yoga
+  description: Yoga und Movement Classes unter freiem Himmel auf unserer Terrasse
+  image: /assets/yoga_studio.jpg
+  imageAlt: EOS Terrasse
+```
+The customer should review and update this placeholder content via Keystatic.
+
+**Recommended Prevention Fix:**
+
+1. In `src/content/config.ts`, make `label` and `image` optional with defaults so empty items degrade gracefully instead of breaking the build:
+   ```typescript
+   // Lines 26-31 — BEFORE:
+   const interactiveListItemSchema = z.object({
+     label: z.string(),
+     description: z.string().optional(),
+     image: z.string(),
+     imageAlt: z.string().optional(),
+   });
+
+   // AFTER:
+   const interactiveListItemSchema = z.object({
+     label: z.string().default(''),
+     description: z.string().optional(),
+     image: z.string().default('/assets/yoga_studio.jpg'),
+     imageAlt: z.string().optional(),
+   });
+   ```
+
+2. In `keystatic.config.ts`, add `defaultValue` and descriptions to the `InteractiveListBlock` item fields to pre-fill and guide editors:
+   ```typescript
+   // Lines 133-140 — add defaultValue to label and image:
+   label: fields.text({ label: 'Label', defaultValue: 'New Item' }),
+   image: fields.text({
+     label: 'Hover Image',
+     description: 'Required. Path to public asset, e.g. /assets/yoga_studio.jpg',
+     defaultValue: '/assets/yoga_studio.jpg',
+   }),
+   ```
+
+---
+
 ### FeatureGridBlock `icon` Field Not Validated in Keystatic — Build Breaks When Left Empty
 
 **Date:** 2026-03-06
@@ -118,3 +177,6 @@ Icons manually restored in `src/content/pages/de/kurse.md`:
 - [ ] Consider restoring wellness.md page content (was lost in rename)
 - [ ] Harden FeatureGridBlock icon field: make `icon` optional with `default('help')` in `src/content/config.ts` line 67
 - [ ] Add `defaultValue: 'help'` and description hint to FeatureGridBlock icon field in `keystatic.config.ts` line 101
+- [ ] Harden InteractiveListBlock: make `label` and `image` optional with defaults in `src/content/config.ts` lines 26-31
+- [ ] Add `defaultValue` and description hints to InteractiveListBlock item fields in `keystatic.config.ts` lines 133-140
+- [ ] Review studio-terasse-list placeholder content — customer should update via Keystatic
