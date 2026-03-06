@@ -52,6 +52,10 @@ blocks:
   - discriminant: InteractiveListBlock
     value:
       name: studio-terasse-list
+      title: Die EOS Terrasse
       items:
-        - {}
+        - label: Outdoor Yoga
+          description: Yoga und Movement Classes unter freiem Himmel auf unserer Terrasse
+          image: /assets/yoga_studio.jpg
+          imageAlt: EOS Terrasse
 ---
