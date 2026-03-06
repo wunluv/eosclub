@@ -1,10 +1,8 @@
 ---
-cmsSlug: de/home
-title: EOS CLUB – Dein Yoga & Wellness Studio in Köln
+title: EOS CLUB – Hot Yoga, Hot Pilates & mehr in Köln.
 seoDescription: >-
-  Entdecke EOS CLUB: Yoga, Pilates, Barre und ganzheitliches Wellness in Köln.
-  Buche jetzt deine erste Klasse.
-ogImage: /assets/yoga_studio.jpg
+  Entdecke EOS CLUB: Hot Yoga, Hot Pilates und mehr in Köln. Buche jetzt deine
+  erste Klasse.
 translationSlug: home
 blocks:
   - discriminant: HeroBlock
@@ -12,19 +10,22 @@ blocks:
       name: home-hero
       headline: Practice over promise
       variant: split-grid
-      subheadline: Energy is our Element
-      subBodyText: >-
-        Gesundes Leben, keine Selbstoptimierung. Eine Gemeinschaft, in der
-        niemand perfekt sein muss. test
+      subheadline: 'Where Energie meets Community '
+      subBodyText: |-
+        Bewegung, Energie und Gemeinschaft.
+        Ein Ort für echte Praxis – nicht für Perfektion.
       ctaLabel: Kurse entdecken
       ctaUrl: /kurse
   - discriminant: ContentBlock
     value:
       name: philosophy-intro
       body: >-
-        <p>EOS CLUB ist mehr als ein Studio – es ist ein Ort der Transformation.
-        Hier verbinden sich traditionelle Praktiken mit modernem Wellness für
-        dein ganzheitliches Wohlbefinden.</p>
+        <p>Hot Yoga. Hot Pilates & mehr.
+
+        Willkommen im EOS CLUB Köln.
+
+        Infrared Classes, Calisthenics, Tai Chi und moderne Bewegung – unter
+        einem Dach..</p>
       fullBleed: true
       backgroundImage: /assets/bw_horizontal_theme_barre.png
   - discriminant: FeatureGridBlock
@@ -32,41 +33,18 @@ blocks:
       name: pillars-grid
       items:
         - icon: heart
-          title: Yoga & Pilates
-          description: Kurse für alle Level – von sanft bis kraftvoll
+          title: Infrared Hot Classes
+          description: >-
+            Hot Yoga & Hot Pilates mit Infrarotwärme für intensive und
+            energiegeladene Sessions
         - icon: sun
-          title: Infrarot-Wellness
-          description: Regeneration und Entspannung durch Wärme
+          title: Movement Classes
+          description: >-
+            Yoga, Pilates, Calisthenics, Mobility & Tai Chi – für Kraft, Balance
+            und Beweglichkeit
         - icon: users
-          title: Community
-          description: Eine warmherzige Gemeinschaft erwartet dich
-  - discriminant: InteractiveListBlock
-    value:
-      name: offerings-list
-      title: Was wir anbieten
-      items:
-        - label: Yoga
-          description: Vinyasa, Hatha und Yin für alle Levels
-          image: /assets/tiled_yoga_closeup_1.png
-          imageAlt: Yoga Praxis
-        - label: Pilates
-          description: Körpermitte, Kraft und Kontrolle
-          image: /assets/tiled_theme_pilates.png
-          imageAlt: Pilates Stunde
-        - label: Kalisthenics
-          description: Funktionale Kraft mit dem eigenen Körpergewicht
-          image: /assets/tiled_theme_calisthenics.png
-          imageAlt: Kalisthenics Training
-        - label: Infrarot-Wellness
-          description: Tiefenwärme und Regeneration
-          image: /assets/tiled_infrared_therapy_studio.png
-          imageAlt: Infrarot Therapie Studio
-        - label: Tai Chi
-          description: Meditation in Bewegung für innere Balance
-          image: /assets/tiled_theme_taichi.png
-          imageAlt: Tai Chi Praxis
-        - label: Barre
-          description: Ballett-inspiriertes Training für Kraft und Haltung
-          image: /assets/theme_barre.png
-          imageAlt: Barre Training
+          title: Outdoor Classes
+          description: >-
+            Yoga und Bewegung auf unserer Terrasse sowie Kurse im Kölner
+            Stadtwald.
 ---
