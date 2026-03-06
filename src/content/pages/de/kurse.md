@@ -22,16 +22,32 @@ blocks:
     value:
       name: classes-grid
       items:
-        - icon: wind
-          title: Vinyasa Flow
-          description: Dynamische Sequenzen, verbunden mit dem Atem
-        - icon: moon
-          title: Hatha Yoga
-          description: Klassische Haltungen, tiefe Entspannung
-        - icon: activity
-          title: Pilates
-          description: Kräftigung der Körpermitte mit Präzision
-        - icon: music
-          title: Barre
-          description: Elegante Bewegung inspiriert vom Ballett
+        - title: Vinyasa Flow
+          description: |-
+            Fließende Sequenzen im Atemrhythmus für Kraft, Mobilität und Fokus
+            Auch als Infrared Format verfügbar
+        - title: Pilates
+          description: |-
+            Präzises Training für Core, Haltung und Stabilität
+            Auch als Infrared Format verfügbar
+        - title: Mobility & Strength
+          description: >-
+            Funktionelles Training zur Verbesserung von Beweglichkeit, Kraft und
+            Körperkontrolle
+
+            Auch als Infrared Format verfügbar
+        - title: Calisthenics Circuit
+          description: >-
+            Zirkeltraining mit dem eigenen Körpergewicht für Kraft, Stabilität
+            und Ausdauer
+        - title: Yin Restore
+          description: >-
+            Ruhige Praxis mit langen Dehnungen für tiefe Entspannung und
+            Regeneration
+
+            Auch als Infrared Format verfügbar
+        - title: Tai Chi
+          description: |-
+            Langsame, fließende Bewegungen für Balance, Fokus und innere Ruhe
+            Auch als Infrared Format verfügbar
 ---
