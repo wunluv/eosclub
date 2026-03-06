@@ -22,31 +22,37 @@ blocks:
     value:
       name: classes-grid
       items:
-        - title: Vinyasa Flow
+        - icon: wind
+          title: Vinyasa Flow
           description: |-
             Fließende Sequenzen im Atemrhythmus für Kraft, Mobilität und Fokus
             Auch als Infrared Format verfügbar
-        - title: Pilates
+        - icon: target
+          title: Pilates
           description: |-
             Präzises Training für Core, Haltung und Stabilität
             Auch als Infrared Format verfügbar
-        - title: Mobility & Strength
+        - icon: activity
+          title: Mobility & Strength
           description: >-
             Funktionelles Training zur Verbesserung von Beweglichkeit, Kraft und
             Körperkontrolle
 
             Auch als Infrared Format verfügbar
-        - title: Calisthenics Circuit
+        - icon: layers
+          title: Calisthenics Circuit
           description: >-
             Zirkeltraining mit dem eigenen Körpergewicht für Kraft, Stabilität
             und Ausdauer
-        - title: Yin Restore
+        - icon: moon
+          title: Yin Restore
           description: >-
             Ruhige Praxis mit langen Dehnungen für tiefe Entspannung und
             Regeneration
 
             Auch als Infrared Format verfügbar
-        - title: Tai Chi
+        - icon: feather
+          title: Tai Chi
           description: |-
             Langsame, fließende Bewegungen für Balance, Fokus und innere Ruhe
             Auch als Infrared Format verfügbar
