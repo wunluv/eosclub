@@ -12,6 +12,13 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+const getIconSvg = (iconName: string) => {
+  const icon = feather.icons[iconName as keyof typeof feather.icons];
+  const fallbackIcon = feather.icons['help-circle'];
+
+  return (icon ?? fallbackIcon).toSvg();
+};
 ---
 
 <section class="py-20 px-4 bg-white">
@@ -19,7 +26,7 @@ const { items } = Astro.props;
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {items.map((item) => (
         <div class="feature-item p-8 rounded-2xl bg-eos-base border border-eos-subtle/50 hover:shadow-xl transition-shadow duration-300">
-          <div class="w-12 h-12 mb-6 text-eos-accent" set:html={feather.icons[item.icon as keyof typeof feather.icons]?.toSvg() || feather.icons.help.toSvg()} />
+          <div class="w-12 h-12 mb-6 text-eos-accent" set:html={getIconSvg(item.icon)} />
           <h3 class="text-xl font-bold mb-4">{item.title}</h3>
           <p class="text-eos-contrast/60 leading-relaxed">{item.description}</p>
         </div>

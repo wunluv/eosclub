@@ -27,7 +27,7 @@ const menuLinks = [
   { de: 'Kurse',    en: 'Classes', dePath: '/kurse',    enPath: '/en/classes' },
   { de: 'Preise',   en: 'Pricing', dePath: '/preise',   enPath: '/en/pricing' },
   { de: 'Events',   en: 'Events',  dePath: '/events',   enPath: '/en/events' },
-  { de: 'Wellness', en: 'Wellness',dePath: '/wellness', enPath: '/en/wellness' },
+  { de: 'B2B', en: 'B2B', dePath: '/b2b', enPath: '/en/b2b' },
   { de: 'Team',     en: 'Team',    dePath: '/team',     enPath: '/en/team' },
 ];
 
@@ -146,7 +146,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
   <!-- ── Full-width logo banner: EOS [mark] CLUB ── -->
   <div class="w-full mt-10 px-4 flex items-center justify-center gap-4 md:gap-8 py-8">
-    <span class="font-serif text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">EOS</span>
+    <span class="font-sans text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">EOS</span>
     <img
       src="/assets/eos-logo-export_bm-white.png"
       alt=""
@@ -155,7 +155,7 @@ const pathname = new URL(Astro.request.url).pathname;
       loading="lazy"
       decoding="async"
     />
-    <span class="font-serif text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">CLUB</span>
+    <span class="font-sans text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">CLUB</span>
   </div>
 
   <!-- ── Bottom bar ── -->

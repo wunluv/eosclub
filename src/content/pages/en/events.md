@@ -17,10 +17,47 @@ blocks:
         <h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats
         and special events. Stay informed and sign up for our newsletter.</p>
       fullBleed: false
-  - discriminant: BsportCalendar
+  - discriminant: FeatureGridBlock
     value:
-      name: events-calendar
-      elementId: bsport-events-calendar
+      name: events-grid
+      items:
+        - icon: calendar
+          title: Workshops
+          description: >-
+            Deep-dive workshops on various topics – from advanced asanas to
+            pranayama. Suitable for all levels.
+        - icon: award
+          title: Teacher Training
+          description: >-
+            Certified training programs for aspiring yoga and Pilates teachers.
+            Become part of the EOS Community.
+        - icon: sun
+          title: Retreats
+          description: >-
+            Weekend retreats and short trips for deep regeneration. Reconnect
+            with yourself.
+        - icon: users
+          title: Special Events
+          description: >-
+            Community events, guest teacher sessions and special happenings
+            throughout the year.
+  - discriminant: FullBleedBlock
+    value:
+      name: events-fullbleed
+      image: /assets/yoga_closeup_1.png
+      altText: EOS CLUB Event Atmosphere
+      minHeight: '60vh'
+      overlayOpacity: '0.4'
+      headline: '
+        '
+      subtext: >-
+        '
+  - discriminant: BookingBlock
+    value:
+      name: events-cta
+      enabled: true
+      bookingUrl: https://backoffice.bsport.io/c/5082/home/
+      label: Book Workshop
   - discriminant: FaqBlock
     value:
       name: events-faq

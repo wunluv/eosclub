@@ -12,24 +12,22 @@ blocks:
       variant: cover
       subheadline: Infrared Yoga, Pilates & Bewegung in Community
       backgroundImage: /assets/theme_yoga.png
-  - discriminant: BookingBlock
+  - discriminant: BsportCalendar
     value:
-      name: classes-booking-cta
-      enabled: true
-      bookingUrl: https://backoffice.bsport.io/c/5082/home/
-      label: Jetzt buchen
+      name: classes-calendar
+      elementId: bsport-classes-calendar
   - discriminant: FeatureGridBlock
     value:
       name: classes-grid
       items:
         - icon: wind
           title: Vinyasa Flow
-          description: |-
+          description: >-
             Fließende Sequenzen im Atemrhythmus für Kraft, Mobilität und Fokus
             Auch als Infrared Format verfügbar
         - icon: target
           title: Pilates
-          description: |-
+          description: >-
             Präzises Training für Core, Haltung und Stabilität
             Auch als Infrared Format verfügbar
         - icon: activity
@@ -37,7 +35,6 @@ blocks:
           description: >-
             Funktionelles Training zur Verbesserung von Beweglichkeit, Kraft und
             Körperkontrolle
-
             Auch als Infrared Format verfügbar
         - icon: layers
           title: Calisthenics Circuit
@@ -49,11 +46,10 @@ blocks:
           description: >-
             Ruhige Praxis mit langen Dehnungen für tiefe Entspannung und
             Regeneration
-
             Auch als Infrared Format verfügbar
         - icon: feather
           title: Tai Chi
-          description: |-
+          description: >-
             Langsame, fließende Bewegungen für Balance, Fokus und innere Ruhe
             Auch als Infrared Format verfügbar
 ---

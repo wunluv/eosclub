@@ -1,6 +1,6 @@
 # Revised Design System Directive: EOS – "The Lucid Dawn"
 
-**Aesthetic Codename:** Lucid Dawn / Mineral Warmth 
+**Aesthetic Codename:** Lucid Dawn / Mineral Warmth
 
 **Core Concept:** The precise moment the sun hits a stone wall. It is grounded (mineral) but active (light). It balances "Medical Clarity" with "Human Warmth."
 
@@ -20,7 +20,8 @@
 * **Action Colors:**
     * *Primary Text/UI:* **Night Slate** (`#1F2933`). Never pure black.
     * *Interactive:* **Clay** (`#C57B57`). Used for links and active states.
-    * *Highlight:* **Morning Light** (`#F0EAD6`). Used for "Spotlight" effects.
+    * *Highlight:* **Vivid Red** (`#F70D0D`). Brand accent for calls-to-action and emphasis.
+    * *Spotlight:* **Morning Light** (`#F0EAD6`). Used for "Spotlight" effects.
 
 
 ### 2. Texture & Surface: "Grain & Spotlight"
@@ -40,7 +41,8 @@
 
 
 
-* **Typeface Pairing:** **Merriweather ** (Headings) + **Geist ** (Body).
+* **Logo Wordmark:** **Geist Sans Bold** (uppercase). Used for EOS CLUB wordmark.
+* **Typeface Pairing:** **Merriweather** (Headings) + **Geist** (Body).
 * **Typesetting Rules:**
     * *Headings:* Sentence case only. No all-caps shouting (per "No motivational shouting" rule).
     * *Body:* High line-height (1.6 to 1.75). The text must "breathe" just like the physical rooms.

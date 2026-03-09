@@ -68,7 +68,7 @@ colors: {
   eos: {
     base:     '#F9F9F7',  // 60% — dominant background (Mineral White)
     contrast: '#2F3A40',  // 30% — secondary / dark elements (Deep Slate)
-    accent:   '#FF2E00',  // 10% — CTA, active, headings (Infrared Red)
+    accent:   '#F70D0D',  // 10% — CTA, active, headings (Infrared Red)
     subtle:   '#E6E5E0',  // secondary backgrounds (Warm Concrete)
     text:     '#1F2933',  // body text (Night Slate)
     zen:      '#09090B',  // inputs, dark surfaces (Zen Black)
@@ -80,7 +80,7 @@ colors: {
 
 ```js
 backgroundImage: {
-  'accent-gradient': 'linear-gradient(135deg, #FF2E00 0%, #FF5C00 100%)',
+  'accent-gradient': 'linear-gradient(135deg, #F70D0D 0%, #FF5C00 100%)',
   'heat-gradient':   'linear-gradient(135deg, #E9B24A 0%, #E8742C 35%, #E6534A 60%, #E24676 78%, #C74A8E 100%)',
   'wash-gradient':   'linear-gradient(135deg, #F2F4C9 0%, #FBF3D6 45%, #F8E1D5 100%)',
 }
@@ -96,7 +96,7 @@ fontFamily: {
 ```
 
 **Constraints:**
-- Never use `#FF2E00` (accent) for body text
+- Never use `#F70D0D` (accent) for body text
 - Never use pure `#000000`
 
 ---

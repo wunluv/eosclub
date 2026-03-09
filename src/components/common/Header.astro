@@ -20,7 +20,7 @@ const navItems = [
   { de: 'Kurse', en: 'Classes', dePath: '/kurse', enPath: '/en/classes' },
   { de: 'Preise', en: 'Pricing', dePath: '/preise', enPath: '/en/pricing' },
   { de: 'Events', en: 'Events', dePath: '/events', enPath: '/en/events' },
-  { de: 'Wellness', en: 'Wellness', dePath: '/wellness', enPath: '/en/wellness' },
+  { de: 'B2B', en: 'B2B', dePath: '/b2b', enPath: '/en/b2b' },
   { de: 'Team', en: 'Team', dePath: '/team', enPath: '/en/team' },
 ];
 
@@ -33,7 +33,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <div class="flex items-center space-x-3">
       <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
         <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
-        <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
+        <span class="font-sans font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
       </a>
     </div>
 
@@ -120,7 +120,7 @@ const pathname = new URL(Astro.request.url).pathname;
   <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
     <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
       <img src="/assets/web-app-manifest-512x512.png" alt="EOS CLUB Logo" class="h-8 w-auto" />
-      <span class="font-serif font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
+      <span class="font-sans font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
     </a>
     <button
       id="mobile-close-button"
@@ -180,7 +180,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
   <!-- Footer Mark -->
   <div class="p-6 border-t border-eos-subtle">
-    <p class="text-xs text-eos-contrast/60 uppercase tracking-widest">EOS CLUB</p>
+    <p class="font-sans font-bold text-xs text-eos-contrast/60 uppercase tracking-widest">EOS CLUB</p>
   </div>
 </aside>
 
