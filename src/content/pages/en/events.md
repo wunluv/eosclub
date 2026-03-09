@@ -1,14 +1,13 @@
 ---
-cmsSlug: en/events
 title: Events & Workshops
-seoDescription: 'Workshops, teacher trainings and special events at EOS CLUB Cologne.'
+seoDescription: Workshops, teacher trainings and special events at EOS CLUB Cologne.
 translationSlug: events
 blocks:
   - discriminant: HeroBlock
     value:
       name: events-hero
+      headline: 'Events Und Retreats '
       variant: cover
-      headline: Events
       subheadline: Deepen your practice
       backgroundImage: /assets/theme_pilates.png
   - discriminant: ContentBlock
@@ -17,6 +16,7 @@ blocks:
       body: >-
         <h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats
         and special events. Stay informed and sign up for our newsletter.</p>
+      fullBleed: false
   - discriminant: BsportCalendar
     value:
       name: events-calendar
@@ -35,6 +35,5 @@ blocks:
             Each workshop provides guidance on the recommended level. Many of
             our events welcome all experience levels.
         - question: Are there group discounts for workshops?
-          answer: 'For groups of 3 or more, contact us for an individual offer.'
+          answer: For groups of 3 or more, contact us for an individual offer.
 ---
-
