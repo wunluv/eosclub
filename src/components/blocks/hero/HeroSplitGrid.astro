@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import { resolveImage } from '../../../lib/image-registry.ts';
+
 interface Props {
   headline: string;
   subheadline?: string;
@@ -20,12 +23,18 @@ const locale = Astro.currentLocale ?? 'de';
 const localizedCtaLabel = ctaLabel || (locale.startsWith('de') ? 'Kurse Buchen' : 'Book Classes');
 const showCta = Boolean(ctaUrl);
 
-  const gridImages = [
+  const rawGridImages = [
     { src: '/assets/tiled_bw_yoga_closeup_1.png',        alt: locale.startsWith('de') ? 'Yoga Nahaufnahme' : 'Yoga closeup' },
     { src: '/assets/tiled_bw_red_light_therapy1.jpeg',   alt: locale.startsWith('de') ? 'Rotlichttherapie' : 'Red light therapy' },
     { src: '/assets/tiled_bw_theme_calisthenics.png',    alt: locale.startsWith('de') ? 'Kalisthenics' : 'Calisthenics' },
     { src: '/assets/tiled_bw_red_light_therapy2.jpeg',   alt: locale.startsWith('de') ? 'Rotlichttherapie' : 'Red light therapy' },
   ];
+
+  // Resolve images using the registry, with fallback to null for missing images
+  const gridImages = rawGridImages.map((img) => ({
+    ...img,
+    optimized: resolveImage(img.src),
+  }));
 
 ---
 
@@ -71,13 +80,29 @@ const showCta = Boolean(ctaUrl);
           <div
             class={`hero-grid-item delay-${i} aspect-square overflow-hidden rounded-2xl`}
           >
-            <img
-              src={img.src}
-              alt={img.alt}
-              class="h-full w-full object-cover img-greyscale"
-              loading={(i === 0 || i === 1) ? 'eager' : 'lazy'}
-              decoding="async"
-            />
+            {img.optimized ? (
+              <Image
+                src={img.optimized}
+                alt={img.alt}
+                width={600}
+                height={600}
+                format="webp"
+                class="h-full w-full object-cover img-greyscale"
+                loading={(i === 0 || i === 1) ? 'eager' : 'lazy'}
+                decoding="async"
+                {...(i === 0 || i === 1 ? { fetchpriority: 'high' } : {})}
+              />
+            ) : (
+              // Fallback: original img tag if image not in registry
+              <img
+                src={img.src}
+                alt={img.alt}
+                class="h-full w-full object-cover img-greyscale"
+                loading={(i === 0 || i === 1) ? 'eager' : 'lazy'}
+                decoding="async"
+                {...(i === 0 || i === 1 ? { fetchpriority: 'high' } : {})}
+              />
+            )}
           </div>
         ))}
       </div>

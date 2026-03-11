@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { resolveImage } from '../../lib/image-registry';
+
 interface Props {
   image: string;
   altText?: string;
@@ -21,14 +25,41 @@ const locale = Astro.currentLocale ?? 'de';
 const isDE = locale.startsWith('de');
 
 const ariaLabel = altText || (isDE ? 'Hintergrundbild' : 'Background image');
+
+// Try to resolve image to optimized ImageMetadata
+const optimizedImage = resolveImage(image);
+const isOptimized = optimizedImage !== null;
+
+// Fallback dimensions for full-bleed backgrounds
+const FULLBLEED_WIDTH = 1920;
+const FULLBLEED_HEIGHT = 1080;
 ---
 
 <div
   class={`w-full relative ${minHeight}`}
-  style={`background-image: url('${image}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
   role="img"
   aria-label={ariaLabel}
 >
+  {isOptimized ? (
+    <Image
+      src={optimizedImage as ImageMetadata}
+      alt=""
+      width={FULLBLEED_WIDTH}
+      height={FULLBLEED_HEIGHT}
+      format="webp"
+      loading="eager"
+      fetchpriority="high"
+      class="absolute inset-0 w-full h-full object-cover"
+      aria-hidden="true"
+    />
+  ) : (
+    <div
+      class="absolute inset-0 w-full h-full"
+      style={`background-image: url('${image}'); background-size: cover; background-position: center; background-repeat: no-repeat;`}
+      aria-hidden="true"
+    ></div>
+  )}
+
   <div class={`absolute inset-0 bg-black ${overlayOpacity}`}></div>
 
   {(headline || subtext) && (
