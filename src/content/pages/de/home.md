@@ -39,34 +39,5 @@ blocks:
         - icon: users
           title: Community
           description: Eine warmherzige Gemeinschaft erwartet dich
-  - discriminant: InteractiveListBlock
-    value:
-      name: offerings-list
-      title: Was wir anbieten
-      items:
-        - label: Yoga
-          description: 'Vinyasa, Hatha und Yin für alle Level'
-          image: /assets/tiled_yoga_closeup_1.png
-          imageAlt: Yoga Praxis
-        - label: Pilates
-          description: 'Körpermitte, Kraft und Kontrolle'
-          image: /assets/tiled_theme_pilates.png
-          imageAlt: Pilates Stunde
-        - label: Kalisthenics
-          description: Funktionale Kraft mit dem eigenen Körpergewicht
-          image: /assets/tiled_theme_calisthenics.png
-          imageAlt: Kalisthenics Training
-        - label: Infrarot-Wellness
-          description: Tiefenwärme und Regeneration
-          image: /assets/tiled_infrared_therapy_studio.png
-          imageAlt: Infrarot Therapie Studio
-        - label: Tai Chi
-          description: Meditation in Bewegung für innere Balance
-          image: /assets/tiled_theme_taichi.png
-          imageAlt: Tai Chi Praxis
-        - label: Barre
-          description: Ballett-inspiriertes Training für Kraft und Haltung
-          image: /assets/theme_barre.png
-          imageAlt: Barre Training
 ---
 
