@@ -1,4 +1,5 @@
 ---
+cmsSlug: en/pricing
 title: Pricing & Memberships
 seoDescription: >-
   Flexible pricing options: single tickets, 10-class passes and flat-rate
@@ -43,4 +44,3 @@ blocks:
             All our classes include level guidance. Write to us if you need
             recommendations for getting started.
 ---
-

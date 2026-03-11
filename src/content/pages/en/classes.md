@@ -35,4 +35,3 @@ blocks:
           title: Barre
           description: Elegant movement inspired by ballet
 ---
-

@@ -1,4 +1,5 @@
 ---
+cmsSlug: de/preise
 title: Preise & Mitgliedschaften
 seoDescription: >-
   Flexible Preisoptionen: Einzeltickets, 10er-Karten und
@@ -47,4 +48,3 @@ blocks:
             Alle unsere Kursangebote beinhalten Level-Hinweise. Schreib uns,
             wenn du Empfehlungen für den Einstieg benötigst.
 ---
-

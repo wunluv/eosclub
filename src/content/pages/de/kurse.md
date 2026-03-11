@@ -1,16 +1,16 @@
 ---
-title: 'Kurse – Yoga, Pilates & mehr'
+title: Kurse – Yoga, Pilates & mehr
 seoDescription: >-
-  Unser Kursangebot: Vinyasa Yoga, Hatha, Pilates, Barre und mehr. Finde den
-  perfekten Kurs für dich.
+  Unser Kursangebot: Vinyasa Yoga, Hatha, Pilates, Calisthenics, Barre und mehr.
+  Finde den perfekten Kurs für dich.
 translationSlug: classes
 blocks:
   - discriminant: HeroBlock
     value:
       name: classes-hero
       variant: cover
-      headline: Unsere Kurse
-      subheadline: 'Finde den Kurs, der zu dir passt'
+      headline: Unsere Formate
+      subheadline: Infrared Yoga, Pilates & Bewegung in Community
       backgroundImage: /assets/theme_yoga.png
   - discriminant: BookingBlock
     value:
@@ -24,15 +24,33 @@ blocks:
       items:
         - icon: wind
           title: Vinyasa Flow
-          description: 'Dynamische Sequenzen, verbunden mit dem Atem'
-        - icon: moon
-          title: Hatha Yoga
-          description: 'Klassische Haltungen, tiefe Entspannung'
-        - icon: activity
+          description: >-
+            Fließende Sequenzen im Atemrhythmus für Kraft, Mobilität und Fokus
+            Auch als Infrared Format verfügbar
+        - icon: target
           title: Pilates
-          description: Kräftigung der Körpermitte mit Präzision
-        - icon: music
-          title: Barre
-          description: Elegante Bewegung inspiriert vom Ballett
+          description: >-
+            Präzises Training für Core, Haltung und Stabilität
+            Auch als Infrared Format verfügbar
+        - icon: activity
+          title: Mobility & Strength
+          description: >-
+            Funktionelles Training zur Verbesserung von Beweglichkeit, Kraft und
+            Körperkontrolle
+        - icon: layers
+          title: Calisthenics Circuit
+          description: >-
+            Zirkeltraining mit dem eigenen Körpergewicht für Kraft, Stabilität
+            und Ausdauer
+        - icon: moon
+          title: Yin Restore
+          description: >-
+            Ruhige Praxis mit langen Dehnungen für tiefe Entspannung und
+            Regeneration
+            Auch als Infrared Format verfügbar
+        - icon: feather
+          title: Tai Chi
+          description: >-
+            Langsame, fließende Bewegungen für Balance, Fokus und innere Ruhe
+            Auch als Infrared Format verfügbar
 ---
-
