@@ -1,5 +1,4 @@
 ---
-cmsSlug: en/classes
 title: 'Classes – Yoga, Pilates & more'
 seoDescription: >-
   Our class offerings: Vinyasa Yoga, Hatha, Pilates, Barre and more. Find the
@@ -13,10 +12,12 @@ blocks:
       headline: Our Classes
       subheadline: Find the class that fits you
       backgroundImage: /assets/theme_yoga.png
-  - discriminant: BsportCalendar
+  - discriminant: BookingBlock
     value:
-      name: classes-calendar
-      elementId: bsport-classes-calendar
+      name: classes-booking-cta
+      enabled: true
+      bookingUrl: 'https://backoffice.bsport.io/c/5082/home/'
+      label: Book Now
   - discriminant: FeatureGridBlock
     value:
       name: classes-grid
@@ -34,3 +35,4 @@ blocks:
           title: Barre
           description: Elegant movement inspired by ballet
 ---
+

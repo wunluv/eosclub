@@ -1,5 +1,4 @@
 ---
-cmsSlug: en/pricing
 title: Pricing & Memberships
 seoDescription: >-
   Flexible pricing options: single tickets, 10-class passes and flat-rate

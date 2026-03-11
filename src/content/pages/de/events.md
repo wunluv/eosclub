@@ -1,7 +1,6 @@
 ---
-cmsSlug: de/events
 title: Events & Workshops
-seoDescription: Workshops, Teacher Trainings und besondere Events bei EOS CLUB Köln.
+seoDescription: Workshops, Teacher Trainings und besondere Events bei EOS CLUB Berlin.
 translationSlug: events
 blocks:
   - discriminant: HeroBlock
@@ -19,47 +18,10 @@ blocks:
         Retreats und besondere Veranstaltungen an. Bleib informiert und melde
         dich für unseren Newsletter an. Test from San. New test 1pm 05/03</p>
       fullBleed: false
-  - discriminant: FeatureGridBlock
+  - discriminant: BsportCalendar
     value:
-      name: events-grid
-      items:
-        - icon: calendar
-          title: Workshops
-          description: >-
-            Vertiefende Einzelworkshops zu verschiedenen Themen – von Advanced
-            Asanas bis Pranayama. Ideal für alle Level.
-        - icon: award
-          title: Teacher Training
-          description: >-
-            Zertifizierte Ausbildungen für angehende Yoga- und Pilates-Lehrer.
-            Werde Teil der EOS Community.
-        - icon: sun
-          title: Retreats
-          description: >-
-            Weekend-Retreats und Kurztrips für tiefe Regeneration. Finde
-            zurück zu dir selbst.
-        - icon: users
-          title: Special Events
-          description: >-
-            Community-Events, Guest Teacher Sessions und besondere
-            Veranstaltungen das ganze Jahr über.
-  - discriminant: FullBleedBlock
-    value:
-      name: events-fullbleed
-      image: /assets/yoga_closeup_1.png
-      altText: EOS CLUB Event Atmosphäre
-      minHeight: '60vh'
-      overlayOpacity: '0.4'
-      headline: '
-        '
-      subtext: >-
-        '
-  - discriminant: BookingBlock
-    value:
-      name: events-cta
-      enabled: true
-      bookingUrl: https://backoffice.bsport.io/c/5082/home/
-      label: Jetzt Workshop buchen
+      name: events-calendar
+      elementId: bsport-events-calendar
   - discriminant: FaqBlock
     value:
       name: events-faq

@@ -64,7 +64,7 @@ const bookingBlockSchema = z.object({
 const featureGridBlockSchema = z.object({
   name: z.string().optional(),
   items: z.array(z.object({
-    icon: z.string(),
+    icon: z.string().optional(),
     title: z.string(),
     description: z.string(),
   })),

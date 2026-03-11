@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         'serif': ['Merriweather', 'serif'],
         'sans':  ['Geist Sans', 'Inter', 'sans-serif'],
+        'geist': ['Geist Sans', 'Inter', 'sans-serif'],
       },
     },
   },

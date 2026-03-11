@@ -50,7 +50,7 @@ const pathname = new URL(Astro.request.url).pathname;
           <a
             href={path}
             data-nav-link
-            class={`text-sm font-bold uppercase tracking-widest text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 relative py-2 ${isActive ? 'is-active' : ''}`}
+            class={`text-sm font-geist font-bold uppercase tracking-widest text-eos-accent transition-colors duration-200 hover:text-eos-accent/70 relative py-2 ${isActive ? 'is-active' : ''}`}
           >
             {isEn ? item.en : item.de}
           </a>
@@ -142,7 +142,7 @@ const pathname = new URL(Astro.request.url).pathname;
         return (
           <a
             href={path}
-            class={`mobile-nav-item w-full text-center py-3 text-eos-accent font-bold uppercase tracking-widest hover:bg-eos-base rounded-xl transition-colors px-4 ${isActive ? 'bg-eos-base' : ''}`}
+            class={`mobile-nav-item w-full text-center py-3 text-eos-accent font-geist font-bold uppercase tracking-widest hover:bg-eos-base rounded-xl transition-colors px-4 ${isActive ? 'bg-eos-base' : ''}`}
           >
             {isEn ? item.en : item.de}
           </a>

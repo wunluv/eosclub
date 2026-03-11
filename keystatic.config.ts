@@ -98,7 +98,7 @@ export default config({
                 name: fields.text({ label: 'Section Name (internal reference)' }),
                 items: fields.array(
                   fields.object({
-                    icon: fields.text({ label: 'Feather Icon Name' }),
+                    icon: fields.text({ label: 'Feather Icon Name', description: 'Optional: leave blank to hide icon' }),
                     title: fields.text({ label: 'Title' }),
                     description: fields.text({ label: 'Description', multiline: true }),
                   }),

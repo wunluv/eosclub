@@ -28,20 +28,15 @@ blocks:
     value:
       name: b2b-target-segments
       items:
-        - icon: user
-          title: Freie Therapeut:innen
+        - title: Freie Therapeut:innen
           description: Massage, Physiotherapie, Kosmetik
-        - icon: heart
-          title: Gesundheitspraktiker:innen
+        - title: Gesundheitspraktiker:innen
           description: Osteopathie, Akupunktur, Heilpraxis
-        - icon: activity
-          title: Personal Trainer:innen
+        - title: Personal Trainer:innen
           description: 1:1 Sessions und Small Groups
-        - icon: star
-          title: Wellness-Startups
+        - title: Wellness-Startups
           description: Testphase vor eigenem Standort
-        - icon: home
-          title: Corporate Wellness
+        - title: Corporate Wellness
           description: Mitarbeitenden-Angebote
   - discriminant: ContentBlock
     value:
@@ -57,21 +52,17 @@ blocks:
     value:
       name: b2b-included-value
       items:
-        - icon: sun
-          title: EOS CLUB Atmosphäre
+        - title: EOS CLUB Atmosphäre
           description: Hochwertiges Ambiente für deine Kund:innen
-        - icon: log-in
-          title: Professionelles Umfeld
+        - title: Professionelles Umfeld
           description: Reception-ready, professioneller Empfang
-        - icon: wifi
-          title: Infrastruktur
+        - title: Infrastruktur
           description: Duschen, WLAN, Gemeinschaftsbereiche
-        - icon: mic
-          title: Cross-Promotion
+        - title: Cross-Promotion
           description: Optionale Sichtbarkeit im EOS CLUB Umfeld
   - discriminant: BookingBlock
     value:
       name: b2b-cta
-      label: Räume anfragen
-      bookingUrl: /kontakt
+      label: Jetzt WhatsAppen
+      bookingUrl: https://wa.me/491726955550?text=Ich%20bin%20interessiert%20an%20der%20Raumvermietung
 ---

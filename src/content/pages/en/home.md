@@ -1,30 +1,31 @@
 ---
-title: EOS CLUB – Your Wellness Club & Community in Cologne
+title: EOS CLUB – Your Yoga & Wellness Studio in Berlin
 seoDescription: >-
-  Discover EOS CLUB: Yoga, Pilates, Barre and holistic wellness in Cologne. Book
+  Discover EOS CLUB: Yoga, Pilates, Barre and holistic wellness in Berlin. Book
   your first class now.
+ogImage: /assets/yoga_studio.jpg
 translationSlug: home
 blocks:
   - discriminant: HeroBlock
     value:
-      name: home-hero
       headline: Practice over promise
-      variant: split-grid
       subheadline: Energy is our Element
       subBodyText: >-
         Healthy living, not self-optimization. A community where nobody has to
         be perfect.
       ctaLabel: Explore Classes
       ctaUrl: /en/classes
+      variant: split-grid
+      name: home-hero
   - discriminant: ContentBlock
     value:
       name: philosophy-intro
+      fullBleed: true
+      backgroundImage: /assets/bw_horizontal_theme_barre.png
       body: >
         <p>EOS CLUB is more than a studio – it's a place of transformation.
         Here, traditional practices meet modern wellness for your holistic
         well-being.</p>
-      fullBleed: true
-      backgroundImage: /assets/bw_horizontal_theme_barre.png
   - discriminant: FeatureGridBlock
     value:
       name: pillars-grid
@@ -44,11 +45,11 @@ blocks:
       title: What we offer
       items:
         - label: Yoga
-          description: Vinyasa, Hatha and Yin for all levels. Yogis & Yoginis
+          description: 'Vinyasa, Hatha and Yin for all levels'
           image: /assets/tiled_yoga_closeup_1.png
           imageAlt: Yoga practice
         - label: Pilates
-          description: Core, strength and control
+          description: 'Core, strength and control'
           image: /assets/tiled_theme_pilates.png
           imageAlt: Pilates class
         - label: Calisthenics
@@ -68,3 +69,4 @@ blocks:
           image: /assets/theme_barre.png
           imageAlt: Barre training
 ---
+

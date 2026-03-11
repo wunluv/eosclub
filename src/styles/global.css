@@ -8,12 +8,12 @@
   }
 
   body {
-    @apply font-sans bg-eos-base text-eos-text antialiased;
+    @apply font-serif bg-white text-eos-text antialiased;
   }
 
-  /* ALL headings: serif face + Infrared Red */
+  /* ALL headings: sans-serif face (Geist) + Infrared Red + uppercase */
   h1, h2, h3, h4, h5, h6, .font-display {
-    @apply font-serif text-eos-accent;
+    @apply font-sans text-eos-accent uppercase;
   }
 
   /* Exception pattern: headings on dark backgrounds use white */
@@ -132,10 +132,46 @@
   .img-greyscale {
     @apply grayscale transition-all duration-500 hover:grayscale-0;
   }
+
+  /* --- Feature Grid Gradient Hover --- */
+  .feature-item {
+    transition: background 0.4s ease, box-shadow 0.3s ease;
+  }
+
+  /* Different gradient offsets for each item using nth-child */
+  .feature-item:nth-child(6n+1):hover {
+    background: linear-gradient(135deg, #F70D0D 0%, #FF5C00 100%);
+  }
+  .feature-item:nth-child(6n+2):hover {
+    background: linear-gradient(135deg, #E9B24A 0%, #E8742C 35%, #E6534A 60%, #E24676 78%, #C74A8E 100%);
+  }
+  .feature-item:nth-child(6n+3):hover {
+    background: linear-gradient(135deg, #F2F4C9 0%, #FBF3D6 45%, #F8E1D5 100%);
+  }
+  .feature-item:nth-child(6n+4):hover {
+    background: linear-gradient(120deg, #F70D0D 0%, #FF5C00 50%, #E9B24A 100%);
+  }
+  .feature-item:nth-child(6n+5):hover {
+    background: linear-gradient(150deg, #E6534A 0%, #E24676 50%, #C74A8E 100%);
+  }
+  .feature-item:nth-child(6n+6):hover {
+    background: linear-gradient(100deg, #F2F4C9 0%, #E9B24A 50%, #E8742C 100%);
+  }
+
+  /* Text color adjustment on gradient hover */
+  .feature-item:nth-child(6n+1):hover h3,
+  .feature-item:nth-child(6n+1):hover p,
+  .feature-item:nth-child(6n+4):hover h3,
+  .feature-item:nth-child(6n+4):hover p,
+  .feature-item:nth-child(6n+5):hover h3,
+  .feature-item:nth-child(6n+5):hover p {
+    @apply text-white;
+  }
 }
 
 /* Reduced motion overrides */
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; }
   .sidebar-transition { transition: none !important; }
+  .feature-item { transition: none !important; }
 }

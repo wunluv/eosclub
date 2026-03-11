@@ -1,5 +1,4 @@
 ---
-cmsSlug: de/preise
 title: Preise & Mitgliedschaften
 seoDescription: >-
   Flexible Preisoptionen: Einzeltickets, 10er-Karten und

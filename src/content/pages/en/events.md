@@ -1,13 +1,13 @@
 ---
 title: Events & Workshops
-seoDescription: Workshops, teacher trainings and special events at EOS CLUB Cologne.
+seoDescription: 'Workshops, teacher trainings and special events at EOS CLUB Berlin.'
 translationSlug: events
 blocks:
   - discriminant: HeroBlock
     value:
       name: events-hero
-      headline: 'Events Und Retreats '
       variant: cover
+      headline: Events
       subheadline: Deepen your practice
       backgroundImage: /assets/theme_pilates.png
   - discriminant: ContentBlock
@@ -16,48 +16,10 @@ blocks:
       body: >-
         <h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats
         and special events. Stay informed and sign up for our newsletter.</p>
-      fullBleed: false
-  - discriminant: FeatureGridBlock
+  - discriminant: BsportCalendar
     value:
-      name: events-grid
-      items:
-        - icon: calendar
-          title: Workshops
-          description: >-
-            Deep-dive workshops on various topics – from advanced asanas to
-            pranayama. Suitable for all levels.
-        - icon: award
-          title: Teacher Training
-          description: >-
-            Certified training programs for aspiring yoga and Pilates teachers.
-            Become part of the EOS Community.
-        - icon: sun
-          title: Retreats
-          description: >-
-            Weekend retreats and short trips for deep regeneration. Reconnect
-            with yourself.
-        - icon: users
-          title: Special Events
-          description: >-
-            Community events, guest teacher sessions and special happenings
-            throughout the year.
-  - discriminant: FullBleedBlock
-    value:
-      name: events-fullbleed
-      image: /assets/yoga_closeup_1.png
-      altText: EOS CLUB Event Atmosphere
-      minHeight: '60vh'
-      overlayOpacity: '0.4'
-      headline: '
-        '
-      subtext: >-
-        '
-  - discriminant: BookingBlock
-    value:
-      name: events-cta
-      enabled: true
-      bookingUrl: https://backoffice.bsport.io/c/5082/home/
-      label: Book Workshop
+      name: events-calendar
+      elementId: bsport-events-calendar
   - discriminant: FaqBlock
     value:
       name: events-faq
@@ -72,5 +34,6 @@ blocks:
             Each workshop provides guidance on the recommended level. Many of
             our events welcome all experience levels.
         - question: Are there group discounts for workshops?
-          answer: For groups of 3 or more, contact us for an individual offer.
+          answer: 'For groups of 3 or more, contact us for an individual offer.'
 ---
+

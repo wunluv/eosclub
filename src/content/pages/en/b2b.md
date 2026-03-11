@@ -29,20 +29,15 @@ blocks:
     value:
       name: b2b-target-segments
       items:
-        - icon: user
-          title: Freelance Therapists
+        - title: Freelance Therapists
           description: Massage, physiotherapy, aesthetics
-        - icon: heart
-          title: Health Practitioners
+        - title: Health Practitioners
           description: Osteopathy, acupuncture, naturopathy
-        - icon: activity
-          title: Personal Trainers
+        - title: Personal Trainers
           description: 1:1 sessions and small groups
-        - icon: star
-          title: Wellness Startups
+        - title: Wellness Startups
           description: Testing demand before opening own location
-        - icon: home
-          title: Corporate Wellness
+        - title: Corporate Wellness
           description: Employee wellness sessions
   - discriminant: ContentBlock
     value:
@@ -58,21 +53,17 @@ blocks:
     value:
       name: b2b-included-value
       items:
-        - icon: sun
-          title: EOS CLUB Atmosphere
+        - title: EOS CLUB Atmosphere
           description: Premium ambiance for your clients
-        - icon: log-in
-          title: Professional Setting
+        - title: Professional Setting
           description: Reception-ready, professional environment
-        - icon: wifi
-          title: Infrastructure
+        - title: Infrastructure
           description: Showers, WiFi, shared facilities
-        - icon: mic
-          title: Cross-Promotion
+        - title: Cross-Promotion
           description: Optional visibility within EOS CLUB ecosystem
   - discriminant: BookingBlock
     value:
       name: b2b-cta
       label: Inquire Now
-      bookingUrl: /en/contact
+      bookingUrl: https://wa.me/491726955550?text=I%27m%20interested%20in%20room%20rental
 ---
