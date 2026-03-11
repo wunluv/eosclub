@@ -144,8 +144,15 @@ const pathname = new URL(Astro.request.url).pathname;
     </div>
   </div>
 
-  <!-- ── Full-width logo banner: EOS CLUB ── -->
-  <div class="w-full mt-10 px-4 flex items-center justify-center gap-4 md:gap-8 py-8">
+  <!-- ── Full-width logo banner: EOS [logo] CLUB ── -->
+  <div class="w-full mt-10 px-4 flex flex-col items-center justify-center gap-4 md:gap-8 py-8">
+    <img
+      src="/assets/eos-logo-export_bm-white.png"
+      alt="EOS CLUB"
+      class="h-14 md:h-20 lg:h-24 xl:h-28 w-auto object-contain opacity-90"
+      loading="lazy"
+      decoding="async"
+    />
     <span class="font-geist font-black text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">EOS CLUB</span>
   </div>
 
