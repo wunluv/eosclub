@@ -46,19 +46,8 @@ const COMPANY_ID = 5082;
 ---
 
 <Fragment slot="head">
-  <!-- bsport CDN loader: guarded against duplicate inserts -->
-  <script id="insert-bsport-widget-cdn" is:inline>
-    !function (b, s, p) {
-      typeof window.BsportWidget === "undefined" &&
-        !document.getElementById("bsport-widget-cdn") &&
-        (function () {
-          var m = b.createElement(s);
-          m.id = "bsport-widget-cdn";
-          m.src = p;
-          b.getElementsByTagName("head")[0].appendChild(m);
-        })();
-    }(document, "script", "https://cdn.bsport.io/scripts/widget.js");
-  </script>
+  <!-- bsport CDN loader: deferred to reduce TBT -->
+  <script id="bsport-widget-cdn" src="https://cdn.bsport.io/scripts/widget.js" defer is:inline></script>
 </Fragment>
 
 <!-- Mount target -->
