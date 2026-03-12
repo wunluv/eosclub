@@ -47,11 +47,10 @@ const DESKTOP_HEIGHT = 600;
             data-index={i}
             aria-describedby={`item-desc-${i}`}
           >
-            <div class="flex items-baseline justify-between">
+            <div class="flex items-baseline">
               <span class="text-xl lg:text-2xl font-geist font-bold uppercase text-eos-accent group-hover:text-eos-base transition-colors duration-200">
                 {item.label}
               </span>
-              <span class="text-eos-subtle text-sm ml-4 tabular-nums group-hover:text-eos-base/60">{String(i + 1).padStart(2, '0')}</span>
             </div>
             {item.description && (
               <div class="overflow-hidden max-h-0 group-hover:max-h-40 transition-all duration-500 ease-in-out">

@@ -63,7 +63,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
         <!-- Menu -->
         <nav>
-          <h3 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+          <h3 class="text-[10px] font-geist font-bold uppercase tracking-widest text-white/40 mb-4">
             {isEn ? 'Menu' : 'Menü'}
           </h3>
           <ul class="space-y-2.5">
@@ -88,7 +88,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
         <!-- Social / Links -->
         <nav>
-          <h3 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">Links</h3>
+          <h3 class="text-[10px] font-geist font-bold uppercase tracking-widest text-white/40 mb-4">Links</h3>
           <ul class="space-y-2.5">
             {socialLinks.map((link) => (
               <li>
@@ -107,7 +107,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
         <!-- Legal -->
         <nav>
-          <h3 class="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-4">
+          <h3 class="text-[10px] font-geist font-bold uppercase tracking-widest text-white/40 mb-4">
             {isEn ? 'Legal' : 'Rechtliches'}
           </h3>
           <ul class="space-y-2.5">
@@ -131,7 +131,7 @@ const pathname = new URL(Astro.request.url).pathname;
 
       <!-- RIGHT: email signup -->
       <div class="flex flex-col justify-start gap-6">
-        <p class="text-sm text-white/70 font-sans text-center">
+        <p class="font-geist text-sm text-white/70 text-center">
           {isEn
             ? 'Join the club and benefit from our welcome offers'
             : 'Werde Mitglied und profitiere von unseren Willkommensangeboten'}
@@ -147,20 +147,26 @@ const pathname = new URL(Astro.request.url).pathname;
   <!-- ── Full-width logo banner: EOS [logo] CLUB ── -->
   <div class="w-full mt-10 px-4 flex flex-col items-center justify-center gap-4 md:gap-8 py-8">
     <img
-      src="/assets/eos-logo-export_bm-white.png"
+      src="/assets/eos-logo-export_wb-white.png"
       alt="EOS CLUB"
       class="h-14 md:h-20 lg:h-24 xl:h-28 w-auto object-contain opacity-90"
       loading="lazy"
       decoding="async"
+      srcset="
+        /assets/eos-logo-export_wb-white.png 320w,
+        /assets/eos-logo-export_wb-white.png 640w,
+        /assets/eos-logo-export_wb-white.png 1024w,
+        /assets/eos-logo-export_wb-white.png 1920w
+      "
+      sizes="(max-width: 640px) 160px, (max-width: 1024px) 200px, (max-width: 1280px) 240px, 280px"
     />
-    <span class="font-geist font-black text-4xl md:text-6xl lg:text-7xl xl:text-8xl tracking-[0.25em] text-white/90 select-none leading-none">EOS CLUB</span>
   </div>
 
   <!-- ── Bottom bar ── -->
   <div>
     <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
       <!-- Left: copyright + address -->
-      <div class="flex flex-col items-center sm:items-start gap-1 text-xs text-white/40">
+      <div class="flex flex-col items-center sm:items-start gap-1 text-xs text-white/40 font-geist">
         <p>© {currentYear} EOS CLUB. {isEn ? 'All rights reserved.' : 'Alle Rechte vorbehalten.'}</p>
         <a
           href="https://www.google.com/maps/place/Eupener+Str.+84,+50933+K%C3%B6ln"
@@ -189,7 +195,7 @@ const pathname = new URL(Astro.request.url).pathname;
       <!-- Right: phone -->
       <a
         href="tel:+491726955550"
-        class="text-xs text-white/40 hover:text-white transition-colors"
+        class="text-xs text-white/40 font-geist hover:text-white transition-colors"
       >
         +49 172 6955550
       </a>

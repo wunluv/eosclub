@@ -21,6 +21,9 @@ import horizontal_yoga_closeup_3 from '../assets/horizontal_yoga_closeup_3.webp'
 import yoga_closeup_1 from '../assets/yoga_closeup_1.webp';
 import yoga_closeup_2 from '../assets/yoga_closeup_2.webp';
 import yoga_closeup_3 from '../assets/yoga_closeup_3.webp';
+import bw_horizontal_theme_barre from '../assets/bw_horizontal_theme_barre.webp';
+import tiled_theme_calisthenics from '../assets/tiled_theme_calisthenics.webp';
+import theme_calisthenics from '../assets/theme_calisthenics.webp';
 
 // Registry mapping legacy public paths to imported ImageMetadata
 const IMAGE_REGISTRY: Record<string, ImageMetadata> = {
@@ -44,6 +47,9 @@ const IMAGE_REGISTRY: Record<string, ImageMetadata> = {
   '/assets/yoga_closeup_1.png': yoga_closeup_1,
   '/assets/yoga_closeup_2.png': yoga_closeup_2,
   '/assets/yoga_closeup_3.png': yoga_closeup_3,
+  '/assets/bw_horizontal_theme_barre.png': bw_horizontal_theme_barre,
+  '/assets/tiled_theme_calisthenics.png': tiled_theme_calisthenics,
+  '/assets/theme_calisthenics.png': theme_calisthenics,
 };
 
 /**
