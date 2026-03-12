@@ -14,10 +14,11 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: team-intro
-      body: >-
-        <h2>The People Behind EOS</h2><p>Our team consists of certified teachers
+      body: |-
+        ## The People Behind EOS
+        Our team consists of certified teachers
         with years of experience. Each brings a unique perspective and passion
-        for movement and well-being.</p>
+        for movement and well-being.
   - discriminant: FeatureGridBlock
     value:
       name: team-expertise

@@ -69,6 +69,9 @@ translationSlug: kurse
 | `events.md` | `events.md` |
 | `wellness.md` | `wellness.md` |
 | `team.md` | `team.md` |
+| `impressum.md` | `imprint.md` |
+| `datenschutz.md` | `privacy.md` |
+| `agb.md` | `terms.md` |
 
 ### LangSwitch Component
 The [`LangSwitch.astro`](src/components/common/LangSwitch.astro) component:
@@ -85,13 +88,19 @@ The [`LangSwitch.astro`](src/components/common/LangSwitch.astro) component:
 ```
 src/content/pages/
 ├── de/
-│   ├── home.md       → renders at /
-│   ├── kurse.md      → renders at /kurse
-│   ├── studio.md     → renders at /studio
+│   ├── home.md          → renders at /
+│   ├── kurse.md         → renders at /kurse
+│   ├── studio.md        → renders at /studio
+│   ├── impressum.md     → renders at /impressum
+│   ├── datenschutz.md   → renders at /datenschutz
+│   ├── agb.md           → renders at /agb
 │   └── ...
 └── en/
-    ├── home.md        → renders at /en
-    ├── classes.md     → renders at /en/classes
+    ├── home.md           → renders at /en
+    ├── classes.md        → renders at /en/classes
+    ├── imprint.md        → renders at /en/imprint
+    ├── privacy.md        → renders at /en/privacy
+    ├── terms.md          → renders at /en/terms
     └── ...
 ```
 
@@ -112,6 +121,7 @@ blocks: []              # array of block objects
 2. English home is rendered by `src/pages/en/[...slug].astro` from `en/home.md` with `slug === 'home'` mapped to `/en`.
 3. The EN catch-all route includes backward compatibility for legacy `_template` blocks.
 4. The DE routes currently dispatch only the modern `discriminant + value` shape.
+5. All 6 legal pages (impressum, datenschutz, agb / imprint, privacy, terms) are served by the content collection catch-all routes — there are no static `.astro` files for legal pages.
 
 ---
 
@@ -132,15 +142,16 @@ switch (block.discriminant) {
 | Block | Purpose |
 |-------|---------|
 | `HeroBlock` | Page hero with 3 variants: `split-grid`, `cover`, `minimal` |
-| `ContentBlock` | Rich text body with optional full-bleed layout |
+| `ContentBlock` | Markdown body (string, rendered via `set:html`) with optional full-bleed layout |
 | `BookingBlock` | CTA linking to bsport booking |
 | `FeatureGridBlock` | Icon + title + description grid |
 | `FullBleedBlock` | Edge-to-edge background image |
 | `InteractiveListBlock` | List with hover-reveal images (GSAP) |
-| `FaqBlock` | Accordion FAQ |
+| `FaqBlock` | Accordion FAQ — `answer` is Markdown string rendered via `set:html` |
 | `BsportCalendar` | bsport calendar widget |
 | `BsportPasses` | bsport passes widget |
 | `BsportSubscription` | bsport subscription widget |
+| `LegalPageBlock` | Legal page sections — each has `level`, `title`, `content` (Markdown string) |
 
 ---
 
@@ -212,8 +223,8 @@ grep -r "name: philosophy-intro" src/content/
 - Production: `https://eos-club.de/keystatic`
 
 ### Storage Mode
-- **Development**: Local filesystem (`keystatic.config.ts` → `kind: 'local'`)
-- **Production**: GitHub-backed (`kind: 'github'`)
+- **Development + Production**: Keystatic Cloud (`kind: 'cloud'`, project `eos-club/eosclub`)
+- Note: previously used `kind: 'local'` in dev and `kind: 'github'` in prod — now unified via Keystatic Cloud
 
 ### Content Path
 `src/content/pages/**` - all markdown files under this path are editable

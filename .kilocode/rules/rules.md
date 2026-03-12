@@ -24,7 +24,9 @@ Astro v5 SSG | Tailwind CSS v3 | GSAP v3.14.2 | Keystatic CMS | bsport SDK (CDN)
 | `wellness.md` | `wellness.md` | `/wellness` | `/en/wellness` |
 | `team.md` | `team.md` | `/team` | `/en/team` |
 | `kontakt.md` | `contact.md` | `/kontakt` | `/en/contact` |
-| `impressum.md` | _(none)_ | `/impressum` | — |
+| `impressum.md` | `imprint.md` | `/impressum` | `/en/imprint` |
+| `datenschutz.md` | `privacy.md` | `/datenschutz` | `/en/privacy` |
+| `agb.md` | `terms.md` | `/agb` | `/en/terms` |
 
 `translationSlug` in a DE file = the EN filename slug (without `.md`), and vice versa.
 
@@ -68,15 +70,16 @@ Skipping any of these 6 steps will cause a broken page or missing CMS field.
 | Block | `discriminant` | Purpose |
 |-------|---------------|---------|
 | `HeroBlock` | `HeroBlock` | Hero — variants: `split-grid`, `cover`, `minimal` |
-| `ContentBlock` | `ContentBlock` | Rich text / Markdown body |
+| `ContentBlock` | `ContentBlock` | Markdown body (string, rendered via `set:html`) with optional full-bleed layout |
 | `BookingBlock` | `BookingBlock` | CTA link to bsport booking URL |
 | `FeatureGridBlock` | `FeatureGridBlock` | Icon + title + description grid |
 | `FullBleedBlock` | `FullBleedBlock` | Edge-to-edge background image |
 | `InteractiveListBlock` | `InteractiveListBlock` | Hover-reveal image list (GSAP, desktop only) |
-| `FaqBlock` | `FaqBlock` | `<details>/<summary>` accordion |
+| `FaqBlock` | `FaqBlock` | `<details>/<summary>` accordion — `answer` is Markdown string rendered via `set:html` |
 | `BsportCalendar` | `BsportCalendar` | bsport calendar widget |
 | `BsportPasses` | `BsportPasses` | bsport passes widget |
 | `BsportSubscription` | `BsportSubscription` | bsport subscription widget |
+| `LegalPageBlock` | `LegalPageBlock` | Legal page sections — each with `level`, `title`, `content` (Markdown string) |
 
 ---
 

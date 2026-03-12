@@ -1,6 +1,8 @@
 ---
+import { marked } from 'marked';
+
 interface Props {
-  body: string;
+  body: (() => any) | string;
   backgroundImage?: string;
   fullBleed?: boolean;
   name?: string;
@@ -10,6 +12,7 @@ const { body, backgroundImage, fullBleed = false, name } = Astro.props;
 
 const sectionId = name ? `block-${name}` : undefined;
 const isImageBand = fullBleed && !!backgroundImage;
+const renderedBody = typeof body === 'string' ? await marked(body ?? '') : null;
 ---
 
 {isImageBand ? (
@@ -35,7 +38,7 @@ const isImageBand = fullBleed && !!backgroundImage;
                prose-a:text-eos-accent hover:prose-a:underline
                max-w-none"
       >
-        <Fragment set:html={body} />
+        {typeof body === 'function' ? body() : <Fragment set:html={renderedBody} />}
       </div>
     </div>
   </section>
@@ -43,7 +46,7 @@ const isImageBand = fullBleed && !!backgroundImage;
   <section id={sectionId} class="py-16 px-4">
     <div class="max-w-5xl mx-auto">
       <div class="prose prose-lg prose-slate prose-headings:text-eos-accent prose-a:text-eos-accent hover:prose-a:text-eos-accent transition-colors">
-        <Fragment set:html={body} />
+        {typeof body === 'function' ? body() : <Fragment set:html={renderedBody} />}
       </div>
     </div>
   </section>

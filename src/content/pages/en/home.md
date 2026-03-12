@@ -19,10 +19,12 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: philosophy-intro
-      body: >
-        <p>EOS CLUB is more than a studio – it's a place of transformation.
+      body: >-
+        EOS CLUB is more than a studio – it's a place of transformation.
         Here, traditional practices meet modern wellness for your holistic
-        well-being.</p>
+        well-being.
+
+
       fullBleed: true
       backgroundImage: /assets/bw_horizontal_theme_barre.png
   - discriminant: FeatureGridBlock

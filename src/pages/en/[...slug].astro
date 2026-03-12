@@ -11,6 +11,7 @@ import FaqBlock from '../../components/blocks/FaqBlock.astro';
 import BsportCalendar from '../../components/integrations/BsportCalendar.astro';
 import BsportPasses from '../../components/integrations/BsportPasses.astro';
 import BsportSubscription from '../../components/integrations/BsportSubscription.astro';
+import LegalPageBlock from '../../components/blocks/LegalPageBlock.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages');
@@ -80,6 +81,8 @@ const { title, seoDescription, ogImage, blocks } = page.data;
             const { name: _n3, ...subProps } = block.value;
             return <BsportSubscription {...subProps} />;
           }
+          case 'LegalPageBlock':
+            return <LegalPageBlock {...block.value} />;
           default:
             return null;
         }

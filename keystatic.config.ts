@@ -185,6 +185,31 @@ export default config({
                 elementId: fields.text({ label: 'Unique Element ID' }),
               }),
             },
+            LegalPageBlock: {
+              label: 'Legal Page Block',
+              schema: fields.object({
+                name: fields.text({ label: 'Section Name (internal reference)' }),
+                sections: fields.array(
+                  fields.object({
+                    level: fields.select({
+                      label: 'Heading Level',
+                      options: [
+                        { value: 'h1', label: 'Heading 1' },
+                        { value: 'h2', label: 'Heading 2' },
+                        { value: 'h3', label: 'Heading 3' },
+                      ],
+                      defaultValue: 'h2',
+                    }),
+                    title: fields.text({ label: 'Section Title' }),
+                    content: fields.text({ label: 'Section Content', multiline: true }),
+                  }),
+                  {
+                    label: 'Sections',
+                    itemLabel: (props) => props.fields.title.value || 'New Section',
+                  }
+                ),
+              }),
+            },
           },
           { label: 'Content Blocks' }
         ),

@@ -20,12 +20,14 @@ blocks:
     value:
       name: philosophy-intro
       body: >-
-        <p>Hot Yoga. Hot Pilates & mehr.
+        Hot Yoga. Hot Pilates & mehr.
 
         Willkommen im EOS CLUB Köln.
 
         Infrared Classes, Calisthenics, Tai Chi und moderne Bewegung – unter
-        einem Dach..</p>
+        einem Dach..
+
+
       fullBleed: true
       backgroundImage: /assets/bw_horizontal_theme_barre.png
   - discriminant: FeatureGridBlock

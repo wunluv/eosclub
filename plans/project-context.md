@@ -49,7 +49,9 @@ i18n: {
 | `/wellness` | `/en/wellness` | Wellness |
 | `/team` | `/en/team` | Team |
 | `/kontakt` | `/en/contact` | Kontakt / Contact |
-| `/impressum` | (none) | Impressum (DE-only, footer) |
+| `/impressum` | `/en/imprint` | Impressum / Imprint (footer) |
+| `/datenschutz` | `/en/privacy` | Datenschutz / Privacy (footer) |
+| `/agb` | `/en/terms` | AGB / Terms (footer) |
 
 **LangSwitch Logic:**
 - Reads `translationSlug` frontmatter field
@@ -112,12 +114,13 @@ src/
         HeroSplitGrid.astro        # Split column + 2×2 image grid (home)
         HeroCover.astro            # Full-width bg image + gradient overlay
         HeroMinimal.astro          # Centered text only, no image
-      ContentBlock.astro
+      ContentBlock.astro           # body: string (Markdown) rendered via set:html
       BookingBlock.astro
       FeatureGridBlock.astro
       FullBleedBlock.astro         # Edge-to-edge image (breaks max-w-7xl)
       InteractiveListBlock.astro   # GSAP hover-image list
       FaqBlock.astro               # <details>/<summary> accordion
+      LegalPageBlock.astro         # Sections with heading + Markdown body
     common/
       Header.astro
       Footer.astro
@@ -135,15 +138,16 @@ src/
   content/
     config.ts                      # Zod schemas for all blocks
     pages/
-      de/  home.md, studio.md, kurse.md, preise.md, events.md, wellness.md, team.md, kontakt.md
-      en/  home.md, studio.md, classes.md, pricing.md, events.md, wellness.md, team.md, contact.md
+      de/  home.md, studio.md, kurse.md, preise.md, events.md, wellness.md,
+           team.md, kontakt.md, impressum.md, datenschutz.md, agb.md
+      en/  home.md, studio.md, classes.md, pricing.md, events.md, wellness.md,
+           team.md, contact.md, imprint.md, privacy.md, terms.md
   layouts/
     BaseLayout.astro
   pages/
     [...slug].astro                # DE catch-all
     index.astro                    # Home page (also DE)
     404.astro
-    impressum.astro
 keystatic.config.ts                # Keystatic configuration and schemas
 tailwind.config.mjs
 astro.config.mjs
@@ -153,30 +157,32 @@ astro.config.mjs
 
 ## Block System
 
-**Architecture:** Pages use a `blocks` array in frontmatter. Page routes iterate blocks and dispatch via `switch (block._template)`.
+**Architecture:** Pages use a `blocks` array in frontmatter. Page routes iterate blocks and dispatch via discriminated union `switch (block.discriminant)`.
 
-**Adding a New Block:**
+**Adding a New Block (6 touchpoints — all required):**
 
 1. Create `src/components/blocks/MyBlock.astro`
 2. Add Zod schema to `src/content/config.ts` → add to `z.discriminatedUnion` in `blockSchema`
 3. Add Keystatic schema to `keystatic.config.ts` → `collections.pages.schema`
-4. Add import + switch case to `src/pages/[...slug].astro`
-5. Add import + switch case to `src/pages/index.astro`
+4. Add import + switch case to `src/pages/[...slug].astro` (DE catch-all)
+5. Add import + switch case to `src/pages/index.astro` (DE home)
+6. Add import + switch case to `src/pages/en/[...slug].astro` (EN) — both `discriminant` and legacy `_template` branches
 
 **Block Reference:**
 
-| Block | `_template` | Description |
-|-------|-------------|-------------|
+| Block | `discriminant` | Description |
+|-------|----------------|-------------|
 | `HeroBlock.astro` | `HeroBlock` | Dispatcher. `variant` field selects sub-component |
-| `ContentBlock.astro` | `ContentBlock` | Rich text / Markdown body |
+| `ContentBlock.astro` | `ContentBlock` | Markdown body string rendered via `set:html`. Supports optional `fullBleed` + `backgroundImage` |
 | `BookingBlock.astro` | `BookingBlock` | CTA link to bsport booking URL |
 | `FeatureGridBlock.astro` | `FeatureGridBlock` | Icon + title + description grid |
 | `FullBleedBlock.astro` | `FullBleedBlock` | Edge-to-edge bg image. Breaks `max-w-7xl` via `w-screen relative left-1/2 -translate-x-1/2` |
 | `InteractiveListBlock.astro` | `InteractiveListBlock` | List with GSAP hover-image reveal (desktop). Static on mobile/touch. `prefers-reduced-motion` respected. Used: home, studio |
-| `FaqBlock.astro` | `FaqBlock` | `<details>/<summary>` accordion. Single-open accordion script. Used: pricing, events |
+| `FaqBlock.astro` | `FaqBlock` | `<details>/<summary>` accordion. `answer` is a Markdown string rendered via `set:html`. Single-open accordion script. Used: pricing, events |
 | `BsportCalendar.astro` | `BsportCalendar` | bsport calendar widget embed. Used: events |
 | `BsportPasses.astro` | `BsportPasses` | bsport passes widget embed. Used: pricing |
 | `BsportSubscription.astro` | `BsportSubscription` | bsport subscription widget embed. Used: pricing |
+| `LegalPageBlock.astro` | `LegalPageBlock` | Structured sections each with heading level + title + Markdown body. Used: impressum, datenschutz, agb, imprint, privacy, terms |
 
 **HeroBlock Variants:**
 
@@ -202,18 +208,21 @@ blocks: []               # array of block objects
 
 **Block Fields (key fields — see `src/content/config.ts` for full schema):**
 
-| Block | Key Fields |
-|-------|------------|
-| `HeroBlock` | `_template`, `name`, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `logoOverlay`, `ctaLabel`, `ctaUrl` |
-| `ContentBlock` | `_template`, `name`, `body`, `fullBleed`, `backgroundImage` |
-| `BookingBlock` | `_template`, `name`, `enabled`, `bookingUrl`, `label` |
-| `FeatureGridBlock` | `_template`, `name`, `items[]` {`icon`, `title`, `description`} |
-| `FullBleedBlock` | `_template`, `name`, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
-| `InteractiveListBlock` | `_template`, `name`, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
-| `FaqBlock` | `_template`, `name`, `title`, `questions[]` {`question`, `answer`} |
-| `BsportCalendar` | `_template`, `name`, `elementId` |
-| `BsportPasses` | `_template`, `name`, `elementId` |
-| `BsportSubscription` | `_template`, `name`, `elementId` |
+> All blocks use `discriminant + value` shape: `{ discriminant: 'BlockName', value: { ... } }`. The `_template` shape is legacy and only handled by the EN route for backward compatibility.
+
+| Block | `value` Key Fields |
+|-------|-------------------|
+| `HeroBlock` | `name`, `variant`, `headline`, `subheadline`, `subBodyText`, `backgroundImage`, `logoOverlay`, `ctaLabel`, `ctaUrl` |
+| `ContentBlock` | `name`, `body` (Markdown string), `fullBleed`, `backgroundImage` |
+| `BookingBlock` | `name`, `enabled`, `bookingUrl`, `label`, `iconOnly` |
+| `FeatureGridBlock` | `name`, `items[]` {`icon`, `title`, `description`} |
+| `FullBleedBlock` | `name`, `image`, `altText`, `minHeight`, `overlayOpacity`, `headline`, `subtext` |
+| `InteractiveListBlock` | `name`, `title`, `items[]` {`label`, `description`, `image`, `imageAlt`} |
+| `FaqBlock` | `name`, `title`, `questions[]` {`question`, `answer` (Markdown string)} |
+| `BsportCalendar` | `name`, `elementId` |
+| `BsportPasses` | `name`, `elementId` |
+| `BsportSubscription` | `name`, `elementId` |
+| `LegalPageBlock` | `name`, `sections[]` {`level` (h1/h2/h3), `title`, `content` (Markdown string)} |
 
 > **Note:** The `name` field is informational metadata only. It has no runtime rendering effect. It exists purely for agent/human referencing. See [Section Pattern Language](#section-pattern-language) below.
 

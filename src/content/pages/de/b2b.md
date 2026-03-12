@@ -22,7 +22,7 @@ blocks:
         Flächen mit geringem Mehraufwand als B2B-Angebot nutzbar. </p><p> Neben
         Endkund:innen (B2C) bedient EOS CLUB gezielt auch Unternehmen und
         selbstständige Wellness-Professionals (B2B), die hochwertige Räume für
-        ihre eigenen Leistungen benötigen </p><p>Test San</p>
+        ihre eigenen Leistungen benötigen </p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -46,7 +46,7 @@ blocks:
         Miete</strong><br/> Für einzelne Termine und flexible Einsätze. </p><p>
         <strong>2. Fester Wochen-Slot</strong><br/> Für wiederkehrende Kurse
         oder feste Praxiszeiten. </p><p> <strong>3. Tagesbuchung</strong><br/>
-        Für Workshops, Events und Trainings. </p><p>TEst San</p>
+        Für Workshops, Events und Trainings. </p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:

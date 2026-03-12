@@ -13,10 +13,13 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: events-intro
-      body: >-
-        <h2>Workshops & Specials</h2><p>Regelmäßig bieten wir workshops,
+      body: |-
+        ## Workshops & Specials
+        Regelmäßig bieten wir workshops,
         Retreats und besondere Veranstaltungen an. Bleib informiert und melde
-        dich für unseren Newsletter an. Test from San. New test 1pm 05/03</p>
+        dich für unseren Newsletter an. Test from San. New test 1pm 05/03
+
+
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -69,10 +72,14 @@ blocks:
           answer: >-
             Workshops können direkt über unser Buchungssystem reserviert werden.
             Früh buchen empfohlen – Plätze sind begrenzt. San Test 3pm test
+
+
         - question: Sind die Workshops für Anfänger geeignet?
           answer: >-
             Jeder Workshop gibt Hinweise zum empfohlenen Level. Viele unserer
             Events begrüßen alle Erfahrungsstufen.
+
+
         - question: Gibt es Gruppenrabatte für Workshops?
           answer: >-
             Ab 3 Personen aus einer Gruppe kontaktiere uns für ein individuelles

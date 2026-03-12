@@ -278,3 +278,114 @@ collection({
   },
 })
 ```
+
+---
+
+## Issue 4: `fields.markdoc()` Does NOT Return a Callable Function at Runtime
+
+### Symptom
+When `fields.markdoc()` is used inside `fields.blocks()` schema items (e.g. for `ContentBlock.body`), and the `.astro` component renders it as `{@render body()}`, a runtime crash occurs:
+```
+TypeError: body is not a function
+```
+
+### Root Cause
+`fields.markdoc()` provides a **WYSIWYG editor** in the Keystatic CMS UI. However, when the content collection entry is read by Astro at build/render time, the markdoc field value is returned as a **plain string** (the raw Markdown text stored in the YAML frontmatter), NOT as a callable Astro snippet function.
+
+The `{@render field()}` pattern only works for Astro content collection entries that use the dedicated `render()` API (i.e., `.astro` files or `.md` files processed as content entries with their own render pipeline). Inline YAML block scalars stored in frontmatter do not go through this pipeline.
+
+### Fix
+Use a **callable guard** in components that receive a `fields.markdoc()` value:
+
+```astro
+---
+// Props type allows both callable and string:
+interface Props {
+  body: (() => any) | string;
+}
+const { body } = Astro.props;
+const isCallable = typeof body === 'function';
+---
+
+{isCallable ? body() : <Fragment set:html={body} />}
+```
+
+Or if you want to preserve Markdown-to-HTML rendering for string values, use a Markdown parser:
+
+```astro
+---
+import { marked } from 'marked'; // or any other MD parser
+const rendered = typeof body === 'function' ? null : marked(body ?? '');
+---
+
+{typeof body === 'function' ? body() : <Fragment set:html={rendered} />}
+```
+
+The EOS CLUB components (`ContentBlock.astro`, `FaqBlock.astro`, `LegalPageBlock.astro`) use `set:html` with Markdown-converted-to-HTML via `marked` (see `package.json` — `marked@17.x` is a production dependency):
+
+```astro
+import { marked } from 'marked';
+const renderedBody = typeof body === 'string' ? await marked(body ?? '') : null;
+// ...
+{typeof body === 'function' ? body() : <Fragment set:html={renderedBody} />}
+```
+
+### What `fields.markdoc()` DOES provide in the CMS UI
+The CMS editor shows a rich WYSIWYG toolbar. However, it expects content to be stored in **companion files** on disk (e.g. `de/b2b/blocks/0/body.md`), NOT as inline YAML block scalars. When existing content is stored inline (`body: |-\n  ## heading...`), the Keystatic editor shows an **empty field** — it simply can't read the inline content.
+
+### Final decision for this project: use `fields.text({ multiline: true })`
+`fields.text({ multiline: true })` reads inline YAML block scalars correctly, making all existing body content immediately visible and editable in the CMS. Editors see a plain multi-line textarea — a UX compromise, but fully functional.
+
+The `marked` Markdown→HTML pipeline on the public site still converts the textarea content to proper HTML at render time.
+
+**Current state of the three affected fields in `keystatic.config.ts`:**
+```ts
+// ContentBlock
+body: fields.text({ label: 'Body Content', multiline: true }),  // ✅ reads inline YAML
+
+// FaqBlock answers
+answer: fields.text({ label: 'Answer', multiline: true }),  // ✅ reads inline YAML
+
+// LegalPageBlock sections
+content: fields.text({ label: 'Section Content', multiline: true }),  // ✅ reads inline YAML
+```
+
+If WYSIWYG editing is required in future, the content model must migrate to **companion files** (directory-based Keystatic entries with separate `.md` files per markdoc field). This is a significant architectural change and should be planned as a separate project.
+
+### Note on the original plan assumption
+`plans/markdoc-legal-pages-integration.md` stated: *"`fields.markdoc()` exposes content as a callable render function via Astro content collections"*. This was incorrect for this project's content model (inline YAML block scalars). The callable pattern would only be valid if markdoc content were stored in dedicated companion `.mdoc` files — a different content architecture not used here.
+
+---
+
+## Issue 5: YAML `>-` Folded Scalar Collapses Markdown Headings into Paragraphs
+
+### Symptom
+A `ContentBlock.body` containing a Markdown heading followed by paragraph text renders the entire content as one large heading:
+```
+## The People Behind EOS Our team consists of certified teachers...
+```
+
+### Root Cause
+YAML `>-` (folded scalar, strip) replaces all newlines with spaces:
+```yaml
+body: >-
+  ## The People Behind EOS
+  Our team consists of certified teachers.
+```
+→ Produces the string: `## The People Behind EOS Our team consists of certified teachers.`
+
+`marked` then renders the full line as an `<h2>`, since no newline separates the heading from the paragraph text.
+
+### Fix
+Use `|-` (literal scalar, strip) instead of `>-` for any body field that contains a Markdown heading followed by separate paragraph text:
+```yaml
+body: |-
+  ## The People Behind EOS
+
+  Our team consists of certified teachers.
+```
+`|-` preserves newlines exactly as written, allowing `marked` to correctly distinguish the heading from paragraph text.
+
+**Rule of thumb for `ContentBlock.body` YAML scalars:**
+- `|-` — use when content starts with `##`/`###` heading (preserves newlines)
+- `>-` — acceptable when content is pure flowing paragraph text with no headings

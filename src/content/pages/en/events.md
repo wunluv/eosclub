@@ -13,9 +13,12 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: events-intro
-      body: >-
-        <h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats
-        and special events. Stay informed and sign up for our newsletter.</p>
+      body: |-
+        ## Workshops & Specials
+        We regularly offer workshops, retreats
+        and special events. Stay informed and sign up for our newsletter.
+
+
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -67,10 +70,14 @@ blocks:
           answer: >-
             Workshops can be reserved directly through our booking system. Book
             early — spots are limited.
+
+
         - question: Are the workshops suitable for beginners?
           answer: >-
             Each workshop provides guidance on the recommended level. Many of
             our events welcome all experience levels.
+
+
         - question: Are there group discounts for workshops?
           answer: For groups of 3 or more, contact us for an individual offer.
 ---

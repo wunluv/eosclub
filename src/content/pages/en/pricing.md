@@ -17,7 +17,8 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: pricing-intro
-      body: <h2>Passes and Memberships</h2>
+      body: |-
+        ## Passes and Memberships
   - discriminant: BsportPasses
     value:
       name: pricing-passes
@@ -35,6 +36,8 @@ blocks:
           answer: >-
             Yes! Our drop-in ticket lets you visit any class once, with no
             commitment.
+
+
         - question: How long is the 10-class pass valid?
           answer: The 10-class pass is valid for 3 months from the date of purchase.
         - question: Can I pause my flat-rate membership?

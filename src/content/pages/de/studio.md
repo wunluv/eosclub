@@ -15,11 +15,14 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: studio-intro
-      body: >-
-        <h2>Das EOS Studio</h2><p>Unser lichtdurchfluteter Raum ist das Herz des
+      body: |-
+        ## Das EOS Studio
+        Unser lichtdurchfluteter Raum ist das Herz des
         EOS CLUB. Hier treffen Hot Yoga, Hot Pilates und Movement Classes auf
         eine ruhige Atmosphäre, Infrared-Technologie, Ambientelicht und
-        großzügige Spiegel – für Energie, Fokus und echte Praxis.</p>
+        großzügige Spiegel – für Energie, Fokus und echte Praxis.
+
+
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
@@ -43,11 +46,14 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: terrasse-intro
-      body: >-
-        <h2>Die EOS Terrasse</h2><p>Unsere großzügige, sonnenbeflutete Terrasse
+      body: |-
+        ## Die EOS Terrasse
+        Unsere großzügige, sonnenbeflutete Terrasse
         erweitert den EOS CLUB nach draußen. Hier finden Outdoor Yoga und
         Movement Classes unter freiem Himmel statt – umgeben von Grün und
-        frischer Luft.</p>
+        frischer Luft.
+
+
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:

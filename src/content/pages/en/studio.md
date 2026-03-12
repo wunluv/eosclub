@@ -16,11 +16,14 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: studio-intro
-      body: >-
-        <h2>Your Sanctuary</h2><p>Our studio offers ample space for movement,
+      body: |-
+        ## Your Sanctuary
+        Our studio offers ample space for movement,
         breath, and relaxation. Natural light, high-quality materials, and
         thoughtful acoustics create an atmosphere where you can truly arrive
-        within yourself.</p>
+        within yourself.
+
+
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:

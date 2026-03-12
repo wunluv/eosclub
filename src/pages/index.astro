@@ -12,6 +12,7 @@ import FaqBlock from '../components/blocks/FaqBlock.astro';
 import BsportCalendar from '../components/integrations/BsportCalendar.astro';
 import BsportPasses from '../components/integrations/BsportPasses.astro';
 import BsportSubscription from '../components/integrations/BsportSubscription.astro';
+import LegalPageBlock from '../components/blocks/LegalPageBlock.astro';
 
 // Get the home page from the content collection
 const pages = await getCollection('pages');
@@ -54,6 +55,8 @@ const homePage = pages.find(page => page.id === 'de/home.md');
           const { name: _n3, ...subProps } = block.value;
           return <BsportSubscription {...subProps} />;
         }
+        case 'LegalPageBlock':
+          return <LegalPageBlock {...block.value} />;
         default:
           return null;
       }

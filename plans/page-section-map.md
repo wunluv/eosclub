@@ -29,8 +29,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/home.md` · `src/content/pages/en/home.md`
 **Routes:** `/` (DE) · `/en/home` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `home-hero` | `HeroBlock` | `HeroSplitGrid.astro` | "Practice over promise" — split layout with 2×2 image grid |
 | `philosophy-intro` | `ContentBlock` | `ContentBlock.astro` | "EOS CLUB ist mehr als ein Studio – es ist ein Ort der Transformation…" |
 | `pillars-grid` | `FeatureGridBlock` | `FeatureGridBlock.astro` | 3 icons: Yoga & Pilates · Infrarot-Wellness · Community |
@@ -43,8 +43,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/studio.md` · `src/content/pages/en/studio.md`
 **Routes:** `/studio` (DE) · `/en/studio` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `studio-hero` | `HeroBlock` | `HeroCover.astro` | "Unser Studio" — full-bleed cover image |
 | `studio-intro` | `ContentBlock` | `ContentBlock.astro` | "200m² Raum für Bewegung, Atmung und Entspannung…" |
 | `studio-spaces-list` | `InteractiveListBlock` | `InteractiveListBlock.astro` | Hover-image list: 200m² · Natürliches Licht · Infrarot-Kabinen |
@@ -56,8 +56,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/kurse.md` · `src/content/pages/en/classes.md`
 **Routes:** `/kurse` (DE) · `/en/classes` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `classes-hero` | `HeroBlock` | `HeroCover.astro` | "Unsere Kurse" — cover image with subheadline |
 | `classes-booking-cta` | `BookingBlock` | `BookingBlock.astro` | CTA button linking to bsport booking URL |
 | `classes-grid` | `FeatureGridBlock` | `FeatureGridBlock.astro` | 4 icons: Vinyasa Flow · Hatha Yoga · Pilates · Barre |
@@ -69,8 +69,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/preise.md` · `src/content/pages/en/pricing.md`
 **Routes:** `/preise` (DE) · `/en/pricing` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `pricing-hero` | `HeroBlock` | `HeroCover.astro` | "Preise" — gradient background cover |
 | `pricing-intro` | `ContentBlock` | `ContentBlock.astro` | Drop-in / 10er-Karte / Flatrate pricing list |
 | `pricing-booking-cta` | `BookingBlock` | `BookingBlock.astro` | "Mitgliedschaft wählen" CTA |
@@ -83,8 +83,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/events.md` · `src/content/pages/en/events.md`
 **Routes:** `/events` (DE) · `/en/events` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `events-hero` | `HeroBlock` | `HeroCover.astro` | "Events" — pilates image cover |
 | `events-intro` | `ContentBlock` | `ContentBlock.astro` | "Workshops, Retreats und besondere Veranstaltungen…" |
 | `events-faq` | `FaqBlock` | `FaqBlock.astro` | 3 FAQ items: booking, suitability, group discounts |
@@ -96,8 +96,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/wellness.md` · `src/content/pages/en/wellness.md`
 **Routes:** `/wellness` (DE) · `/en/wellness` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `wellness-hero` | `HeroBlock` | `HeroCover.astro` | "Wellness" — infrared therapy studio image |
 | `wellness-intro` | `ContentBlock` | `ContentBlock.astro` | "Infrarot-Kabinen bieten tiefenwirksame Wärme…" |
 | `wellness-benefits-grid` | `FeatureGridBlock` | `FeatureGridBlock.astro` | 3 icons: Tiefenwärme · Detox · Regeneration |
@@ -109,8 +109,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/team.md` · `src/content/pages/en/team.md`
 **Routes:** `/team` (DE) · `/en/team` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `team-hero` | `HeroBlock` | `HeroCover.astro` | "Unser Team" — yoga image cover |
 | `team-intro` | `ContentBlock` | `ContentBlock.astro` | "Die Menschen hinter EOS — zertifizierte Lehrer…" |
 
@@ -121,8 +121,8 @@ The `name` field is added directly to each block in the markdown frontmatter (se
 **Files:** `src/content/pages/de/kontakt.md` · `src/content/pages/en/contact.md`
 **Routes:** `/kontakt` (DE) · `/en/contact` (EN)
 
-| `name` | `_template` | Sub-component | Key content / purpose |
-|--------|-------------|---------------|-----------------------|
+| `name` | `discriminant` | Sub-component | Key content / purpose |
+|--------|----------------|---------------|-----------------------|
 | `contact-hero` | `HeroBlock` | `HeroCover.astro` | "Kontakt" — gradient background |
 | `contact-info` | `ContentBlock` | `ContentBlock.astro` | Address, email, phone, opening hours |
 
@@ -140,6 +140,8 @@ These zones appear on every page and are referenced by their component names dir
 ---
 
 ## Quick Lookup: Blocks by Type
+
+> All blocks use `discriminant + value` shape. The `name` field inside `value` is for referencing only — it has no runtime effect.
 
 ### All `HeroBlock` sections
 
@@ -193,4 +195,20 @@ These zones appear on every page and are referenced by their component names dir
 | Page | `name` | Label |
 |------|--------|-------|
 | kurse/classes | `classes-booking-cta` | "Jetzt buchen" |
+
+---
+
+## Legal Pages
+
+| Page | `name` | Sections |
+|------|--------|----------|
+| impressum | `impressum-content` | Angaben gemäß § 5 TMG · Kontakt · Umsatzsteuer-ID · Haftungsausschluss |
+| datenschutz | `datenschutz-content` | Datenschutzerklärung · Datenschutz auf einen Blick · Datenerfassung · Analyse-Tools · Kontakt |
+| agb | `agb-content` | Geltungsbereich · Leistungsangebot · Anmeldung und Buchung · Kontakt |
+
+| Page | `name` | Sections |
+|------|--------|----------|
+| imprint | `impressum-content` | Information according to § 5 TMG · Contact · VAT ID · Disclaimer |
+| privacy | `datenschutz-content` | Privacy Policy · Data protection at a glance · Data collection · Analysis tools · Contact |
+| terms | `agb-content` | Scope · Services · Registration and Booking · Contact |
 | preise/pricing | `pricing-booking-cta` | "Mitgliedschaft wählen" |

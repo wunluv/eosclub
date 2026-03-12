@@ -17,7 +17,8 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: pricing-intro
-      body: <h2>Pässe und Mitgliedschaften</h2>
+      body: |-
+        ## Pässe und Mitgliedschaften
   - discriminant: BsportPasses
     value:
       name: pricing-passes
@@ -37,12 +38,16 @@ blocks:
           answer: >-
             Ja! Unser Drop-in-Ticket ermöglicht dir, jede Klasse einmalig zu
             besuchen, ohne Verpflichtung.
+
+
         - question: Wie lange ist die 10er-Karte gültig?
           answer: Die 10er-Karte ist 3 Monate ab Kaufdatum gültig.
         - question: Kann ich meine Flatrate pausieren?
           answer: >-
             Ja, du kannst deine Mitgliedschaft einmal im Jahr für bis zu 4
             Wochen pausieren.
+
+
         - question: Gibt es eine Einführungsklasse für Anfänger?
           answer: >-
             Alle unsere Kursangebote beinhalten Level-Hinweise. Schreib uns,

@@ -1,0 +1,51 @@
+---
+import { marked } from 'marked';
+
+interface Props {
+  name?: string;
+  sections: Array<{
+    level?: 'h1' | 'h2' | 'h3';
+    title: string;
+    content: (() => any) | string;
+  }>;
+}
+
+const { name, sections = [] } = Astro.props;
+const sectionId = name ? `block-${name}` : undefined;
+
+type RenderContent = (() => any) | string;
+
+function renderContent(content: RenderContent) {
+  if (typeof content === 'function') return content();
+  return null;
+}
+
+const renderedContents = await Promise.all(
+  sections.map((section) =>
+    typeof section.content === 'string' ? marked(section.content ?? '') : Promise.resolve(null)
+  )
+);
+---
+
+<section id={sectionId} class="container mx-auto px-4 py-16 max-w-3xl">
+  <div class="space-y-8 text-eos-text leading-relaxed">
+    {sections.map((section, i) => {
+      const HeadingTag = section.level ?? 'h2';
+      const isString = typeof section.content === 'string';
+      const renderedContent = renderedContents[i];
+      return (
+        <div>
+          <HeadingTag class="text-xl font-bold mb-2 font-serif text-eos-zen">
+            {section.title}
+          </HeadingTag>
+          <div class="prose prose-lg prose-slate prose-headings:text-eos-zen prose-a:text-eos-accent hover:prose-a:underline text-sm leading-relaxed">
+            {isString
+              ? <Fragment set:html={renderedContent} />
+              : renderContent(section.content)
+            }
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>

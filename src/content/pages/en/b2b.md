@@ -16,14 +16,16 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: b2b-intro
-      body: >-
-        <h2> Additional Revenue Stream for EOS CLUB </h2><p> EOS CLUB can unlock
+      body: |-
+        ##  Additional Revenue Stream for EOS CLUB
+        EOS CLUB can unlock
         an additional revenue stream by renting out treatment rooms and course
         rooms to business clients. This turns existing space into a flexible B2B
-        offer with minimal operational overhead. </p><p> Instead of serving only
+        offer with minimal operational overhead.  Instead of serving only
         end-consumers (B2C), EOS CLUB also serves wellness professionals and
         companies (B2B) who need premium space to deliver their own services.
-        </p>
+
+
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -42,12 +44,23 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: b2b-offer-model
-      body: >-
-        <h2> Offer Structure </h2><p> <strong>1. Hourly Rental</strong><br/>
-        For individual appointments and ad-hoc sessions. </p><p> <strong>2. Fixed
-        Weekly Slot</strong><br/> For recurring classes or practitioner schedules.
-        </p><p> <strong>3. Full-Day Booking</strong><br/> For workshops, events, and
-        trainings. </p>
+      body: |-
+        ##  Offer Structure
+        **1. Hourly Rental**
+
+        For individual appointments and ad-hoc sessions.
+
+        **2. Fixed
+        Weekly Slot**
+
+        For recurring classes or practitioner schedules.
+
+        **3. Full-Day Booking**
+
+        For workshops, events, and
+        trainings.
+
+
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:

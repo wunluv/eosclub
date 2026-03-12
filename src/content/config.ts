@@ -38,7 +38,7 @@ const interactiveListBlockSchema = z.object({
 
 const faqItemSchema = z.object({
   question: z.string(),
-  answer: z.string(),
+  answer: z.any(),
 });
 
 const faqBlockSchema = z.object({
@@ -49,7 +49,7 @@ const faqBlockSchema = z.object({
 
 const contentBlockSchema = z.object({
   name: z.string().optional(),
-  body: z.string(),
+  body: z.any(),
   backgroundImage: z.string().optional(),
   fullBleed: z.boolean().optional().default(false),
 });
@@ -86,6 +86,17 @@ const bsportSubscriptionBlockSchema = z.object({
   elementId: z.string(),
 });
 
+const legalPageSectionSchema = z.object({
+  level: z.enum(['h1', 'h2', 'h3']).optional().default('h2'),
+  title: z.string(),
+  content: z.any(),
+});
+
+const legalPageBlockSchema = z.object({
+  name: z.string().optional(),
+  sections: z.array(legalPageSectionSchema),
+});
+
 // Discriminated union for all blocks
 const blockSchema = z.discriminatedUnion('discriminant', [
   z.object({ discriminant: z.literal('HeroBlock'), value: heroBlockSchema }),
@@ -98,6 +109,7 @@ const blockSchema = z.discriminatedUnion('discriminant', [
   z.object({ discriminant: z.literal('BsportCalendar'), value: bsportCalendarBlockSchema }),
   z.object({ discriminant: z.literal('BsportPasses'), value: bsportPassesBlockSchema }),
   z.object({ discriminant: z.literal('BsportSubscription'), value: bsportSubscriptionBlockSchema }),
+  z.object({ discriminant: z.literal('LegalPageBlock'), value: legalPageBlockSchema }),
 ]);
 
 // Pages collection
