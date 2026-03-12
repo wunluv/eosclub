@@ -17,10 +17,6 @@ blocks:
         <h2>Workshops & Specials</h2><p>We regularly offer workshops, retreats
         and special events. Stay informed and sign up for our newsletter.</p>
       fullBleed: false
-  - discriminant: BsportCalendar
-    value:
-      name: events-calendar
-      elementId: bsport-events-calendar
   - discriminant: FeatureGridBlock
     value:
       name: events-grid

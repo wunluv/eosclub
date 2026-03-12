@@ -18,6 +18,10 @@ blocks:
       enabled: true
       bookingUrl: 'https://backoffice.bsport.io/c/5082/home/'
       label: Book Now
+  - discriminant: BsportCalendar
+    value:
+      name: classes-calendar
+      elementId: bsport-classes-calendar
   - discriminant: FeatureGridBlock
     value:
       name: classes-grid
