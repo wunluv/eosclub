@@ -65,5 +65,6 @@ blocks:
     value:
       name: b2b-cta
       label: Inquire Now
-      bookingUrl: /en/contact
+      bookingUrl: https://wa.me/491726955550?text=I%27m%20interested%20in%20room%20rental
+      iconOnly: true
 ---

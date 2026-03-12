@@ -14,9 +14,8 @@ blocks:
     value:
       name: contact-info
       body: >-
-        <h2>How to Reach Us</h2><p><strong>EOS CLUB</strong><br>Musterstraße
-        1<br>10115 Cologne</p><p>Email: <a
-        href='mailto:kontakt@eos-club.de'>kontakt@eos-club.de</a><br>Phone: +49
-        (0) 30 12345678</p><h3>Opening Hours</h3><p>Mon–Fri:
+        <h2>How to Reach Us</h2><p><strong>EOS CLUB</strong><br>Eupener Str.
+        84<br>50933 Cologne</p><p>Email: <a
+        href='mailto:info@eos.club'>info@eos.club</a><br>Phone: +49 172 6955550</p><h3>Opening Hours</h3><p>Mon–Fri:
         07:00–21:00<br>Sat–Sun: 09:00–18:00</p>
 ---

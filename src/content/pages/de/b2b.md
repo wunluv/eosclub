@@ -65,4 +65,5 @@ blocks:
       name: b2b-cta
       label: Jetzt WhatsAppen
       bookingUrl: https://wa.me/491726955550?text=Ich%20bin%20interessiert%20an%20der%20Raumvermietung
+      iconOnly: true
 ---

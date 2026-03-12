@@ -59,6 +59,7 @@ const bookingBlockSchema = z.object({
   enabled: z.boolean().default(true),
   bookingUrl: z.string(),
   label: z.string().optional(),
+  iconOnly: z.boolean().optional().default(false),
 });
 
 const featureGridBlockSchema = z.object({

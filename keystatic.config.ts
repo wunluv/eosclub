@@ -90,6 +90,7 @@ export default config({
                 enabled: fields.checkbox({ label: 'Enabled' }),
                 bookingUrl: fields.text({ label: 'bsport Booking URL' }),
                 label: fields.text({ label: 'Section Label' }),
+                iconOnly: fields.checkbox({ label: 'Icon Only (for WhatsApp buttons)' }),
               }),
             },
             FeatureGridBlock: {
