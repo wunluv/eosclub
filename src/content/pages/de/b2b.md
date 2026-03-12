@@ -16,13 +16,13 @@ blocks:
     value:
       name: b2b-intro
       body: >-
-        <h2> Zusätzliche Einnahmequelle für EOS CLUB </h2><p> EOS CLUB kann
-        eine zusätzliche Einnahmequelle schaffen, indem Behandlungsräume und
+        <h2> Zusätzliche Einnahmequelle für EOS CLUB </h2><p> EOS CLUB kann eine
+        zusätzliche Einnahmequelle schaffen, indem Behandlungsräume und
         Kursräume an Geschäftskunden vermietet werden. So werden bestehende
-        Flächen mit geringem Mehraufwand als B2B-Angebot nutzbar. </p><p>
-        Neben Endkund:innen (B2C) bedient EOS CLUB gezielt auch Unternehmen und
+        Flächen mit geringem Mehraufwand als B2B-Angebot nutzbar. </p><p> Neben
+        Endkund:innen (B2C) bedient EOS CLUB gezielt auch Unternehmen und
         selbstständige Wellness-Professionals (B2B), die hochwertige Räume für
-        ihre eigenen Leistungen benötigen. </p>
+        ihre eigenen Leistungen benötigen </p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -42,11 +42,11 @@ blocks:
     value:
       name: b2b-offer-model
       body: >-
-        <h2> Angebotsstruktur </h2><p> <strong>1. Stundenweise Miete</strong><br/>
-        Für einzelne Termine und flexible Einsätze. </p><p> <strong>2. Fester
-        Wochen-Slot</strong><br/> Für wiederkehrende Kurse oder feste Praxiszeiten.
-        </p><p> <strong>3. Tagesbuchung</strong><br/> Für Workshops, Events und
-        Trainings. </p>
+        <h2> Angebotsstruktur </h2><p> <strong>1. Stundenweise
+        Miete</strong><br/> Für einzelne Termine und flexible Einsätze. </p><p>
+        <strong>2. Fester Wochen-Slot</strong><br/> Für wiederkehrende Kurse
+        oder feste Praxiszeiten. </p><p> <strong>3. Tagesbuchung</strong><br/>
+        Für Workshops, Events und Trainings. </p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
@@ -63,7 +63,9 @@ blocks:
   - discriminant: BookingBlock
     value:
       name: b2b-cta
+      enabled: false
+      bookingUrl: >-
+        https://wa.me/491726955550?text=Ich%20bin%20interessiert%20an%20der%20Raumvermietung
       label: Jetzt WhatsAppen
-      bookingUrl: https://wa.me/491726955550?text=Ich%20bin%20interessiert%20an%20der%20Raumvermietung
       iconOnly: true
 ---
