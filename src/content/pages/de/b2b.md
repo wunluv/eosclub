@@ -22,7 +22,7 @@ blocks:
         Flächen mit geringem Mehraufwand als B2B-Angebot nutzbar. </p><p> Neben
         Endkund:innen (B2C) bedient EOS CLUB gezielt auch Unternehmen und
         selbstständige Wellness-Professionals (B2B), die hochwertige Räume für
-        ihre eigenen Leistungen benötigen </p>
+        ihre eigenen Leistungen benötigen </p><p>Test San</p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
