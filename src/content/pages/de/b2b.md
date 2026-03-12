@@ -46,7 +46,7 @@ blocks:
         Miete</strong><br/> Für einzelne Termine und flexible Einsätze. </p><p>
         <strong>2. Fester Wochen-Slot</strong><br/> Für wiederkehrende Kurse
         oder feste Praxiszeiten. </p><p> <strong>3. Tagesbuchung</strong><br/>
-        Für Workshops, Events und Trainings. </p>
+        Für Workshops, Events und Trainings. </p><p>TEst San</p>
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
