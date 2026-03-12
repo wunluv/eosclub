@@ -236,19 +236,30 @@ const pathname = new URL(Astro.request.url).pathname;
 
     if (!nav || !underline || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
+    // Get nav's position for relative calculations
+    const navRect = nav.getBoundingClientRect();
+
     const setUnderline = (el: HTMLElement, immediate = false) => {
+      const elRect = el.getBoundingClientRect();
+      // Calculate position relative to the nav container
+      const left = elRect.left - navRect.left;
+      const width = elRect.width;
+
       gsap.to(underline, {
-        left: el.offsetLeft,
-        width: el.offsetWidth,
+        left: left,
+        width: width,
         opacity: 1,
         duration: immediate ? 0 : 0.4,
         ease: 'power2.out'
       });
     };
 
-    if (activeLink) {
-      setUnderline(activeLink, true);
-    }
+    // Wait for layout to stabilize before setting initial position
+    requestAnimationFrame(() => {
+      if (activeLink) {
+        setUnderline(activeLink, true);
+      }
+    });
 
     links.forEach(link => {
       link.addEventListener('mouseenter', () => setUnderline(link as HTMLElement));
