@@ -32,10 +32,11 @@ services:
       # Port 4321 is reserved by astro_oneplusone on this host
       - "127.0.0.1:4322:4322"
     volumes:
-      # Repo root — git was cloned directly into eos.khanyi.com/ (no /repo subdir).
+      # Repo root — git is cloned into /var/www/public/eosclub (actual directory).
+      # Symlinks on host: staging.eos-club.de -> eosclub/dist  |  eos-club.de -> eosclub
       # Astro builds to /app/repo/dist/client (static, served by Nginx) and
       # /app/repo/dist/server (SSR, run by the Node server on port 4322).
-      - /var/www/public/eos.khanyi.com:/app/repo
+      - /var/www/public/eosclub:/app/repo
     networks:
       - backend
     logging:
@@ -48,6 +49,7 @@ services:
 networks:
   backend:
     # Match this to the backend network created by the main Docker stack.
-    # Default assumes compose project name "deploy" for deploy/docker-compose.yaml.
-    name: ${EOS_BACKEND_NETWORK:-deploy_backend}
+    # On this server the main stack creates "docker_backend".
+    # Override via EOS_BACKEND_NETWORK env var if needed.
+    name: ${EOS_BACKEND_NETWORK:-docker_backend}
     external: true

@@ -1,6 +1,6 @@
 # EOS CLUB — Staging Deployment Setup Guide (Keystatic Cloud)
 
-**Target URL:** `https://staging.prod.khanyi.com`
+**Target URL:** `https://staging.eos-club.de`
 **Server:** DigitalOcean Droplet (shared Docker host)
 **Architecture:** Astro hybrid build (`dist/client` + `dist/server`) with Nginx reverse proxy
 **CMS:** Keystatic Cloud
@@ -29,10 +29,20 @@ GitHub push to main
   -> SSH to droplet
   -> docker exec eosclub_astro /app/repo/deploy/rebuild.sh
   -> git pull origin main + pnpm install + build
-  -> static site served from /var/www/public/eos.khanyi.com/dist/client
+  -> static pages served from /var/www/public/eosclub/dist/client
   -> Astro Node server serves Keystatic SSR routes on :4322
   -> Nginx proxies /keystatic and /api/keystatic to eosclub-astro:4322
   -> Keystatic redirects to keystatic.cloud for authentication
+```
+
+Host directory layout:
+```
+/var/www/public/
+  eosclub/               <- git repo (actual directory)
+  eosclub/dist/client/   <- Astro static output (served by Nginx)
+  eosclub/dist/server/   <- Astro SSR output (Node server on :4322)
+  staging.eos-club.de -> eosclub/dist   (symlink — nginx roots here for staging)
+  eos-club.de         -> eosclub        (symlink — production)
 ```
 
 Keystatic in staging/production runs in **Cloud storage mode** (sign in via keystatic.cloud, no GitHub OAuth).
@@ -42,21 +52,28 @@ Keystatic in staging/production runs in **Cloud storage mode** (sign in via keys
 ## Phase 1 — Host Directories
 
 ```bash
-sudo mkdir -p /var/www/public/eos.khanyi.com
+sudo mkdir -p /var/www/public/eosclub
 sudo mkdir -p /var/www/private/eosclub
-sudo chown -R $USER:$USER /var/www/public/eos.khanyi.com
-sudo chown -R $USER:$USER /var/www/private/eosclub
+sudo chown -R deploy:deploy /var/www/public/eosclub
+sudo chown -R deploy:deploy /var/www/private/eosclub
+```
+
+Create the nginx symlinks (if not already present):
+
+```bash
+sudo ln -s /var/www/public/eosclub/dist       /var/www/public/staging.eos-club.de
+sudo ln -s /var/www/public/eosclub            /var/www/public/eos-club.de
 ```
 
 ---
 
 ## Phase 2 — Clone Repository
 
-Clone directly into `/var/www/public/eos.khanyi.com` (no `/repo` subdirectory):
+Clone into `/var/www/public/eosclub`:
 
 ```bash
 cd /var/www/public
-git clone git@github.com:wunluv/eosclub.git eos.khanyi.com
+git clone git@github.com:wunluv/eosclub.git eosclub
 ```
 
 Validate access:
@@ -75,7 +92,7 @@ Create `/var/www/private/eosclub/.env`:
 # Keystatic Cloud — no OAuth secrets needed
 # Auth handled by keystatic.cloud
 
-PUBLIC_SITE_URL=https://staging.prod.khanyi.com
+PUBLIC_SITE_URL=https://staging.eos-club.de
 PUBLIC_GAS_ENDPOINT=
 
 # Optional override if backend network name differs from deploy_backend
@@ -97,7 +114,7 @@ sudo chmod 600 /var/www/private/eosclub/.env
 3. Create a project: `eosclub`
 4. Link to GitHub repo: `wunluv/eosclub`
 5. Enable **Allow local development** (for local dev at `localhost:4321/keystatic`)
-6. In project settings, add **Primary URL**: `https://staging.prod.khanyi.com`
+6. In project settings, add **Primary URL**: `https://staging.eos-club.de`
 
 ---
 
@@ -152,8 +169,8 @@ Rebuild behavior:
 Copy vhost:
 
 ```bash
-sudo cp /var/www/public/eos.khanyi.com/deploy/nginx/eosclub-staging.conf \
-        /var/www/private/nginx/conf.d/eosclub-staging.conf
+sudo cp /var/www/public/eosclub/deploy/nginx/eosclub-staging.conf \
+        /var/www/private/nginx/conf.d/staging.eos-club.de.conf
 ```
 
 Reload:
@@ -178,12 +195,12 @@ Deployment branch is **`main`** end-to-end:
 ## Phase 10 — Verification Checklist (Blocking)
 
 - [ ] `docker exec nginx wget -qO- http://eosclub-astro:4322/keystatic` returns HTML
-- [ ] `https://staging.prod.khanyi.com` loads
-- [ ] `https://staging.prod.khanyi.com/keystatic` redirects to keystatic.cloud
+- [ ] `https://staging.eos-club.de` loads
+- [ ] `https://staging.eos-club.de/keystatic` redirects to keystatic.cloud
 - [ ] Sign in with keystatic.cloud account succeeds
 - [ ] Content saves create commits in the repo
 - [ ] Restart `eosclub_astro` and confirm `/keystatic` still works without manual rebuild
-- [ ] Canonical/sitemap URLs on staging point to `https://staging.prod.khanyi.com`
+- [ ] Canonical/sitemap URLs on staging point to `https://staging.eos-club.de`
 
 ---
 

@@ -55,7 +55,7 @@ Optional:
 4. Link the project to your GitHub repo: `wunluv/eosclub`
 5. Enable "Allow local development" if you want local dev at `localhost:4321/keystatic`
 6. Add your deployment domains as **Primary URLs** in the project settings:
-   - Staging: `https://staging.prod.khanyi.com`
+   - Staging: `https://staging.eos-club.de`
    - Production: `https://eos-club.de`
 
 ---
@@ -120,7 +120,9 @@ Container startup also attempts to start runtime automatically if `dist/server/e
 
 For both `deploy/nginx/eosclub-staging.conf` and `deploy/nginx/eosclub.conf`:
 
-- `root` must be `/var/www/public/eos.khanyi.com/dist/client`
+- Both staging and production `root`: `/var/www/public/eosclub/dist/client`
+- Repo lives at `/var/www/public/eosclub` (actual directory)
+- `staging.eos-club.de` and `eos-club.de` are symlinks on the host — nginx configs use the resolved real path
 - `/keystatic` proxied to `http://eosclub-astro:4322`
 - `/api/keystatic` proxied to `http://eosclub-astro:4322`
 - Static route fallback remains:

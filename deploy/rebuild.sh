@@ -7,7 +7,10 @@ set -e
 #   docker exec eosclub_astro /app/repo/deploy/rebuild.sh
 #
 # Volume map (docker-compose.eosclub.yml):
-#   host: /var/www/public/eos.khanyi.com  →  container: /app/repo
+#   host: /var/www/public/eosclub  →  container: /app/repo
+# Host symlinks (for nginx):
+#   staging.eos-club.de -> eosclub/dist   (static served by nginx)
+#   eos-club.de         -> eosclub        (production, nginx reads dist/client)
 #
 # Architecture (hybrid mode):
 #   dist/client/  — static HTML/assets → served by Nginx from host fs
