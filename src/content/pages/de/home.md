@@ -26,10 +26,8 @@ blocks:
 
         Infrared Classes, Calisthenics, Tai Chi und moderne Bewegung – unter
         einem Dach..
-
-
       fullBleed: true
-      backgroundImage: /assets/bw_horizontal_theme_barre.png
+      backgroundImage: /assets/bw_horizontal_theme_barre.webp
   - discriminant: FeatureGridBlock
     value:
       name: pillars-grid

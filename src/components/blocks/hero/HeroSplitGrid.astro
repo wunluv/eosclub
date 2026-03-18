@@ -44,12 +44,12 @@ const showCta = Boolean(ctaUrl);
 
       <!-- Left column: Text + CTA -->
       <div class="flex flex-col items-center gap-y-6 text-center md:items-start md:text-left">
-        <h1 class="font-geist font-black uppercase leading-tight text-eos-accent md:text-5xl lg:text-6xl">
+        <h1 class="font-geist font-black uppercase leading-tight text-[#DC0000] md:text-5xl lg:text-6xl">
           {headline}
         </h1>
 
         {subheadline && (
-          <h2 class="font-geist font-semibold uppercase leading-snug text-eos-accent md:text-3xl">
+          <h2 class="font-geist font-semibold uppercase leading-snug text-[#DC0000] md:text-3xl">
             {subheadline}
           </h2>
         )}
@@ -63,7 +63,7 @@ const showCta = Boolean(ctaUrl);
         {showCta && (
           <a
             href={ctaUrl}
-            class="mt-2 inline-flex items-center justify-center rounded-full bg-eos-accent px-8 py-4 text-base font-geist font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-eos-accent/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-eos-accent"
+            class="mt-2 inline-flex items-center justify-center rounded-full bg-[#DC0000] px-8 py-4 text-base font-geist font-bold uppercase tracking-wide text-white transition-all duration-300 hover:bg-[#DC0000]/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DC0000]"
           >
             {localizedCtaLabel}
           </a>
@@ -84,12 +84,13 @@ const showCta = Boolean(ctaUrl);
               <Image
                 src={img.optimized}
                 alt={img.alt}
-                width={600}
-                height={600}
+                width={400}
+                height={400}
                 format="webp"
                 class="h-full w-full object-cover img-greyscale"
                 loading={(i === 0 || i === 1) ? 'eager' : 'lazy'}
                 decoding="async"
+                sizes="(max-width: 640px) 45vw, (max-width: 1024px) 22vw, 300px"
                 {...(i === 0 || i === 1 ? { fetchpriority: 'high' } : {})}
               />
             ) : (

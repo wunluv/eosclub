@@ -32,7 +32,7 @@ const pathname = new URL(Astro.request.url).pathname;
     <!-- Logo + Brand (Left) -->
     <div class="flex items-center space-x-3">
       <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
-        <img src="/assets/eos-logo-export_bm-red.svg" alt="EOS CLUB Logo" class="h-8 w-auto" />
+        <img src="/assets/eos-logo-export_bm-red.svg" alt="EOS CLUB Logo" class="h-8 w-auto" width="32" height="32" />
         <span class="font-geist font-bold text-lg tracking-wider text-eos-accent uppercase hidden lg:inline">EOS CLUB</span>
       </a>
     </div>
@@ -116,12 +116,12 @@ const pathname = new URL(Astro.request.url).pathname;
   id="mobile-sidebar"
   class="fixed left-0 top-0 h-screen w-full bg-white z-50 -translate-x-full sidebar-transition overflow-y-auto no-scrollbar flex flex-col pointer-events-none"
 >
-  <!-- Close Button -->
-  <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
-    <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
-      <img src="/assets/eos-logo-export_bm-red.svg" alt="EOS CLUB Logo" class="h-8 w-auto" />
-      <span class="font-geist font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
-    </a>
+   <!-- Close Button -->
+   <div class="flex items-center justify-between p-6 border-b border-eos-subtle">
+     <a href={isEn ? '/en' : '/'} class="flex items-center space-x-3">
+       <img src="/assets/eos-logo-export_bm-red.svg" alt="EOS CLUB Logo" class="h-8 w-auto" width="32" height="32" />
+       <span class="font-geist font-bold text-lg tracking-wider text-eos-accent uppercase">EOS CLUB</span>
+     </a>
     <button
       id="mobile-close-button"
       class="p-2 text-eos-accent focus:outline-none transition-transform active:scale-95"

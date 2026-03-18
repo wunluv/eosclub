@@ -24,32 +24,85 @@ const { items } = Astro.props;
   </div>
 </section>
 
+<style>
+  @keyframes featureItemFadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .feature-item {
+    animation: featureItemFadeUp 0.4s ease forwards paused;
+  }
+
+  .feature-item:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .feature-item:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+
+  .feature-item:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+
+  .feature-item:nth-child(4) {
+    animation-delay: 0.24s;
+  }
+
+  .feature-item:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+
+  .feature-item:nth-child(6) {
+    animation-delay: 0.4s;
+  }
+
+  .feature-item.animate {
+    animation-play-state: running;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feature-item {
+      animation: none;
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
 <script>
-  import { gsap } from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-  gsap.registerPlugin(ScrollTrigger);
-
   function initFeatureGridAnimations() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    gsap.from('.feature-item', {
-      scrollTrigger: {
-        trigger: '.feature-item',
-        start: 'top 85%',
-        toggleActions: 'play none none none'
+    const items = document.querySelectorAll('.feature-item');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target);
+          }
+        });
       },
-      opacity: 0,
-      y: 20,
-      duration: 0.4,
-      stagger: 0.08,
-      ease: 'power2.out'
+      { threshold: 0.1 }
+    );
+
+    items.forEach((item) => {
+      observer.observe(item);
     });
   }
 
   // Run on page load
   initFeatureGridAnimations();
 
-  // Re-run for TinaCMS live editing if needed
+  // Re-run for TinaCMS live editing and view transitions
   document.addEventListener('astro:after-swap', initFeatureGridAnimations);
 </script>

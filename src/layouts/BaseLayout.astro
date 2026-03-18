@@ -67,7 +67,9 @@ const currentLocale = Astro.currentLocale || 'de';
     <!-- Google Fonts: Merriweather — confirmed display/heading font, all weights used in DS V7 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Non-blocking font load with noscript fallback -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" /></noscript>
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col overflow-x-hidden">

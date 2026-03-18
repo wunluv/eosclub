@@ -23,10 +23,8 @@ blocks:
         EOS CLUB is more than a studio – it's a place of transformation.
         Here, traditional practices meet modern wellness for your holistic
         well-being.
-
-
       fullBleed: true
-      backgroundImage: /assets/bw_horizontal_theme_barre.png
+      backgroundImage: /assets/bw_horizontal_theme_barre.webp
   - discriminant: FeatureGridBlock
     value:
       name: pillars-grid

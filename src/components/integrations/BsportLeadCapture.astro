@@ -33,13 +33,53 @@ const WIDGET_ELEMENT_ID = "bsport-widget-263658";
 const COMPANY_ID = 5082;
 ---
 
-<Fragment slot="head">
-  <!-- bsport CDN loader: deferred to reduce TBT -->
-  <script id="bsport-widget-cdn" src="https://cdn.bsport.io/scripts/widget.js" defer is:inline></script>
-</Fragment>
-
 <!-- Mount target -->
 <div id={WIDGET_ELEMENT_ID} class="bsport-lead-capture"></div>
+
+<!-- Lazy bsport CDN loader — injects widget.js only when widget enters viewport -->
+<script is:inline>
+(function() {
+  // Use a unique selector to find this component's widget container
+  var mountTarget = document.getElementById('bsport-widget-263658');
+  if (!mountTarget) return;
+
+  // If the CDN is already loaded (another widget on same page loaded it first),
+  // do nothing — the mount polling script handles the rest
+  if (window.BsportWidget) return;
+
+  var loaded = false;
+
+  function loadBsportCDN() {
+    if (loaded) return;
+    loaded = true;
+    if (document.getElementById('bsport-widget-cdn')) return; // already injected
+    var s = document.createElement('script');
+    s.id = 'bsport-widget-cdn';
+    s.src = 'https://cdn.bsport.io/scripts/widget.js';
+    s.defer = true;
+    document.body.appendChild(s);
+  }
+
+  // Load when widget container is within 300px of viewport
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(
+      function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            loadBsportCDN();
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(mountTarget);
+  } else {
+    // Fallback for very old browsers: load after page load event
+    window.addEventListener('load', loadBsportCDN);
+  }
+})();
+</script>
 
 <!--
   ALL visual overrides live here — not in bsport admin panel.

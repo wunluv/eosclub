@@ -10,6 +10,11 @@ import node from '@astrojs/node';
 //   - Static pages  → dist/client/   (served by Nginx)
 //   - Keystatic SSR → dist/server/   (served by the Astro Node server)
 // Nginx proxies /keystatic/* and /api/keystatic/* to the Node process.
+//
+// NOTE: Keystatic admin UI CSS (keystatic-astro-page.css) is removed from
+// dist/client/ HTML files by the post-build cleanup script (scripts/clean-keystatic-css.mjs).
+// This prevents 8.7KB of unused admin UI CSS from loading on public pages.
+// Keystatic routes in dist/server/ still have full access via server rendering.
 export default defineConfig({
   output: 'static',
   adapter: node({
