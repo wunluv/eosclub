@@ -6,10 +6,10 @@ blocks:
   - discriminant: HeroBlock
     value:
       name: team-hero
-      headline: Unser Team
+      headline: 'Team Eos '
       variant: cover
       subheadline: Mit Herz und Expertise für dich da
-      subBodyText: Test
+      subBodyText: 'Test '
       backgroundImage: /assets/theme_yoga.png
   - discriminant: ContentBlock
     value:
