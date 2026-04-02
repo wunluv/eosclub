@@ -1,6 +1,5 @@
 ---
-cmsSlug: de/team
-title: Unser Team
+title: 'Team Eos '
 seoDescription: Lerne unser Team aus erfahrenen Yoga- und Pilates-Lehrern kennen.
 translationSlug: team
 blocks:
@@ -20,21 +19,25 @@ blocks:
         Unser Team besteht aus zertifizierten
         Lehrern mit jahrelanger Erfahrung. Jede/r bringt eine einzigartige
         Perspektive und Leidenschaft für Bewegung und Wohlbefinden mit.
-
-
       fullBleed: false
   - discriminant: FeatureGridBlock
     value:
       name: team-expertise
       items:
         - title: Vinyasa & Hatha Yoga
-          description: Zertifizierte Lehrer mit Spezialisierung in fließenden und klassischen Yoga-Formen
+          description: >-
+            Zertifizierte Lehrer mit Spezialisierung in fließenden und
+            klassischen Yoga-Formen
         - title: Pilates & Core
           description: Experten für funktionelles Core-Training und Körperstabilität
         - title: Mobility & Flexibility
-          description: Spezialisten für Beweglichkeits training und funktionelle Bewegungsabläufe
+          description: >-
+            Spezialisten für Beweglichkeits training und funktionelle
+            Bewegungsabläufe
         - title: Meditation & Breathwork
-          description: Ausgebildete Meditations- und Atemtherapeuten für ganzheitliches Wohlbefinden
+          description: >-
+            Ausgebildete Meditations- und Atemtherapeuten für ganzheitliches
+            Wohlbefinden
   - discriminant: InteractiveListBlock
     value:
       name: team-members
@@ -59,16 +62,25 @@ blocks:
       altText: EOS Community beim gemeinsamen Training
       minHeight: 60vh
       headline: Gemeinschaft & Bewegung
-      subtext: Bei EOS verbinden wir traditionelle Praktiken mit modernen Trainingsmethoden
+      subtext: >-
+        Bei EOS verbinden wir traditionelle Praktiken mit modernen
+        Trainingsmethoden
   - discriminant: FaqBlock
     value:
       name: team-faq
       title: Häufige Fragen
       questions:
         - question: Wie buche ich eine Stunde mit einem bestimmten Lehrer?
-          answer: Du kannst直接在 unserem Buchungskalender den gewünschten Lehrer auswählen. Klicke auf den Kalender und wähle deinen bevorzugten Instructor aus.
+          answer: >-
+            Du kannst直接在 unserem Buchungskalender den gewünschten Lehrer
+            auswählen. Klicke auf den Kalender und wähle deinen bevorzugten
+            Instructor aus.
         - question: Bietet ihr auch private Sessions an?
-          answer: Ja, wir bieten sowohl Einzelstunden als auch Kleingruppen-Formate an. Kontaktiere uns für mehr Informationen.
+          answer: >-
+            Ja, wir bieten sowohl Einzelstunden als auch Kleingruppen-Formate
+            an. Kontaktiere uns für mehr Informationen.
         - question: Welche Qualifikationen haben eure Lehrer?
-          answer: Alle unsere Lehrer sind zertifiziert und haben mehrjährige Erfahrung in ihren jeweiligen Disziplinen.
+          answer: >-
+            Alle unsere Lehrer sind zertifiziert und haben mehrjährige Erfahrung
+            in ihren jeweiligen Disziplinen.
 ---
