@@ -24,8 +24,8 @@ blocks:
 
         Willkommen im EOS CLUB Köln.
 
-        Infrared Classes, Calisthenics, Tai Chi und moderne Bewegung – unter
-        einem Dach..
+        Infrarot Klassen, Calisthenics, Tai Chi, und moderne Bewegung – alles im
+        EOS CLUB ... 
       fullBleed: true
       backgroundImage: /assets/bw_horizontal_theme_barre.webp
   - discriminant: FeatureGridBlock
