@@ -41,8 +41,8 @@ blocks:
             Yoga, (Reformer-)Pilates, Calisthenics, Mobility, Tanz & Tai Chi –
             für Deinen aktiven Lebensstil
         - icon: users
-          title: Outdoor Classes
+          title: EOS CLUB draußen
           description: >-
-            Yoga und Bewegung auf unserer Terrasse sowie Kurse im Kölner
-            Stadtwald.
+            Bei passendem Wetter finden Klassen auf unserer Sonnenterrasse
+            und/oder im nahegelegenen Stadtwald statt
 ---
