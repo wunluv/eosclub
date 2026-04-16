@@ -8,16 +8,17 @@ blocks:
   - discriminant: HeroBlock
     value:
       name: classes-hero
+      headline: Unsere Klassen
       variant: cover
-      headline: Unsere Formate
-      subheadline: Infrared Yoga, Pilates & Bewegung in Community
+      subheadline: Yoga, Pilates, Calisthenics, Tai Chi, Tanz & Bewegung
       backgroundImage: /assets/theme_yoga.png
   - discriminant: BookingBlock
     value:
       name: classes-booking-cta
       enabled: true
-      bookingUrl: 'https://backoffice.bsport.io/c/5082/home/'
+      bookingUrl: https://backoffice.bsport.io/c/5082/home/
       label: Jetzt buchen
+      iconOnly: false
   - discriminant: BsportCalendar
     value:
       name: classes-calendar
@@ -34,8 +35,8 @@ blocks:
         - icon: target
           title: Pilates
           description: >-
-            Präzises Training für Core, Haltung und Stabilität
-            Auch als Infrared Format verfügbar
+            Präzises Training für Core, Haltung und Stabilität Auch als Infrared
+            Format verfügbar
         - icon: activity
           title: Mobility & Strength
           description: >-
@@ -50,8 +51,7 @@ blocks:
           title: Yin Restore
           description: >-
             Ruhige Praxis mit langen Dehnungen für tiefe Entspannung und
-            Regeneration
-            Auch als Infrared Format verfügbar
+            Regeneration Auch als Infrared Format verfügbar
         - icon: feather
           title: Tai Chi
           description: >-
