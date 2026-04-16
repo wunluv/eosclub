@@ -33,15 +33,13 @@ blocks:
       name: pillars-grid
       items:
         - icon: heart
-          title: Infrared Hot Classes
-          description: >-
-            Hot Yoga & Hot Pilates mit Infrarotwärme für intensive und
-            energiegeladene Sessions
+          title: EOS CLUB Hot-Formate
+          description: Gesteigertes Wohlbefinden durch hochmoderne Infrarotpanele
         - icon: sun
-          title: Movement Classes
+          title: EOS CLUB Bewegung
           description: >-
-            Yoga, Pilates, Calisthenics, Mobility & Tai Chi – für Kraft, Balance
-            und Beweglichkeit
+            Yoga, (Reformer-)Pilates, Calisthenics, Mobility, Tanz & Tai Chi –
+            für Deinen aktiven Lebensstil
         - icon: users
           title: Outdoor Classes
           description: >-
