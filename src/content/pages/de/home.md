@@ -10,7 +10,7 @@ blocks:
       name: home-hero
       headline: Practice over promise
       variant: split-grid
-      subheadline: 'Where Energie meets Community '
+      subheadline: 'Where Energy meets Community '
       subBodyText: |-
         Bewegung, Energie und Gemeinschaft.
         Ein Ort für echte Praxis – nicht für Perfektion.
