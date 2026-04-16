@@ -22,22 +22,32 @@ blocks:
   - discriminant: InteractiveListBlock
     value:
       name: studio-spaces-list
-      title: Unser Raum
+      title: DER EOS CLUB
       items:
-        - label: 200 m² Studiofläche
-          description: >-
-            Großzügiger Raum für Hot Yoga, Hot Pilates und moderne Movement
-            Classes
+        - label: 200 qm Studio
+          description: Natürliches Beleuchtungskonzept, Soundsystem und Wohlfühlambiente
           image: /assets/yoga_studio.jpg
           imageAlt: Yoga Studio Fläche
-        - label: Natürliches Licht
-          description: Große Fensterfronten schaffen eine helle und offene Atmosphäre
+        - label: EOS CLUB Café
+          description: >-
+            Unser Herzstück mit vegetarisches Angebot von lokalen Partnern macht
+            dir einfach, Kontakte zu knüpfen
           image: /assets/horizontal_yoga_closeup_3.png
           imageAlt: Natürliches Licht
-        - label: Infrared Heat
-          description: Moderne Infrarottechnologie für unsere energiegeladenen Hot Classes
+        - label: EOS CLUB Sonnenterrasse
+          description: >-
+            Weiträumige Sonnenterrasse verbindet Studioaktivitäten mit
+            Caféatmosphäre
           image: /assets/tiled_infrared_therapy_studio.png
           imageAlt: Infrared Heat
+        - label: EOS CLUB Behandlungsräume
+          description: >-
+            Fünf Räume für Massagen, Physiotherapie und andere Anwendungen.
+            Alles im EOS CLUB 
+        - label: Umkleide & Dusche
+          description: >-
+            Unisexumkleiden (mit Schließfächern), Duschen und Toiletten sind
+            barrierefrei
   - discriminant: ContentBlock
     value:
       name: terrasse-intro
