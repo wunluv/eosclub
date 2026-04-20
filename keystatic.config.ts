@@ -135,8 +135,8 @@ export default config({
                     label: fields.text({ label: 'Label' }),
                     description: fields.text({ label: 'Description', multiline: true }),
                     image: fields.text({
-                      label: 'Hover Image',
-                      description: 'Path to public asset, e.g. /assets/...',
+                      label: 'Hover Image (optional)',
+                      description: 'Path to public asset, e.g. /assets/... Leave blank for text-only items.',
                     }),
                     imageAlt: fields.text({ label: 'Image Alt Text' }),
                   }),

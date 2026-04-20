@@ -8,7 +8,7 @@ interface Props {
   items: Array<{
     label: string;
     description?: string;
-    image: string;       // path to image shown on hover
+    image?: string;      // optional — text-only items render without images
     imageAlt?: string;
   }>;
 }
@@ -17,11 +17,16 @@ const { title, items } = Astro.props;
 const locale = Astro.currentLocale ?? 'de';
 const isDE = locale.startsWith('de');
 
-// Resolve images for each item upfront
+// Resolve images for each item upfront; skip items without an image path
 const resolvedItems = items.map((item) => ({
   ...item,
-  optimizedImage: resolveImage(item.image) as ImageMetadata | null,
+  hasImage: !!item.image,
+  optimizedImage: item.image ? (resolveImage(item.image) as ImageMetadata | null) : null,
 }));
+
+// Only items with images are shown in the desktop hover panel
+const itemsWithImages = resolvedItems.filter((item) => item.hasImage);
+const hasAnyImage = itemsWithImages.length > 0;
 
 // Mobile image dimensions (h-48 aspect ratio ~ 16:7.5)
 const MOBILE_WIDTH = 400;
@@ -45,6 +50,7 @@ const DESKTOP_HEIGHT = 600;
           <li
             class="interactive-list-item py-6 lg:py-8 cursor-default group transition-colors duration-300 hover:bg-gradient-to-r hover:from-eos-accent hover:to-eos-accent/80 px-4 -mx-4 rounded-lg"
             data-index={i}
+            data-has-image={resolvedItems[i].hasImage ? 'true' : undefined}
             aria-describedby={`item-desc-${i}`}
           >
             <div class="flex items-baseline">
@@ -59,67 +65,72 @@ const DESKTOP_HEIGHT = 600;
                 </p>
               </div>
             )}
-            <!-- Mobile: static image below each item (visible only on touch devices) -->
-            <div class="mt-4 lg:hidden">
-              {resolvedItems[i].optimizedImage ? (
-                <Image
-                  src={resolvedItems[i].optimizedImage}
-                  alt={item.imageAlt ?? item.label}
-                  width={MOBILE_WIDTH}
-                  height={MOBILE_HEIGHT}
-                  format="webp"
-                  loading="lazy"
-                  class="w-full h-48 object-cover rounded-lg img-greyscale"
-                />
-              ) : (
-                <img
-                  src={item.image}
-                  alt={item.imageAlt ?? item.label}
-                  width={MOBILE_WIDTH}
-                  height={MOBILE_HEIGHT}
-                  loading="lazy"
-                  class="w-full h-48 object-cover rounded-lg img-greyscale"
-                />
-              )}
-            </div>
+            <!-- Mobile: static image below each item (only if image exists) -->
+            {resolvedItems[i].hasImage && (
+              <div class="mt-4 lg:hidden">
+                {resolvedItems[i].optimizedImage ? (
+                  <Image
+                    src={resolvedItems[i].optimizedImage!}
+                    alt={item.imageAlt ?? item.label}
+                    width={MOBILE_WIDTH}
+                    height={MOBILE_HEIGHT}
+                    format="webp"
+                    loading="lazy"
+                    class="w-full h-48 object-cover rounded-lg img-greyscale"
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt ?? item.label}
+                    width={MOBILE_WIDTH}
+                    height={MOBILE_HEIGHT}
+                    loading="lazy"
+                    class="w-full h-48 object-cover rounded-lg img-greyscale"
+                  />
+                )}
+              </div>
+            )}
           </li>
         ))}
       </ul>
 
-      <!-- RIGHT: Floating image panel (desktop only) -->
-      <div class="hidden lg:block sticky top-24 w-[42%] flex-shrink-0" aria-hidden="true">
-        <div class="relative aspect-square overflow-hidden rounded-xl bg-eos-subtle">
-          {resolvedItems.map((item, i) => (
-            <div
-              class="hover-image absolute inset-0 w-full h-full object-cover img-greyscale"
-              data-index={i}
-              style={i === 0 ? "opacity: 1;" : "opacity: 0;"}
-            >
-              {item.optimizedImage ? (
-                <Image
-                  src={item.optimizedImage}
-                  alt={item.imageAlt ?? item.label}
-                  width={DESKTOP_WIDTH}
-                  height={DESKTOP_HEIGHT}
-                  format="webp"
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  fetchpriority={i === 0 ? 'high' : undefined}
-                  class="w-full h-full object-cover"
-                />
-              ) : (
-                <img
-                  src={item.image}
-                  alt={item.imageAlt ?? item.label}
-                  width={DESKTOP_WIDTH}
-                  height={DESKTOP_HEIGHT}
-                  loading={i === 0 ? 'eager' : 'lazy'}
-                  class="w-full h-full object-cover"
-                />
-              )}
-            </div>
-          ))}
+      <!-- RIGHT: Floating image panel (desktop only, only if at least one item has an image) -->
+      {hasAnyImage && (
+        <div class="hidden lg:block sticky top-24 w-[42%] flex-shrink-0" aria-hidden="true">
+          <div class="relative aspect-square overflow-hidden rounded-xl bg-eos-subtle">
+            {itemsWithImages.map((item, imgIdx) => (
+              <div
+                class="hover-image absolute inset-0 w-full h-full object-cover img-greyscale"
+                data-index={items.indexOf(item)}
+                data-img-index={imgIdx}
+                style={imgIdx === 0 ? "opacity: 1;" : "opacity: 0;"}
+              >
+                {item.optimizedImage ? (
+                  <Image
+                    src={item.optimizedImage}
+                    alt={item.imageAlt ?? item.label}
+                    width={DESKTOP_WIDTH}
+                    height={DESKTOP_HEIGHT}
+                    format="webp"
+                    loading={imgIdx === 0 ? 'eager' : 'lazy'}
+                    fetchpriority={imgIdx === 0 ? 'high' : undefined}
+                    class="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt ?? item.label}
+                    width={DESKTOP_WIDTH}
+                    height={DESKTOP_HEIGHT}
+                    loading={imgIdx === 0 ? 'eager' : 'lazy'}
+                    class="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
     </div>
   </div>
@@ -146,11 +157,16 @@ const DESKTOP_HEIGHT = 600;
 
       if (reducedMotion || isTouch) return;
 
-      items.forEach((item, i) => {
+      items.forEach((item) => {
+        const itemIndex = Number(item.getAttribute('data-index'));
+        // Find the hover-image whose data-index matches this list item
+        const matchingImage = section.querySelector(`.hover-image[data-index="${itemIndex}"]`);
+
         item.addEventListener('mouseenter', () => {
+          if (!matchingImage) return; // text-only item, no image to show
           gsap.set(images, { opacity: 0 });
           gsap.fromTo(
-            images[i],
+            matchingImage,
             { opacity: 0, y: 12 },
             { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }
           );

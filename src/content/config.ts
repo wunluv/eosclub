@@ -26,7 +26,7 @@ const fullBleedBlockSchema = z.object({
 const interactiveListItemSchema = z.object({
   label: z.string(),
   description: z.string().optional(),
-  image: z.string(),
+  image: z.string().optional(),
   imageAlt: z.string().optional(),
 });
 
