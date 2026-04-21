@@ -10,11 +10,9 @@ blocks:
       name: home-hero
       headline: Practice over promise
       variant: split-grid
-      subheadline: 'Where Energy meets Community '
-      subBodyText: |-
-        Bewegung, Energie und Gemeinschaft.
-        Ein Ort für echte Praxis – nicht für Perfektion.
-      ctaLabel: Kurse entdecken
+      subheadline: "Movement · Heat ·\_Wellbeing"
+      subBodyText: EOS Club – Der Ort für Bewegung und Entspannung
+      ctaLabel: Checke unsere Klassen
       ctaUrl: /kurse
   - discriminant: ContentBlock
     value:
