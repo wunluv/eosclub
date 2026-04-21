@@ -1,5 +1,5 @@
 ---
-title: Kurse – Yoga, Pilates & mehr
+title: Klassen – Yoga, Pilates & mehr
 seoDescription: >-
   Unser Kursangebot: Vinyasa Yoga, Hatha, Pilates, Calisthenics, Barre und mehr.
   Finde den perfekten Kurs für dich.

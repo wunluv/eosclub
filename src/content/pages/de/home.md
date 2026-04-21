@@ -13,7 +13,7 @@ blocks:
       subheadline: "Movement · Heat ·\_Wellbeing"
       subBodyText: EOS Club – Der Ort für Bewegung und Entspannung
       ctaLabel: Checke unsere Klassen
-      ctaUrl: /kurse
+      ctaUrl: /klassen
   - discriminant: ContentBlock
     value:
       name: philosophy-intro

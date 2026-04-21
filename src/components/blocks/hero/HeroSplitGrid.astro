@@ -20,7 +20,7 @@ const {
 } = Astro.props as Props;
 
 const locale = Astro.currentLocale ?? 'de';
-const localizedCtaLabel = ctaLabel || (locale.startsWith('de') ? 'Kurse Buchen' : 'Book Classes');
+const localizedCtaLabel = ctaLabel || (locale.startsWith('de') ? 'Klassen Buchen' : 'Book Classes');
 const showCta = Boolean(ctaUrl);
 
   const rawGridImages = [

@@ -3,7 +3,7 @@ title: 'Classes – Yoga, Pilates & more'
 seoDescription: >-
   Our class offerings: Vinyasa Yoga, Hatha, Pilates, Barre and more. Find the
   perfect class for you.
-translationSlug: kurse
+translationSlug: klassen
 blocks:
   - discriminant: HeroBlock
     value:
