@@ -29,28 +29,26 @@ blocks:
       items:
         - icon: wind
           title: Yoga Flow
-          description: Fließende Sequenzen im Atemrhythmus für Kraft, Mobilität und Fokus
+          description: Fließende Bewegungen im Rhythmus des Atems
         - icon: target
           title: Pilates
           description: Präzises Training für Core, Haltung und Stabilität
         - title: Reformer
-          description: Reformer
+          description: coming soon ...
         - icon: layers
           title: Calisthenics
-          description: >-
-            Zirkeltraining mit dem eigenen Körpergewicht für Kraft, Stabilität
-            und Ausdauer
+          description: Funktionelles Training mit dem eigenen Körpergewicht
         - icon: feather
           title: Tai Chi
-          description: >-
-            Langsame, fließende Bewegungen für Balance, Fokus und innere Ruhe
-            Auch als Infrared Format verfügbar
+          description: langsame und konzentrierte Bewegungsabläufe
         - icon: moon
           title: Tanz
-          description: Verschiedene Tanzformate in den Klassen. z.B. Commercial-Tanz
+          description: Umsetzung von Inspiration in Bewegung
         - icon: activity
           title: Bewegung
-          description: >-
-            Funktionelles Training zur Verbesserung von Beweglichkeit, Kraft und
-            Körperkontrolle
+          description: Gezielte Verbesserung von Beweglichkeit, Kraft und Körperkontrolle
+        - icon: Yin
+          description: Ein entspannter und achtsamer Yogastil
+        - icon: Workshops
+          description: Lust auf deine eigenen Workshops? Kontaktiere uns!
 ---
