@@ -47,8 +47,8 @@ blocks:
         - icon: activity
           title: Bewegung
           description: Gezielte Verbesserung von Beweglichkeit, Kraft und Körperkontrolle
-        - icon: Yin
+        - title: Yin Yoga
           description: Ein entspannter und achtsamer Yogastil
-        - icon: Workshops
+        - title: Workshops
           description: Lust auf deine eigenen Workshops? Kontaktiere uns!
 ---
