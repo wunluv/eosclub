@@ -37,7 +37,7 @@ blocks:
           title: EOS CLUB Bewegung
           description: >-
             Yoga, (Reformer-)Pilates, Calisthenics, Mobility, Tanz & Tai Chi –
-            für Deinen aktiven Lebensstil
+            für einen aktiven und gesunden Lebensstil.
         - icon: users
           title: EOS CLUB draußen
           description: >-
