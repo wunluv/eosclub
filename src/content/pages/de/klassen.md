@@ -29,10 +29,10 @@ blocks:
       items:
         - icon: wind
           title: Yoga Flow
-          description: Fließende Bewegungen im Rhythmus des Atems
+          description: Fließende Bewegungen im Rhythmus des bewussten Atmens
         - icon: target
           title: Pilates
-          description: Präzises Training für Core, Haltung und Stabilität
+          description: Präzises Training für Haltung, Core und Stabilität
         - title: Reformer
           description: coming soon ...
         - icon: layers
@@ -40,15 +40,17 @@ blocks:
           description: Funktionelles Training mit dem eigenen Körpergewicht
         - icon: feather
           title: Tai Chi
-          description: langsame und konzentrierte Bewegungsabläufe
+          description: >-
+            meditative Körperkontrolle, innere Ruhe, Konzentration und
+            Gleichgewicht
         - icon: moon
           title: Tanz
-          description: Umsetzung von Inspiration in Bewegung
+          description: Umsetzung von Inspiration in Bewegung und Koordination
         - icon: activity
           title: Bewegung
-          description: Gezielte Verbesserung von Beweglichkeit, Kraft und Körperkontrolle
+          description: Gezielte Übungen für Kraft, Beweglichkeit und Gleichgewicht
         - title: Yin Yoga
-          description: Ein entspannter und achtsamer Yogastil
+          description: Die sanfte Art, Muskeln zu entspannen und die Faszien zu dehnen
         - title: Workshops
           description: Lust auf deine eigenen Workshops? Kontaktiere uns!
 ---
