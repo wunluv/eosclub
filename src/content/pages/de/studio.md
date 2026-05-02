@@ -51,12 +51,12 @@ blocks:
   - discriminant: ContentBlock
     value:
       name: terrasse-intro
-      body: |-
+      body: >-
         ## Die EOS Terrasse
-        Unsere großzügige, sonnenbeflutete Terrasse
-        erweitert den EOS CLUB nach draußen. Hier finden Outdoor Yoga und
-        Movement Classes unter freiem Himmel statt – umgeben von Grün und
-        frischer Luft.
+
+        Unsere großzügige Terrasse erweitert den EOS CLUB nach draußen. Unter
+        freiem Himmel finden unsere Yoga und Movement Klassen an der frischen
+        Luft statt
       fullBleed: false
   - discriminant: InteractiveListBlock
     value:
