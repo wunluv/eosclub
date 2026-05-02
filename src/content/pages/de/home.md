@@ -11,7 +11,7 @@ blocks:
       headline: Practice over promise
       variant: split-grid
       subheadline: "Movement · Heat ·\_Wellbeing"
-      subBodyText: EOS Club – Der Ort für Bewegung und Entspannung
+      subBodyText: 'Der Ort für Bewegung und Entspannung: EOS Club'
       ctaLabel: Checke unsere Klassen
       ctaUrl: /klassen
   - discriminant: ContentBlock
